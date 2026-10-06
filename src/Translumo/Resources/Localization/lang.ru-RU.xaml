@@ -1,0 +1,225 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+
+    <!--  Generic  -->
+    <system:String x:Key="Str.Login">Логин</system:String>
+    <system:String x:Key="Str.Password">Пароль</system:String>
+    <system:String x:Key="Str.ExitConfirmation" xml:space="preserve">Хотите выйти из приложения?&#13;Можете использовать кнопку сворачивания для скрытия окна настроек (доступ к приложению останется через трей).</system:String>
+    <system:String x:Key="Str.ExitConfirmationCaption">Подтверждение выхода</system:String>
+    <system:String x:Key="Str.NewVersion">Доступна новая версия!</system:String>
+
+    <!--  Notifications  -->
+    <system:String x:Key="Str.Notification.CaptchaPass" xml:space="preserve">Пожалуйста пройдите капчу для использования сервиса&#13;Это окно может появиться для каждого задействованного прокси.</system:String>
+
+    <!--  Titles  -->
+    <system:String x:Key="Str.Title.SettingWindow" xml:space="preserve">Настройки - Translumo LLM</system:String>
+    <system:String x:Key="Str.Title.BrowserWindow" xml:space="preserve">Браузер - Translumo LLM</system:String>
+
+    <!--  Tray  -->
+    <system:String x:Key="Str.Tray.ShowHideSettings">Показать/Скрыть настройки</system:String>
+    <system:String x:Key="Str.Tray.ShowHideTranslation">Показать/Скрыть окно перевода</system:String>
+    <system:String x:Key="Str.Tray.Exit">Выйти</system:String>
+
+    <!--  Chat  -->
+    <system:String x:Key="Str.Chat.SettingsOpened">Закройте окно настроек чтобы начать перевод</system:String>
+    <system:String x:Key="Str.Chat.WindowLocked">Окно перевода заблокировано</system:String>
+    <system:String x:Key="Str.Chat.WindowUnlocked">Окно перевода разблокировано</system:String>
+
+    <!--  Language settings  -->
+    <system:String x:Key="Str.LangSettings.SourceLang">Исходный язык</system:String>
+    <system:String x:Key="Str.LangSettings.TranslationLang">Язык перевода</system:String>
+    <system:String x:Key="Str.LangSettings.Translator">Переводчик</system:String>
+    <system:String x:Key="Str.LangSettings.TtsSystem">Синтез речи (TTS)</system:String>
+    <system:String x:Key="Str.LangSettings.Voice">Голос</system:String>
+
+    <!--  Имена TTS-движков  -->
+    <system:String x:Key="Str.Tts.None">Нет</system:String>
+    <system:String x:Key="Str.Tts.WindowsTTS">Windows TTS</system:String>
+
+    <!--  Сообщения времени выполнения  -->
+    <system:String x:Key="Str.Messages.NoOcrEngine">OCR-движок не выбран!</system:String>
+    <system:String x:Key="Str.Messages.TranslationStarted">Перевод начат</system:String>
+    <system:String x:Key="Str.Messages.TranslationFinished">Перевод завершён</system:String>
+    <system:String x:Key="Str.Messages.CapturerInitFailed">Не удалось инициализировать захват экрана. Подробности в журнале</system:String>
+    <system:String x:Key="Str.Messages.CaptureFailed">Не удалось захватить экран</system:String>
+    <system:String x:Key="Str.Messages.CaptureAreaNotSelected">Область захвата не выбрана</system:String>
+    <system:String x:Key="Str.Messages.TextDetectionFailed">Не удалось распознать текст ({0})</system:String>
+    <system:String x:Key="Str.Messages.TranslatorFailed">{0} не удалось: {1}. Попробуйте сменить переводчик, использовать прокси или другой узел VPN.</system:String>
+
+    <!--  Translator names  -->
+    <system:String x:Key="Str.Translator.Deepl">DeepL</system:String>
+    <system:String x:Key="Str.Translator.Yandex">Yandex</system:String>
+    <system:String x:Key="Str.Translator.Google">Google</system:String>
+    <system:String x:Key="Str.Translator.Papago">Papago</system:String>
+    <system:String x:Key="Str.Translator.Llm">LLM AI</system:String>
+
+    <!--  LLM AI translator settings  -->
+    <system:String x:Key="Str.LlmSettings.Header">Переводчик LLM AI</system:String>
+    <system:String x:Key="Str.LlmSettings.Note" xml:space="preserve">Настройте API вашего LLM-провайдера. Стандартный промпт оптимизирован для перевода видеоигр и фильмов/сериалов.&#13;Оставьте адрес и модель пустыми, чтобы использовать предустановленные значения провайдера.</system:String>
+    <system:String x:Key="Str.LlmSettings.Provider">Провайдер</system:String>
+    <system:String x:Key="Str.LlmSettings.Provider_Custom">Пользовательская модель</system:String>
+    <system:String x:Key="Str.LlmSettings.ApiKey">API Key</system:String>
+    <system:String x:Key="Str.LlmSettings.Endpoint">API BASE URL</system:String>
+    <system:String x:Key="Str.LlmSettings.Model">Модель (необязательно)</system:String>
+    <system:String x:Key="Str.LlmSettings.UseVisionForImages">Использовать визуальную модель для перевода изображений (без OCR)</system:String>
+    <system:String x:Key="Str.LlmSettings.SystemPrompt">Промпт перевода</system:String>
+    <system:String x:Key="Str.LlmSettings.Temperature">Температура</system:String>
+    <system:String x:Key="Str.LlmSettings.MaxTokens">Макс. токенов</system:String>
+    <system:String x:Key="Str.LlmSettings.Test">Проверить подключение</system:String>
+    <system:String x:Key="Str.LlmSettings.Testing">Проверка...</system:String>
+    <system:String x:Key="Str.LlmSettings.TestSuccess">Подключение успешно!</system:String>
+    <system:String x:Key="Str.LlmSettings.TestFail">Ошибка подключения: {0}</system:String>
+    <system:String x:Key="Str.LlmSettings.AddProfile">Добавить профиль</system:String>
+    <system:String x:Key="Str.LlmSettings.DeleteProfile">Удалить профиль</system:String>
+    <system:String x:Key="Str.LlmSettings.DeleteConfirm">Вы уверены, что хотите удалить этот профиль? Действие необратимо.</system:String>
+
+    <!--  Hotkeys descriptions  -->
+    <system:String x:Key="Str.Hotkeys.ChatVisibility">Показать/скрыть окно перевода</system:String>
+    <system:String x:Key="Str.Hotkeys.SettingsVisibility">Показать/закрыть окно настроек</system:String>
+    <system:String x:Key="Str.Hotkeys.SelectArea">Выбрать область перевода</system:String>
+    <system:String x:Key="Str.Hotkeys.OnOffTranslation">Включить/выключить перевод</system:String>
+    <system:String x:Key="Str.Hotkeys.ShowSelectArea">Показать выбранную область перевода</system:String>
+    <system:String x:Key="Str.Hotkeys.OnceTranslate">Выбрать область и перевести текст один раз</system:String>
+    <system:String x:Key="Str.Hotkeys.ImageTranslate">Перевод изображения (выделить область, наложение как в Google)</system:String>
+    <system:String x:Key="Str.Hotkeys.RestoreDefaults">Восстановить по умолчанию</system:String>
+    <system:String x:Key="Str.Hotkeys.ImageTranslateHelp">Нажмите '{0}', чтобы мгновенно перевести выделенную область (как Google Lens)</system:String>
+    <system:String x:Key="Str.Hotkeys.WindowChangeStyle">Заблокировать/разблокировать окно перевода</system:String>
+    <system:String x:Key="Str.Hotkeys.SettingsShowHelp">Нажмите '{0}' чтобы открыть настройки</system:String>
+    <system:String x:Key="Str.Hotkeys.SelectAreaHelp">Нажмите '{0}' чтобы выбрать область захвата текста</system:String>
+    <system:String x:Key="Str.Hotkeys.OnTranslationHelp">Нажмите '{0}' чтобы начать перевод</system:String>
+    <system:String x:Key="Str.Hotkeys.GeneralHelp">Для управления приложением вы можете использовать контекстное меню из трея или горячие клавиши:</system:String>
+
+    <!--  Appearance settings  -->
+    <system:String x:Key="Str.AppearanceSettings.WindowColor">Цвет окна</system:String>
+    <system:String x:Key="Str.AppearanceSettings.FontColor">Цвет шрифта</system:String>
+    <system:String x:Key="Str.AppearanceSettings.FontSize">Размер шрифта</system:String>
+    <system:String x:Key="Str.AppearanceSettings.Bold">Жирный</system:String>
+    <system:String x:Key="Str.AppearanceSettings.DarkTheme">Тёмная тема</system:String>
+    <system:String x:Key="Str.AppearanceSettings.ExcludeFromCaptue">Не захватывать окно перевода</system:String>
+    <system:String x:Key="Str.AppearanceSettings.LineSpacing" xml:space="preserve">Межстрочный&#13;интервал</system:String>
+    <system:String x:Key="Str.AppearanceSettings.WindowOpacity">Прозрачность окна</system:String>
+    <system:String x:Key="Str.AppearanceSettings.FontSizePanelCaption">Цвет окна — изменить</system:String>
+    <system:String x:Key="Str.AppearanceSettings.FontColorPanelCaption">Цвет шрифта — изменить</system:String>
+    <system:String x:Key="Str.AppearanceSettings.KeepFormatting" xml:space="preserve">Сохранять исходное&#13;форматирование</system:String>
+    <system:String x:Key="Str.AppearanceSettings.TextAlignment">Выравнивание текста</system:String>
+    <system:String x:Key="Str.AppearanceSettings.Left">Выравнивать текст по левому краю</system:String>
+    <system:String x:Key="Str.AppearanceSettings.Center">Выравнивать текст по центру</system:String>
+    <system:String x:Key="Str.AppearanceSettings.Right">Выравнивать текст по правому краю</system:String>
+    <system:String x:Key="Str.AppearanceSettings.Justify">Выравнивать текст по ширине</system:String>
+    <system:String x:Key="Str.AppearanceSettings.AutoClearTexts">Автоочистка окна</system:String>
+    <system:String x:Key="Str.AppearanceSettings.AutoClearTexts2">после бездействия</system:String>
+    <system:String x:Key="Str.AppearanceSettings.Ms">мс</system:String>
+
+    <!--  Proxy settings  -->
+    <system:String x:Key="Str.ProxySettings.Proxy">Прокси</system:String>
+    <system:String x:Key="Str.ProxySettings.IpAddress">IP адрес</system:String>
+    <system:String x:Key="Str.ProxySettings.Port">Порт</system:String>
+    <system:String x:Key="Str.ProxySettings.Note" xml:space="preserve">Используйте IPv4 прокси чтобы избежать блокировки со стороны сервисов перевода за множественные запросы.&#13;Приложение будет равномерно использовать пул доступных прокси между запросами.</system:String>
+    <system:String x:Key="Str.ProxySettings.Caption">Список прокси — изменить</system:String>
+
+
+    <!--  OCR settings  -->
+    <system:String x:Key="Str.OcrSettings.TesseractOcr">Tesseract OCR</system:String>
+    <system:String x:Key="Str.OcrSettings.WindowsOcr">Windows OCR</system:String>
+    <system:String x:Key="Str.OcrSettings.EasyOcr">EasyOCR</system:String>
+    <system:String x:Key="Str.OcrSettings.TesseractOcrDesc" xml:space="preserve">Tesseract 5.0 в LSTM режиме. Одно из самых популярных и ранних open-source OCR решений.&#13;Стабильно определяет текст с простым шрифтом и идеальным однотонным фоном.&#13;&lt;Bold&gt;Влияние на производительность:&lt;/Bold&gt; небольшое</system:String>
+    <system:String x:Key="Str.OcrSettings.WindowsOcrDesc" xml:space="preserve">Нативное OCR решение от Microsoft. Способно работать с более сложным фоном и&#13;шрифтами, чем Tesseract.&#13;&lt;Bold&gt;Влияние на производительность:&lt;/Bold&gt; минимальное</system:String>
+    <system:String x:Key="Str.OcrSettings.WindowsOcrDesc2">Необходима установка дополнительных языковых пакетов</system:String>
+    <system:String x:Key="Str.OcrSettings.EasyOcrDesc" xml:space="preserve">Наиболее продвинутое open-source OCR решение от Jaided AI.&#13;Высокая точность определение даже со сложным фоном и нестандартными шрифтами.&#13;&lt;Bold&gt;Влияние на производительность:&lt;/Bold&gt; высокое</system:String>
+    <system:String x:Key="Str.OcrSettings.EasyOcrDesc2">Необходима установка дополнительных модулей (Python, PyTorch)</system:String>
+
+    <!--  About window  -->
+    <system:String x:Key="Str.About.Edition">Translumo-LLM Edition</system:String>
+    <system:String x:Key="Str.About.EditionAuthor">LLM Edition автор: Chaobs</system:String>
+    <system:String x:Key="Str.About.MaintainedBy">Изначальный создатель Алексей Вехов</system:String>
+    <system:String x:Key="Str.About.DevelopedBy">Изначальный автор Данил Юшков</system:String>
+    <system:String x:Key="Str.About.ProjectPage">Страница проекта</system:String>
+    <system:String x:Key="Str.About.ReportIssue">Сообщить о проблеме</system:String>
+    <system:String x:Key="Str.About.OriginalProjectPage">Исходный проект (Translumo)</system:String>
+    <system:String x:Key="Str.About.OriginalReportIssue">Исходный проект: проблемы</system:String>
+
+    <!--  Navigation menu  -->
+    <system:String x:Key="Str.Navigation.Languages">Языки</system:String>
+    <system:String x:Key="Str.Navigation.Appearance">Внешний вид</system:String>
+    <system:String x:Key="Str.Navigation.Ocr">Распознавание текста</system:String>
+    <system:String x:Key="Str.Navigation.HotKeys">Горячие клавиши</system:String>
+
+    <!--  Languages  -->
+    <system:String x:Key="Str.Languages.English">Английский</system:String>
+    <system:String x:Key="Str.Languages.Russian">Русский</system:String>
+    <system:String x:Key="Str.Languages.Japanese">Японский</system:String>
+    <system:String x:Key="Str.Languages.Korean">Корейский</system:String>
+    <system:String x:Key="Str.Languages.Chinese">Китайский (упрощенный)</system:String>
+    <system:String x:Key="Str.Languages.Italian">Итальянский</system:String>
+    <system:String x:Key="Str.Languages.French">Французский</system:String>
+    <system:String x:Key="Str.Languages.German">Немецкий</system:String>
+    <system:String x:Key="Str.Languages.Spanish">Испанский</system:String>
+    <system:String x:Key="Str.Languages.Portuguese">Португальский</system:String>
+    <system:String x:Key="Str.Languages.Vietnamese">Вьетнамский</system:String>
+    <system:String x:Key="Str.Languages.Turkish">Турецкий</system:String>
+    <system:String x:Key="Str.Languages.Thai">Тайский</system:String>
+    <system:String x:Key="Str.Languages.Arabic">Арабский</system:String>
+    <system:String x:Key="Str.Languages.Greek">Греческий</system:String>
+    <system:String x:Key="Str.Languages.PortugueseBrazil">Португальский (бразильский)</system:String>
+    <system:String x:Key="Str.Languages.Polish">Польский</system:String>
+    <system:String x:Key="Str.Languages.Belarusian">Белорусский</system:String>
+    <system:String x:Key="Str.Languages.Persian">Персидский</system:String>
+    <system:String x:Key="Str.Languages.Indonesian">Индонезийский</system:String>
+    <system:String x:Key="Str.Languages.Bulgarian">Болгарский</system:String>
+    <system:String x:Key="Str.Languages.Czech">Чешский</system:String>
+    <system:String x:Key="Str.Languages.Danish">Датский</system:String>
+    <system:String x:Key="Str.Languages.Estonian">Эстонский</system:String>
+    <system:String x:Key="Str.Languages.Finnish">Финский</system:String>
+    <system:String x:Key="Str.Languages.Hungarian">Венгерский</system:String>
+    <system:String x:Key="Str.Languages.Lithuanian">Литовский</system:String>
+    <system:String x:Key="Str.Languages.Latvian">Латышский</system:String>
+    <system:String x:Key="Str.Languages.Dutch">Нидерландский</system:String>
+    <system:String x:Key="Str.Languages.Romanian">Румынский</system:String>
+    <system:String x:Key="Str.Languages.Slovak">Словацкий</system:String>
+    <system:String x:Key="Str.Languages.Slovenian">Словенский</system:String>
+    <system:String x:Key="Str.Languages.Swedish">Шведский</system:String>
+    <system:String x:Key="Str.Languages.Ukrainian">Украинский</system:String>
+
+    <!--  Dialog stages  -->
+    <system:String x:Key="Str.Stages.CheckPyModules">Проверка установленных модулей...</system:String>
+    <system:String x:Key="Str.Stages.PyModulesQuestion" xml:space="preserve">Необходимые Python модули не установлены. Хотите установить сейчас?&#13;Опция доступна только для видеокарт NVIDIA!</system:String>
+    <system:String x:Key="Str.Stages.PyModulesQuestion2" xml:space="preserve">Дополнительные модули потребуют ~5гб свободного дискового пространства.&#13;Установка может занять от нескольких минут до часа.&#13;Хотите продолжить?</system:String>
+    <system:String x:Key="Str.Stages.InstallationPyModule1">(1/3) Установка 'pytorch' модуля...</system:String>
+    <system:String x:Key="Str.Stages.InstallationPyModule2">(2/3) Установка 'easyocr' модуля...</system:String>
+    <system:String x:Key="Str.Stages.InstallationPyModule3">(3/3) Установка 'pillow' модуля...</system:String>
+    <system:String x:Key="Str.Stages.InstallationPyModuleTemplate">Установка '{0}' модуля...</system:String>
+    <system:String x:Key="Str.Stages.PyModulesInstalled">Необходимые модули успешно установлены</system:String>
+    <system:String x:Key="Str.Stages.PyModulesCheckError">Не удалось получить доступ к Python для проверки модулей</system:String>
+    <system:String x:Key="Str.Stages.CheckOcrComponent">Проверка компонентов OCR...</system:String>
+    <system:String x:Key="Str.Stages.OcrComponentDownloadQuestion">Для этого движка OCR требуются файлы данных, не входящие в сборку (~400 МБ). Скачать их сейчас?</system:String>
+    <system:String x:Key="Str.Stages.InstallationOcrComponent">Загрузка компонентов OCR...</system:String>
+    <system:String x:Key="Str.Stages.CheckLangPack">Проверка установленных языковых пакетов...</system:String>
+    <system:String x:Key="Str.Stages.OCRLangPackQuestion" xml:space="preserve">Распознавание текста (OCR) для языка «{0}» не установлено в Windows.&#13;Хотите установить его сейчас?</system:String>
+    <system:String x:Key="Str.Stages.TTSLangPackQuestion" xml:space="preserve">Синтез речи (TTS) для языка «{0}» не установлен в Windows.&#13;Хотите установить его сейчас?</system:String>
+    <system:String x:Key="Str.Stages.InstallationLangPack">Установка языкового пакета...</system:String>
+    <system:String x:Key="Str.Stages.LangPackInstalledRestart">Языковой пакет успешно установлен. Пожалуйста, перезагрузите систему.</system:String>
+    <system:String x:Key="Str.Stages.LangPackInstalledTtsRestart" xml:space="preserve">Языковой пакет успешно установлен.&#13;Если TTS не работает, попробуйте перезапустить приложение.</system:String>
+    <system:String x:Key="Str.Stages.InstallationLangError">Ошибка установки пакета: '{0}'</system:String>
+    <system:String x:Key="Str.Stages.CheckLangPackError" xml:space="preserve">Ошибка проверки дополнительных компонентов Windows.&#13;Пожалуйста, убедитесь, что приложение запущено с правами администратора.</system:String>
+    <system:String x:Key="Str.Stages.SwitchLanguage">Смена языка...</system:String>
+    <system:String x:Key="Str.Stages.SwitchLanguageError">Ошибка смены языка: '{0}'</system:String>
+    <system:String x:Key="Str.Stages.TtsNotSupportLanguageTemplate">{0} '{1}' не поддерживает '{2}' язык</system:String>
+
+    <!--  Buttons  -->
+    <system:String x:Key="Str.Button.SettingProxy">Настроить прокси</system:String>
+    <system:String x:Key="Str.Button.ShowText">Показать пример текста</system:String>
+    <system:String x:Key="Str.Button.Apply">Применить</system:String>
+    <system:String x:Key="Str.Button.ManageApi">Управление API</system:String>
+    <system:String x:Key="Str.LlmSettings.PanelCaption">LLM API — управление</system:String>
+    <system:String x:Key="Str.Button.Done">Готово</system:String>
+
+    <system:String x:Key="Str.Lookupper.ProjectNote">Мой главный проект:</system:String>
+    <system:String x:Key="Str.Lookupper.Url">https://lookupper.ru</system:String>
+
+    <!--  Footer links  -->
+    <system:String x:Key="Str.Links.TranslumoLlm">Translumo-LLM (этот проект)</system:String>
+    <system:String x:Key="Str.Links.Original">Translumo (оригинал)</system:String>
+
+</ResourceDictionary>

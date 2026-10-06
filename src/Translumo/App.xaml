@@ -1,0 +1,76 @@
+﻿<Application
+    x:Class="Translumo.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:system="clr-namespace:System;assembly=System.Runtime">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/Generic.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignExtensions;component/Themes/Generic.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignExtensions;component/Themes/MaterialDesignLightTheme.xaml" />
+
+                <!--  primary colors  -->
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/materialdesigncolor.cyan.accent.xaml" />
+                    </ResourceDictionary.MergedDictionaries>
+                    <SolidColorBrush x:Key="PrimaryHueLightBrush" Color="#fbffff" />
+                    <SolidColorBrush x:Key="PrimaryHueLightForegroundBrush" Color="{StaticResource Accent400Foreground}" />
+                    <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#c7f7ff" />
+                    <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="{StaticResource Accent400Foreground}" />
+                    <SolidColorBrush x:Key="PrimaryHueDarkBrush" Color="#95c4cc" />
+                    <SolidColorBrush x:Key="PrimaryHueDarkForegroundBrush" Color="{StaticResource Accent400Foreground}" />
+                </ResourceDictionary>
+
+                <!--  accent color  -->
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/materialdesigncolor.cyan.accent.xaml" />
+                    </ResourceDictionary.MergedDictionaries>
+                    <SolidColorBrush x:Key="SecondaryHueLightBrush" Color="#fbffff" />
+                    <SolidColorBrush x:Key="SecondaryHueLightForegroundBrush" Color="{StaticResource Accent400Foreground}" />
+                    <SolidColorBrush x:Key="SecondaryHueMidBrush" Color="#c7ffea" />
+                    <SolidColorBrush x:Key="SecondaryHueMidForegroundBrush" Color="{StaticResource Accent400Foreground}" />
+                    <SolidColorBrush x:Key="SecondaryHueDarkBrush" Color="#95ccb8" />
+                    <SolidColorBrush x:Key="SecondaryHueDarkForegroundBrush" Color="{StaticResource Accent400Foreground}" />
+                </ResourceDictionary>
+
+                <!--  other colors  -->
+                <ResourceDictionary>
+                    <SolidColorBrush x:Key="ErrorBrush" Color="#f03a16" />
+                    <SolidColorBrush x:Key="HoverBackgroundBrush" Color="#ebf5f7" />
+                    <SolidColorBrush x:Key="WarningBrush" Color="#ffdad6" />
+                    <!--  Dark chrome surface for the side navigation and dialog headers (theme-aware)  -->
+                    <SolidColorBrush x:Key="ChromeBackgroundBrush" Color="#95c4cc" />
+                    <!--  MaterialDesign built-in text/background brushes overridden at the app level
+                          (and re-colored at runtime by ThemeService) so DynamicResource references
+                          resolve to our mutable instances rather than the Frozen built-in ones.  -->
+                    <SolidColorBrush x:Key="MaterialDesignBody" Color="#FF000000" />
+                    <SolidColorBrush x:Key="MaterialDesignBackground" Color="#FFFFFFFF" />
+                </ResourceDictionary>
+
+                <ResourceDictionary Source="/Themes/Label.xaml" />
+                <ResourceDictionary Source="/Themes/TextBlock.xaml" />
+                <ResourceDictionary Source="/Themes/Button.xaml" />
+                <ResourceDictionary Source="/Themes/List.xaml" />
+                <ResourceDictionary Source="/Themes/PackIcon.xaml" />
+                <ResourceDictionary Source="/Themes/TextBox.xaml" />
+                <ResourceDictionary Source="/Themes/ComboBox.xaml" />
+                <ResourceDictionary Source="/Themes/Spinner.xaml" />
+                <ResourceDictionary Source="/Themes/CheckBox.xaml" />
+                <ResourceDictionary Source="/Themes/ToggleButton.xaml" />
+
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="Resources/Localization/lang.en-US.xaml" />
+                    </ResourceDictionary.MergedDictionaries>
+                    <system:String x:Key="ApplicationName">Translumo LLM</system:String>
+                </ResourceDictionary>
+            </ResourceDictionary.MergedDictionaries>
+
+            <Style TargetType="ToolTip" />
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

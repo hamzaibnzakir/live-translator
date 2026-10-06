@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Used by TempBundleCleaner for best-effort logging of extraction temp cleanup. -->
+    <PackageReference Include="Serilog" Version="2.12.0" />
+  </ItemGroup>
+
+</Project>

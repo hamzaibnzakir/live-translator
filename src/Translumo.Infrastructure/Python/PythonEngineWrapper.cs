@@ -1,0 +1,107 @@
+﻿using System;
+using System.IO;
+using Python.Runtime;
+using Translumo.Infrastructure.Constants;
+
+namespace Translumo.Infrastructure.Python;
+
+public class PythonEngineWrapper : IDisposable
+{
+    private bool _disposedValue;
+    private int _countUsage;
+
+    public PythonEngineWrapper()
+    {
+        // Force UTF-8 mode for the embedded CPython so a home/executable path that contains
+        // characters outside the system ANSI codepage (e.g. Japanese/Russian inside a Chinese
+        // path) is not mangled. This is what lets Translumo run from paths such as
+        // D:\游戏\暗黑破坏神 without crashing the OCR engine.
+        Environment.SetEnvironmentVariable("PYTHONUTF8", "1");
+        Environment.SetEnvironmentVariable("PYTHONLEGACYWINDOWSFSENCODING", "0");
+
+        // Only stage the DLL *path* here — do NOT touch PythonEngine yet. Any PythonEngine/Runtime
+        // call (e.g. setting PythonHome) eagerly loads python38.dll via Python.Runtime's Delegates
+        // type initializer, which crashes startup when Python\ is absent (the slim release ships
+        // without it; it is fetched on demand when EasyOCR is enabled). PythonHome + Initialize are
+        // deferred to Init()/InitInternal().
+        Runtime.PythonDLL = Path.Combine(Global.PythonPathShort, "python38.dll");
+    }
+
+    public PyObject Import(string libName) => Py.Import(libName);
+
+    public void Execute(Action action)
+    {
+        Execute<object>(() => { action(); return null; });
+    }
+
+    public T Execute<T>(Func<T> func)
+    {
+        using (Py.GIL())
+        {
+            return func();
+        }
+    }
+
+    public void Init()
+    {
+        if (_countUsage++ > 0)
+        {
+            return;
+        }
+
+        InitInternal();
+    }
+
+    private void InitInternal()
+    {
+        _disposedValue = false;
+
+        if (!PythonEngine.IsInitialized)
+        {
+            // TODO: move to common place, also used in EasyOCR
+            Runtime.PythonDLL = Path.Combine(Global.PythonPathShort, "python38.dll");
+            PythonEngine.PythonHome = Global.PythonPathShort;
+            PythonEngine.Initialize();
+            PythonEngine.BeginAllowThreads();
+        }
+    }
+
+
+    protected virtual void Dispose(bool disposing)
+    {
+        if (!_disposedValue)
+        {
+            if (disposing)
+            {
+                // TODO: dispose managed state (managed objects)
+            }
+
+            if (PythonEngine.IsInitialized)
+            {
+                // PythonEngine.EndAllowThreads(...) is intentionally skipped: it causes Shutdown() to hang (pythonnet/pythonnet#1701)
+                PythonEngine.Shutdown();
+            }
+
+            _disposedValue = true;
+        }
+    }
+
+    // TODO: override finalizer only if 'Dispose(bool disposing)' has code to free unmanaged resources
+    ~PythonEngineWrapper()
+    {
+        // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+        Dispose(disposing: false);
+    }
+
+    public void Dispose()
+    {
+        if (--_countUsage > 0)
+        {
+            return;
+        }
+
+        // Do not change this code. Put cleanup code in 'Dispose(bool disposing)' method
+        Dispose(disposing: true);
+        GC.SuppressFinalize(this);
+    }
+}

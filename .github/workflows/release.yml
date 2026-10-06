@@ -21,7 +21,7 @@ jobs:
   release:
     runs-on: windows-latest
     env:
-      Solution_Name: Translumo-LLM.sln
+      Solution_Name: BrainboxLiveTranslator.sln
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -95,7 +95,7 @@ jobs:
       - name: Zip artifact
         working-directory: publish
         shell: pwsh
-        run: 7z a -tzip "..\Translumo-LLM-${{ steps.ver.outputs.tag }}.zip" .
+        run: 7z a -tzip "..\BrainboxLiveTranslator-${{ steps.ver.outputs.tag }}-win-x64.zip" .
 
       - name: Create GitHub Release
         shell: pwsh
@@ -103,7 +103,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           gh release create "${{ steps.ver.outputs.tag }}" `
-            "Translumo-LLM-${{ steps.ver.outputs.tag }}.zip" `
+            "BrainboxLiveTranslator-${{ steps.ver.outputs.tag }}-win-x64.zip" `
             --target ${{ github.sha }} `
             --title "${{ steps.ver.outputs.tag }}" `
             --generate-notes

@@ -1,0 +1,405 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--  ===== Brainbox palette =====  -->
+    <Color x:Key="BbVioletColor">#8B5CF6</Color>
+    <Color x:Key="BbCyanColor">#22D3EE</Color>
+    <SolidColorBrush x:Key="BbBg" Color="#0D0F14" />
+    <SolidColorBrush x:Key="BbSurface" Color="#151821" />
+    <SolidColorBrush x:Key="BbSurface2" Color="#1C202B" />
+    <SolidColorBrush x:Key="BbBorder" Color="#262B38" />
+    <SolidColorBrush x:Key="BbText" Color="#F3F4F8" />
+    <SolidColorBrush x:Key="BbMuted" Color="#8A90A2" />
+    <SolidColorBrush x:Key="BbFaint" Color="#5B6173" />
+    <SolidColorBrush x:Key="BbGreen" Color="#34D399" />
+    <SolidColorBrush x:Key="BbAmber" Color="#FBBF24" />
+    <SolidColorBrush x:Key="BbViolet" Color="{StaticResource BbVioletColor}" />
+    <SolidColorBrush x:Key="BbCyan" Color="{StaticResource BbCyanColor}" />
+    <LinearGradientBrush x:Key="BbGradient" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Offset="0" Color="{StaticResource BbVioletColor}" />
+        <GradientStop Offset="1" Color="{StaticResource BbCyanColor}" />
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="BbHeroGlow" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Offset="0" Color="#338B5CF6" />
+        <GradientStop Offset="1" Color="#1A22D3EE" />
+    </LinearGradientBrush>
+
+    <FontFamily x:Key="BbFont">Segoe UI Variable Display, Segoe UI</FontFamily>
+
+    <!--  ===== Text =====  -->
+    <Style x:Key="BbLabel" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource BbMuted}" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontFamily" Value="{StaticResource BbFont}" />
+    </Style>
+    <Style x:Key="BbValue" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource BbText}" />
+        <Setter Property="FontSize" Value="15" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="FontFamily" Value="{StaticResource BbFont}" />
+        <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+    </Style>
+    <Style x:Key="BbSectionTitle" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource BbText}" />
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="FontFamily" Value="{StaticResource BbFont}" />
+        <Setter Property="Margin" Value="0,0,0,4" />
+    </Style>
+    <Style x:Key="BbHint" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource BbFaint}" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="FontFamily" Value="{StaticResource BbFont}" />
+        <Setter Property="Margin" Value="0,2,0,0" />
+    </Style>
+
+    <!--  ===== Buttons =====  -->
+    <Style x:Key="BbPrimaryButton" TargetType="Button">
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="FontFamily" Value="{StaticResource BbFont}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Height" Value="42" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Bd" Background="{StaticResource BbGradient}" CornerRadius="10">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Bd" Property="Opacity" Value="0.88" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Bd" Property="Opacity" Value="0.75" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Bd" Property="Opacity" Value="0.4" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="BbGhostButton" TargetType="Button">
+        <Setter Property="Foreground" Value="{StaticResource BbText}" />
+        <Setter Property="FontFamily" Value="{StaticResource BbFont}" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Height" Value="38" />
+        <Setter Property="Padding" Value="14,0" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border
+                        x:Name="Bd"
+                        Padding="{TemplateBinding Padding}"
+                        Background="{StaticResource BbSurface2}"
+                        BorderBrush="{StaticResource BbBorder}"
+                        BorderThickness="1"
+                        CornerRadius="10">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource BbViolet}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Bd" Property="Opacity" Value="0.45" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="BbChromeButton" TargetType="Button">
+        <Setter Property="Foreground" Value="{StaticResource BbMuted}" />
+        <Setter Property="Width" Value="40" />
+        <Setter Property="Height" Value="32" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontFamily" Value="Segoe MDL2 Assets" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="Bd" Background="Transparent" CornerRadius="6">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource BbSurface2}" />
+                            <Setter Property="Foreground" Value="{StaticResource BbText}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--  ===== Toggle switch (CheckBox) =====  -->
+    <Style x:Key="BbSwitch" TargetType="CheckBox">
+        <Setter Property="Foreground" Value="{StaticResource BbText}" />
+        <Setter Property="FontFamily" Value="{StaticResource BbFont}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Margin" Value="0,6" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="CheckBox">
+                    <Grid Background="Transparent">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <ContentPresenter VerticalAlignment="Center" />
+                        <Border
+                            x:Name="Track"
+                            Grid.Column="1"
+                            Width="42"
+                            Height="24"
+                            Background="{StaticResource BbSurface2}"
+                            BorderBrush="{StaticResource BbBorder}"
+                            BorderThickness="1"
+                            CornerRadius="12">
+                            <Ellipse
+                                x:Name="Thumb"
+                                Width="16"
+                                Height="16"
+                                Margin="4,0,0,0"
+                                HorizontalAlignment="Left"
+                                Fill="{StaticResource BbMuted}" />
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="Track" Property="Background" Value="{StaticResource BbGradient}" />
+                            <Setter TargetName="Track" Property="BorderThickness" Value="0" />
+                            <Setter TargetName="Thumb" Property="HorizontalAlignment" Value="Right" />
+                            <Setter TargetName="Thumb" Property="Margin" Value="0,0,4,0" />
+                            <Setter TargetName="Thumb" Property="Fill" Value="White" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.45" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--  ===== Inputs =====  -->
+    <Style x:Key="BbTextBox" TargetType="TextBox">
+        <Setter Property="Foreground" Value="{StaticResource BbText}" />
+        <Setter Property="CaretBrush" Value="{StaticResource BbText}" />
+        <Setter Property="SelectionBrush" Value="{StaticResource BbViolet}" />
+        <Setter Property="FontFamily" Value="{StaticResource BbFont}" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Height" Value="36" />
+        <Setter Property="Padding" Value="10,0" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="TextBox">
+                    <Border
+                        x:Name="Bd"
+                        Background="{StaticResource BbSurface2}"
+                        BorderBrush="{StaticResource BbBorder}"
+                        BorderThickness="1"
+                        CornerRadius="8">
+                        <ScrollViewer x:Name="PART_ContentHost" Margin="{TemplateBinding Padding}" VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsKeyboardFocused" Value="True">
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource BbViolet}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="BbComboItem" TargetType="ComboBoxItem">
+        <Setter Property="Foreground" Value="{StaticResource BbText}" />
+        <Setter Property="FontFamily" Value="{StaticResource BbFont}" />
+        <Setter Property="Padding" Value="10,7" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ComboBoxItem">
+                    <Border x:Name="Bd" Padding="{TemplateBinding Padding}" Background="Transparent" CornerRadius="6">
+                        <ContentPresenter />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsHighlighted" Value="True">
+                            <Setter TargetName="Bd" Property="Background" Value="#2A2F3D" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="Bd" Property="Background" Value="#33405B" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="BbComboToggle" TargetType="ToggleButton">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Border
+                        x:Name="Bd"
+                        Background="{StaticResource BbSurface2}"
+                        BorderBrush="{StaticResource BbBorder}"
+                        BorderThickness="1"
+                        CornerRadius="8">
+                        <TextBlock
+                            Margin="0,0,12,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            FontFamily="Segoe MDL2 Assets"
+                            FontSize="10"
+                            Foreground="{StaticResource BbMuted}"
+                            Text="&#xE70D;" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Bd" Property="BorderBrush" Value="{StaticResource BbViolet}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="BbCombo" TargetType="ComboBox">
+        <Setter Property="Foreground" Value="{StaticResource BbText}" />
+        <Setter Property="FontFamily" Value="{StaticResource BbFont}" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Height" Value="36" />
+        <Setter Property="ItemContainerStyle" Value="{StaticResource BbComboItem}" />
+        <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ComboBox">
+                    <Grid>
+                        <ToggleButton
+                            Focusable="False"
+                            IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                            Style="{StaticResource BbComboToggle}" />
+                        <ContentPresenter
+                            x:Name="SelectionContent"
+                            Margin="12,0,32,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Content="{TemplateBinding SelectionBoxItem}"
+                            ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                            IsHitTestVisible="False" />
+                        <TextBox
+                            x:Name="PART_EditableTextBox"
+                            Margin="4,0,30,0"
+                            VerticalAlignment="Center"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            CaretBrush="{StaticResource BbText}"
+                            Foreground="{StaticResource BbText}"
+                            IsReadOnly="{TemplateBinding IsReadOnly}"
+                            Visibility="Collapsed" />
+                        <Popup
+                            AllowsTransparency="True"
+                            IsOpen="{TemplateBinding IsDropDownOpen}"
+                            Placement="Bottom"
+                            PopupAnimation="Fade">
+                            <Border
+                                MinWidth="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}}"
+                                MaxHeight="320"
+                                Margin="0,4,0,0"
+                                Padding="4"
+                                Background="{StaticResource BbSurface}"
+                                BorderBrush="{StaticResource BbBorder}"
+                                BorderThickness="1"
+                                CornerRadius="8">
+                                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                                    <ItemsPresenter />
+                                </ScrollViewer>
+                            </Border>
+                        </Popup>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEditable" Value="True">
+                            <Setter TargetName="PART_EditableTextBox" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="SelectionContent" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.45" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="BbSlider" TargetType="Slider">
+        <Setter Property="Foreground" Value="{StaticResource BbViolet}" />
+        <Setter Property="IsMoveToPointEnabled" Value="True" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <!--  ===== Settings navigation =====  -->
+    <Style x:Key="BbNavItem" TargetType="RadioButton">
+        <Setter Property="Foreground" Value="{StaticResource BbMuted}" />
+        <Setter Property="FontFamily" Value="{StaticResource BbFont}" />
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Height" Value="40" />
+        <Setter Property="Margin" Value="0,2" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <Border x:Name="Bd" Padding="14,0" Background="Transparent" CornerRadius="8">
+                        <Grid>
+                            <Rectangle
+                                x:Name="Accent"
+                                Width="3"
+                                Height="18"
+                                Margin="-10,0,0,0"
+                                HorizontalAlignment="Left"
+                                Fill="{StaticResource BbGradient}"
+                                RadiusX="1.5"
+                                RadiusY="1.5"
+                                Visibility="Collapsed" />
+                            <ContentPresenter VerticalAlignment="Center" />
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource BbSurface2}" />
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="Bd" Property="Background" Value="{StaticResource BbSurface2}" />
+                            <Setter TargetName="Accent" Property="Visibility" Value="Visible" />
+                            <Setter Property="Foreground" Value="{StaticResource BbText}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="BbCard" TargetType="Border">
+        <Setter Property="Background" Value="{StaticResource BbSurface}" />
+        <Setter Property="BorderBrush" Value="{StaticResource BbBorder}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="14" />
+        <Setter Property="Padding" Value="18" />
+    </Style>
+
+    <Style x:Key="BbFieldLabel" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource BbText}" />
+        <Setter Property="FontFamily" Value="{StaticResource BbFont}" />
+        <Setter Property="FontSize" Value="13" />
+        <Setter Property="Margin" Value="0,14,0,6" />
+    </Style>
+</ResourceDictionary>

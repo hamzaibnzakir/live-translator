@@ -10,13 +10,13 @@ using System.Windows;
                                               //(used if a resource is not found in the page,
                                               // app, or any theme specific resource dictionaries)
 )]
-[assembly: AssemblyFileVersion("1.3.5")]
-[assembly: AssemblyInformationalVersion("1.3.5")]
-[assembly: AssemblyVersion("1.3.5")]
+[assembly: AssemblyFileVersion("2.0.0")]
+[assembly: AssemblyInformationalVersion("2.0.0")]
+[assembly: AssemblyVersion("2.0.0")]
 
-[assembly: AssemblyCompany("Translumo LLM")]
-[assembly: AssemblyProduct("Translumo LLM")]
-[assembly: AssemblyTitle("Translumo LLM")]
-[assembly: AssemblyCopyright("Copyright © Chaobs (LLM Edition). Based on Translumo by Aleksei Vekhov & Danil Iushkov.")]
+[assembly: AssemblyCompany("Brainbox")]
+[assembly: AssemblyProduct("Brainbox Live Translator")]
+[assembly: AssemblyTitle("Brainbox Live Translator")]
+[assembly: AssemblyCopyright("Copyright © 2026 Brainbox (David Monday Nwankwo). Built on Translumo-LLM by Chaobs and Translumo by Aleksei Vekhov & Danil Iushkov (Apache-2.0).")]
 [assembly: TargetPlatform("Windows10.0.19041.0")]
 [assembly: SupportedOSPlatform("Windows10.0.19041.0")]

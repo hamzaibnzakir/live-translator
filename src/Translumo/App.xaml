@@ -66,7 +66,7 @@
                     <ResourceDictionary.MergedDictionaries>
                         <ResourceDictionary Source="Resources/Localization/lang.en-US.xaml" />
                     </ResourceDictionary.MergedDictionaries>
-                    <system:String x:Key="ApplicationName">Translumo LLM</system:String>
+                    <system:String x:Key="ApplicationName">Brainbox Classic (Translumo)</system:String>
                 </ResourceDictionary>
             </ResourceDictionary.MergedDictionaries>
 

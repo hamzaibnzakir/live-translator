@@ -1,0 +1,121 @@
+name: Brainbox CI (build, test, real-screen self-test)
+
+# Builds on a real Windows desktop, runs unit/integration tests and static analysis, publishes the
+# single-file app, then launches it in --selftest mode on the runner's interactive desktop:
+# real screen capture, real Windows OCR, real overlay windows, synthetic mouse/keyboard input.
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, "feat/**", "fix/**" ]
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  windows:
+    runs-on: windows-2022
+    timeout-minutes: 60
+    env:
+      DOTNET_NOLOGO: "1"
+      DOTNET_CLI_TELEMETRY_OPTOUT: "1"
+      SkipBinariesExtract: "true"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Install Japanese OCR + fonts (for the real-screen Japanese test)
+        continue-on-error: true
+        shell: pwsh
+        run: |
+          $caps = 'Language.OCR~~~ja-JP~0.0.1.0', 'Language.Fonts.Jpan~~~und-JPAN~0.0.1.0'
+          foreach ($c in $caps) {
+            try { Add-WindowsCapability -Online -Name $c -ErrorAction Stop | Out-Null; Write-Host "Installed $c" }
+            catch { Write-Warning "Could not install $c : $_" }
+          }
+          Get-WindowsCapability -Online | Where-Object Name -like 'Language.OCR*' | Format-Table Name, State
+
+      - name: Larger desktop resolution (best effort)
+        continue-on-error: true
+        shell: pwsh
+        run: |
+          if (Get-Command Set-DisplayResolution -ErrorAction SilentlyContinue) { Set-DisplayResolution -Width 1920 -Height 1080 -Force }
+          Add-Type -AssemblyName System.Windows.Forms
+          [System.Windows.Forms.Screen]::AllScreens | Format-Table DeviceName, Bounds, Primary
+
+      - name: Restore
+        run: dotnet restore BrainboxLiveTranslator.sln
+
+      - name: Build (static analysis on, Brainbox.Core warnings are errors)
+        run: dotnet build BrainboxLiveTranslator.sln -c Release --no-restore
+
+      - name: Unit + pipeline integration tests (Brainbox.Core)
+        run: dotnet test src/Brainbox.Core.Tests/Brainbox.Core.Tests.csproj -c Release --no-build --logger "trx;LogFileName=brainbox-core.trx" --logger "console;verbosity=normal"
+
+      - name: Existing Translumo tests
+        run: dotnet test src/Translumo.Tests/Translumo.Tests.csproj -c Release --no-build --logger "trx;LogFileName=translumo.trx"
+
+      - name: Publish single-file win-x64
+        run: dotnet publish src/Translumo/Translumo.csproj -c Release -o publish -p:SkipBinariesExtract=true
+
+      - name: Add Translumo prediction model (needed only by the classic region translator)
+        continue-on-error: true
+        shell: pwsh
+        run: |
+          $zip = "$env:RUNNER_TEMP\components.zip"; $ext = "$env:RUNNER_TEMP\ext"
+          Invoke-WebRequest 'https://github.com/ramjke/Translumo/releases/download/v.0.8.5/_components_v.1.0.0.zip' -OutFile $zip
+          Expand-Archive -Path $zip -DestinationPath $ext -Force
+          New-Item -ItemType Directory -Force -Path 'publish\models\prediction' | Out-Null
+          Copy-Item -Path "$ext\models\prediction\*" -Destination 'publish\models\prediction' -Recurse -Force
+
+      - name: Real-screen self-test (capture → OCR → translate → overlay on the runner desktop)
+        id: selftest
+        shell: pwsh
+        run: |
+          $out = Join-Path $env:GITHUB_WORKSPACE 'selftest-out'
+          New-Item -ItemType Directory -Force -Path $out | Out-Null
+          $p = Start-Process -FilePath 'publish\BrainboxLiveTranslator.exe' -ArgumentList @('--selftest', '--out', "`"$out`"") -PassThru
+          if (-not $p.WaitForExit(15 * 60 * 1000)) { Write-Warning 'Self-test timed out'; $p.Kill(); $code = 99 } else { $code = $p.ExitCode }
+          if (Test-Path "$out\selftest.log") { Get-Content "$out\selftest.log" }
+          if (Test-Path "$out\report.md") { Get-Content "$out\report.md" | Out-File -Append -Encoding utf8 $env:GITHUB_STEP_SUMMARY }
+          Write-Host "Self-test exit code: $code"
+          exit $code
+
+      - name: Upload self-test report + screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: brainbox-selftest
+          path: |
+            selftest-out/*.md
+            selftest-out/*.json
+            selftest-out/*.log
+            selftest-out/*.png
+            selftest-out/data/logs/**
+          if-no-files-found: warn
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: '**/*.trx'
+          if-no-files-found: warn
+
+      - name: Upload app (win-x64)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: BrainboxLiveTranslator-win-x64
+          path: |
+            publish
+            !publish/symbols/**
+          if-no-files-found: warn

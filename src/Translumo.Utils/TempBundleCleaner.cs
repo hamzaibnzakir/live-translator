@@ -28,7 +28,7 @@ namespace Translumo.Utils
         internal const string ExtractBaseDirEnv = "DOTNET_BUNDLE_EXTRACT_BASE_DIR";
 
         /// <summary>Sub-folder the host appends under the extraction base (matches the assembly name).</summary>
-        internal const string AppBundleFolder = "Translumo-LLM";
+        internal const string AppBundleFolder = "BrainboxLiveTranslator";
 
         /// <summary>
         /// Removes single-file extraction directories that are (a) not the one this
@@ -43,7 +43,7 @@ namespace Translumo.Utils
             try
             {
                 // For a single-file app this is the extraction dir, e.g.
-                // <base>/Translumo-LLM/<hash>/. Never delete the folder we are running from.
+                // <base>/BrainboxLiveTranslator/<hash>/. Never delete the folder we are running from.
                 var current = (AppContext.BaseDirectory ?? string.Empty)
                     .TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
                 if (string.IsNullOrEmpty(current))

@@ -1,0 +1,186 @@
+<Window
+    x:Class="Brainbox.Desktop.UI.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Brainbox Live Translator"
+    Width="400"
+    Height="680"
+    Background="#0D0F14"
+    FontFamily="Segoe UI Variable Display, Segoe UI"
+    Icon="/Resources/Brainbox/brainbox.ico"
+    ResizeMode="CanMinimize"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Brainbox/UI/BrainboxTheme.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <BooleanToVisibilityConverter x:Key="BoolToVis" />
+        </ResourceDictionary>
+    </Window.Resources>
+    <WindowChrome.WindowChrome>
+        <WindowChrome
+            CaptionHeight="52"
+            CornerRadius="0"
+            GlassFrameThickness="0"
+            ResizeBorderThickness="0"
+            UseAeroCaptionButtons="False" />
+    </WindowChrome.WindowChrome>
+
+    <Border BorderBrush="{StaticResource BbBorder}" BorderThickness="1">
+        <Grid>
+            <!--  soft brand glow behind the hero  -->
+            <Ellipse
+                Width="420"
+                Height="320"
+                Margin="-60,-150,0,0"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Fill="{StaticResource BbHeroGlow}"
+                IsHitTestVisible="False">
+                <Ellipse.Effect>
+                    <BlurEffect Radius="90" />
+                </Ellipse.Effect>
+            </Ellipse>
+
+            <Grid Margin="24,0,24,20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="52" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <!--  title bar  -->
+                <DockPanel Grid.Row="0" LastChildFill="False">
+                    <Image
+                        Width="22"
+                        Height="22"
+                        VerticalAlignment="Center"
+                        DockPanel.Dock="Left"
+                        Source="/Resources/Brainbox/brainbox.png" />
+                    <Button
+                        Click="OnClose"
+                        Content="&#xE8BB;"
+                        DockPanel.Dock="Right"
+                        Style="{StaticResource BbChromeButton}"
+                        ToolTip="Hide to tray (keeps translating)"
+                        WindowChrome.IsHitTestVisibleInChrome="True" />
+                    <Button
+                        Click="OnMinimize"
+                        Content="&#xE921;"
+                        DockPanel.Dock="Right"
+                        Style="{StaticResource BbChromeButton}"
+                        WindowChrome.IsHitTestVisibleInChrome="True" />
+                </DockPanel>
+
+                <!--  brand  -->
+                <StackPanel Grid.Row="1" Margin="0,6,0,0">
+                    <TextBlock
+                        FontSize="30"
+                        FontWeight="Bold"
+                        Foreground="{StaticResource BbGradient}"
+                        Text="BRAINBOX" />
+                    <TextBlock
+                        Margin="2,-2,0,0"
+                        FontSize="13"
+                        FontWeight="SemiBold"
+                        Foreground="{StaticResource BbMuted}"
+                        Text="LIVE TRANSLATOR" />
+                </StackPanel>
+
+                <!--  live status  -->
+                <Border
+                    Grid.Row="2"
+                    Margin="0,22,0,0"
+                    Style="{StaticResource BbCard}">
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Grid Width="14" Height="14" VerticalAlignment="Center">
+                                <Ellipse x:Name="StatusHalo" Fill="{Binding StatusBrush}" Opacity="0.35" />
+                                <Ellipse
+                                    Width="8"
+                                    Height="8"
+                                    Fill="{Binding StatusBrush}" />
+                            </Grid>
+                            <TextBlock
+                                Margin="10,0,0,0"
+                                VerticalAlignment="Center"
+                                FontSize="18"
+                                FontWeight="Bold"
+                                Foreground="{StaticResource BbText}"
+                                Text="{Binding Controller.StatusText}" />
+                        </StackPanel>
+                        <TextBlock
+                            Margin="24,4,0,0"
+                            Style="{StaticResource BbHint}"
+                            Text="{Binding Controller.StatusDetail}" />
+                    </StackPanel>
+                </Border>
+
+                <!--  details  -->
+                <Border
+                    Grid.Row="3"
+                    Margin="0,12,0,0"
+                    Style="{StaticResource BbCard}">
+                    <StackPanel>
+                        <TextBlock Style="{StaticResource BbLabel}" Text="Translating" />
+                        <TextBlock Margin="0,2,0,12" Style="{StaticResource BbValue}" Text="{Binding Controller.LanguagePairText}" />
+                        <TextBlock Style="{StaticResource BbLabel}" Text="Screen" />
+                        <TextBlock Margin="0,2,0,12" Style="{StaticResource BbValue}" Text="{Binding Controller.ScreenText}" />
+                        <TextBlock Style="{StaticResource BbLabel}" Text="Engine" />
+                        <TextBlock Margin="0,2,0,12" Style="{StaticResource BbValue}" Text="{Binding Controller.EngineText}" />
+                        <TextBlock Style="{StaticResource BbLabel}" Text="Mode" />
+                        <TextBlock Margin="0,2,0,0" Style="{StaticResource BbValue}" Text="{Binding Controller.ModeText}" />
+                    </StackPanel>
+                </Border>
+
+                <!--  actions  -->
+                <Grid Grid.Row="4" Margin="0,14,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="10" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Button
+                        Click="OnPause"
+                        Content="{Binding PauseText}"
+                        Style="{StaticResource BbPrimaryButton}" />
+                    <Button
+                        Grid.Column="2"
+                        Height="42"
+                        Click="OnSettings"
+                        Content="Settings"
+                        Style="{StaticResource BbGhostButton}" />
+                </Grid>
+
+                <!--  quick toggles  -->
+                <StackPanel Grid.Row="5" Margin="2,18,2,0">
+                    <Rectangle Height="1" Margin="0,0,0,10" Fill="{StaticResource BbBorder}" />
+                    <CheckBox Content="Automatic Translation" IsChecked="{Binding Controller.Settings.LiveTranslationEnabled}" Style="{StaticResource BbSwitch}" />
+                    <CheckBox Content="Screen Glow" IsChecked="{Binding Controller.Settings.GlowEnabled}" Style="{StaticResource BbSwitch}" />
+                    <CheckBox Content="Start With Windows" IsChecked="{Binding Controller.Settings.StartWithWindows}" Style="{StaticResource BbSwitch}" />
+                </StackPanel>
+
+                <!--  footer  -->
+                <StackPanel Grid.Row="6">
+                    <TextBlock
+                        Foreground="{StaticResource BbAmber}"
+                        Style="{StaticResource BbHint}"
+                        Text="{Binding Controller.HotkeyErrors}"
+                        Visibility="{Binding HasHotkeyErrors, Converter={StaticResource BoolToVis}}" />
+                    <TextBlock Style="{StaticResource BbHint}" Text="{Binding HotkeyHint}" />
+                    <TextBlock
+                        Margin="0,4,0,0"
+                        FontSize="11"
+                        Style="{StaticResource BbHint}"
+                        Text="{Binding Controller.MetricsText}" />
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

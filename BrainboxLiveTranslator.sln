@@ -26,6 +26,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{92A2E6BF-240
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Translumo.Tests", "src\Translumo.Tests\Translumo.Tests.csproj", "{A21C1FC9-C04E-4F9D-9C88-87AC23C12BDF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brainbox.Core", "src\Brainbox.Core\Brainbox.Core.csproj", "{765A33E9-14D6-4C24-A67E-528AC373C2F6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brainbox.Core.Tests", "src\Brainbox.Core.Tests\Brainbox.Core.Tests.csproj", "{41D4FD5A-E48C-4A6F-9D0B-72A2A9C8AEDB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,6 +68,14 @@ Global
 		{A21C1FC9-C04E-4F9D-9C88-87AC23C12BDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A21C1FC9-C04E-4F9D-9C88-87AC23C12BDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A21C1FC9-C04E-4F9D-9C88-87AC23C12BDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{765A33E9-14D6-4C24-A67E-528AC373C2F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{765A33E9-14D6-4C24-A67E-528AC373C2F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{765A33E9-14D6-4C24-A67E-528AC373C2F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{765A33E9-14D6-4C24-A67E-528AC373C2F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41D4FD5A-E48C-4A6F-9D0B-72A2A9C8AEDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41D4FD5A-E48C-4A6F-9D0B-72A2A9C8AEDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41D4FD5A-E48C-4A6F-9D0B-72A2A9C8AEDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41D4FD5A-E48C-4A6F-9D0B-72A2A9C8AEDB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -73,5 +85,7 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A21C1FC9-C04E-4F9D-9C88-87AC23C12BDF} = {92A2E6BF-2403-4D1C-9BA9-CF85F6D9E03C}
+		{765A33E9-14D6-4C24-A67E-528AC373C2F6} = {92A2E6BF-2403-4D1C-9BA9-CF85F6D9E03C}
+		{41D4FD5A-E48C-4A6F-9D0B-72A2A9C8AEDB} = {92A2E6BF-2403-4D1C-9BA9-CF85F6D9E03C}
 	EndGlobalSection
 EndGlobal

@@ -6,7 +6,8 @@
 	
 	<PropertyGroup>
 		<OutputType>WinExe</OutputType>
-		<AssemblyName>Translumo-LLM</AssemblyName>
+		<AssemblyName>BrainboxLiveTranslator</AssemblyName>
+		<RootNamespace>Translumo</RootNamespace>
 		<TargetFramework>net8.0-windows10.0.19041.0</TargetFramework>
 		<UseWPF>true</UseWPF>
 		<ApplicationManifest>app.manifest</ApplicationManifest>
@@ -14,7 +15,7 @@
 		<SatelliteResourceLanguages>en-US;en</SatelliteResourceLanguages>
 		<IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
 		<PublishSingleFile>true</PublishSingleFile>
-		<ApplicationIcon>Resources\Icons\favicon_new.ico</ApplicationIcon>
+		<ApplicationIcon>Resources\Brainbox\brainbox.ico</ApplicationIcon>
 		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 	</PropertyGroup>
 
@@ -89,6 +90,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Brainbox.Core\Brainbox.Core.csproj" />
     <ProjectReference Include="..\Translumo.Processing\Translumo.Processing.csproj" />
     <ProjectReference Include="..\Translumo.Translation\Translumo.Translation.csproj" />
     <ProjectReference Include="..\Translumo.Utils\Translumo.Utils.csproj" />
@@ -107,6 +109,11 @@
     <Resource Include="..\..\docs\banner_new.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Brainbox\*" />
+    <Resource Include="Resources\Brainbox\*.png;Resources\Brainbox\*.ico" />
   </ItemGroup>
 
   <ItemGroup>

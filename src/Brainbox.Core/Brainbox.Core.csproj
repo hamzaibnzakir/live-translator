@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    Brainbox.Core: the platform-neutral live-translation engine.
+    Deliberately has ZERO NuGet dependencies and no Windows APIs so it can be compiled, analysed
+    and unit-tested anywhere (CI, Linux dev boxes). Everything OS-specific (capture, OCR, overlay)
+    plugs in through the interfaces in Capture/, Text/IOcrEngine and Overlay/.
+  -->
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>latest</LangVersion>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <RootNamespace>Brainbox.Core</RootNamespace>
+    <!-- Static analysis: built-in .NET analyzers, warnings are errors for the core engine. -->
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    <AnalysisLevel>latest-recommended</AnalysisLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <!-- CA1848/CA2254: we use a tiny logging abstraction, not ILogger message templates.
+         CA1031: the pipeline intentionally catches all exceptions to stay alive (requirement #20).
+         CA1062: nullable reference types already guard public inputs.
+         CA1716/CA1720/CA1711: identifier-naming rules that clash with domain words (Text, Single...). -->
+    <NoWarn>$(NoWarn);CA1848;CA2254;CA1031;CA1062;CA1716;CA1720;CA1711</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <InternalsVisibleTo Include="Brainbox.Core.Tests" />
+  </ItemGroup>
+</Project>

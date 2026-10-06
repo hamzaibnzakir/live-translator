@@ -422,3 +422,6 @@ llm_profiles.json
 # Local build / publish output artifacts
 publish/
 artifacts/
+
+# Brainbox
+artifacts/

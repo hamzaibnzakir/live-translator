@@ -166,7 +166,7 @@ namespace Brainbox.Desktop.Shell
 
             var (chain, vision, owned) = EngineFactory.Build(Settings, () => Environment.TickCount64, Log, _translumoProvider);
             _engineOwned.AddRange(owned);
-            Watcher = new ScreenWatcher(_frames, _ocr, chain, _cache, Settings, Log);
+            Watcher = new ScreenWatcher(_frames, _ocr, chain, _cache, Settings, Log, () => Environment.TickCount64);
             Watcher.SetVisionTranslator(vision);
             Watcher.ForegroundWindowBounds = ForegroundBounds;
 

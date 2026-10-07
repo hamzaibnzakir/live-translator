@@ -81,7 +81,10 @@ public sealed class ResilientTranslator
     /// <summary>True when the first provider that would be used accepts context.</summary>
     public bool PrimarySupportsContext => _chain.FirstOrDefault(c => !c.Breaker.IsOpen).Provider?.SupportsContext ?? false;
 
-    /// <summary>Earliest time any provider becomes available again (for back-off scheduling).</summary>
+    /// <summary>Milliseconds until some provider may be tried again (0 = now). Clock-independent for callers.</summary>
+    public long RetryDelayMs => Math.Max(0, NextAvailableAtMs == long.MaxValue ? 5000 : NextAvailableAtMs - _clock());
+
+    /// <summary>Earliest time any provider becomes available again (for back-off scheduling), on this translator's clock.</summary>
     public long NextAvailableAtMs => _chain.Count == 0 ? long.MaxValue : _chain.Min(c => c.Breaker.IsOpen ? c.Breaker.RetryAtMs : 0);
 
     public async Task<TranslationOutcome> TranslateAsync(TranslationBatch batch, CancellationToken cancellationToken)

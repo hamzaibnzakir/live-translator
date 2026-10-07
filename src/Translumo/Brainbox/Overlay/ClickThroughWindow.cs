@@ -31,7 +31,7 @@ namespace Brainbox.Desktop.Overlay
         /// normal windows, which is what SetWindowDisplayAffinity needs on some systems; "Layered"
         /// is the classic WPF transparent window. Chosen at startup (see <see cref="OverlayManager"/>).
         /// </summary>
-        public static OverlaySurface Surface { get; set; } = OverlaySurface.Layered;
+        public static OverlaySurface Surface { get; set; } = OverlaySurface.Redirected;
 
         /// <summary>Win32 error of the last failed SetWindowDisplayAffinity call (diagnostics).</summary>
         public int LastAffinityError { get; private set; }
@@ -75,13 +75,10 @@ namespace Brainbox.Desktop.Overlay
                 Native.DwmExtendFrameIntoClientArea(Handle, ref margins);
             }
 
-            Native.AddExStyle(Handle, Native.WS_EX_TRANSPARENT | Native.WS_EX_TOOLWINDOW | Native.WS_EX_NOACTIVATE | Native.WS_EX_LAYERED);
-            Native.RemoveExStyle(Handle, Native.WS_EX_APPWINDOW);
-            if (!AllowsTransparency)
-            {
-                // WS_EX_TRANSPARENT only makes a top-level window click-through when it is layered.
-                Native.SetLayeredWindowAttributes(Handle, 0, 255, Native.LWA_ALPHA);
-            }
+            // WPF rewrites the extended style from its own cache (Topmost/ShowInTaskbar/Show), which
+            // would silently drop our bits; pin them in WM_STYLECHANGING so they can never be removed.
+            HwndSource.FromHwnd(Handle)?.AddHook(PinStyles);
+            EnsureStyles();
 
             SetCaptureExclusion(true);
             // Some systems only accept the affinity once the window has been shown/composed.
@@ -89,6 +86,54 @@ namespace Brainbox.Desktop.Overlay
             {
                 if (!ExcludedFromCapture) SetCaptureExclusion(true);
             };
+        }
+
+        private const long PinnedExStyles = Native.WS_EX_TRANSPARENT | Native.WS_EX_TOOLWINDOW | Native.WS_EX_NOACTIVATE | Native.WS_EX_LAYERED;
+        private const int WM_STYLECHANGING = 0x007C;
+        private const int MA_NOACTIVATE = 3;
+        private const int WM_MOUSEACTIVATE = 0x0021;
+
+        [StructLayout(LayoutKind.Sequential)]
+        private struct STYLESTRUCT
+        {
+            public uint StyleOld;
+            public uint StyleNew;
+        }
+
+        private IntPtr PinStyles(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
+        {
+            if (msg == WM_STYLECHANGING && wParam.ToInt64() == Native.GWL_EXSTYLE)
+            {
+                var ss = Marshal.PtrToStructure<STYLESTRUCT>(lParam);
+                ss.StyleNew = (uint)((ss.StyleNew | PinnedExStyles) & ~Native.WS_EX_APPWINDOW);
+                Marshal.StructureToPtr(ss, lParam, false);
+            }
+            else if (msg == WM_MOUSEACTIVATE)
+            {
+                handled = true;
+                return new IntPtr(MA_NOACTIVATE);
+            }
+
+            return IntPtr.Zero;
+        }
+
+        /// <summary>(Re)applies click-through / no-activate / tool-window / layered styles.</summary>
+        public void EnsureStyles()
+        {
+            if (Handle == IntPtr.Zero) return;
+            var ex = Native.GetWindowLongPtr(Handle, Native.GWL_EXSTYLE).ToInt64();
+            var wasLayered = (ex & Native.WS_EX_LAYERED) != 0;
+            if ((ex & PinnedExStyles) != PinnedExStyles || (ex & Native.WS_EX_APPWINDOW) != 0)
+            {
+                Native.SetWindowLongPtr(Handle, Native.GWL_EXSTYLE, new IntPtr((ex | PinnedExStyles) & ~Native.WS_EX_APPWINDOW));
+            }
+
+            if (!AllowsTransparency && !wasLayered)
+            {
+                // WS_EX_TRANSPARENT only makes a top-level window click-through when it is layered;
+                // a constant-alpha layered window keeps DWM redirection (needed for capture exclusion).
+                Native.SetLayeredWindowAttributes(Handle, 0, 255, Native.LWA_ALPHA);
+            }
         }
 
         /// <summary>Turns capture exclusion on/off (off only for the self-test's "screenshot with overlay").</summary>
@@ -132,6 +177,7 @@ namespace Brainbox.Desktop.Overlay
         public void BringToTop()
         {
             if (Handle == IntPtr.Zero) return;
+            EnsureStyles();
             Native.SetWindowPos(Handle, Native.HWND_TOPMOST, 0, 0, 0, 0,
                 Native.SWP_NOACTIVATE | Native.SWP_NOMOVE | Native.SWP_NOSIZE | Native.SWP_NOOWNERZORDER);
         }

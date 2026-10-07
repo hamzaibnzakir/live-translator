@@ -578,7 +578,7 @@ public sealed class ScreenWatcher : IDisposable
                 Metrics.Translation(outcome.ElapsedMs, texts.Count, outcome.Success);
                 if (!outcome.Success)
                 {
-                    var retryAt = Math.Max(_clock() + 1500, _translator.NextAvailableAtMs);
+                    var retryAt = _clock() + Math.Max(1500, _translator.RetryDelayMs); // the translator may run on a different clock
                     _tracker.MarkRetry(toSend.Select(l => l.Id), retryAt);
                     UpdateStatus();
                     break;

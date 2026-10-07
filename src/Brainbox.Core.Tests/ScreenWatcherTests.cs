@@ -178,6 +178,39 @@ public class ScreenWatcherTests
     }
 
     [Fact]
+    public async Task Recovers_even_when_translator_and_watcher_use_different_clocks()
+    {
+        // Regression (found on the Windows runner): the app's translator used Environment.TickCount64
+        // while the watcher used its own stopwatch, so retries were scheduled days in the future.
+        var clock = new FakeClock();
+        var desk = new FakeDesktop();
+        var provider = new FakeProvider("LM Studio", new Dictionary<string, string> { ["こんにちは世界"] = "Hello world" }) { Down = true };
+        var translatorClock = new FakeClock { Now = 900_000_000 };
+        var chain = new ResilientTranslator(new[] { provider }, () => translatorClock.Now);
+        using var cache = new TranslationCache();
+        using var watcher = new ScreenWatcher(desk, new FakeOcr(desk), chain, cache, new BrainboxSettings(), null, clock.Read);
+        desk.Texts.Add(new FakeText("こんにちは世界", new PixelRect(100, 100, 140, 24)));
+        for (var i = 0; i < 4; i++)
+        {
+            clock.Advance(300);
+            translatorClock.Now += 300;
+            await watcher.TickAsync(CancellationToken.None);
+            await watcher.WhenTranslationsIdleAsync();
+        }
+
+        provider.Down = false;
+        for (var i = 0; i < 40 && watcher.CurrentOverlay.Count == 0; i++)
+        {
+            clock.Advance(500);
+            translatorClock.Now += 500;
+            await watcher.TickAsync(CancellationToken.None);
+            await watcher.WhenTranslationsIdleAsync();
+        }
+
+        Assert.Equal("Hello world", Assert.Single(watcher.CurrentOverlay).Text);
+    }
+
+    [Fact]
     public async Task Falls_back_to_secondary_engine_when_local_ai_is_down()
     {
         var local = new FakeProvider("LM Studio") { Down = true };

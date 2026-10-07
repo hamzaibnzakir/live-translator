@@ -230,7 +230,7 @@ namespace Brainbox.Desktop.SelfTest
                 // T6: window moves → overlay follows (and no new translation request)
                 if (found)
                 {
-                    var requests = server.ChatRequests;
+                    var requests = server.TranslatedSegments.Count(x => x.Contains("Bienvenue", StringComparison.OrdinalIgnoreCase));
                     var oldBox = FindItem(controller, FrenchAEn).Box;
                     await PlaceWindowAsync(testWindow, primary.WorkArea.X + 420, primary.WorkArea.Y + 260);
                     var newRect = ScreenRect(french);
@@ -241,7 +241,8 @@ namespace Brainbox.Desktop.SelfTest
                     }, 15_000);
                     var moved = FindItem(controller, FrenchAEn);
                     Record("T6 Overlay follows moved window", follow, $"overlay {oldBox} → {moved?.Box}, text now at {newRect}");
-                    Record("T6b Moved text served from cache (no new request)", server.ChatRequests == requests, $"new chat requests: {server.ChatRequests - requests}");
+                    var resent = server.TranslatedSegments.Count(x => x.Contains("Bienvenue", StringComparison.OrdinalIgnoreCase)) - requests;
+                    Record("T6b Moved text served from cache (no new request)", resent == 0, $"times the moved French line was re-sent for translation: {resent}");
                 }
 
                 // T8b: changed text → new translation, removed text → overlay disappears

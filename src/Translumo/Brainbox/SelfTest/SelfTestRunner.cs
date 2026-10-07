@@ -58,6 +58,11 @@ namespace Brainbox.Desktop.SelfTest
             Directory.CreateDirectory(outDir);
             Environment.SetEnvironmentVariable("BRAINBOX_DATA_DIR", Path.Combine(outDir, "data"));
             var interactive = args.Any(a => a == "--interactive");
+            if (string.Equals(ArgValue(args, "--engine"), "ollama", StringComparison.OrdinalIgnoreCase))
+            {
+                await RealEngineRunAsync(app, outDir, ArgValue(args, "--model") ?? "", ArgValue(args, "--endpoint") ?? "http://localhost:11434/v1");
+                return;
+            }
 
             var results = new List<Result>();
             var metrics = new Dictionary<string, object>();
@@ -546,6 +551,8 @@ namespace Brainbox.Desktop.SelfTest
                 var gdi = new GdiFrameSource();
                 var plain = gdi.Capture(area);
                 if (plain != null) File.WriteAllBytes(Path.Combine(dir, "screen-capture-as-brainbox-sees-it.png"), ImageOps.EncodePng(plain.Bgra, plain.Width, plain.Height));
+                c.Watcher.HoldCapture = true; // don't let the engine see the overlay while exclusion is off
+                await Task.Delay(600);
                 c.Overlay.SetCaptureExclusion(false);
                 await Task.Delay(400);
                 var withOverlay = gdi.Capture(area);
@@ -559,6 +566,7 @@ namespace Brainbox.Desktop.SelfTest
             {
                 c.Overlay.SetCaptureExclusion(true);
                 await Task.Delay(300);
+                c.Watcher.HoldCapture = false;
             }
         }
 
@@ -600,6 +608,100 @@ namespace Brainbox.Desktop.SelfTest
         {
             var i = Array.FindIndex(args, a => a.Equals(name, StringComparison.OrdinalIgnoreCase));
             return i >= 0 && i + 1 < args.Length ? args[i + 1] : null;
+        }
+
+        /// <summary>
+        /// Same pipeline against a REAL local LLM (Ollama, OpenAI-compatible endpoint): no
+        /// dictionary, the model decides the wording, so checks are semantic.
+        /// </summary>
+        private static async Task RealEngineRunAsync(App app, string outDir, string model, string endpoint)
+        {
+            var results = new List<Result>();
+            var metrics = new Dictionary<string, object>();
+            void Log(string s)
+            {
+                var line = $"{DateTime.Now:HH:mm:ss.fff} {s}";
+                Console.WriteLine(line);
+                File.AppendAllText(Path.Combine(outDir, "selftest.log"), line + Environment.NewLine);
+            }
+
+            void Record(string name, bool? pass, string details)
+            {
+                var status = pass == null ? "SKIP" : pass.Value ? "PASS" : "FAIL";
+                results.Add(new Result(name, status, details, 0));
+                Log($"[{status}] {name} — {details}");
+            }
+
+            BrainboxController controller = null;
+            Window w = null;
+            try
+            {
+                new BrainboxSettings
+                {
+                    Engine = TranslationEngineKind.Ollama,
+                    OllamaEndpoint = endpoint,
+                    Model = model,
+                    PerformanceMode = PerformanceMode.Balanced,
+                    StartWithWindows = false,
+                    FirstRunCompleted = true,
+                    RequestTimeoutSeconds = 120,
+                    GlowEnabled = true,
+                }.Save(BrainboxPaths.Settings);
+
+                var monitors = GdiFrameSource.QueryMonitors();
+                var primary = monitors.First(m => m.IsPrimary);
+                var (window, french, japanese, _, _) = CreateTestWindow(new WindowsOcrEngineAdapter().InstalledLanguageTags.Any(t => t.StartsWith("ja", StringComparison.OrdinalIgnoreCase)));
+                w = window;
+                w.Show();
+                await PlaceWindowAsync(w, primary.WorkArea.X + 120, primary.WorkArea.Y + 120);
+
+                var sw = Stopwatch.StartNew();
+                controller = new BrainboxController(app.Dispatcher);
+                controller.Start(false);
+                Log($"Real engine: Ollama at {endpoint}, model '{(string.IsNullOrEmpty(model) ? "(auto)" : model)}'");
+
+                OverlayItem BySource(string src) => controller.Watcher.CurrentOverlay.FirstOrDefault(o => TextNormalizer.Similarity(o.SourceText, src) > 0.8);
+                var ok = await WaitForAsync(() => BySource(FrenchA) != null, 240_000);
+                var fr = BySource(FrenchA);
+                var text = fr?.Text ?? "";
+                var english = text.Contains("welcome", StringComparison.OrdinalIgnoreCase) || text.Contains("world", StringComparison.OrdinalIgnoreCase) || text.Contains("translation", StringComparison.OrdinalIgnoreCase);
+                Record("Real local LLM (Ollama) translates on-screen French", ok && english, ok ? $"'{FrenchA}' → '{text}' after {sw.Elapsed.TotalSeconds:0.0}s (includes model load)" : $"no translation; status '{controller.Status.Message}'");
+                if (japanese.Text.Length > 0)
+                {
+                    var jp = await WaitForAsync(() => BySource(Japanese) != null, 120_000);
+                    Record("Real local LLM translates on-screen Japanese", jp, jp ? $"'{Japanese}' → '{BySource(Japanese).Text}'" : "no translation");
+                }
+
+                var before = controller.Watcher.Metrics.TranslationRequests;
+                await Task.Delay(15_000);
+                Record("Real engine: unchanged text not re-translated", controller.Watcher.Metrics.TranslationRequests == before, $"requests during 15 s idle: {controller.Watcher.Metrics.TranslationRequests - before}");
+
+                french.Text = FrenchB;
+                var sw2 = Stopwatch.StartNew();
+                var changed = await WaitForAsync(() => BySource(FrenchB) != null, 120_000);
+                Record("Real engine: new subtitle-style line translated with context", changed, changed ? $"'{FrenchB}' → '{BySource(FrenchB).Text}' in {sw2.ElapsedMilliseconds} ms" : "no translation");
+                metrics["engine"] = controller.Watcher.Metrics.ToString();
+                metrics["model"] = model;
+            }
+            catch (Exception ex)
+            {
+                Record("Real-engine harness", false, "crashed: " + ex);
+            }
+            finally
+            {
+                WriteReport(outDir, results, metrics);
+                try
+                {
+                    controller?.Dispose();
+                }
+                catch
+                {
+                }
+
+                w?.Close();
+            }
+
+            app.Shutdown(results.Any(r => r.Status == "FAIL") ? 1 : 0);
         }
 
         private static void WriteReport(string dir, List<Result> results, Dictionary<string, object> metrics)

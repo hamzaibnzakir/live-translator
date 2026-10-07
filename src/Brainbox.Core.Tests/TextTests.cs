@@ -75,6 +75,8 @@ public class TextFilterTests
     [InlineData("e42382c6-f7aa-e854-8948", FilterVerdict.Symbols)]
     [InlineData("agfd-73Sé", FilterVerdict.Code)]
     [InlineData("25e7efeedc44b48-ß1", FilterVerdict.Code)]
+    [InlineData("こSd - 779d - [ db7ヨヨ893", FilterVerdict.Code)]
+    [InlineData("Windows 11の設定を開く", FilterVerdict.Translate)]
     public void Verdicts(string text, FilterVerdict expected)
     {
         Assert.Equal(expected, Filter().Evaluate(text));

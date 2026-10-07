@@ -315,7 +315,8 @@ namespace Brainbox.Desktop.Ocr
                 foreach (var line in other.Lines)
                 {
                     var own = line.Text.Count(c => MatchesFamily(c, Family(other.Tag)));
-                    if (own < 2 || ScriptConsistency(line.Text, other.Tag) < 0.3) continue;
+                    var consistency = ScriptConsistency(line.Text, other.Tag);
+                    if (own < 2 || !(consistency >= 0.5 || (own >= 4 && consistency >= 0.3))) continue;
                     var overlapping = merged.Where(m => m.Box.IoU(line.Box) > 0.15 || m.Box.CoveredBy(line.Box) > 0.4 || line.Box.CoveredBy(m.Box) > 0.4).ToList();
                     // Keep a stronger non-Latin reading already chosen for the same place.
                     if (overlapping.Any(m => m.LanguageTag != baseResult.Tag && m.Text.Count(c => MatchesFamily(c, Family(m.LanguageTag ?? ""))) >= own)) continue;

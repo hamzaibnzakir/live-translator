@@ -123,6 +123,9 @@ public sealed class ScreenWatcher : IDisposable
     /// </summary>
     public Func<IReadOnlyList<PixelRect>>? ExtraMasks { get; set; }
 
+    /// <summary>Temporarily skip capture/OCR without hiding the overlay (diagnostic screenshots).</summary>
+    public bool HoldCapture { get; set; }
+
     /// <summary>Host-provided bounds of the foreground window (for the "Current monitor" scope).</summary>
     public Func<PixelRect?>? ForegroundWindowBounds { get; set; }
 
@@ -270,7 +273,7 @@ public sealed class ScreenWatcher : IDisposable
 
     private async Task TickCoreAsync(CancellationToken ct)
     {
-        if (!_settings.LiveTranslationEnabled || _paused)
+        if (!_settings.LiveTranslationEnabled || _paused || HoldCapture)
         {
             UpdateStatus();
             return;
@@ -684,6 +687,13 @@ public sealed class ScreenWatcher : IDisposable
         if (!_forcePublish && version == _lastPublishedVersion) return;
         _forcePublish = false;
         _lastPublishedVersion = version;
+
+        if (!_settings.LiveTranslationEnabled || _paused)
+        {
+            // Turned off/paused while this tick or a translation was in flight: never resurrect the overlay.
+            SetOverlay(Array.Empty<OverlayItem>());
+            return;
+        }
 
         var inputs = _tracker.Snapshot()
             .Where(l => l.State == LineState.Translated && !string.IsNullOrEmpty(l.Translation))

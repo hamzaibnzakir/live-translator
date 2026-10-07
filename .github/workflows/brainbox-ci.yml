@@ -92,6 +92,35 @@ jobs:
           Write-Host "Self-test exit code: $code"
           exit $code
 
+      - name: Install Ollama + a small local model (real local-LLM test)
+        id: ollama
+        if: always() && steps.selftest.outcome != 'skipped'
+        continue-on-error: true
+        shell: pwsh
+        run: |
+          $dir = Join-Path $env:RUNNER_TEMP 'ollama'
+          Invoke-WebRequest 'https://github.com/ollama/ollama/releases/latest/download/ollama-windows-amd64.zip' -OutFile "$dir.zip"
+          Expand-Archive "$dir.zip" -DestinationPath $dir -Force
+          $env:OLLAMA_MODELS = Join-Path $env:RUNNER_TEMP 'ollama-models'
+          Start-Process -FilePath "$dir\ollama.exe" -ArgumentList 'serve' -WindowStyle Hidden
+          Start-Sleep -Seconds 8
+          & "$dir\ollama.exe" pull qwen2.5:1.5b
+          if ($LASTEXITCODE -ne 0) { throw 'model pull failed' }
+          (Invoke-WebRequest http://localhost:11434/v1/models -UseBasicParsing).Content
+
+      - name: Real-screen self-test against real Ollama
+        id: selftest_ollama
+        if: always() && steps.ollama.outcome == 'success'
+        shell: pwsh
+        run: |
+          $out = Join-Path $env:GITHUB_WORKSPACE 'selftest-ollama'
+          New-Item -ItemType Directory -Force -Path $out | Out-Null
+          $p = Start-Process -FilePath 'publish\BrainboxLiveTranslator.exe' -ArgumentList @('--selftest', '--engine', 'ollama', '--model', 'qwen2.5:1.5b', '--out', "`"$out`"") -PassThru
+          if (-not $p.WaitForExit(20 * 60 * 1000)) { $p.Kill(); $code = 99 } else { $code = $p.ExitCode }
+          if (Test-Path "$out\selftest.log") { Get-Content "$out\selftest.log" }
+          if (Test-Path "$out\report.md") { Get-Content "$out\report.md" | Out-File -Append -Encoding utf8 $env:GITHUB_STEP_SUMMARY }
+          exit $code
+
       - name: Publish self-test report to the ci-results branch
         if: always()
         continue-on-error: true
@@ -104,7 +133,9 @@ jobs:
           Copy-Item "$out\*.md","$out\*.json","$out\*.log","$out\*.png" $dest -ErrorAction SilentlyContinue
           if (Test-Path "$out\data\logs") { Copy-Item "$out\data\logs" "$dest\app-logs" -Recurse -ErrorAction SilentlyContinue }
           Get-ChildItem -Recurse -Filter *.trx $env:GITHUB_WORKSPACE | Copy-Item -Destination $dest -ErrorAction SilentlyContinue
-          Set-Content "$dest\RUN.txt" "run=${{ github.run_id }} sha=${{ github.sha }} outcome=${{ steps.selftest.outcome }}"
+          $ol = Join-Path $env:GITHUB_WORKSPACE 'selftest-ollama'
+          if (Test-Path "$ol\report.md") { Copy-Item "$ol\report.md" "$dest\report-ollama.md"; Copy-Item "$ol\selftest.log" "$dest\selftest-ollama.log" -ErrorAction SilentlyContinue }
+          Set-Content "$dest\RUN.txt" "run=${{ github.run_id }} sha=${{ github.sha }} selftest=${{ steps.selftest.outcome }} ollama-install=${{ steps.ollama.outcome }} ollama-test=${{ steps.selftest_ollama.outcome }}"
           Set-Location $dest
           git init -q -b ci-results
           git config user.name 'brainbox-ci'; git config user.email 'ci@brainbox.local'

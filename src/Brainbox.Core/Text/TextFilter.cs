@@ -97,7 +97,7 @@ public sealed partial class TextFilter
         if (EmailRegex().IsMatch(text)) return FilterVerdict.Email;
         if (PathRegex().IsMatch(text)) return FilterVerdict.FilePath;
         if (ShortcutRegex().IsMatch(text)) return FilterVerdict.KeyboardShortcut;
-        if (nonLatinLetters == 0 && LooksLikeCode(text)) return FilterVerdict.Code;
+        if (nonLatinLetters * 2 < letters && LooksLikeCode(text)) return FilterVerdict.Code;
         if (nonLatinLetters == 0 && LooksGarbled(text)) return FilterVerdict.Garbled;
 
         if (IsOwnOutput(text)) return FilterVerdict.OwnOverlayOutput;
@@ -131,7 +131,7 @@ public sealed partial class TextFilter
         var tokens = text.Split(TokenSeparators, StringSplitOptions.RemoveEmptyEntries);
         if (tokens.Length > 0)
         {
-            var mixed = tokens.Count(t => t.Any(char.IsDigit) && t.Any(char.IsLetter));
+            var mixed = tokens.Count(t => t.Any(char.IsDigit) && t.Any(c => char.IsLetter(c) && LanguageId.ScriptOf(c) == Script.Latin));
             var digits = text.Count(char.IsDigit);
             var alnum = text.Count(char.IsLetterOrDigit);
             if (mixed * 2 >= tokens.Length || (alnum > 0 && digits * 10 >= alnum * 3)) return true;

@@ -217,6 +217,10 @@ namespace Brainbox.Desktop.SelfTest
                     var target = ScreenRect(french);
                     var hitPoint = new Native.POINT { X = (int)target.CenterX, Y = (int)target.CenterY };
                     var overlayCovers = controller.Watcher.CurrentOverlay.Any(o => o.Box.Contains(hitPoint.X, hitPoint.Y));
+                    var hit = Native.WindowFromPoint(hitPoint);
+                    var title = new StringBuilder(256);
+                    Native.GetWindowText(hit, title, 256);
+                    Log($"WindowFromPoint({hitPoint.X},{hitPoint.Y}) = 0x{hit.ToInt64():X} '{title}' exStyle=0x{Native.GetWindowLongPtr(hit, Native.GWL_EXSTYLE).ToInt64():X}; overlay handles: {string.Join(",", controller.Overlay.WindowHandles.Select(h => "0x" + h.ToInt64().ToString("X") + " ex=0x" + Native.GetWindowLongPtr(h, Native.GWL_EXSTYLE).ToInt64().ToString("X")))}");
                     var clicksBefore = clicks();
                     Click(hitPoint.X, hitPoint.Y);
                     await Task.Delay(600);

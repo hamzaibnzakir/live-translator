@@ -187,7 +187,7 @@ namespace Brainbox.Desktop.SelfTest
 
                 // T3/T11: overlay excluded from capture and never OCR'd
                 var excluded = controller.Overlay.AllExcludedFromCapture;
-                Record("T11a Overlay & glow windows excluded from screen capture", excluded,
+                Record("T11a Translation overlay excluded from screen capture", excluded,
                     excluded ? "SetWindowDisplayAffinity(WDA_EXCLUDEFROMCAPTURE) accepted for all layers" : "exclusion unavailable — masking + own-output filter in use");
                 if (found)
                 {
@@ -302,8 +302,8 @@ namespace Brainbox.Desktop.SelfTest
                 var glowWindows = controller.Overlay.GlowWindows;
                 await Task.Delay(800);
                 var glowShown = glowWindows.Count > 0 && glowWindows.All(g => g.IsVisible);
-                Record("Glow indicator visible on every monitor edge", glowShown && glowWindows.All(g => g.ExcludedFromCapture),
-                    $"{glowWindows.Count} edge strips, visible={glowShown}");
+                Record("Glow indicator visible on every monitor edge", glowShown,
+                    $"{glowWindows.Count} edge strips, visible={glowShown}, excluded from capture={controller.Overlay.GlowExcludedFromCapture} (masked from detection otherwise)");
 
                 // Startup registration (a real reboot cannot be done here)
                 var startupOk = StartupManager.Apply(true) && StartupManager.IsEnabled();
@@ -604,7 +604,7 @@ namespace Brainbox.Desktop.SelfTest
             var md = new StringBuilder();
             md.AppendLine("# Brainbox Live Translator — real-screen self-test");
             md.AppendLine();
-            md.AppendLine($"Passed **{results.Count(r => r.Status == "PASS")}**, failed **{results.Count(r => r.Status == "FAIL")}**, skipped **{results.Count(r => r.Status == "SKIP")}**. Overlay surface in use: **{ClickThroughWindow.Surface}**.");
+            md.AppendLine($"Passed **{results.Count(r => r.Status == "PASS")}**, failed **{results.Count(r => r.Status == "FAIL")}**, skipped **{results.Count(r => r.Status == "SKIP")}**.");
             md.AppendLine();
             md.AppendLine("| Result | Check | Details |");
             md.AppendLine("|---|---|---|");

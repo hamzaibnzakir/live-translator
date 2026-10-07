@@ -28,7 +28,7 @@ namespace Brainbox.Desktop.Overlay
         private double _intensity = 0.5;
         private bool _active;
 
-        public GlowEdgeWindow(MonitorInfo monitor, GlowEdge edge)
+        public GlowEdgeWindow(MonitorInfo monitor, GlowEdge edge) : base(OverlaySurface.Layered)
         {
             Monitor = monitor;
             Edge = edge;

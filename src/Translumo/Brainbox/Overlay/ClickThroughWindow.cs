@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
@@ -8,38 +9,40 @@ using Brainbox.Desktop.Interop;
 
 namespace Brainbox.Desktop.Overlay
 {
-    /// <summary>
-    /// Base for every Brainbox on-screen layer: transparent, top-most, never activated, invisible
-    /// to the mouse (WS_EX_TRANSPARENT → clicks go to the app underneath), hidden from Alt+Tab and
-    /// the taskbar, and excluded from screen capture (WDA_EXCLUDEFROMCAPTURE) so the translator can
-    /// never read its own output (§16) — screenshots/recordings by other tools won't show it either.
-    /// </summary>
     public enum OverlaySurface
     {
-        /// <summary>WPF per-pixel-alpha layered window (UpdateLayeredWindow).</summary>
+        /// <summary>WPF per-pixel-alpha layered window (UpdateLayeredWindow): classic click-through via WS_EX_TRANSPARENT.</summary>
         Layered,
-        /// <summary>DWM-composited redirected surface (frame extended into the client area) + WS_EX_LAYERED with constant alpha.</summary>
+
+        /// <summary>
+        /// DWM-redirected window (frame extended into the client area for transparency) whose
+        /// window region is limited to what it draws. Unlike layered windows it accepts
+        /// WDA_EXCLUDEFROMCAPTURE on every system we tested, so the translator can never read its
+        /// own output.
+        /// </summary>
         Redirected,
     }
 
+    /// <summary>
+    /// Base for every Brainbox on-screen layer: transparent, top-most, never activated or focused,
+    /// hidden from Alt+Tab and the taskbar, and excluded from screen capture where Windows allows.
+    /// </summary>
     public class ClickThroughWindow : Window
     {
+        private const int WM_STYLECHANGING = 0x007C;
+        private const int WM_MOUSEACTIVATE = 0x0021;
+        private const int MA_NOACTIVATE = 3;
+
         private PixelRect _physical;
+        private readonly long _pinnedExStyles;
 
-        /// <summary>
-        /// Surface technique for all overlay layers. "Redirected" windows are composed by DWM like
-        /// normal windows, which is what SetWindowDisplayAffinity needs on some systems; "Layered"
-        /// is the classic WPF transparent window. Chosen at startup (see <see cref="OverlayManager"/>).
-        /// </summary>
-        public static OverlaySurface Surface { get; set; } = OverlaySurface.Redirected;
-
-        /// <summary>Win32 error of the last failed SetWindowDisplayAffinity call (diagnostics).</summary>
-        public int LastAffinityError { get; private set; }
-
-        public ClickThroughWindow()
+        public ClickThroughWindow(OverlaySurface surface)
         {
+            Surface = surface;
+            _pinnedExStyles = Native.WS_EX_TRANSPARENT | Native.WS_EX_TOOLWINDOW | Native.WS_EX_NOACTIVATE
+                              | (surface == OverlaySurface.Layered ? Native.WS_EX_LAYERED : 0);
             WindowStyle = WindowStyle.None;
-            AllowsTransparency = Surface == OverlaySurface.Layered;
+            AllowsTransparency = surface == OverlaySurface.Layered;
             Background = Brushes.Transparent;
             ShowInTaskbar = false;
             ShowActivated = false;
@@ -55,10 +58,15 @@ namespace Brainbox.Desktop.Overlay
             DpiChanged += (_, _) => Reposition();
         }
 
+        public OverlaySurface Surface { get; }
+
         public IntPtr Handle { get; private set; }
 
         /// <summary>True when Windows accepted WDA_EXCLUDEFROMCAPTURE for this window.</summary>
         public bool ExcludedFromCapture { get; private set; }
+
+        /// <summary>Win32 error of the last failed SetWindowDisplayAffinity call (diagnostics).</summary>
+        public int LastAffinityError { get; private set; }
 
         public double DpiScale => VisualTreeHelper.GetDpi(this).DpiScaleX;
 
@@ -66,32 +74,42 @@ namespace Brainbox.Desktop.Overlay
         {
             base.OnSourceInitialized(e);
             Handle = new WindowInteropHelper(this).Handle;
-            if (!AllowsTransparency)
+            var source = HwndSource.FromHwnd(Handle);
+            if (Surface == OverlaySurface.Redirected)
             {
-                // Transparent client area composed by DWM: extend the (invisible) frame over the whole
-                // window and clear WPF's render target to fully transparent.
-                if (HwndSource.FromHwnd(Handle) is { CompositionTarget: { } target }) target.BackgroundColor = Colors.Transparent;
+                if (source?.CompositionTarget != null) source.CompositionTarget.BackgroundColor = Colors.Transparent;
                 var margins = new Native.MARGINS { Left = -1, Right = -1, Top = -1, Bottom = -1 };
                 Native.DwmExtendFrameIntoClientArea(Handle, ref margins);
+                SetRegion(Array.Empty<PixelRect>()); // nothing drawn yet → nothing to click on
             }
 
-            // WPF rewrites the extended style from its own cache (Topmost/ShowInTaskbar/Show), which
-            // would silently drop our bits; pin them in WM_STYLECHANGING so they can never be removed.
-            HwndSource.FromHwnd(Handle)?.AddHook(PinStyles);
+            // WPF rewrites the extended style from its own cache (Topmost/ShowInTaskbar/Show); pin ours.
+            source?.AddHook(WndProc);
             EnsureStyles();
-
             SetCaptureExclusion(true);
-            // Some systems only accept the affinity once the window has been shown/composed.
             ContentRendered += (_, _) =>
             {
                 if (!ExcludedFromCapture) SetCaptureExclusion(true);
             };
         }
 
-        private const long PinnedExStyles = Native.WS_EX_TRANSPARENT | Native.WS_EX_TOOLWINDOW | Native.WS_EX_NOACTIVATE | Native.WS_EX_LAYERED;
-        private const int WM_STYLECHANGING = 0x007C;
-        private const int MA_NOACTIVATE = 3;
-        private const int WM_MOUSEACTIVATE = 0x0021;
+        private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
+        {
+            if (msg == WM_STYLECHANGING && wParam.ToInt64() == Native.GWL_EXSTYLE)
+            {
+                var ss = Marshal.PtrToStructure<STYLESTRUCT>(lParam);
+                ss.StyleNew = (uint)((ss.StyleNew | _pinnedExStyles) & ~Native.WS_EX_APPWINDOW);
+                Marshal.StructureToPtr(ss, lParam, false);
+            }
+            else if (msg == WM_MOUSEACTIVATE)
+            {
+                // Never take focus or activation from the app the user is working in.
+                handled = true;
+                return new IntPtr(MA_NOACTIVATE);
+            }
+
+            return IntPtr.Zero;
+        }
 
         [StructLayout(LayoutKind.Sequential)]
         private struct STYLESTRUCT
@@ -100,40 +118,34 @@ namespace Brainbox.Desktop.Overlay
             public uint StyleNew;
         }
 
-        private IntPtr PinStyles(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
-        {
-            if (msg == WM_STYLECHANGING && wParam.ToInt64() == Native.GWL_EXSTYLE)
-            {
-                var ss = Marshal.PtrToStructure<STYLESTRUCT>(lParam);
-                ss.StyleNew = (uint)((ss.StyleNew | PinnedExStyles) & ~Native.WS_EX_APPWINDOW);
-                Marshal.StructureToPtr(ss, lParam, false);
-            }
-            else if (msg == WM_MOUSEACTIVATE)
-            {
-                handled = true;
-                return new IntPtr(MA_NOACTIVATE);
-            }
-
-            return IntPtr.Zero;
-        }
-
-        /// <summary>(Re)applies click-through / no-activate / tool-window / layered styles.</summary>
         public void EnsureStyles()
         {
             if (Handle == IntPtr.Zero) return;
             var ex = Native.GetWindowLongPtr(Handle, Native.GWL_EXSTYLE).ToInt64();
-            var wasLayered = (ex & Native.WS_EX_LAYERED) != 0;
-            if ((ex & PinnedExStyles) != PinnedExStyles || (ex & Native.WS_EX_APPWINDOW) != 0)
+            if ((ex & _pinnedExStyles) != _pinnedExStyles || (ex & Native.WS_EX_APPWINDOW) != 0)
             {
-                Native.SetWindowLongPtr(Handle, Native.GWL_EXSTYLE, new IntPtr((ex | PinnedExStyles) & ~Native.WS_EX_APPWINDOW));
+                Native.SetWindowLongPtr(Handle, Native.GWL_EXSTYLE, new IntPtr((ex | _pinnedExStyles) & ~Native.WS_EX_APPWINDOW));
+            }
+        }
+
+        /// <summary>
+        /// Limits the window to the given rectangles (window-relative physical pixels). Everywhere
+        /// else the window does not exist: it is not drawn and mouse input reaches the apps below.
+        /// </summary>
+        public void SetRegion(IReadOnlyList<PixelRect> windowRelativeRects)
+        {
+            if (Handle == IntPtr.Zero) return;
+            var region = Native.CreateRectRgn(0, 0, 0, 0);
+            foreach (var r in windowRelativeRects)
+            {
+                if (r.IsEmpty) continue;
+                var part = Native.CreateRectRgn(r.Left, r.Top, r.Right, r.Bottom);
+                Native.CombineRgn(region, region, part, Native.RGN_OR);
+                Native.DeleteObject(part);
             }
 
-            if (!AllowsTransparency && !wasLayered)
-            {
-                // WS_EX_TRANSPARENT only makes a top-level window click-through when it is layered;
-                // a constant-alpha layered window keeps DWM redirection (needed for capture exclusion).
-                Native.SetLayeredWindowAttributes(Handle, 0, 255, Native.LWA_ALPHA);
-            }
+            // On success the system owns the region.
+            if (Native.SetWindowRgn(Handle, region, true) == 0) Native.DeleteObject(region);
         }
 
         /// <summary>Turns capture exclusion on/off (off only for the self-test's "screenshot with overlay").</summary>
@@ -173,7 +185,7 @@ namespace Brainbox.Desktop.Overlay
                 Native.SWP_NOACTIVATE | Native.SWP_NOOWNERZORDER);
         }
 
-        /// <summary>Re-asserts top-most z-order (other top-most windows like the taskbar can rise above).</summary>
+        /// <summary>Re-asserts top-most z-order and our window styles.</summary>
         public void BringToTop()
         {
             if (Handle == IntPtr.Zero) return;

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Threading;
 using Brainbox.Core.Capture;
 using Brainbox.Core.Diagnostics;
+using Brainbox.Core.Geometry;
 using Brainbox.Core.Overlay;
 using Brainbox.Core.Settings;
 using Brainbox.Desktop.Capture;
@@ -33,9 +34,27 @@ namespace Brainbox.Desktop.Overlay
             _log = log;
         }
 
-        /// <summary>True when every overlay/glow window is excluded from capture.</summary>
-        public bool AllExcludedFromCapture =>
-            _overlays.Count > 0 && _overlays.Values.All(o => o.ExcludedFromCapture) && _glows.Values.SelectMany(g => g).All(g => g.ExcludedFromCapture);
+        /// <summary>True when every translation layer is excluded from capture (the recursion guarantee).</summary>
+        public bool AllExcludedFromCapture => _overlays.Count > 0 && _overlays.Values.All(o => o.ExcludedFromCapture);
+
+        /// <summary>True when the glow strips are excluded from capture too (not possible on every system).</summary>
+        public bool GlowExcludedFromCapture => _glows.Values.SelectMany(g => g).All(g => g.ExcludedFromCapture);
+
+        /// <summary>
+        /// Screen areas the engine must ignore: visible glow strips that Windows would not exclude
+        /// from capture (their breathing animation would otherwise look like constant change).
+        /// Thread-safe snapshot.
+        /// </summary>
+        public IReadOnlyList<PixelRect> CaptureMasks => _masks;
+
+        private volatile IReadOnlyList<PixelRect> _masks = Array.Empty<PixelRect>();
+
+        private void UpdateMasks()
+        {
+            _masks = _glowVisible
+                ? _glows.Values.SelectMany(g => g).Where(g => !g.ExcludedFromCapture).Select(g => g.PhysicalBounds).ToList()
+                : Array.Empty<PixelRect>();
+        }
 
         public IEnumerable<IntPtr> WindowHandles =>
             _overlays.Values.Select(o => o.Handle).Concat(_glows.Values.SelectMany(g => g).Select(g => g.Handle)).ToList();
@@ -47,20 +66,9 @@ namespace Brainbox.Desktop.Overlay
         public int RenderedItemCount => _overlays.Values.Sum(o => o.ItemCount);
 
         /// <summary>Creates/updates/removes windows to match the monitor layout. UI thread.</summary>
-        private void RecreateAll()
-        {
-            foreach (var o in _overlays.Values) o.Close();
-            foreach (var g in _glows.Values.SelectMany(x => x)) g.Close();
-            _overlays.Clear();
-            _glows.Clear();
-            _createdAt = DateTime.UtcNow;
-            SyncMonitors(_lastMonitors);
-        }
-
         public void SyncMonitors(IReadOnlyList<MonitorInfo> monitors)
         {
             _dispatcher.VerifyAccess();
-            _lastMonitors = monitors;
             var names = monitors.Select(m => m.DeviceName).ToHashSet();
 
             foreach (var gone in _overlays.Keys.Where(k => !names.Contains(k)).ToList())
@@ -103,7 +111,7 @@ namespace Brainbox.Desktop.Overlay
             if (!GdiFrameSource.OverlayExcludedFromCapture)
             {
                 var errors = string.Join(",", _overlays.Values.Select(o => o.LastAffinityError).Concat(_glows.Values.SelectMany(g => g).Select(g => g.LastAffinityError)).Distinct());
-                _log.Warn($"Overlay not (yet) excluded from capture (surface={ClickThroughWindow.Surface}, Win32 errors={errors}); retrying after first render, masking + own-output filter meanwhile.");
+                _log.Warn($"Overlay not (yet) excluded from capture (Win32 errors={errors}); retrying after first render, masking + own-output filter meanwhile.");
             }
             Render(_pending);
         }
@@ -166,6 +174,8 @@ namespace Brainbox.Desktop.Overlay
                         g.Hide();
                     }
                 }
+
+                UpdateMasks();
             }));
         }
 
@@ -188,30 +198,16 @@ namespace Brainbox.Desktop.Overlay
             }));
         }
 
-        private DateTime _createdAt = DateTime.UtcNow;
-        private int _surfaceSwitches;
-        private IReadOnlyList<MonitorInfo> _lastMonitors = Array.Empty<MonitorInfo>();
 
         public void BringToTop()
         {
             var excluded = AllExcludedFromCapture;
 
-            // If Windows refuses capture exclusion for this window type, rebuild the layers once with
-            // the other surface technique (some systems only accept it for DWM-redirected windows).
-            if (!excluded && _surfaceSwitches < 2 && _overlays.Count > 0 && (DateTime.UtcNow - _createdAt).TotalSeconds > 2)
-            {
-                _surfaceSwitches++;
-                var previous = ClickThroughWindow.Surface;
-                ClickThroughWindow.Surface = previous == OverlaySurface.Layered ? OverlaySurface.Redirected : OverlaySurface.Layered;
-                _log.Warn($"Capture exclusion refused for {previous} windows; rebuilding overlay as {ClickThroughWindow.Surface}.");
-                RecreateAll();
-                return;
-            }
-
+            UpdateMasks();
             if (excluded != GdiFrameSource.OverlayExcludedFromCapture)
             {
                 GdiFrameSource.OverlayExcludedFromCapture = excluded;
-                _log.Info($"Overlay capture exclusion now {(excluded ? "active" : "inactive")} (surface={ClickThroughWindow.Surface}).");
+                _log.Info($"Overlay capture exclusion now {(excluded ? "active" : "inactive")}; glow excluded: {GlowExcludedFromCapture}.");
             }
 
             foreach (var o in _overlays.Values) o.BringToTop();
@@ -224,6 +220,7 @@ namespace Brainbox.Desktop.Overlay
             foreach (var o in _overlays.Values) o.SetCaptureExclusion(exclude);
             foreach (var g in _glows.Values.SelectMany(x => x)) g.SetCaptureExclusion(exclude);
             GdiFrameSource.OverlayExcludedFromCapture = exclude && AllExcludedFromCapture;
+            UpdateMasks();
         }
 
         public void Dispose()

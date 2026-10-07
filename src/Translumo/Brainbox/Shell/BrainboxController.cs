@@ -173,6 +173,7 @@ namespace Brainbox.Desktop.Shell
             _overlay = new OverlayManager(Settings, _dispatcher, Log);
             _overlay.SyncMonitors(_frames.GetMonitors());
 
+            Watcher.ExtraMasks = () => _overlay.CaptureMasks;
             Watcher.OverlayUpdated += _overlay.Show;
             Watcher.ActivityChanged += _overlay.SetActivity;
             Watcher.MonitorsChanged += monitors => _dispatcher.BeginInvoke(new Action(() =>

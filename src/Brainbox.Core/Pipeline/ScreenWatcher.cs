@@ -117,6 +117,12 @@ public sealed class ScreenWatcher : IDisposable
     public ResilientTranslator Translator => _translator;
     public PerformanceProfile Profile => _profile;
 
+    /// <summary>
+    /// Host-provided areas to ignore entirely (e.g. our own glow strips when Windows cannot exclude
+    /// them from capture). Applied to change detection and OCR results.
+    /// </summary>
+    public Func<IReadOnlyList<PixelRect>>? ExtraMasks { get; set; }
+
     /// <summary>Host-provided bounds of the foreground window (for the "Current monitor" scope).</summary>
     public Func<PixelRect?>? ForegroundWindowBounds { get; set; }
 
@@ -332,7 +338,9 @@ public sealed class ScreenWatcher : IDisposable
 
         // --- 3. Change detection ------------------------------------------------------------
         var t1 = Stopwatch.GetTimestamp();
-        var masks = _frames.HonoursCaptureExclusion ? null : _overlay.Select(o => o.Box).ToList();
+        var extra = ExtraMasks?.Invoke() ?? Array.Empty<PixelRect>();
+        List<PixelRect>? masks = _frames.HonoursCaptureExclusion ? null : _overlay.Select(o => o.Box).ToList();
+        if (extra.Count > 0) (masks ??= new List<PixelRect>()).AddRange(extra);
         if (frame.Bounds != _changes.Bounds) _tracker.Clear();
         _changes.NoiseThreshold = PerformanceProfile.NoiseThresholdFor(_settings.Sensitivity);
         _changes.Ingest(frame, now, masks);
@@ -447,12 +455,13 @@ public sealed class ScreenWatcher : IDisposable
 
         // Sample colours for readable overlays and drop anything our overlay displays (§16).
         var accepted = new List<OcrLine>(lines.Count);
-        var overlayBoxes = _frames.HonoursCaptureExclusion ? null : _overlay.Select(o => o.Box).ToList();
+        var overlayBoxes = _frames.HonoursCaptureExclusion ? new List<PixelRect>() : _overlay.Select(o => o.Box).ToList();
+        overlayBoxes.AddRange(ExtraMasks?.Invoke() ?? Array.Empty<PixelRect>());
         foreach (var l in lines)
         {
             if (_filter.IsOwnOutput(l.Text)) continue;
             // Capture cannot see through our overlay here: whatever is read inside it is our own drawing.
-            if (overlayBoxes != null && overlayBoxes.Any(b => l.Box.CoveredBy(b) >= 0.5)) continue;
+            if (overlayBoxes.Any(b => l.Box.CoveredBy(b) >= 0.5)) continue;
             var (bg, fg) = ImageOps.SampleColors(frame, l.Box);
             accepted.Add(l with { BackgroundRgb = bg, ForegroundRgb = fg });
         }

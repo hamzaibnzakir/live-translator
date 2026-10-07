@@ -152,6 +152,17 @@ namespace Brainbox.Desktop.Interop
         [DllImport("gdi32.dll")]
         public static extern bool GdiFlush();
 
+        [DllImport("gdi32.dll")]
+        public static extern IntPtr CreateRectRgn(int left, int top, int right, int bottom);
+
+        [DllImport("gdi32.dll")]
+        public static extern int CombineRgn(IntPtr dest, IntPtr src1, IntPtr src2, int mode);
+
+        [DllImport("user32.dll")]
+        public static extern int SetWindowRgn(IntPtr hWnd, IntPtr hRgn, bool redraw);
+
+        public const int RGN_OR = 2;
+
         public const uint SRCCOPY = 0x00CC0020;
         public const uint DIB_RGB_COLORS = 0;
 

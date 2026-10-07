@@ -29,20 +29,19 @@ namespace Brainbox.Desktop.SelfTest
         public static async Task<List<SurfaceResult>> ProbeSurfacesAsync(MonitorInfo monitor)
         {
             var results = new List<SurfaceResult>();
-            var original = ClickThroughWindow.Surface;
             var rect = new PixelRect(monitor.WorkArea.X + 40, monitor.WorkArea.Bottom - 160, 240, 60);
             var gdi = new GdiFrameSource();
             foreach (var surface in new[] { OverlaySurface.Layered, OverlaySurface.Redirected })
             {
-                ClickThroughWindow.Surface = surface;
                 var before = gdi.Capture(rect);
                 var grid = new Grid();
                 grid.ColumnDefinitions.Add(new ColumnDefinition());
                 grid.ColumnDefinitions.Add(new ColumnDefinition());
                 grid.Children.Add(new Border { Background = new SolidColorBrush(Color.FromRgb(255, 0, 255)) });
-                var w = new ClickThroughWindow { Content = grid };
+                var w = new ClickThroughWindow(surface) { Content = grid };
                 w.Show();
                 w.PlaceAt(rect);
+                if (surface == OverlaySurface.Redirected) w.SetRegion(new[] { new PixelRect(0, 0, rect.Width, rect.Height) });
                 await Task.Delay(800);
                 var accepted = w.ExcludedFromCapture;
                 var err = w.LastAffinityError;
@@ -59,7 +58,6 @@ namespace Brainbox.Desktop.SelfTest
                 results.Add(new SurfaceResult(surface, accepted, err, accepted && hidden, draws, transparent));
             }
 
-            ClickThroughWindow.Surface = original;
             return results;
         }
 

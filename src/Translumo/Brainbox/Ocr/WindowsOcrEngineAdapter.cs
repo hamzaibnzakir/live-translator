@@ -75,7 +75,7 @@ namespace Brainbox.Desktop.Ocr
                     perFamily.Add((tag, lines, score, clean));
 
                     // Early exit: the preferred/first recognizer produced clean text in its own script.
-                    if (!request.ExhaustiveLanguageSearch && clean && perFamily.Count == 1 && families.Count > 1) break;
+                    if (!request.ExhaustiveLanguageSearch && clean && !Suspicious(lines) && perFamily.Count == 1 && families.Count > 1) break;
                 }
 
                 return Merge(perFamily);
@@ -273,6 +273,15 @@ namespace Brainbox.Desktop.Ocr
             return (own, clean);
         }
 
+        /// <summary>Lines a Latin recognizer probably misread (CJK/other script read as junk).</summary>
+        private static bool Suspicious(List<OcrLine> lines)
+        {
+            var filter = new TextFilter();
+            return lines.Any(l =>
+                filter.Evaluate(l.Text) is FilterVerdict.Garbled or FilterVerdict.Symbols ||
+                l.Text.Count(char.IsLetterOrDigit) / Math.Max(1.0, (double)l.Box.Width / Math.Max(1, l.Box.Height)) < 0.8);
+        }
+
         private static double ScriptConsistency(string text, string tag)
         {
             var fam = Family(tag);
@@ -291,22 +300,27 @@ namespace Brainbox.Desktop.Ocr
         private static IReadOnlyList<OcrLine> Merge(List<(string Tag, List<OcrLine> Lines, double Score, bool Clean)> results)
         {
             if (results.Count == 0) return Array.Empty<OcrLine>();
-            var ordered = results.OrderByDescending(r => r.Score).ToList();
-            var merged = new List<OcrLine>(ordered[0].Lines);
-            foreach (var other in ordered.Skip(1))
+
+            // Base = the Latin reading when there is one (Latin recognizers keep word spacing and
+            // punctuation best), otherwise the highest-scoring family.
+            var baseResult = results.FirstOrDefault(r => Family(r.Tag) == "latin" && r.Lines.Count > 0);
+            if (baseResult.Lines == null) baseResult = results.OrderByDescending(r => r.Score).First();
+            var merged = new List<OcrLine>(baseResult.Lines);
+
+            // A non-Latin recognizer that finds its own script somewhere means that place holds that
+            // script: its reading replaces whatever the base produced there (usually junk letters).
+            foreach (var other in results.Where(r => r.Tag != baseResult.Tag).OrderByDescending(r => r.Score))
             {
-                var fam = Family(other.Tag);
+                if (Family(other.Tag) == "latin") continue;
                 foreach (var line in other.Lines)
                 {
-                    if (fam == "latin") continue; // Latin is always read well by every recognizer
-                    if (ScriptConsistency(line.Text, other.Tag) < 0.5) continue;
-                    var overlapping = merged.Where(m => m.Box.IoU(line.Box) > 0.2 || m.Box.CoveredBy(line.Box) > 0.5).ToList();
-                    // Replace junk read by the wrong recognizer with the proper one.
-                    if (overlapping.All(m => ScriptConsistency(m.Text, m.LanguageTag ?? "") < 0.5))
-                    {
-                        foreach (var o in overlapping) merged.Remove(o);
-                        merged.Add(line);
-                    }
+                    var own = line.Text.Count(c => MatchesFamily(c, Family(other.Tag)));
+                    if (own < 2 || ScriptConsistency(line.Text, other.Tag) < 0.3) continue;
+                    var overlapping = merged.Where(m => m.Box.IoU(line.Box) > 0.15 || m.Box.CoveredBy(line.Box) > 0.4 || line.Box.CoveredBy(m.Box) > 0.4).ToList();
+                    // Keep a stronger non-Latin reading already chosen for the same place.
+                    if (overlapping.Any(m => m.LanguageTag != baseResult.Tag && m.Text.Count(c => MatchesFamily(c, Family(m.LanguageTag ?? ""))) >= own)) continue;
+                    foreach (var o in overlapping) merged.Remove(o);
+                    merged.Add(line);
                 }
             }
 

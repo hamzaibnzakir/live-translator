@@ -15,7 +15,7 @@ public sealed record PerformanceProfile(
     int MaxCooldownMs,
     /// <summary>Max OCR regions per tick (bounds worst-case CPU per tick).</summary>
     int MaxRegionsPerTick,
-    /// <summary>Try every installed script family per region instead of stopping at the first plausible result.</summary>
+    /// <summary>Run every installed script family's recognizer per region (CJK text inside a mostly-Latin page); false = stop at the first clean result (Battery Saver).</summary>
     bool ExhaustiveOcr,
     /// <summary>Full-desktop re-scan period (0 = only on change).</summary>
     int FullRescanMs,
@@ -28,13 +28,13 @@ public sealed record PerformanceProfile(
     public static PerformanceProfile For(PerformanceMode mode) => mode switch
     {
         PerformanceMode.Performance => new(mode, IntervalMs: 250, SettleMs: 120, MaxWaitMs: 500, MaxCooldownMs: 1000,
-            MaxRegionsPerTick: 10, ExhaustiveOcr: false, FullRescanMs: 0, OcrUpscale: 1.0, MaxBatchLines: 12, AllowVisionFallback: false),
+            MaxRegionsPerTick: 10, ExhaustiveOcr: true, FullRescanMs: 0, OcrUpscale: 1.0, MaxBatchLines: 12, AllowVisionFallback: false),
         PerformanceMode.BatterySaver => new(mode, IntervalMs: 1500, SettleMs: 600, MaxWaitMs: 3000, MaxCooldownMs: 4000,
             MaxRegionsPerTick: 3, ExhaustiveOcr: false, FullRescanMs: 0, OcrUpscale: 1.0, MaxBatchLines: 20, AllowVisionFallback: false),
         PerformanceMode.MaximumAccuracy => new(mode, IntervalMs: 400, SettleMs: 200, MaxWaitMs: 800, MaxCooldownMs: 1500,
             MaxRegionsPerTick: 12, ExhaustiveOcr: true, FullRescanMs: 20000, OcrUpscale: 1.6, MaxBatchLines: 12, AllowVisionFallback: true),
         _ => new(PerformanceMode.Balanced, IntervalMs: 500, SettleMs: 220, MaxWaitMs: 1200, MaxCooldownMs: 2000,
-            MaxRegionsPerTick: 6, ExhaustiveOcr: false, FullRescanMs: 0, OcrUpscale: 1.25, MaxBatchLines: 12, AllowVisionFallback: false),
+            MaxRegionsPerTick: 6, ExhaustiveOcr: true, FullRescanMs: 0, OcrUpscale: 1.25, MaxBatchLines: 12, AllowVisionFallback: false),
     };
 
     /// <summary>Profile for the user's settings (mode + optional interval override + sensitivity).</summary>

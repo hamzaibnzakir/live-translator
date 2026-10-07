@@ -57,10 +57,12 @@ public sealed partial class TextFilter
         lock (_gate)
         {
             if (_ownOutputKeys.Contains(k)) return true;
-            // Overlay text read back by OCR may be slightly corrupted or cut.
+            // Overlay text read back by OCR may be slightly corrupted, cut, or prefixed.
             foreach (var own in _ownOutputKeys)
             {
-                if (own.Length >= 8 && k.Length >= 8 && (own.Contains(k, StringComparison.Ordinal) || k.Contains(own, StringComparison.Ordinal)))
+                if (own.Length >= 6 && k.Length >= 6 && (own.Contains(k, StringComparison.Ordinal) || k.Contains(own, StringComparison.Ordinal)))
+                    return true;
+                if (own.Length >= 5 && k.Length >= 5 && Math.Abs(own.Length - k.Length) <= Math.Max(3, own.Length / 4) && TextNormalizer.Similarity(own, k) >= (Math.Min(own.Length, k.Length) >= 8 ? 0.7 : 0.8))
                     return true;
             }
         }
@@ -119,9 +121,22 @@ public sealed partial class TextFilter
         return FilterVerdict.Translate;
     }
 
+    private static readonly char[] TokenSeparators = { ' ', '-', '_', ':', '/', '.', ',', '"' };
+
     private static bool LooksLikeCode(string text)
     {
         if (CodeRegex().IsMatch(text)) return true;
+
+        // Identifiers, hashes, GUIDs, log noise: most tokens mix letters and digits ("e42382c6-f7aa").
+        var tokens = text.Split(TokenSeparators, StringSplitOptions.RemoveEmptyEntries);
+        if (tokens.Length > 0)
+        {
+            var mixed = tokens.Count(t => t.Any(char.IsDigit) && t.Any(char.IsLetter));
+            var digits = text.Count(char.IsDigit);
+            var alnum = text.Count(char.IsLetterOrDigit);
+            if (mixed * 2 >= tokens.Length || (alnum > 0 && digits * 10 >= alnum * 3)) return true;
+        }
+
         var symbols = text.Count(c => "{}[];=<>()_$#\\|&*".Contains(c, StringComparison.Ordinal));
         return symbols >= 3 && symbols * 6 >= text.Length;
     }

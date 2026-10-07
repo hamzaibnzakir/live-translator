@@ -173,7 +173,7 @@ public static class OverlayLayout
                     fg = ImageOps.Luminance(bg) > 0.45 ? 0x111317 : 0xF7F8FA;
                 }
 
-                return (bg, Math.Max(opacity, 0.9), fg);
+                return (bg, opacity, fg);
             }
         }
     }

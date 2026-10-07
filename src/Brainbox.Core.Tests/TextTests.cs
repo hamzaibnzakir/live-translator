@@ -72,6 +72,9 @@ public class TextFilterTests
     [InlineData("Bonjour tout le monde", FilterVerdict.Translate)]
     [InlineData("Привет", FilterVerdict.Translate)]
     [InlineData("x x x x q", FilterVerdict.Garbled)]
+    [InlineData("e42382c6-f7aa-e854-8948", FilterVerdict.Symbols)]
+    [InlineData("agfd-73Sé", FilterVerdict.Code)]
+    [InlineData("25e7efeedc44b48-ß1", FilterVerdict.Code)]
     public void Verdicts(string text, FilterVerdict expected)
     {
         Assert.Equal(expected, Filter().Evaluate(text));
@@ -85,6 +88,7 @@ public class TextFilterTests
         Assert.True(f.IsOwnOutput("Hello, how are you doing today?"));
         Assert.True(f.IsOwnOutput("hello how are you doing today")); // OCR lost punctuation/case
         Assert.True(f.IsOwnOutput("Hello, how are you doing"));       // cut off
+        Assert.True(f.IsOwnOutput("[ENI Save the fiIe"));              // OCR noise + prefix
         Assert.False(f.IsOwnOutput("こんにちは"));
     }
 

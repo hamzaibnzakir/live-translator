@@ -128,7 +128,10 @@ namespace Brainbox.Desktop.SelfTest
             var outputs = segments.Select(s =>
             {
                 TranslatedSegments.Enqueue(s);
-                return _dictionary.TryGetValue(s, out var t) ? t : "[EN] " + s;
+                if (_dictionary.TryGetValue(s, out var t)) return t;
+                // OCR may differ by a character or two: accept close matches.
+                var best = _dictionary.OrderByDescending(kv => Brainbox.Core.Text.TextNormalizer.Similarity(kv.Key, s)).FirstOrDefault();
+                return best.Key != null && Brainbox.Core.Text.TextNormalizer.Similarity(best.Key, s) >= 0.8 ? best.Value : "[EN] " + s;
             }).ToList();
             var content = JsonSerializer.Serialize(new { translations = outputs });
             return JsonSerializer.Serialize(new

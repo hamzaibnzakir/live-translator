@@ -21,6 +21,7 @@ using Brainbox.Core.Translation;
 using Brainbox.Desktop.Capture;
 using Brainbox.Desktop.Interop;
 using Brainbox.Desktop.Ocr;
+using Brainbox.Desktop.Overlay;
 using Brainbox.Desktop.Shell;
 using Translumo;
 
@@ -93,6 +94,18 @@ namespace Brainbox.Desktop.SelfTest
                 metrics["os"] = Environment.OSVersion.VersionString;
                 metrics["ocrLanguages"] = ocrTags;
                 metrics["monitors"] = monitors.Select(m => new { m.DeviceName, Bounds = m.Bounds.ToString(), m.DpiScale, m.IsPrimary }).ToList();
+
+                // ---- environment probes (diagnostics, not pass/fail) ------------------------------
+                var probePrimary = monitors.First(m => m.IsPrimary);
+                foreach (var probe in await SurfaceProbe.ProbeSurfacesAsync(probePrimary))
+                {
+                    results.Add(new Result("Probe: overlay surface " + probe.Surface, "INFO", probe.ToString(), 0));
+                    Log("Probe " + probe);
+                }
+
+                var dxProbe = await SurfaceProbe.ProbeDuplicationAsync(probePrimary, Brainbox.Core.Diagnostics.NullLog.Instance);
+                results.Add(new Result("Probe: Desktop Duplication", "INFO", dxProbe, 0));
+                Log("Probe " + dxProbe);
 
                 // ---- fake LM Studio --------------------------------------------------------
                 server = new FakeLocalAiServer(new Dictionary<string, string>
@@ -586,7 +599,7 @@ namespace Brainbox.Desktop.SelfTest
             var md = new StringBuilder();
             md.AppendLine("# Brainbox Live Translator — real-screen self-test");
             md.AppendLine();
-            md.AppendLine($"Passed **{results.Count(r => r.Status == "PASS")}**, failed **{results.Count(r => r.Status == "FAIL")}**, skipped **{results.Count(r => r.Status == "SKIP")}**.");
+            md.AppendLine($"Passed **{results.Count(r => r.Status == "PASS")}**, failed **{results.Count(r => r.Status == "FAIL")}**, skipped **{results.Count(r => r.Status == "SKIP")}**. Overlay surface in use: **{ClickThroughWindow.Surface}**.");
             md.AppendLine();
             md.AppendLine("| Result | Check | Details |");
             md.AppendLine("|---|---|---|");

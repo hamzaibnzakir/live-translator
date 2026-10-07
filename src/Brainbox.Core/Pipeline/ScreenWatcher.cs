@@ -447,9 +447,12 @@ public sealed class ScreenWatcher : IDisposable
 
         // Sample colours for readable overlays and drop anything our overlay displays (§16).
         var accepted = new List<OcrLine>(lines.Count);
+        var overlayBoxes = _frames.HonoursCaptureExclusion ? null : _overlay.Select(o => o.Box).ToList();
         foreach (var l in lines)
         {
             if (_filter.IsOwnOutput(l.Text)) continue;
+            // Capture cannot see through our overlay here: whatever is read inside it is our own drawing.
+            if (overlayBoxes != null && overlayBoxes.Any(b => l.Box.CoveredBy(b) >= 0.5)) continue;
             var (bg, fg) = ImageOps.SampleColors(frame, l.Box);
             accepted.Add(l with { BackgroundRgb = bg, ForegroundRgb = fg });
         }

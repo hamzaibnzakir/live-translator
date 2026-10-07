@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
@@ -13,14 +14,32 @@ namespace Brainbox.Desktop.Overlay
     /// the taskbar, and excluded from screen capture (WDA_EXCLUDEFROMCAPTURE) so the translator can
     /// never read its own output (§16) — screenshots/recordings by other tools won't show it either.
     /// </summary>
+    public enum OverlaySurface
+    {
+        /// <summary>WPF per-pixel-alpha layered window (UpdateLayeredWindow).</summary>
+        Layered,
+        /// <summary>DWM-composited redirected surface (frame extended into the client area) + WS_EX_LAYERED with constant alpha.</summary>
+        Redirected,
+    }
+
     public class ClickThroughWindow : Window
     {
         private PixelRect _physical;
 
+        /// <summary>
+        /// Surface technique for all overlay layers. "Redirected" windows are composed by DWM like
+        /// normal windows, which is what SetWindowDisplayAffinity needs on some systems; "Layered"
+        /// is the classic WPF transparent window. Chosen at startup (see <see cref="OverlayManager"/>).
+        /// </summary>
+        public static OverlaySurface Surface { get; set; } = OverlaySurface.Layered;
+
+        /// <summary>Win32 error of the last failed SetWindowDisplayAffinity call (diagnostics).</summary>
+        public int LastAffinityError { get; private set; }
+
         public ClickThroughWindow()
         {
             WindowStyle = WindowStyle.None;
-            AllowsTransparency = true;
+            AllowsTransparency = Surface == OverlaySurface.Layered;
             Background = Brushes.Transparent;
             ShowInTaskbar = false;
             ShowActivated = false;
@@ -47,9 +66,29 @@ namespace Brainbox.Desktop.Overlay
         {
             base.OnSourceInitialized(e);
             Handle = new WindowInteropHelper(this).Handle;
+            if (!AllowsTransparency)
+            {
+                // Transparent client area composed by DWM: extend the (invisible) frame over the whole
+                // window and clear WPF's render target to fully transparent.
+                if (HwndSource.FromHwnd(Handle) is { CompositionTarget: { } target }) target.BackgroundColor = Colors.Transparent;
+                var margins = new Native.MARGINS { Left = -1, Right = -1, Top = -1, Bottom = -1 };
+                Native.DwmExtendFrameIntoClientArea(Handle, ref margins);
+            }
+
             Native.AddExStyle(Handle, Native.WS_EX_TRANSPARENT | Native.WS_EX_TOOLWINDOW | Native.WS_EX_NOACTIVATE | Native.WS_EX_LAYERED);
             Native.RemoveExStyle(Handle, Native.WS_EX_APPWINDOW);
+            if (!AllowsTransparency)
+            {
+                // WS_EX_TRANSPARENT only makes a top-level window click-through when it is layered.
+                Native.SetLayeredWindowAttributes(Handle, 0, 255, Native.LWA_ALPHA);
+            }
+
             SetCaptureExclusion(true);
+            // Some systems only accept the affinity once the window has been shown/composed.
+            ContentRendered += (_, _) =>
+            {
+                if (!ExcludedFromCapture) SetCaptureExclusion(true);
+            };
         }
 
         /// <summary>Turns capture exclusion on/off (off only for the self-test's "screenshot with overlay").</summary>
@@ -64,6 +103,12 @@ namespace Brainbox.Desktop.Overlay
             }
 
             ExcludedFromCapture = Native.SupportsExcludeFromCapture && Native.SetWindowDisplayAffinity(Handle, Native.WDA_EXCLUDEFROMCAPTURE);
+            LastAffinityError = ExcludedFromCapture ? 0 : Marshal.GetLastWin32Error();
+            if (ExcludedFromCapture && Native.GetWindowDisplayAffinity(Handle, out var actual) && actual != Native.WDA_EXCLUDEFROMCAPTURE)
+            {
+                ExcludedFromCapture = false; // pre-2004 behaviour (treated as WDA_MONITOR)
+            }
+
             return ExcludedFromCapture;
         }
 

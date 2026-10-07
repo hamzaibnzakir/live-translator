@@ -127,7 +127,7 @@ public sealed class BrainboxSettings : ObservableSettings
     public bool VisionFallback { get => _visionFallback; set => Set(ref _visionFallback, value); }
 
     // --- Overlay -----------------------------------------------------------------------
-    private double _overlayOpacity = 0.94;
+    private double _overlayOpacity = 1.0;
     public double OverlayOpacity { get => _overlayOpacity; set => Set(ref _overlayOpacity, Math.Clamp(value, 0.3, 1.0)); }
 
     private string _fontFamily = "Segoe UI";

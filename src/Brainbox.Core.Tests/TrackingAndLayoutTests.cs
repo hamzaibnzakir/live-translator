@@ -247,5 +247,6 @@ public class SettingsTests
         if (mode == PerformanceMode.BatterySaver) Assert.True(p.IntervalMs > PerformanceProfile.For(PerformanceMode.Balanced).IntervalMs);
         if (mode == PerformanceMode.Performance) Assert.True(p.IntervalMs < PerformanceProfile.For(PerformanceMode.Balanced).IntervalMs);
         if (mode == PerformanceMode.MaximumAccuracy) Assert.True(p.ExhaustiveOcr);
+        if (mode == PerformanceMode.BatterySaver) Assert.False(p.ExhaustiveOcr);
     }
 }

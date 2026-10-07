@@ -1,0 +1,41 @@
+02:28:31.829 Brainbox self-test. OS 10.0.20348.0, 64-bit=True, out=D:\a\live-translator\live-translator\selftest-out
+02:28:32.082 OCR recognizers: en-US, ja
+02:28:32.090 Monitor \\.\DISPLAY1 [0,0 1920x1080] scale 1 primary=True
+02:28:35.639 Probe Layered: affinity accepted=False (err 8), hidden from capture=False, draws=True, transparent background=True
+02:28:35.639 Probe Redirected: affinity accepted=True (err 0), hidden from capture=True, draws=True, transparent background=True
+02:28:36.093 Probe Desktop Duplication vs GDI: 100% identical pixels, 0.1% black
+02:28:36.108 Fake local AI server at http://127.0.0.1:59912/v1
+02:28:37.872 [PASS] System tray icon created — Tray menu with Live/Target/Engine/Mode/Glow/Pause/Settings/Restart/Exit
+02:28:37.872 Engine started; capture backend GDI
+02:28:39.500 [PASS] T1 Foreign text detected & translated automatically — 'Bienvenue dans le monde de la traduction' → 'Welcome to the world of translation' in 1971 ms with no user action
+02:28:39.500 [PASS] T1b Translation placed over the original text — source [152,210 483x35], overlay [151,217 486x23]
+02:28:39.500 [PASS] T1c Overlay actually rendered on screen — 3 item(s) on overlay windows
+02:28:39.500 [PASS] T1d Japanese detected & translated — '東京の天気は晴れです' → 'The weather in Tokyo is sunny'
+02:28:41.000 [PASS] T2 English text is ignored (not English→English) — sent=False, overlay=False
+02:28:42.503 [PASS] T11a Translation overlay excluded from screen capture — SetWindowDisplayAffinity(WDA_EXCLUDEFROMCAPTURE) accepted for all layers
+02:28:42.528 [PASS] T11b Capture under the overlay shows the original, not the translation — OCR of captured area: 'ft | Bienvenue dans le monde de la traduction'
+02:28:57.529 [PASS] T11c Translator never translates its own overlay — segments sent so far: Bienvenue dans le monde de la traduction / 東京の天気は晴れです / ー[ 172ヨ9fヨ- f9eß - 8 [十
+02:28:57.529 [PASS] T7 Unchanged on-screen text is not re-translated — translation requests during 15 s idle: 0; OCR passes: 0
+02:29:08.554 WindowFromPoint(393,227) = 0x20202 'Brainbox translation overlay \\.\DISPLAY1' exStyle=0x80000A8; overlay handles: 0x20202 ex=0x80000A8,0x201A6 ex=0x80800A8,0x300AC ex=0x80800A8,0x20196 ex=0x80800A8,0x2019E ex=0x80800A8
+02:29:08.954 Pointer over translation → peeked: True
+02:29:09.629 [PASS] T10 Overlay does not block mouse input — click at (393,227) under overlay=True reached the app: True; translation peeked away under pointer: True; overlay took focus: False
+02:29:10.642 [PASS] T6 Overlay follows moved window — overlay [151,217 486x23] → [451,357 486x23], text now at [452,350 483x35]
+02:29:10.642 [PASS] T6b Moved text served from cache (no new request) — times the moved French line was re-sent for translation: 0
+02:29:11.242 [PASS] Text change updates the translation — now 'The train arrives in five minutes'
+02:29:11.643 [PASS] Overlay disappears when the source text disappears — removed
+02:29:20.645 [PASS] T8 Local AI closed: app keeps running and reports it — running=True, state=Degraded, message='Custom AI is not reachable at http://127.0.0.1:59912/v1 (No connection could be made because the target machine actively refused it. (127.0.0.1:59912)).'
+02:29:22.451 [PASS] T8b Recovers automatically when the local AI is back — state=Live
+02:29:22.965 [PASS] Survives maximized/fullscreen window changes — overlay present after maximize: True
+02:29:23.874 [PASS] Hotkey Ctrl+Alt+P pauses and resumes — paused=True, overlay hidden while paused=True, resumed=True
+02:29:24.076 [PASS] Hotkey Ctrl+Alt+G toggles the glow — glow True → False
+02:29:24.277 [PASS] Hotkey Ctrl+Alt+B toggles live translation — turned off=True, overlay cleared=True
+02:29:25.078 [PASS] Glow indicator visible on every monitor edge — 4 edge strips, visible=True, excluded from capture=False (masked from detection otherwise)
+02:29:25.079 [PASS] Start-with-Windows registration — HKCU Run entry created with --autostart and removed again (reboot not performed in this test)
+02:29:28.212 Virtual desktop: switch detected=True, overlay on current desktop=True, translated=True
+02:29:30.730 [PASS] Virtual desktop switching keeps translation active — switch detected=True, new desktop translated=True, overlay followed=True, back on desktop 1 overlay ok=True, translation after return=True
+02:29:30.730 [SKIP] Multiple monitors — only one display attached here (multi-monitor coordinate logic covered by unit tests)
+02:29:32.232 Capture backend now: Desktop Duplication (GPU)
+02:29:32.632 [PASS] Desktop Duplication (GPU) capture backend — backend=Desktop Duplication (GPU)
+02:29:42.644 Engine metrics: ticks=240 interval=250ms capture=21.6ms detect=1.5ms ocr=170ms (max 1240, n=21) translate=36ms (req=8, fail=2, lines=8) cache hit/miss=20/8 e2e=24ms tracked=69 overlay=3
+02:29:42.647 [PASS] Application stayed alive through all scenarios — watcher loop running
+02:29:42.669 Done: 26 passed, 0 failed, 1 skipped.

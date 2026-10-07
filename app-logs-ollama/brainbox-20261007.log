@@ -1,0 +1,99 @@
+2026-10-07 02:30:20.484 [INF] Brainbox Live Translator starting (autostart=False, OS 10.0.20348.0).
+2026-10-07 02:30:20.535 [INF] Capture backend: GDI
+2026-10-07 02:30:20.536 [INF] Windows OCR recognizers: en-US, ja
+2026-10-07 02:30:20.676 [INF] ScreenWatcher started.
+2026-10-07 02:30:21.216 [DBG] Tick: 2 tiles changed, 0 dirty, 1 region(s) ready: [16,16 1888x1056]
+2026-10-07 02:30:22.274 [DBG] OCR [0,16 1920x1056]: 63 lines (61 kept) +61 -0 ~0: Recycl[en-US] | bin\ \Runner . Listener . exe" }[en-US] | : INFO" , "ts" :1791339981.2598097, "logger" : "hosted-compute-agent", "[en-US] | msg" : "Request processing,[en-US] | waiting for completio[en-US] | n or finish request message... ", "orchestration id": "eca76bd6-S91d-81a7-a1d7-Sdf6e88acaff . windows.[en-US] | default"[en-US] | "source corr[en-US] | EPIC[en-US] | elation[en-US] | 9954c67eaed14df3-e[en-US] | Brainbox Self-Test[en-US] | AMCs I[en-US] | t to run job", "orc[en-US] | hestratic[en-US] | 9f3-f9ee-8cfe-f4e7[en-US] | Launc[en-US] | Brainbox self-test page[en-US] | -1658528[en-US] | ca76bd6-591d-81a7[en-US] | ald7-5df€[en-US] | raceparent" : "ee-df[en-US] | Bienvenue dans le monde de la traduction[en-US] | cd28aeeE[en-US] | Hub" , "orchestratio[en-US] | 8cfe-f4e7-1650528e[en-US] | 東京の天気は晴れです[ja] | e3c4" , "tr[en-US] | 76bd6-591d-81a7-a1[en-US] | d7-5df6eE[en-US] | ceparent" : "ee-df4c[en-US] | d28aee8bÆ[en-US] | This sentence is already written in English[en-US] | '2.337 e " "[en-US] | . ' , orche[en-US] | stration[en-US] | 3-f9ee-8cfe-f4e7-1[en-US] | Goo[en-US] | 658528ee[en-US] | Chr[en-US] | istening for Jobs"[en-US] | , "orchest[en-US] | c17239f3-f9ee-8cfe[en-US] | ・f427 -15三[ja] | nning job: windows[en-US] | " , "orches[en-US] | "c17239f3-f9ee-8cf[en-US] | Micr[en-US] | e-f4e7-1f[en-US] | Edg[en-US] | age" , "orchestratio[en-US] | 8cfe-f4e7-1650528e[en-US] | e3c4" , "traceparent" . "[en-US] | -81" , "jobName" : "windows")[en-US] | • ee-df4cd28aee8b466e1esce696øe8cee73-9954c67eaed14df3[en-US] | R 46.1[en-US] | Unity Hub[en-US] | Test Mode[en-US] | Windows Server 2022 Datacenter[en-US] | ににあに21[ja] | 2:30 AM[en-US]
+2026-10-07 02:30:22.280 [DBG] Line 'Recycl' → AlreadyTargetLanguage
+2026-10-07 02:30:22.281 [DBG] Line 'bin\ \Runner . Listener . exe" }' → AlreadyTargetLanguage
+2026-10-07 02:30:22.281 [DBG] Line ': INFO" , "ts" :1791339981.2598097, "logger" : "hosted-compute-agent", "' → Code
+2026-10-07 02:30:22.281 [DBG] Line 'msg" : "Request processing,' → AlreadyTargetLanguage
+2026-10-07 02:30:22.281 [DBG] Line 'waiting for completio' → AlreadyTargetLanguage
+2026-10-07 02:30:22.281 [DBG] Line 'n or finish request message... ", "orchestration id": "eca76bd6-S91d-81a7-a1d7-Sdf6e88acaff . windows.' → Translate
+2026-10-07 02:30:22.283 [DBG] Line 'default"' → AlreadyTargetLanguage
+2026-10-07 02:30:22.283 [DBG] Line '"source corr' → AlreadyTargetLanguage
+2026-10-07 02:30:22.283 [DBG] Line 'EPIC' → AlreadyTargetLanguage
+2026-10-07 02:30:22.284 [DBG] Line 'elation' → AlreadyTargetLanguage
+2026-10-07 02:30:22.284 [DBG] Line '9954c67eaed14df3-e' → Code
+2026-10-07 02:30:22.284 [DBG] Line 'Brainbox Self-Test' → AlreadyTargetLanguage
+2026-10-07 02:30:22.284 [DBG] Line 'AMCs I' → AlreadyTargetLanguage
+2026-10-07 02:30:22.284 [DBG] Line 't to run job", "orc' → AlreadyTargetLanguage
+2026-10-07 02:30:22.284 [DBG] Line 'hestratic' → AlreadyTargetLanguage
+2026-10-07 02:30:22.284 [DBG] Line '9f3-f9ee-8cfe-f4e7' → Code
+2026-10-07 02:30:22.284 [DBG] Line 'Launc' → AlreadyTargetLanguage
+2026-10-07 02:30:22.284 [DBG] Line 'Brainbox self-test page' → AlreadyTargetLanguage
+2026-10-07 02:30:22.284 [DBG] Line '-1658528' → Numeric
+2026-10-07 02:30:22.284 [DBG] Line 'ca76bd6-591d-81a7' → Code
+2026-10-07 02:30:22.284 [DBG] Line 'ald7-5df€' → Code
+2026-10-07 02:30:22.284 [DBG] Line 'raceparent" : "ee-df' → AlreadyTargetLanguage
+2026-10-07 02:30:22.284 [DBG] Line 'Bienvenue dans le monde de la traduction' → Translate
+2026-10-07 02:30:22.285 [DBG] Line 'cd28aeeE' → Code
+2026-10-07 02:30:22.285 [DBG] Line 'Hub" , "orchestratio' → AlreadyTargetLanguage
+2026-10-07 02:30:22.285 [DBG] Line '8cfe-f4e7-1650528e' → Code
+2026-10-07 02:30:22.285 [DBG] Line '東京の天気は晴れです' → Translate
+2026-10-07 02:30:22.285 [DBG] Line 'e3c4" , "tr' → Code
+2026-10-07 02:30:22.285 [DBG] Line '76bd6-591d-81a7-a1' → Symbols
+2026-10-07 02:30:22.285 [DBG] Line 'd7-5df6eE' → Code
+2026-10-07 02:30:22.285 [DBG] Line 'ceparent" : "ee-df4c' → AlreadyTargetLanguage
+2026-10-07 02:30:22.285 [DBG] Line 'd28aee8bÆ' → Code
+2026-10-07 02:30:22.285 [DBG] Line 'This sentence is already written in English' → AlreadyTargetLanguage
+2026-10-07 02:30:22.285 [DBG] Line ''2.337 e " "' → TooShort
+2026-10-07 02:30:22.285 [DBG] Line '. ' , orche' → Garbled
+2026-10-07 02:30:22.285 [DBG] Line 'stration' → AlreadyTargetLanguage
+2026-10-07 02:30:22.286 [DBG] Line '3-f9ee-8cfe-f4e7-1' → Code
+2026-10-07 02:30:22.286 [DBG] Line 'Goo' → AlreadyTargetLanguage
+2026-10-07 02:30:22.286 [DBG] Line '658528ee' → Symbols
+2026-10-07 02:30:22.286 [DBG] Line 'Chr' → AlreadyTargetLanguage
+2026-10-07 02:30:22.286 [DBG] Line 'istening for Jobs"' → AlreadyTargetLanguage
+2026-10-07 02:30:22.286 [DBG] Line ', "orchest' → AlreadyTargetLanguage
+2026-10-07 02:30:22.286 [DBG] Line 'c17239f3-f9ee-8cfe' → Code
+2026-10-07 02:30:22.286 [DBG] Line '・f427 -15三' → Translate
+2026-10-07 02:30:22.286 [DBG] Line 'nning job: windows' → AlreadyTargetLanguage
+2026-10-07 02:30:22.286 [DBG] Line '" , "orches' → Garbled
+2026-10-07 02:30:22.286 [DBG] Line '"c17239f3-f9ee-8cf' → Code
+2026-10-07 02:30:22.286 [DBG] Line 'Micr' → AlreadyTargetLanguage
+2026-10-07 02:30:22.286 [DBG] Line 'e-f4e7-1f' → Code
+2026-10-07 02:30:22.286 [DBG] Line 'Edg' → AlreadyTargetLanguage
+2026-10-07 02:30:22.287 [DBG] Line 'age" , "orchestratio' → AlreadyTargetLanguage
+2026-10-07 02:30:22.287 [DBG] Line '8cfe-f4e7-1650528e' → Code
+2026-10-07 02:30:22.287 [DBG] Line 'e3c4" , "traceparent" . "' → Code
+2026-10-07 02:30:22.287 [DBG] Line '-81" , "jobName" : "windows")' → AlreadyTargetLanguage
+2026-10-07 02:30:22.287 [DBG] Line '• ee-df4cd28aee8b466e1esce696øe8cee73-9954c67eaed14df3' → Code
+2026-10-07 02:30:22.287 [DBG] Line 'R 46.1' → TooShort
+2026-10-07 02:30:22.287 [DBG] Line 'Unity Hub' → AlreadyTargetLanguage
+2026-10-07 02:30:22.287 [DBG] Line 'Test Mode' → AlreadyTargetLanguage
+2026-10-07 02:30:22.287 [DBG] Line 'Windows Server 2022 Datacenter' → AlreadyTargetLanguage
+2026-10-07 02:30:22.287 [DBG] Line 'ににあに21' → Garbled
+2026-10-07 02:30:22.287 [DBG] Line '2:30 AM' → Code
+2026-10-07 02:30:24.346 [DBG] Tick: 2 tiles changed, 0 dirty, 1 region(s) ready: [624,1008 96x64]
+2026-10-07 02:30:24.350 [DBG] OCR [624,1008 96x64]: 0 lines (0 kept) +0 -0 ~0: 
+2026-10-07 02:30:26.459 [DBG] Tick: 2 tiles changed, 0 dirty, 1 region(s) ready: [624,1008 96x64]
+2026-10-07 02:30:26.516 [DBG] OCR [624,1008 96x64]: 0 lines (0 kept) +0 -0 ~0: 
+2026-10-07 02:30:28.098 [DBG] Tick: 0 tiles changed, 0 dirty, 1 region(s) ready: [624,1008 96x64]
+2026-10-07 02:30:28.111 [DBG] OCR [624,1008 96x64]: 0 lines (0 kept) +0 -0 ~0: 
+2026-10-07 02:30:45.733 [WRN] Translation provider failed (1x), backing off: Ollama returned HTTP 500: {"error":{"message":"prediction aborted, token repeat limit reached","type":"api_error","param":null,"code":null}}
+
+2026-10-07 02:30:48.753 [WRN] Translation provider failed (1x), backing off: LM Studio is not reachable at http://localhost:1234/v1.
+2026-10-07 02:31:01.453 [DBG] Tick: 0 tiles changed, 0 dirty, 1 region(s) ready: [1808,1008 64x64]
+2026-10-07 02:31:01.570 [DBG] OCR [1548,1004 372x68]: 3 lines (3 kept) +2 -2 ~0: Windows Server 2022 Datacenter[en-US] | 20348.fe_re1ease.210507-1500[en-US] | 2:31 AM[en-US]
+2026-10-07 02:31:01.570 [DBG] Line '20348.fe_re1ease.210507-1500' → Symbols
+2026-10-07 02:31:01.570 [DBG] Line '2:31 AM' → Code
+2026-10-07 02:31:34.598 [INF] Ollama recovered.
+2026-10-07 02:31:34.599 [DBG] Translated via Ollama in 44203 ms: n or finish request message... ", "orchestration id": "eca76bd6-S91d-81a7-a1d7-Sdf6e88acaff . windows. => {"translations": ["or finish request message... ", "orchestration id": "eca76bd6-S91d-81a7-a1d7-Sdf6e88acaff. windows."]}
+
+CONTEXT (earlier and nearby on-screen text, do NOT translate):
+- elation
+- Brainbox Self-Test
+- AMCs I
+- hestratic
+- Brainbox self-test page
+- -1658528
+- ald7-5df€
+
+SEGMENTS (2):
+2. 123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789 | Bienvenue dans le monde de la traduction => Welcome to the world of translation | 東京の天気は晴れです => The weather in Tokyo is clear. | ・f427 -15三 => -1658528
+2026-10-07 02:31:50.551 [DBG] Tick: 0 tiles changed, 0 dirty, 1 region(s) ready: [112,176 544x96]
+2026-10-07 02:31:50.581 [DBG] OCR [54,162 602x110]: 5 lines (1 kept) +1 -6 ~0: Le train arrive dans cinq minutes[en-US]
+2026-10-07 02:31:50.582 [DBG] Line 'Le train arrive dans cinq minutes' → Translate
+2026-10-07 02:31:53.671 [DBG] Translated via Ollama in 3078 ms: Le train arrive dans cinq minutes => The train is arriving in five minutes.
+2026-10-07 02:31:53.790 [INF] Brainbox stopped.

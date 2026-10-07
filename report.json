@@ -1,0 +1,232 @@
+{
+  "results": [
+    {
+      "Name": "Probe: overlay surface Layered",
+      "Status": "INFO",
+      "Details": "Layered: affinity accepted=False (err 8), hidden from capture=False, draws=True, transparent background=True",
+      "Ms": 0
+    },
+    {
+      "Name": "Probe: overlay surface Redirected",
+      "Status": "INFO",
+      "Details": "Redirected: affinity accepted=True (err 0), hidden from capture=True, draws=True, transparent background=True",
+      "Ms": 0
+    },
+    {
+      "Name": "Probe: Desktop Duplication",
+      "Status": "INFO",
+      "Details": "Desktop Duplication vs GDI: 100% identical pixels, 0.1% black",
+      "Ms": 0
+    },
+    {
+      "Name": "System tray icon created",
+      "Status": "PASS",
+      "Details": "Tray menu with Live/Target/Engine/Mode/Glow/Pause/Settings/Restart/Exit",
+      "Ms": 0
+    },
+    {
+      "Name": "T1 Foreign text detected \u0026 translated automatically",
+      "Status": "PASS",
+      "Details": "\u0027Bienvenue dans le monde de la traduction\u0027 \u2192 \u0027Welcome to the world of translation\u0027 in 1971 ms with no user action",
+      "Ms": 1971.0597
+    },
+    {
+      "Name": "T1b Translation placed over the original text",
+      "Status": "PASS",
+      "Details": "source [152,210 483x35], overlay [151,217 486x23]",
+      "Ms": 0
+    },
+    {
+      "Name": "T1c Overlay actually rendered on screen",
+      "Status": "PASS",
+      "Details": "3 item(s) on overlay windows",
+      "Ms": 0
+    },
+    {
+      "Name": "T1d Japanese detected \u0026 translated",
+      "Status": "PASS",
+      "Details": "\u0027\u6771\u4EAC\u306E\u5929\u6C17\u306F\u6674\u308C\u3067\u3059\u0027 \u2192 \u0027The weather in Tokyo is sunny\u0027",
+      "Ms": 0
+    },
+    {
+      "Name": "T2 English text is ignored (not English\u2192English)",
+      "Status": "PASS",
+      "Details": "sent=False, overlay=False",
+      "Ms": 0
+    },
+    {
+      "Name": "T11a Translation overlay excluded from screen capture",
+      "Status": "PASS",
+      "Details": "SetWindowDisplayAffinity(WDA_EXCLUDEFROMCAPTURE) accepted for all layers",
+      "Ms": 0
+    },
+    {
+      "Name": "T11b Capture under the overlay shows the original, not the translation",
+      "Status": "PASS",
+      "Details": "OCR of captured area: \u0027ft | Bienvenue dans le monde de la traduction\u0027",
+      "Ms": 0
+    },
+    {
+      "Name": "T11c Translator never translates its own overlay",
+      "Status": "PASS",
+      "Details": "segments sent so far: Bienvenue dans le monde de la traduction / \u6771\u4EAC\u306E\u5929\u6C17\u306F\u6674\u308C\u3067\u3059 / \u30FC[ 172\u30E89f\u30E8- f9e\u00DF - 8 [\u5341",
+      "Ms": 0
+    },
+    {
+      "Name": "T7 Unchanged on-screen text is not re-translated",
+      "Status": "PASS",
+      "Details": "translation requests during 15 s idle: 0; OCR passes: 0",
+      "Ms": 0
+    },
+    {
+      "Name": "T10 Overlay does not block mouse input",
+      "Status": "PASS",
+      "Details": "click at (393,227) under overlay=True reached the app: True; translation peeked away under pointer: True; overlay took focus: False",
+      "Ms": 0
+    },
+    {
+      "Name": "T6 Overlay follows moved window",
+      "Status": "PASS",
+      "Details": "overlay [151,217 486x23] \u2192 [451,357 486x23], text now at [452,350 483x35]",
+      "Ms": 0
+    },
+    {
+      "Name": "T6b Moved text served from cache (no new request)",
+      "Status": "PASS",
+      "Details": "times the moved French line was re-sent for translation: 0",
+      "Ms": 0
+    },
+    {
+      "Name": "Text change updates the translation",
+      "Status": "PASS",
+      "Details": "now \u0027The train arrives in five minutes\u0027",
+      "Ms": 0
+    },
+    {
+      "Name": "Overlay disappears when the source text disappears",
+      "Status": "PASS",
+      "Details": "removed",
+      "Ms": 0
+    },
+    {
+      "Name": "T8 Local AI closed: app keeps running and reports it",
+      "Status": "PASS",
+      "Details": "running=True, state=Degraded, message=\u0027Custom AI is not reachable at http://127.0.0.1:59912/v1 (No connection could be made because the target machine actively refused it. (127.0.0.1:59912)).\u0027",
+      "Ms": 0
+    },
+    {
+      "Name": "T8b Recovers automatically when the local AI is back",
+      "Status": "PASS",
+      "Details": "state=Live",
+      "Ms": 0
+    },
+    {
+      "Name": "Survives maximized/fullscreen window changes",
+      "Status": "PASS",
+      "Details": "overlay present after maximize: True",
+      "Ms": 0
+    },
+    {
+      "Name": "Hotkey Ctrl\u002BAlt\u002BP pauses and resumes",
+      "Status": "PASS",
+      "Details": "paused=True, overlay hidden while paused=True, resumed=True",
+      "Ms": 0
+    },
+    {
+      "Name": "Hotkey Ctrl\u002BAlt\u002BG toggles the glow",
+      "Status": "PASS",
+      "Details": "glow True \u2192 False",
+      "Ms": 0
+    },
+    {
+      "Name": "Hotkey Ctrl\u002BAlt\u002BB toggles live translation",
+      "Status": "PASS",
+      "Details": "turned off=True, overlay cleared=True",
+      "Ms": 0
+    },
+    {
+      "Name": "Glow indicator visible on every monitor edge",
+      "Status": "PASS",
+      "Details": "4 edge strips, visible=True, excluded from capture=False (masked from detection otherwise)",
+      "Ms": 0
+    },
+    {
+      "Name": "Start-with-Windows registration",
+      "Status": "PASS",
+      "Details": "HKCU Run entry created with --autostart and removed again (reboot not performed in this test)",
+      "Ms": 0
+    },
+    {
+      "Name": "Virtual desktop switching keeps translation active",
+      "Status": "PASS",
+      "Details": "switch detected=True, new desktop translated=True, overlay followed=True, back on desktop 1 overlay ok=True, translation after return=True",
+      "Ms": 0
+    },
+    {
+      "Name": "Multiple monitors",
+      "Status": "SKIP",
+      "Details": "only one display attached here (multi-monitor coordinate logic covered by unit tests)",
+      "Ms": 0
+    },
+    {
+      "Name": "Desktop Duplication (GPU) capture backend",
+      "Status": "PASS",
+      "Details": "backend=Desktop Duplication (GPU)",
+      "Ms": 0
+    },
+    {
+      "Name": "Application stayed alive through all scenarios",
+      "Status": "PASS",
+      "Details": "watcher loop running",
+      "Ms": 0
+    }
+  ],
+  "metrics": {
+    "os": "Microsoft Windows NT 10.0.20348.0",
+    "ocrLanguages": [
+      "en-US",
+      "ja"
+    ],
+    "monitors": [
+      {
+        "DeviceName": "\\\\.\\DISPLAY1",
+        "Bounds": "[0,0 1920x1080]",
+        "DpiScale": 1,
+        "IsPrimary": true
+      }
+    ],
+    "idle": {
+      "cpuPercentOfMachine": 3.44,
+      "workingSetMB": 303.1,
+      "privateMB": 198.9,
+      "gpuPercent": 1.41,
+      "ticksPerSecond": 3.63,
+      "avgDetectionIntervalMs": 247.6,
+      "avgOcrMs": 1239.7,
+      "avgTranslationMs": 110
+    },
+    "active": {
+      "cpuPercentOfMachine": 5.93,
+      "workingSetMB": 418.5,
+      "privateMB": 308.5,
+      "gpuPercent": 1.5,
+      "ticksPerSecond": 3.8,
+      "avgDetectionIntervalMs": 250.1,
+      "avgOcrMs": 169.7,
+      "avgTranslationMs": 36
+    },
+    "engine": {
+      "AvgTickIntervalMs": 250.05958097197188,
+      "AvgCaptureMs": 21.56618445135772,
+      "AvgDetectMs": 1.5190876768078028,
+      "AvgOcrMs": 169.7246632194916,
+      "MaxOcrMs": 1239.7234,
+      "OcrCalls": 21,
+      "AvgTranslationMs": 36.0448,
+      "TranslationRequests": 8,
+      "CacheHits": 20,
+      "CacheMisses": 8,
+      "AvgEndToEndMs": 24.226837255587704
+    }
+  }
+}

@@ -80,7 +80,7 @@ namespace Brainbox.Desktop.UI
         protected override void OnClosing(CancelEventArgs e)
         {
             // Alt+F4 also only hides; Exit lives in the tray menu.
-            if (!((App)Application.Current).IsShuttingDown)
+            if (!((Translumo.App)Application.Current).IsShuttingDown)
             {
                 e.Cancel = true;
                 OnClose(this, null);

@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using System.Windows;
+using Brainbox.Core.Diagnostics;
 using Brainbox.Core.Translation;
 using Brainbox.Desktop.UI;
 using Translumo;

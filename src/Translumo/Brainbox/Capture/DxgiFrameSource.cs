@@ -102,7 +102,7 @@ namespace Brainbox.Desktop.Capture
             {
                 var s = (y - srcRect.Y) * srcStride + (part.X - srcRect.X) * 4;
                 var d = (y - dstRect.Y) * dstStride + (part.X - dstRect.X) * 4;
-                Buffer.BlockCopy(src, s, dst, d, rowBytes);
+                System.Buffer.BlockCopy(src, s, dst, d, rowBytes);
             }
         }
 

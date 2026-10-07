@@ -11,6 +11,7 @@ using global::Windows.Globalization;
 using global::Windows.Graphics.Imaging;
 using global::Windows.Media.Ocr;
 using global::Windows.Security.Cryptography;
+using OcrLine = Brainbox.Core.Text.OcrLine;
 
 namespace Brainbox.Desktop.Ocr
 {

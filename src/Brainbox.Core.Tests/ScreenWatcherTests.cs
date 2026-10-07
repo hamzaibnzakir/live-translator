@@ -377,7 +377,7 @@ public class ScreenWatcherTests
         var winner = await Task.WhenAny(got.Task, Task.Delay(10_000));
         await watcher.StopAsync();
         Assert.Same(got.Task, winner);
-        Assert.Equal("Hello world", got.Task.Result.Single().Text);
+        Assert.Equal("Hello world", (await got.Task).Single().Text);
         Assert.True(watcher.Metrics.Ticks > 0);
     }
 }

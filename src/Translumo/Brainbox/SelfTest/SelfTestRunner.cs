@@ -163,6 +163,7 @@ namespace Brainbox.Desktop.SelfTest
                 {
                     var overlaps = item.Box.Intersect(frenchRect).Area > 0.5 * frenchRect.Area;
                     Record("T1b Translation placed over the original text", overlaps, $"source {frenchRect}, overlay {item.Box}");
+                    await WaitForAsync(() => controller.Overlay.RenderedItemCount > 0, 3000);
                     Record("T1c Overlay actually rendered on screen", controller.Overlay.RenderedItemCount > 0, $"{controller.Overlay.RenderedItemCount} item(s) on overlay windows");
                 }
 
@@ -222,13 +223,18 @@ namespace Brainbox.Desktop.SelfTest
                     Native.GetWindowText(hit, title, 256);
                     Log($"WindowFromPoint({hitPoint.X},{hitPoint.Y}) = 0x{hit.ToInt64():X} '{title}' exStyle=0x{Native.GetWindowLongPtr(hit, Native.GWL_EXSTYLE).ToInt64():X}; overlay handles: {string.Join(",", controller.Overlay.WindowHandles.Select(h => "0x" + h.ToInt64().ToString("X") + " ex=0x" + Native.GetWindowLongPtr(h, Native.GWL_EXSTYLE).ToInt64().ToString("X")))}");
                     var clicksBefore = clicks();
+                    // Like a user: the pointer arrives over the translation, then clicks.
+                    Native.SetCursorPos(hitPoint.X, hitPoint.Y);
+                    await Task.Delay(400);
+                    var peeked = controller.Overlay.OverlayWindows.Any(w => w.PeekedItemId >= 0);
+                    Log($"Pointer over translation → peeked: {peeked}");
                     Click(hitPoint.X, hitPoint.Y);
                     await Task.Delay(600);
                     var received = clicks() > clicksBefore;
                     var fg = Native.GetForegroundWindow();
                     var stoleFocus = controller.Overlay.WindowHandles.Contains(fg);
                     Record("T10 Overlay does not block mouse input", received && !stoleFocus,
-                        $"click at ({hitPoint.X},{hitPoint.Y}) under overlay={overlayCovers} reached the app: {received}; overlay took focus: {stoleFocus}");
+                        $"click at ({hitPoint.X},{hitPoint.Y}) under overlay={overlayCovers} reached the app: {received}; translation peeked away under pointer: {peeked}; overlay took focus: {stoleFocus}");
                 }
 
                 // T6: window moves → overlay follows (and no new translation request)

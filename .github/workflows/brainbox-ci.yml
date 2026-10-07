@@ -10,6 +10,9 @@ on:
     branches: [ main, "feat/**", "fix/**" ]
   pull_request:
 
+permissions:
+  contents: write   # publish the self-test report to the ci-results branch
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -88,6 +91,25 @@ jobs:
           if (Test-Path "$out\report.md") { Get-Content "$out\report.md" | Out-File -Append -Encoding utf8 $env:GITHUB_STEP_SUMMARY }
           Write-Host "Self-test exit code: $code"
           exit $code
+
+      - name: Publish self-test report to the ci-results branch
+        if: always()
+        continue-on-error: true
+        shell: pwsh
+        run: |
+          $out = Join-Path $env:GITHUB_WORKSPACE 'selftest-out'
+          if (-not (Test-Path $out)) { New-Item -ItemType Directory -Force -Path $out | Out-Null }
+          $dest = Join-Path $env:RUNNER_TEMP 'ci-results'
+          New-Item -ItemType Directory -Force -Path $dest | Out-Null
+          Copy-Item "$out\*.md","$out\*.json","$out\*.log","$out\*.png" $dest -ErrorAction SilentlyContinue
+          if (Test-Path "$out\data\logs") { Copy-Item "$out\data\logs" "$dest\app-logs" -Recurse -ErrorAction SilentlyContinue }
+          Get-ChildItem -Recurse -Filter *.trx $env:GITHUB_WORKSPACE | Copy-Item -Destination $dest -ErrorAction SilentlyContinue
+          Set-Content "$dest\RUN.txt" "run=${{ github.run_id }} sha=${{ github.sha }} outcome=${{ steps.selftest.outcome }}"
+          Set-Location $dest
+          git init -q -b ci-results
+          git config user.name 'brainbox-ci'; git config user.email 'ci@brainbox.local'
+          git add -A; git commit -qm "Self-test results for ${{ github.sha }} (run ${{ github.run_id }})"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" ci-results
 
       - name: Upload self-test report + screenshots
         if: always()

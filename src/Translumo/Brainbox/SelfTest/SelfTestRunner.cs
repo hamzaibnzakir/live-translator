@@ -646,6 +646,7 @@ namespace Brainbox.Desktop.SelfTest
                     FirstRunCompleted = true,
                     RequestTimeoutSeconds = 120,
                     GlowEnabled = true,
+                    DebugMode = true,
                 }.Save(BrainboxPaths.Settings);
 
                 var monitors = GdiFrameSource.QueryMonitors();

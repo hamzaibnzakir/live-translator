@@ -354,6 +354,7 @@ public sealed class ScreenWatcher : IDisposable
         }
 
         var regions = _changes.TakeReadyRegions(now, _profile.SettleMs, _profile.MaxWaitMs, _profile.MaxRegionsPerTick, _changes.TileSize / 2);
+        if (regions.Count > 0) _log.Debug($"Tick: {_changes.LastChangedTileCount} tiles changed, {_changes.DirtyTileCount} dirty, {regions.Count} region(s) ready: {string.Join(", ", regions)}");
         var detectMs = Stopwatch.GetElapsedTime(t1).TotalMilliseconds;
         Metrics.Tick(now, captureMs, detectMs);
         Metrics.DirtyTiles = _changes.DirtyTileCount;
@@ -471,6 +472,8 @@ public sealed class ScreenWatcher : IDisposable
 
         var occluded = _frames.HonoursCaptureExclusion ? null : _overlay.Select(o => o.Box).ToList();
         var update = _tracker.ApplyRegion(region, accepted, now, occluded);
+        if (_log.IsDebugEnabled)
+            _log.Debug($"OCR {region}: {lines.Count} lines ({accepted.Count} kept) +{update.Added} -{update.Removed} ~{update.Moved}: {string.Join(" | ", accepted.Select(a => $"{a.Text}[{a.LanguageTag}]"))}");
         _changes.ReportOcrOutcome(region, update.AnyChange, now, _profile.MaxCooldownMs);
         if (update.Added > 0)
         {
@@ -508,6 +511,7 @@ public sealed class ScreenWatcher : IDisposable
         foreach (var line in _tracker.TakeNew())
         {
             var verdict = _filter.Evaluate(line.Line.Text, line.Line.LanguageTag);
+            _log.Debug($"Line '{line.Line.Text}' → {verdict}");
             if (verdict != FilterVerdict.Translate)
             {
                 _tracker.MarkSkipped(line, verdict);
@@ -596,6 +600,7 @@ public sealed class ScreenWatcher : IDisposable
                     break;
                 }
 
+                _log.Debug($"Translated via {outcome.ProviderName} in {outcome.ElapsedMs:0} ms: {string.Join(" | ", toSend.Select((l, i) => l.Normalized + " => " + outcome.Translations![i]))}");
                 for (var i = 0; i < toSend.Count; i++)
                 {
                     var translation = TextNormalizer.Normalize(outcome.Translations![i]);

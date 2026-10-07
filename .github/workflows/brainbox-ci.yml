@@ -134,7 +134,7 @@ jobs:
           if (Test-Path "$out\data\logs") { Copy-Item "$out\data\logs" "$dest\app-logs" -Recurse -ErrorAction SilentlyContinue }
           Get-ChildItem -Recurse -Filter *.trx $env:GITHUB_WORKSPACE | Copy-Item -Destination $dest -ErrorAction SilentlyContinue
           $ol = Join-Path $env:GITHUB_WORKSPACE 'selftest-ollama'
-          if (Test-Path "$ol\report.md") { Copy-Item "$ol\report.md" "$dest\report-ollama.md"; Copy-Item "$ol\selftest.log" "$dest\selftest-ollama.log" -ErrorAction SilentlyContinue }
+          if (Test-Path "$ol\report.md") { Copy-Item "$ol\report.md" "$dest\report-ollama.md"; Copy-Item "$ol\selftest.log" "$dest\selftest-ollama.log" -ErrorAction SilentlyContinue; if (Test-Path "$ol\data\logs") { Copy-Item "$ol\data\logs" "$dest\app-logs-ollama" -Recurse -ErrorAction SilentlyContinue } }
           Set-Content "$dest\RUN.txt" "run=${{ github.run_id }} sha=${{ github.sha }} selftest=${{ steps.selftest.outcome }} ollama-install=${{ steps.ollama.outcome }} ollama-test=${{ steps.selftest_ollama.outcome }}"
           Set-Location $dest
           git init -q -b ci-results

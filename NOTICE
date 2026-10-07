@@ -95,3 +95,14 @@ Upstream Translumo NOTICE (preserved)
 The original Translumo project is licensed under the Apache License, Version 2.0.
 Translumo-LLM is not endorsed by, nor affiliated with, the upstream Translumo
 project or its authors beyond the permissions granted by the Apache License.
+
+
+Brainbox Live Translator
+========================
+
+Brainbox Live Translator (2026) is a derivative work of Translumo-LLM / Translumo,
+distributed under the Apache License, Version 2.0. It adds the Brainbox.Core always-on
+engine (change detection, OCR scheduling, translation cache, context, overlay layout),
+whole-desktop capture, capture-excluded overlay and glow, system tray, global hotkeys,
+startup, virtual-desktop support and a real-screen self-test. The original Translumo
+region translator remains available as "Classic region translator".

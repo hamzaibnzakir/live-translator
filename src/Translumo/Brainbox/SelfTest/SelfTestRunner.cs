@@ -147,6 +147,7 @@ namespace Brainbox.Desktop.SelfTest
                 testWindow.Show();
                 testWindow.Activate();
                 await PlaceWindowAsync(testWindow, primary.WorkArea.X + 120, primary.WorkArea.Y + 120);
+                await BringToFrontAsync(testWindow);
                 await Task.Delay(500);
 
                 // ---- start the real engine ------------------------------------------------------
@@ -495,6 +496,16 @@ namespace Brainbox.Desktop.SelfTest
             await Task.Delay(400);
         }
 
+        /// <summary>A process started in the background may not get foreground rights; make sure the page is really on top.</summary>
+        private static async Task BringToFrontAsync(Window w)
+        {
+            w.Topmost = true;
+            w.Activate();
+            await Task.Delay(200);
+            w.Topmost = false;
+            w.Activate();
+        }
+
         private static OverlayItem FindItem(BrainboxController c, string translation) =>
             c.Watcher.CurrentOverlay.FirstOrDefault(o => string.Equals(o.Text, translation, StringComparison.OrdinalIgnoreCase));
 
@@ -655,6 +666,7 @@ namespace Brainbox.Desktop.SelfTest
                 w = window;
                 w.Show();
                 await PlaceWindowAsync(w, primary.WorkArea.X + 120, primary.WorkArea.Y + 120);
+                await BringToFrontAsync(w);
 
                 var sw = Stopwatch.StartNew();
                 controller = new BrainboxController(app.Dispatcher);

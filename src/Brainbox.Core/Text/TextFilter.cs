@@ -99,6 +99,7 @@ public sealed partial class TextFilter
         if (ShortcutRegex().IsMatch(text)) return FilterVerdict.KeyboardShortcut;
         if (nonLatinLetters * 2 < letters && LooksLikeCode(text)) return FilterVerdict.Code;
         if (nonLatinLetters == 0 && LooksGarbled(text)) return FilterVerdict.Garbled;
+        if (nonLatinLetters > 0 && LooksLikeCjkNoise(text)) return FilterVerdict.Garbled;
 
         if (IsOwnOutput(text)) return FilterVerdict.OwnOverlayOutput;
 
@@ -139,6 +140,18 @@ public sealed partial class TextFilter
 
         var symbols = text.Count(c => "{}[];=<>()_$#\\|&*".Contains(c, StringComparison.Ordinal));
         return symbols >= 3 && symbols * 6 >= text.Length;
+    }
+
+    /// <summary>
+    /// A CJK recognizer reading icons/graphics produces short runs of a couple of repeated kana
+    /// ("ににあに21"). Real short UI words rarely repeat that much.
+    /// </summary>
+    private static bool LooksLikeCjkNoise(string text)
+    {
+        var letters = text.Where(char.IsLetter).ToArray();
+        if (letters.Length < 3 || letters.Length > 6) return false;
+        var distinct = letters.Distinct().Count();
+        return distinct * 2 <= letters.Length && text.Any(char.IsDigit);
     }
 
     /// <summary>OCR noise: mostly 1-character tokens or very low vowel content in "words".</summary>

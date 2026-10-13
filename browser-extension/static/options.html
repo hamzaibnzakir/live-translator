@@ -3,7 +3,7 @@
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Brainbox Translate — Settings</title><link rel="stylesheet" href="ui.css">
 <style>main{max-width:860px;margin:0 auto}.cols{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(max-width:700px){.cols{grid-template-columns:1fr}}
 nav{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 10px}nav a{color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:999px;border:1px solid var(--border);background:var(--surface)}
-#packs-table td:first-child{white-space:nowrap}.focus{box-shadow:0 0 0 2px var(--violet)}</style></head>
+#packs-table td:first-child{white-space:nowrap}.check{margin-top:10px;border:1px solid var(--border);border-radius:10px;overflow:hidden}.check div{display:grid;grid-template-columns:190px 1fr;gap:10px;padding:8px 12px;border-bottom:1px solid var(--border);font-size:13px}.check div:last-child{border-bottom:0}.check b{font-weight:600}.focus{box-shadow:0 0 0 2px var(--violet)}</style></head>
 <body>
 <div class="glow"></div>
 <header style="max-width:860px;margin:0 auto"><img src="icons/icon-48.png" alt=""><h1>Brainbox <span class="grad">Translate</span> · Settings</h1><span class="sp"></span><span class="tag ok">🔒 On-device</span></header>
@@ -16,6 +16,8 @@ nav{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 10px}nav a{color:var(--muted)
     <div><div class="muted">Engine</div><select id="engine"><option value="auto">Auto (Chrome built-in when ready, else offline Bergamot)</option><option value="chrome">Chrome built-in (fallback to Bergamot)</option><option value="bergamot">Offline Bergamot only</option></select></div>
   </div>
   <div id="engine-status" class="hint" style="margin-top:8px"></div>
+  <div class="row" style="margin-top:8px"><button class="ghost small" id="engine-check">Run engine check (French → English)</button><span class="muted" id="engine-check-note"></span></div>
+  <div id="engine-check-out" class="check" hidden></div>
   <label class="sw"><input type="checkbox" id="autoDownloadPacks"> Download offline packs automatically when a new language appears</label>
   <div class="hint">Off = Brainbox asks first. Packs come from Mozilla's model storage, are SHA-256 verified and then work offline.</div>
   <div class="row" style="margin-top:8px"><span class="muted">Minimum detection confidence</span><input type="number" id="minConfidence" min="0" max="1" step="0.05" style="width:90px"></div>

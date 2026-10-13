@@ -4,7 +4,8 @@ import { languageName } from '../../shared/languages';
 import type { PackProgressEvent, PackRef, TabMessage, TranslateResult } from '../../shared/messages';
 import { send } from '../../shared/messages';
 import { DEFAULT_SETTINGS, loadSettings, onSettingsChanged, saveSettings, type Settings } from '../../shared/settings';
-import { escapeHtml, formatBytes, Overlay } from '../common/overlay';
+import { escapeHtml, formatBytes, Notices, Overlay, type NoticeHandle } from '../common/overlay';
+import { icon, LOGO_SVG } from '../common/theme';
 import { Composer } from './composer';
 import { DiscordReader } from './reader';
 
@@ -17,58 +18,50 @@ async function main(): Promise<void> {
   const overlay = new Overlay();
   const get = (): Settings => settings;
 
-  // ---------- banners (pack download, ask mode) ----------
-  const banner = overlay.add(overlay.el('div', 'panel banner'));
-  banner.style.display = 'none';
-  let bannerPack: PackRef | null = null;
+  // ---------- notices (pack download, ask mode, engine problems) ----------
+  const notices = new Notices(overlay, LOGO_SVG, icon('close'));
   const dismissedPacks = new Set<string>();
   const askedChannels = new Set<string>();
+  let packNotice: { key: string; handle: NoticeHandle } | null = null;
 
   function showPackBanner(pack: PackRef): void {
     const key = `${pack.from}-${pack.to}`;
-    if (dismissedPacks.has(key) || (bannerPack && `${bannerPack.from}-${bannerPack.to}` === key && banner.style.display !== 'none')) return;
-    bannerPack = pack;
+    if (dismissedPacks.has(key) || (packNotice?.key === key && packNotice.handle.open)) return;
+    const from = languageName(pack.from), to = languageName(pack.to);
     const size = pack.sizeBytes ? ` (${formatBytes(pack.sizeBytes)})` : '';
-    const engine = pack.engine === 'chrome' ? 'Chrome built-in' : 'offline';
-    banner.innerHTML = `<div class="hd"><span class="dot"></span>Brainbox Translate</div>
-      <div>${escapeHtml(languageName(pack.from))} messages here. Download the ${escapeHtml(languageName(pack.from))} → ${escapeHtml(languageName(pack.to))} ${engine} pack${size}? It stays on your computer and works offline.</div>
-      <div class="bar" style="display:none"><i></i></div>
-      <div class="row"><button data-bb="dl">Download ${escapeHtml(languageName(pack.from))} → ${escapeHtml(languageName(pack.to))}</button><button class="ghost" data-bb="later">Not now</button></div>`;
-    banner.style.display = 'block';
-    banner.querySelector('[data-bb="later"]')!.addEventListener('click', () => { dismissedPacks.add(key); banner.style.display = 'none'; });
-    banner.querySelector('[data-bb="dl"]')!.addEventListener('click', () => {
+    const start = (): void => {
       if (pack.engine === 'chrome') { void send({ type: 'bb:open-packs', from: pack.from, to: pack.to }); return; }
-      (banner.querySelector('.bar') as HTMLElement).style.display = 'block';
-      (banner.querySelector('[data-bb="dl"]') as HTMLButtonElement).disabled = true;
+      handle.update({ title: `Downloading ${from} → ${to}…`, body: 'Verified and stored on this computer. Messages translate as soon as it finishes.', progress: 0, actions: [] });
       void send({ type: 'bb:packs:download', from: pack.from, to: pack.to }).catch((e: Error) => {
-        banner.querySelector('.row')!.insertAdjacentHTML('beforebegin', `<div class="err">${escapeHtml(e.message)}</div>`);
+        handle.update({ kind: 'warn', title: 'Download failed', body: e.message, progress: null, actions: [{ label: 'Try again', primary: true, onClick: start }] });
       });
+    };
+    const handle = notices.show('pack', {
+      title: `Translate ${from} messages?`,
+      body: `Needs the ${from} → ${to} ${pack.engine === 'chrome' ? 'Chrome built-in' : 'offline'} pack${size}. Downloaded once, then it works offline.`,
+      actions: [
+        { label: `Download ${from}`, primary: true, icon: icon('download'), onClick: start },
+        { label: 'Not now', onClick: () => { dismissedPacks.add(key); handle.close(); } },
+      ],
     });
+    packNotice = { key, handle };
   }
 
   function onPackProgress(e: PackProgressEvent): void {
-    if (!bannerPack || e.from !== bannerPack.from || e.to !== bannerPack.to) { if (e.done && !e.error) reader.scheduler.retryWaiting(); return; }
-    const bar = banner.querySelector<HTMLElement>('.bar');
-    if (bar) { bar.style.display = 'block'; (bar.firstElementChild as HTMLElement).style.width = `${e.total ? Math.round((e.loaded / e.total) * 100) : 0}%`; }
-    if (e.done) {
-      if (e.error) { banner.querySelector('.row')!.insertAdjacentHTML('beforebegin', `<div class="err">${escapeHtml(e.error)}</div>`); return; }
-      banner.style.display = 'none';
-      bannerPack = null;
-      reader.scheduler.retryWaiting();
-      reader.rescan();
-    }
+    const mine = packNotice && packNotice.key === `${e.from}-${e.to}` && packNotice.handle.open ? packNotice.handle : null;
+    if (mine && !e.done) mine.update({ progress: e.total ? e.loaded / e.total : 'busy' });
+    if (!e.done) return;
+    if (e.error) { mine?.update({ kind: 'warn', title: 'Download failed', body: e.error, progress: null }); return; }
+    mine?.close();
+    reader.scheduler.retryWaiting();
+    reader.rescan();
   }
 
   function showAsk(guildId: string, channelId: string, lang: string): void {
     if (askedChannels.has(channelId)) return;
     askedChannels.add(channelId);
-    banner.innerHTML = `<div class="hd"><span class="dot"></span>Brainbox Translate</div>
-      <div>This channel is mostly in ${escapeHtml(languageName(lang))}. Translate it to ${escapeHtml(languageName(settings.targetLang))}?</div>
-      <div class="row"><button data-m="channel">Always here</button><button data-m="server">Whole server</button><button class="ghost" data-m="once">Just now</button><button class="ghost" data-m="never">Never</button></div>`;
-    banner.style.display = 'block';
-    banner.querySelectorAll<HTMLElement>('[data-m]').forEach((b) => b.addEventListener('click', () => {
-      const m = b.dataset.m;
-      banner.style.display = 'none';
+    const choose = (m: 'channel' | 'server' | 'once' | 'never') => (): void => {
+      handle.close();
       if (m === 'once') reader.sessionAllowed.add(channelId);
       else void saveSettings((s) => {
         const d = { ...s.discord, channels: { ...s.discord.channels }, servers: { ...s.discord.servers } };
@@ -78,10 +71,37 @@ async function main(): Promise<void> {
         return { ...s, discord: d };
       });
       if (m !== 'never') { reader.sessionAllowed.add(channelId); reader.rescan(); }
-    }));
+    };
+    const handle = notices.show('ask', {
+      title: `This channel is in ${languageName(lang)}`,
+      body: `Translate it to ${languageName(settings.targetLang)} as you read?`,
+      actions: [
+        { label: 'Always here', primary: true, onClick: choose('channel') },
+        { label: 'Whole server', onClick: choose('server') },
+        { label: 'Just now', onClick: choose('once') },
+        { label: 'Never', onClick: choose('never') },
+      ],
+    });
   }
 
-  const reader = new DiscordReader(get, { onNeedsPack: showPackBanner, onAsk: showAsk, onVote: () => composer.refresh() });
+  const reportedProblems = new Set<string>();
+  function onEngineProblem(engine: string, reason: string, recovered: boolean): void {
+    const key = `${engine}|${recovered}`;
+    if (reportedProblems.has(key)) return;
+    reportedProblems.add(key);
+    const name = engine === 'chrome' ? 'Chrome’s built-in translator' : engine === 'bergamot' ? 'The offline engine' : 'The translator';
+    notices.show(`engine-${engine}`, {
+      kind: 'warn',
+      title: recovered ? `${name} failed, switched to the offline engine` : `${name} failed`,
+      body: `“${reason}”.${recovered ? ' Messages keep translating offline. Brainbox will try it again in 10 minutes.' : ' Check Settings → Engine.'}`,
+      actions: [
+        { label: 'Use offline only', primary: !recovered, onClick: () => { void saveSettings((s) => ({ ...s, engine: 'bergamot' })); notices.get(`engine-${engine}`)?.close(); } },
+        { label: 'Open settings', onClick: () => void send({ type: 'bb:open-packs' }) },
+      ],
+    });
+  }
+
+  const reader = new DiscordReader(get, { onNeedsPack: showPackBanner, onAsk: showAsk, onVote: () => composer.refresh(), onEngineProblem });
   const composer = new Composer(overlay, reader, get, (r: TranslateResult) => r.pack && showPackBanner(r.pack));
   window.__brainboxDiscord = { reader, composer, settings: get };
 
@@ -95,10 +115,10 @@ async function main(): Promise<void> {
     const info = reader.info(target);
     if (!info) return;
     tipTarget = target;
-    const engine = info.engine === 'bergamot' ? 'offline (Bergamot)' : info.engine === 'chrome' ? 'Chrome built-in' : info.engine === 'ai' ? 'AI polished' : info.engine;
-    tip.innerHTML = `<div class="hd"><span class="dot"></span>Original · ${escapeHtml(info.lang)}${engine ? ` · ${escapeHtml(engine)}` : ''}</div>
+    const engine = info.engine === 'bergamot' ? 'Offline' : info.engine === 'chrome' ? 'Chrome built-in' : info.engine === 'ai' ? 'AI polished' : info.engine;
+    tip.innerHTML = `<div class="hd">${LOGO_SVG}<span>Original</span><span class="sp"></span><span class="chip">${escapeHtml(info.lang)}</span>${engine ? `<span class="chip ok">${escapeHtml(engine)}</span>` : ''}</div>
       <div class="orig" data-bb="orig"></div>
-      <div class="row"><button class="ghost" data-bb="swap">Show original <span class="muted">(Alt+click)</span></button>${settings.polish.enabled ? '<button data-bb="polish">✨ Polish with AI</button>' : ''}</div>`;
+      <div class="row"><button class="ghost" data-bb="swap">${icon('undo')}Show original <kbd>Alt</kbd>+click</button>${settings.polish.enabled ? `<button data-bb="polish">${icon('spark')}Polish with AI</button>` : ''}</div>`;
     (tip.querySelector('[data-bb="orig"]') as HTMLElement).textContent = info.original;
     tip.style.display = 'block';
     const r = target.getBoundingClientRect();
@@ -108,14 +128,15 @@ async function main(): Promise<void> {
     tip.querySelector('[data-bb="swap"]')!.addEventListener('click', () => { reader.toggle(target); hideTip(); });
     tip.querySelector('[data-bb="polish"]')?.addEventListener('click', () => {
       const btn = tip.querySelector('[data-bb="polish"]') as HTMLButtonElement;
+      btn.disabled = true;
       btn.textContent = 'Polishing…';
       const block = reader.blockFor(target);
       const current = block?.el.textContent ?? '';
       void send<{ text: string; model: string }>({ type: 'bb:polish', text: current, original: info.original, from: block?.el.getAttribute('data-bb-lang') ?? 'auto', to: settings.targetLang })
         .then((res) => {
           if (!reader.replaceTranslation(target, res.text)) (tip.querySelector('[data-bb="orig"]') as HTMLElement).textContent = `${info.original}\n\nAI: ${res.text}`;
-          btn.textContent = `✨ ${res.model}`;
-        }, (e: Error) => { btn.textContent = e.message; });
+          btn.textContent = `Polished · ${res.model}`;
+        }, (e: Error) => { btn.textContent = e.message; btn.disabled = false; });
     });
   }
   document.addEventListener('mouseover', (e) => {

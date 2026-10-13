@@ -1,0 +1,37 @@
+/* Popup (400px) and side panel (full height) share this layout. */
+body{width:400px}
+body.panel{width:auto;height:100vh}
+.app{position:relative;z-index:1;display:flex;flex-direction:column;gap:10px;padding:12px 14px 12px}
+body.panel .app{height:100%}
+.top{display:flex;align-items:center;gap:8px}
+.top .mark{width:24px;height:24px;filter:drop-shadow(0 0 6px rgba(139,92,246,.6))}
+.brand{font-size:15px;flex:1;white-space:nowrap}
+.brand b{font-weight:600}
+.chip{font-size:11px;font-weight:600;padding:3px 9px;border-radius:999px;background:var(--surface2);border:1px solid var(--border);color:var(--muted);white-space:nowrap;max-width:150px;overflow:hidden;text-overflow:ellipsis}
+.chip.ok{color:var(--green);border-color:rgba(52,211,153,.35)}
+.chip.warn{color:var(--amber);border-color:rgba(251,191,36,.35)}
+.icon-btn{background:var(--surface2);border:1px solid var(--border);color:#c9cce0;padding:5px;border-radius:8px;display:inline-flex}
+.icon-btn svg{width:16px;height:16px}
+.icon-btn:hover{color:#fff;border-color:#3a4052}
+.tabs{margin:0}
+.quick{display:flex;flex-direction:column;gap:10px;flex:1;min-height:0}
+.langbar{display:grid;grid-template-columns:1fr auto 1fr;gap:6px;align-items:center}
+.langbar select{padding:7px 8px;font-size:13px}
+.swap{padding:7px}
+.pane{background:var(--surface);border:1px solid var(--border);border-radius:12px;display:flex;flex-direction:column;min-height:0}
+.pane textarea{border:0;background:transparent;min-height:104px;resize:none;padding:12px 12px 6px;font-size:14.5px;line-height:1.5;box-shadow:none!important}
+body.panel .pane{flex:1}
+body.panel .pane textarea{flex:1}
+.pane.out{background:linear-gradient(var(--surface),var(--surface)) padding-box,linear-gradient(135deg,rgba(139,92,246,.55),rgba(34,211,238,.35)) border-box;border:1px solid transparent}
+.pane.out textarea{color:#fff}
+.pane.out.loading textarea{opacity:.55}
+.pane-foot{display:flex;align-items:center;gap:6px;padding:6px 8px 8px 12px;font-size:12px}
+.callout{border-radius:12px;padding:10px 12px;background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--violet);font-size:13px}
+.callout.warn{border-left-color:var(--amber)}
+.callout .t{font-weight:600;margin-bottom:2px}
+.callout .row{margin-top:8px}
+.foot{display:flex;justify-content:space-between;gap:8px;font-size:12px;padding-top:2px}
+.site{font-size:13px;color:var(--muted);word-break:break-all}
+.card h2{margin-bottom:6px}
+kbd{font:600 10.5px/1 ui-monospace,monospace;color:#c9cce0;background:var(--surface2);border:1px solid var(--border);border-bottom-width:2px;border-radius:4px;padding:2px 4px}
+[hidden]{display:none!important}

@@ -110,6 +110,29 @@ describe('EngineRouter', () => {
     expect((await auto.translateOne({ id: '2', text: 'Bonjour tout le monde', from: 'fr' }, 'en')).engine).toBe('bergamot');
   });
 
+  it('an engine that fails (Chrome "Other generic failures occurred") is skipped and the next engine answers', async () => {
+    const chrome = new FakeEngine({ installAll: true }); (chrome as { id: string }).id = 'chrome';
+    chrome.translate = async () => { throw new Error('Other generic failures occurred.'); };
+    const berg = new FakeEngine({ installAll: true }); (berg as { id: string }).id = 'bergamot';
+    const r = new EngineRouter({ engines: [chrome, berg], cache: new TranslationCache(new MemoryCacheBackend()), settings: settings({ engine: 'auto' }) });
+    const res = await r.translateOne({ id: '1', text: 'Bonjour tout le monde', from: 'fr' }, 'en');
+    expect(res.reason).toBeUndefined();
+    expect(res).toMatchObject({ status: 'ok', engine: 'bergamot', translation: 'Hello everyone', failedEngine: 'chrome' });
+    expect(r.getStats().failures).toEqual([{ engine: 'chrome', pair: 'fr-en', reason: 'Other generic failures occurred.' }]);
+    // Later requests go straight to Bergamot without hitting Chrome again.
+    const next = await r.translateOne({ id: '2', text: 'Salut', from: 'fr' }, 'en');
+    expect(next).toMatchObject({ engine: 'bergamot', status: 'ok' });
+    expect(next.failedEngine).toBeUndefined();
+  });
+
+  it('when the fallback has no pack, the failure turns into a pack download prompt', async () => {
+    const chrome = new FakeEngine({ installAll: true }); (chrome as { id: string }).id = 'chrome';
+    chrome.translate = async () => { throw new Error('Other generic failures occurred.'); };
+    const berg = new FakeEngine(); (berg as { id: string }).id = 'bergamot';
+    const r = new EngineRouter({ engines: [chrome, berg], cache: new TranslationCache(new MemoryCacheBackend()), settings: settings({ engine: 'auto' }) });
+    expect(await r.translateOne({ id: '1', text: 'Bonjour tout le monde', from: 'fr' }, 'en')).toMatchObject({ status: 'needs-pack', pack: { engine: 'bergamot' }, failedEngine: 'chrome' });
+  });
+
   it('auto-download fetches a missing pack when enabled', async () => {
     const e = new FakeEngine(); (e as { id: string }).id = 'bergamot';
     const onAutoDownload = vi.fn((eng, f: string, t: string) => eng.ensurePack(f, t));

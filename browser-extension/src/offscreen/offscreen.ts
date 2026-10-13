@@ -104,6 +104,19 @@ async function handle(msg: Request): Promise<unknown> {
     case 'bb:cache:clear':
       await cache.clear();
       return true;
+    case 'bb:engine-check': {
+      const sample = msg.from === 'fr' ? 'Bonjour tout le monde, comment ça va ?' : 'Hello everyone, how are you?';
+      const run = async (eng: ChromeEngine | BergamotEngine): Promise<{ availability: string; ok: boolean; output?: string; error?: string; ms?: number }> => {
+        const availability = eng.supported() ? await eng.availability(msg.from, msg.to) : 'unsupported';
+        if (availability !== 'ready') return { availability, ok: false };
+        const t0 = performance.now();
+        try {
+          const [out] = await Promise.race([eng.translate([sample], msg.from, msg.to), new Promise<never>((_, j) => setTimeout(() => j(new Error('timed out after 15 s')), 15_000))]);
+          return { availability, ok: true, output: out, ms: Math.round(performance.now() - t0) };
+        } catch (e) { return { availability, ok: false, error: (e as Error).message }; }
+      };
+      return { chrome: await run(chromeEngine), bergamot: await run(bergamot), detector: await chromeEngine.detectorAvailability(), userAgent: navigator.userAgent };
+    }
     case 'bb:stats':
       return router.getStats();
     case 'bb:stats:reset':

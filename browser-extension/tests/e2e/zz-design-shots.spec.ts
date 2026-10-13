@@ -1,0 +1,44 @@
+// Not an assertion test: captures the UI for design review / the report.
+import { test, expect } from './harness';
+import { content, shot } from './helpers';
+
+test('design screenshots', async ({ bb }) => {
+  await bb.installPacks(['fr-en', 'en-fr', 'ja-en']);
+  await bb.sw.evaluate(() => (globalThis as unknown as { __bbHandle: (m: unknown) => Promise<unknown> }).__bbHandle({ type: 'bb:packs:remove', from: 'es', to: 'en' }));
+  const page = await bb.context.newPage();
+  await page.goto('https://discord.com/channels/111/222');
+  await expect(content(page, '900001')).toHaveText(/Hello everyone/i);
+  await page.waitForTimeout(800);
+  await shot(page, 'v2-discord-notice-pill');
+  await content(page, '900002').hover();
+  await page.waitForTimeout(600);
+  await shot(page, 'v2-discord-tooltip');
+  await page.locator('[data-slate-editor="true"]').click();
+  await page.keyboard.type('Thanks, I will join you tonight after dinner!');
+  await page.keyboard.press('Control+Shift+Y');
+  await expect(page.locator('#brainbox-overlay [data-bb="back"]')).toHaveText(/thank/i, { timeout: 30_000 });
+  await shot(page, 'v2-discord-reply');
+  await page.locator('#brainbox-overlay [data-bb="lang"]').click();
+  await page.waitForTimeout(300);
+  await shot(page, 'v2-discord-lang-menu');
+  const popup = await bb.openPopup();
+  await popup.setViewportSize({ width: 400, height: 560 });
+  await popup.fill('#src', 'Si des personnes ont des questions sur l’organique, n’hésitez pas, je suis pratiquement à 100 % sur l’orga.');
+  await expect(popup.locator('#out')).toHaveValue(/question/i);
+  await shot(popup, 'v2-popup');
+  await popup.fill('#src', '¿Alguien quiere jugar esta noche?');
+  await expect(popup.locator('#pack-need')).toBeVisible();
+  await shot(popup, 'v2-popup-pack');
+  const side = await bb.context.newPage();
+  await side.setViewportSize({ width: 420, height: 860 });
+  await side.goto(`chrome-extension://${bb.extensionId}/sidepanel.html`);
+  await side.fill('#src', 'Tu fais comment tes vidéos organiques ?');
+  await expect(side.locator('#out')).toHaveValue(/video/i);
+  await shot(side, 'v2-sidepanel');
+  const opt = await bb.context.newPage();
+  await opt.goto(`chrome-extension://${bb.extensionId}/options.html`);
+  await opt.click('#engine-check');
+  await expect(opt.locator('#engine-check-out')).toContainText('Offline engine');
+  await opt.waitForTimeout(500);
+  await shot(opt, 'v2-engine-check');
+});

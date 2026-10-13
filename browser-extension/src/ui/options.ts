@@ -179,6 +179,32 @@ function bindGeneral(): void {
   $('clear-cache').onclick = async () => { await send({ type: 'bb:cache:clear' }); toast('Translation cache cleared ✓'); };
 }
 
+interface CheckRow { availability: string; ok: boolean; output?: string; error?: string; ms?: number }
+async function engineCheck(): Promise<void> {
+  const out = $('engine-check-out');
+  out.hidden = false;
+  out.innerHTML = '<div><b>Checking…</b><span class="muted">This can take a few seconds.</span></div>';
+  const row = (name: string, r: CheckRow): string => {
+    const state = r.ok ? `<span class="tag ok">✓ works · ${r.ms} ms</span> <span class="muted">“${r.output}”</span>` : r.error ? `<span class="tag warn">✗ ${r.availability}, but failed</span> <span class="err">${r.error}</span>` : `<span class="tag">${r.availability}</span>`;
+    return `<div><b>${name}</b><span>${state}</span></div>`;
+  };
+  // 1) Chrome's API in this (visible) page — it needs your click if the model still has to download.
+  let here: CheckRow = { availability: 'unsupported', ok: false };
+  if (chromeEngine.supported()) {
+    here = { availability: await chromeEngine.availability('fr', 'en'), ok: false };
+    if (here.availability === 'ready') {
+      const t0 = performance.now();
+      try { const [o] = await chromeEngine.translate(['Bonjour tout le monde, comment ça va ?'], 'fr', 'en'); here = { ...here, ok: true, output: o, ms: Math.round(performance.now() - t0) }; }
+      catch (e) { here = { ...here, error: (e as Error).message }; }
+    }
+  }
+  // 2) The background engine host (where Discord and pages are translated).
+  const bg = await send<{ chrome: CheckRow; bergamot: CheckRow; detector: string; userAgent: string }>({ type: 'bb:engine-check', from: 'fr', to: 'en' });
+  out.innerHTML = row('Chrome built-in (this page)', here) + row('Chrome built-in (background)', bg.chrome) + row('Offline engine (Bergamot)', bg.bergamot)
+    + `<div><b>Chrome language detector</b><span>${bg.detector}</span></div><div><b>Browser</b><span class="muted">${bg.userAgent.replace(/^Mozilla\/5\.0 /, '')}</span></div>`;
+  $('engine-check-note').textContent = bg.chrome.error && !bg.bergamot.ok ? 'Tip: download the French offline pack below, or pick "Offline Bergamot only".' : '';
+}
+
 async function init(): Promise<void> {
   settings = await loadSettings();
   bindGeneral();
@@ -193,6 +219,7 @@ async function init(): Promise<void> {
     if (t.dataset.site) { const [kind, o] = t.dataset.site.split('|') as ['always' | 'never', string]; void save((s) => ({ ...s, sites: { ...s.sites, [kind]: s.sites[kind].filter((x) => x !== o) } })).then(renderLists); }
   });
   $('pack-search').addEventListener('input', renderPacks);
+  $('engine-check').onclick = () => void engineCheck();
   chrome.runtime.onMessage.addListener((m: PackProgressEvent) => {
     if (m.type !== 'bb:packs:progress') return;
     const pair = `${m.from}-${m.to}`;

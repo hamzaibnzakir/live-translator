@@ -11,6 +11,8 @@ export interface TranslateItem {
   hint?: string;
   /** Detect the language on this (longer) text instead, e.g. the whole message for one segment of it. */
   detectText?: string;
+  /** Internal: set by the router when retrying with the next engine. */
+  __retried?: boolean;
 }
 
 export type ItemStatus = 'ok' | 'skipped' | 'needs-pack' | 'error';
@@ -32,6 +34,9 @@ export interface TranslateResult {
   cached?: boolean;
   pack?: PackRef;
   reason?: string;
+  /** Set when an engine failed and the router fell back to another one. */
+  failedEngine?: string;
+  failedReason?: string;
 }
 
 export interface PackInfo {
@@ -53,6 +58,7 @@ export interface EngineStats {
   detectCalls: number;
   workers: { pair: string; wasmBytes: number }[];
   lastEngine?: string;
+  failures?: { engine: string; pair: string; reason: string }[];
 }
 
 export type Request =
@@ -73,6 +79,7 @@ export type Request =
   | { type: 'bb:page:always'; origin: string; tabId?: number }
   | { type: 'bb:page:never'; origin: string }
   | { type: 'bb:open-packs'; from?: string; to?: string }
+  | { type: 'bb:engine-check'; from: string; to: string }
   | { type: 'bb:ping' };
 
 export type Envelope = Request & { target?: 'bg' | 'offscreen' };

@@ -66,3 +66,52 @@ export class FrameWriter {
     });
   }
 }
+
+export interface NoticeAction { label: string; primary?: boolean; icon?: string; onClick: () => void }
+export interface NoticeSpec { kind?: 'info' | 'warn'; title: string; body?: string; actions?: NoticeAction[]; progress?: number | 'busy' | null; logo?: string }
+export interface NoticeHandle { update(spec: Partial<NoticeSpec>): void; close(): void; readonly open: boolean }
+
+/** Top-right stack of dismissible Brainbox notices (pack downloads, ask mode, engine problems). */
+export class Notices {
+  private stack: HTMLElement;
+  private live = new Map<string, NoticeHandle>();
+  constructor(private overlay: Overlay, private logo: string, private closeIcon: string) {
+    this.stack = overlay.add(overlay.el('div', 'stack'));
+  }
+  get(id: string): NoticeHandle | undefined { return this.live.get(id); }
+  show(id: string, spec: NoticeSpec): NoticeHandle {
+    this.live.get(id)?.close();
+    const el = this.overlay.el('div', `panel notice ${spec.kind === 'warn' ? 'warn' : ''}`);
+    el.setAttribute('role', 'status');
+    let current: NoticeSpec = spec;
+    let open = true;
+    const render = (): void => {
+      const p = current.progress;
+      el.innerHTML = `<div class="hd">${this.logo}<span>Brainbox Translate</span><span class="sp"></span><button class="x" data-x aria-label="Dismiss">${this.closeIcon}</button></div>
+        <div class="t"></div>${current.body ? '<div class="b"></div>' : ''}
+        ${p === null || p === undefined ? '' : `<div class="bar ${p === 'busy' ? 'busy' : ''}"><i style="width:${p === 'busy' ? '' : `${Math.round(p * 100)}%`}"></i></div>`}
+        ${current.actions?.length ? '<div class="row"></div>' : ''}`;
+      (el.querySelector('.t') as HTMLElement).textContent = current.title;
+      if (current.body) (el.querySelector('.b') as HTMLElement).textContent = current.body;
+      const row = el.querySelector('.row');
+      for (const a of current.actions ?? []) {
+        const b = document.createElement('button');
+        if (!a.primary) b.className = 'ghost';
+        b.innerHTML = a.icon ?? '';
+        b.append(a.label);
+        b.addEventListener('click', a.onClick);
+        row!.appendChild(b);
+      }
+      el.querySelector('[data-x]')!.addEventListener('click', () => handle.close());
+    };
+    const handle: NoticeHandle = {
+      update: (s) => { current = { ...current, ...s }; if (open) render(); },
+      close: () => { if (!open) return; open = false; el.remove(); if (this.live.get(id) === handle) this.live.delete(id); },
+      get open() { return open; },
+    };
+    render();
+    this.stack.appendChild(el);
+    this.live.set(id, handle);
+    return handle;
+  }
+}

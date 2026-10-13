@@ -23,6 +23,8 @@ export interface ReaderHooks {
   onAsk(guildId: string, channelId: string, lang: string): void;
   /** A message's language was counted towards the channel's main language. */
   onVote?(channelId: string): void;
+  /** An engine failed; the router fell back to another one (or could not). */
+  onEngineProblem?(engine: string, reason: string, recovered: boolean): void;
 }
 
 export class DiscordReader {
@@ -227,6 +229,10 @@ export class DiscordReader {
   }
 
   private onResult(key: string, results: TranslateResult[], req: BlockRequest): void {
+    const failed = results.find((r) => r.failedEngine);
+    if (failed) this.hooks.onEngineProblem?.(failed.failedEngine!, failed.failedReason ?? '', failed.status === 'ok' || failed.status === 'needs-pack');
+    const hardError = results.find((r) => r.status === 'error' && r.reason !== 'cancelled');
+    if (hardError && !failed) this.hooks.onEngineProblem?.(hardError.engine ?? 'engine', hardError.reason ?? 'unknown error', false);
     const ask = key.startsWith('ask:');
     const blockKey = ask ? key.slice(4) : key;
     const first = results.find((r) => r.from && r.from !== 'und') ?? results[0];

@@ -113,7 +113,7 @@ chrome.commands.onCommand.addListener((command, tab) => {
 });
 
 // ---------- message router ----------
-const OFFSCREEN_TYPES = new Set(['bb:translate', 'bb:cancel', 'bb:detect', 'bb:availability', 'bb:packs:list', 'bb:packs:download', 'bb:packs:remove', 'bb:packs:chrome-installed', 'bb:cache:clear', 'bb:stats', 'bb:stats:reset', 'bb:clipboard:translate']);
+const OFFSCREEN_TYPES = new Set(['bb:translate', 'bb:cancel', 'bb:detect', 'bb:availability', 'bb:packs:list', 'bb:packs:download', 'bb:packs:remove', 'bb:packs:chrome-installed', 'bb:cache:clear', 'bb:stats', 'bb:stats:reset', 'bb:clipboard:translate', 'bb:engine-check']);
 
 async function handle(msg: Request, sender: chrome.runtime.MessageSender): Promise<unknown> {
   const tabId = sender.tab?.id;

@@ -65,6 +65,8 @@ export class EngineRouter {
   private flightOf = new Map<string, string>();
   private availCache = new Map<string, { at: number; v: Availability }>();
   private detectCache = new Map<string, Detection | null>();
+  /** Engines that failed for a pair (e.g. Chrome's "Other generic failures occurred"): skipped for a while. */
+  private broken = new Map<string, { until: number; reason: string }>();
   stats: EngineStats = { engineCalls: 0, engineTexts: 0, cacheHits: 0, memoryCacheHits: 0, detectCalls: 0, workers: [] };
 
   constructor(private o: RouterOptions) {}
@@ -97,6 +99,7 @@ export class EngineRouter {
     const engines = this.ordered();
     let fallback: { engine: TranslationEngine; state: Availability } | null = null;
     for (const engine of engines) {
+      if (this.isBroken(engine.id, from, to)) continue;
       const state = await this.availability(engine, from, to);
       if (state === 'ready') return { engine, state };
       if (state === 'unsupported') continue;
@@ -106,6 +109,24 @@ export class EngineRouter {
     }
     return fallback;
   }
+
+  isBroken(engine: string, from: string, to: string): boolean {
+    const b = this.broken.get(`${engine}|${from}|${to}`);
+    if (b && b.until < Date.now()) this.broken.delete(`${engine}|${from}|${to}`);
+    return !!b && b.until >= Date.now();
+  }
+
+  /** What failed recently, for the popup / settings status line. */
+  failures(): { engine: string; pair: string; reason: string }[] {
+    return [...this.broken.entries()].filter(([, b]) => b.until >= Date.now()).map(([k, b]) => { const [engine, f, t] = k.split('|'); return { engine: engine!, pair: `${f}-${t}`, reason: b.reason }; });
+  }
+
+  private markBroken(engine: string, from: string, to: string, reason: string): void {
+    this.broken.set(`${engine}|${from}|${to}`, { until: Date.now() + 10 * 60_000, reason });
+    this.onEngineFailure?.(engine, from, to, reason);
+  }
+
+  onEngineFailure?: (engine: string, from: string, to: string, reason: string) => void;
 
   async detect(text: string): Promise<Detection | null> {
     const norm = normalizeText(text);
@@ -207,12 +228,20 @@ export class EngineRouter {
       return { id: item.id, from, confidence, status: 'ok', translation, engine: engine.id };
     } catch (e) {
       const msg = (e as Error).message;
-      return { id: item.id, from, confidence, status: 'error', reason: msg === 'cancelled' ? 'cancelled' : msg };
+      if (msg === 'cancelled') return { id: item.id, from, confidence, status: 'error', reason: 'cancelled' };
+      // The engine itself failed: take it out of rotation for this pair and try the next engine once.
+      this.markBroken(engine.id, from, to, msg);
+      this.invalidateAvailability();
+      if (!item.__retried) {
+        const retry = await this.translateOne({ ...item, from, __retried: true } as TranslateItem, to, priority, tabKey);
+        return { ...retry, reason: retry.status === 'ok' ? undefined : retry.reason ?? `${engine.id}: ${msg}`, failedEngine: engine.id, failedReason: msg };
+      }
+      return { id: item.id, from, confidence, status: 'error', reason: `${engine.id}: ${msg}` };
     }
   }
 
   getStats(): EngineStats {
     const workers = this.o.engines.flatMap((e) => e.stats?.() ?? []);
-    return { ...this.stats, memoryCacheHits: this.o.cache.memoryHits, workers };
+    return { ...this.stats, memoryCacheHits: this.o.cache.memoryHits, workers, failures: this.failures() };
   }
 }

@@ -51,20 +51,57 @@ public sealed partial class GoogleWebProvider : ITranslationProvider, IDisposabl
         var sl = GoogleCode(batch.SourceLanguageHint);
         var tl = GoogleCode(batch.TargetLanguage);
 
-        if (batch.Lines.Count > 1)
+        var results = new string[batch.Lines.Count];
+
+        // One request per language group: with "auto" Google detects ONE language per request, so a
+        // French line batched with a Japanese line comes back half untranslated.
+        var keys = batch.Lines.Select(l => GroupKey(l, sl)).ToList();
+        var latinLanguages = keys.Where(k => k.StartsWith("latin:", StringComparison.Ordinal) && k != "latin:?").Distinct().ToList();
+        if (latinLanguages.Count == 1)
         {
-            var joined = await TranslateOneAsync(string.Join("\n", batch.Lines.Select(l => l.Replace('\n', ' '))), sl, tl, cancellationToken).ConfigureAwait(false);
-            var parts = joined.Split('\n').Select(p => p.Trim()).ToList();
-            if (parts.Count == batch.Lines.Count) return parts;
+            // Short Latin lines ("Au revoir") are often undetermined: they belong with the one Latin language on screen.
+            for (var i = 0; i < keys.Count; i++) if (keys[i] == "latin:?") keys[i] = latinLanguages[0];
         }
 
-        var results = new string[batch.Lines.Count];
-        for (var i = 0; i < batch.Lines.Count; i++)
+        var groups = batch.Lines
+            .Select((line, index) => (line, index))
+            .GroupBy(x => keys[x.index])
+            .ToList();
+
+        foreach (var group in groups)
         {
-            results[i] = await TranslateOneAsync(batch.Lines[i], sl, tl, cancellationToken).ConfigureAwait(false);
+            var items = group.ToList();
+            if (items.Count > 1)
+            {
+                var joined = await TranslateOneAsync(string.Join("\n", items.Select(x => x.line.Replace('\n', ' '))), sl, tl, cancellationToken).ConfigureAwait(false);
+                var parts = joined.Split('\n').Select(p => p.Trim()).ToList();
+                if (parts.Count == items.Count)
+                {
+                    for (var i = 0; i < items.Count; i++) results[items[i].index] = parts[i];
+                    continue;
+                }
+            }
+
+            foreach (var (line, index) in items)
+            {
+                results[index] = await TranslateOneAsync(line, sl, tl, cancellationToken).ConfigureAwait(false);
+            }
         }
 
         return results;
+    }
+
+    /// <summary>Lines that Google's auto-detect will treat as one language.</summary>
+    internal static string GroupKey(string line, string sourceLanguage)
+    {
+        if (sourceLanguage != "auto") return sourceLanguage;
+        var guess = Brainbox.Core.Text.LanguageId.Detect(line);
+        return guess.Script switch
+        {
+            Brainbox.Core.Text.Script.Han or Brainbox.Core.Text.Script.Kana => guess.Code == "zh" ? "zh" : "ja",
+            Brainbox.Core.Text.Script.Latin or Brainbox.Core.Text.Script.Unknown => guess.IsUndetermined || guess.Code == "en" ? "latin:?" : "latin:" + guess.Code,
+            _ => guess.Script.ToString(),
+        };
     }
 
     private async Task<string> TranslateOneAsync(string text, string sl, string tl, CancellationToken ct)

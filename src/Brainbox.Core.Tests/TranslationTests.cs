@@ -391,6 +391,21 @@ public class GoogleWebProviderTests
     }
 
     [Fact]
+    public async Task Mixed_language_batch_is_split_per_language()
+    {
+        var fake = new FakeGoogle
+        {
+            Reply = url => url.Contains("東京", StringComparison.Ordinal) || url.Contains("%E6%9D%B1", StringComparison.OrdinalIgnoreCase)
+                ? (System.Net.HttpStatusCode.OK, "[[[\"Tokyo is sunny\",\"x\"]]]")
+                : (System.Net.HttpStatusCode.OK, "[[[\"Welcome to the world\",\"x\"]]]"),
+        };
+        using var g = new GoogleWebProvider(fake);
+        var r = await g.TranslateAsync(new TranslationBatch(new[] { "Bienvenue dans le monde", "東京の天気は晴れです" }, "en", null, Array.Empty<ContextEntry>()), CancellationToken.None);
+        Assert.Equal(new[] { "Welcome to the world", "Tokyo is sunny" }, r);
+        Assert.Equal(2, fake.Urls.Count);
+    }
+
+    [Fact]
     public async Task Uses_dict_endpoint_when_gtx_is_rate_limited()
     {
         var fake = new FakeGoogle
@@ -429,12 +444,11 @@ public class GoogleWebProviderTests
         {
             // Google rate-limits cloud CI IP ranges (HTTP 429 on every endpoint). That is the
             // network, not the code; record it loudly instead of failing the build.
-            File.WriteAllText(Path.Combine(AppContext.BaseDirectory, "google-live-INCONCLUSIVE.txt"), ex.Message);
             Console.WriteLine("LIVE GOOGLE TEST INCONCLUSIVE: " + ex.Message);
             return;
         }
 
-        File.WriteAllText(Path.Combine(AppContext.BaseDirectory, "google-live-PASSED.txt"), string.Join(" | ", r));
+        Console.WriteLine("LIVE GOOGLE RESULT: " + string.Join(" | ", r));
         Assert.Contains("welcome", r[0], StringComparison.OrdinalIgnoreCase);
         Assert.Contains("Tokyo", r[1], StringComparison.OrdinalIgnoreCase);
     }

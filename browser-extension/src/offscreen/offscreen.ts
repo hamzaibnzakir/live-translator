@@ -17,7 +17,8 @@ const bergamot = new BergamotEngine({
   store,
   createWorker: () => new Worker(chrome.runtime.getURL('vendor/bergamot/bb-worker.js')) as unknown as WorkerLike,
   baseUrl: () => settings.packBaseUrl || DEFAULT_PACK_BASE_URL,
-  maxWorkers: 3,
+  maxWorkers: 2,
+  idleMs: 120_000,
 });
 const cache = new TranslationCache(new IdbCacheBackend(), settings.cacheMaxEntries);
 

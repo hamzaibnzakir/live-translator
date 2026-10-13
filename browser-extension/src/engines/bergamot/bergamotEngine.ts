@@ -13,9 +13,11 @@ export interface BergamotOptions {
   fetcher?: Fetcher;
   registry?: PinnedRegistry;
   maxWorkers?: number;
+  /** Terminate a worker after this long without use; WASM memory can only be freed this way. */
+  idleMs?: number;
 }
 
-interface Lane { key: string; models: string[]; client: Promise<WorkerClient>; lastUsed: number; chain: Promise<unknown> }
+interface Lane { key: string; models: string[]; client: Promise<WorkerClient>; lastUsed: number; chain: Promise<unknown>; idle?: ReturnType<typeof setTimeout>; busy: number }
 
 export class BergamotEngine implements TranslationEngine {
   readonly id = 'bergamot';
@@ -81,6 +83,7 @@ export class BergamotEngine implements TranslationEngine {
     if (!lane) return;
     this.lanes.delete(key);
     this.wasmBytes.delete(key);
+    if (lane.idle) clearTimeout(lane.idle);
     void lane.client.then((c) => c.terminate()).catch(() => undefined);
   }
 
@@ -92,7 +95,8 @@ export class BergamotEngine implements TranslationEngine {
     if (!models) throw new Error(`No Bergamot model for ${from}→${to}`);
     const max = this.o.maxWorkers ?? 3;
     while (this.lanes.size >= max) {
-      const oldest = [...this.lanes.values()].sort((a, b) => a.lastUsed - b.lastUsed)[0];
+      // Only idle lanes are evicted; if every lane is busy we briefly run one over the cap.
+      const oldest = [...this.lanes.values()].filter((l) => l.busy === 0).sort((a, b) => a.lastUsed - b.lastUsed)[0];
       if (!oldest) break;
       this.closeLane(oldest.key);
     }
@@ -108,7 +112,7 @@ export class BergamotEngine implements TranslationEngine {
       }
       return c;
     })();
-    lane = { key, models, client, lastUsed: Date.now(), chain: Promise.resolve() };
+    lane = { key, models, client, lastUsed: Date.now(), chain: Promise.resolve(), busy: 0 };
     client.catch(() => this.lanes.delete(key));
     this.lanes.set(key, lane);
     return lane;
@@ -124,8 +128,13 @@ export class BergamotEngine implements TranslationEngine {
       void c.call<number>('wasmMemoryBytes').then((b) => this.wasmBytes.set(lane.key, b)).catch(() => undefined);
       return res.map((r) => r.target.text);
     };
-    const next = lane.chain.then(run, run);
+    lane.busy++;
+    const next = lane.chain.then(run, run).finally(() => { lane.busy--; lane.lastUsed = Date.now(); });
     lane.chain = next.catch(() => undefined);
+    // Each loaded model costs ~0.5–0.8 GB of WASM heap (measured), so idle lanes are released.
+    if (lane.idle) clearTimeout(lane.idle);
+    const idleMs = this.o.idleMs ?? 120_000;
+    if (idleMs > 0) lane.idle = setTimeout(() => { if (this.lanes.get(lane.key) === lane) this.closeLane(lane.key); }, idleMs);
     return next;
   }
 

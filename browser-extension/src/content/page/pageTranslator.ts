@@ -153,6 +153,7 @@ export class PageTranslator {
     }
     const s = this.segByKey.get(key);
     if (!r || !s) return;
+    if (r.status === 'error' && r.reason !== 'cancelled') { setTimeout(() => this.active && this.request(key, Priority.nearby), 1500); return; }
     if (r.status !== 'ok' || r.translation === undefined) return;
     this.results.set(s.seg.text.trim(), r.translation);
     this.writer.run(() => this.write(key, r.translation!));

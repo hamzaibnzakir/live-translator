@@ -6,7 +6,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 // Digits, punctuation, symbols, whitespace only (prices, scores, dates, "!!!", "...", "+1").
 const NO_LETTERS_RE = /^[\p{N}\p{P}\p{S}\s]*$/u;
 // Emoji / pictographs / modifiers / ZWJ / variation selectors / Discord :shortcodes: only.
-const EMOJI_ONLY_RE = /^(?:[\p{Extended_Pictographic}\p{Emoji_Modifier}\p{Emoji_Component}‍️\s]|:[\w~-]+:)+$/u;
+const EMOJI_ONLY_RE = /^(?:\p{Extended_Pictographic}|\p{Emoji_Modifier}|\p{Emoji_Component}|\u200d|\ufe0f|\s|:[\w~-]+:)+$/u;
 const LETTER_RE = /\p{L}/gu;
 // Laughs, keyboard mashes and other short noise that every language shares.
 const NOISE_RE = /^(?:(?:ha|he|hi|ja|je|ka|ku|xa|kk|rs|w)+|l+o+l+|x+d+|o+k+|k+|g+g+|h+m+|u+h+|a+h+|o+h+|5{3,}|w{2,}|草+|ㅋ+|ㅎ+|ахах[ах]*|хаха[ха]*)$/iu;

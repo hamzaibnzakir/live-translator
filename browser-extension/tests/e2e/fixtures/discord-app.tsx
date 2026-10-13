@@ -42,7 +42,9 @@ const EN = ['lol nice', 'I agree with that', 'see you later guys', 'ok', 'gg wp'
 function filler(i: number): Msg {
   const id = String(100000 + i);
   const r = i % 10;
-  const text = r < 6 ? `${FR[i % FR.length]} ${FR[(i * 7 + 3) % FR.length]}` : r < 8 ? `${JA[i % JA.length]}${JA[(i * 3 + 1) % JA.length]}` : EN[i % EN.length]!;
+  // Unique combinations (a real channel rarely repeats a message), so the perf test measures real engine work.
+  const n = FR.length, m = JA.length;
+  const text = r < 6 ? `${FR[i % n]} ${FR[Math.floor(i / n) % n]}` : r < 8 ? `${JA[i % m]}${JA[Math.floor(i / m) % m]}${JA[Math.floor(i / (m * m)) % m]}` : EN[i % EN.length]!;
   return { id, author: ['Camille', 'Hugo', 'Yuki', 'Léa', 'Mateo'][i % 5]!, parts: [{ t: 'text', v: text }] };
 }
 
@@ -122,7 +124,7 @@ function Row({ m, byId }: { m: Msg; byId: Map<string, Msg> }): React.ReactElemen
 
 declare global {
   interface Window {
-    __fixture: { edit(id: string, text: string): void; sent: string[]; mounts: number; scrollToTop(): void; scrollToBottom(): void; editorText(): string; count: number };
+    __fixture: { post(author: string, text: string): string; edit(id: string, text: string): void; sent: string[]; mounts: number; scrollToTop(): void; scrollToBottom(): void; editorText(): string; count: number };
   }
 }
 const sent: string[] = [];
@@ -153,6 +155,12 @@ function App(): React.ReactElement {
       sent,
       get mounts() { return mounts; },
       count: messages.length,
+      post: (author, text) => {
+        const id = String(960000 + Math.floor(Math.random() * 30000));
+        setMessages((ms) => [...ms, { id, author, parts: [{ t: 'text', v: text }] }]);
+        requestAnimationFrame(() => { scroller.current!.scrollTop = scroller.current!.scrollHeight; });
+        return id;
+      },
       edit: (id, text) => setMessages((ms) => ms.map((m) => (m.id === id ? { ...m, parts: [{ t: 'text', v: text }], edited: true } : m))),
       scrollToTop: () => { scroller.current!.scrollTop = 0; },
       scrollToBottom: () => { scroller.current!.scrollTop = scroller.current!.scrollHeight; },

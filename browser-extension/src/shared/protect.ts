@@ -21,7 +21,7 @@ const TOKEN_SOURCES = [
   '\\*{1,3}',
   '(?<!\\w)_{1,3}|_{1,3}(?!\\w)',          // underscores as markup, not inside snake_case
   '^>>> |^> |^#{1,3} |^-# |^\\s*[-*] |^\\s*\\d+\\. ', // quote / heading / subtext / list prefixes
-  '[\\p{Extended_Pictographic}\\u200d\\ufe0f]+',      // unicode emoji
+  '(?:\\p{Extended_Pictographic}|\\u200d|\\ufe0f)+',  // unicode emoji
 ];
 const TOKEN_RE = new RegExp(TOKEN_SOURCES.join('|'), 'gmu');
 const HAS_LETTER = /\p{L}/u;

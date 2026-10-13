@@ -46,6 +46,9 @@ export class DiscordReader {
     this.scheduler = new Scheduler({
       to: () => this.settings().targetLang,
       purpose: 'read',
+      // One message per request: a slow pair (e.g. a Japanese base model) never delays others.
+      batchSize: 1,
+      maxInflight: 6,
       onResult: (key, results, req) => this.onResult(key, results, req),
       onNeedsPack: (pack) => this.hooks.onNeedsPack(pack),
     });

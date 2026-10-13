@@ -11,7 +11,7 @@
 import { readDraft } from './discordSelectors';
 
 const sleep = (ms: number): Promise<void> => new Promise((r) => setTimeout(r, ms));
-const norm = (s: string): string => s.replace(/[﻿​]/g, '').replace(/\r/g, '').replace(/[ \t]+\n/g, '\n').trim();
+const norm = (s: string): string => s.replace(/[\uFEFF\u200B]/g, '').replace(/\r/g, '').replace(/[ \t]+\n/g, '\n').trim();
 /** Longer than Slate's selectionchange throttle. */
 export const SELECTION_SYNC_MS = 160;
 

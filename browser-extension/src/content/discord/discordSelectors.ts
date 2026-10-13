@@ -94,7 +94,7 @@ export function findComposer(root: ParentNode = document): HTMLElement | null {
 /** Plain text of a Slate draft, one line per paragraph, without Slate's zero-width placeholders. */
 export function readDraft(textbox: HTMLElement): string {
   const lines = textbox.querySelectorAll('[data-slate-node="element"]');
-  const clean = (s: string): string => s.replace(/[﻿​]/g, '');
+  const clean = (s: string): string => s.replace(/[\uFEFF\u200B]/g, '');
   if (lines.length) return [...lines].map((l) => clean(l.textContent ?? '')).join('\n');
   return clean(textbox.innerText ?? textbox.textContent ?? '');
 }

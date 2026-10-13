@@ -1,1 +1,36 @@
-placeholder
+Brainbox Translate (browser extension)
+======================================
+Part of Brainbox Live Translator — https://github.com/hamzaibnzakir/live-translator
+Licensed under the Apache License, Version 2.0 (see ../LICENSE), except for the third-party
+components listed below, which keep their own licenses.
+
+Third-party components bundled in the extension
+-----------------------------------------------
+
+1. Bergamot translator (WebAssembly runtime)
+   Package : @browsermt/bergamot-translator 0.4.9 (npm), checked 2026-10-13
+   Files   : vendor/bergamot/bergamot-translator-worker.wasm, bergamot-translator-worker.js,
+             translator-worker.js — shipped UNMODIFIED from the npm package.
+             vendor/bergamot/bb-worker.js is a small Brainbox wrapper (MPL-2.0) that loads
+             translator-worker.js and adds one method reporting WASM heap size.
+   License : Mozilla Public License 2.0 — https://mozilla.org/MPL/2.0/
+   Source  : https://github.com/browsermt/bergamot-translator
+
+2. Firefox Translations models (downloaded on demand, never bundled)
+   Source  : Mozilla model registry
+             https://storage.googleapis.com/moz-fx-translations-data--303e-prod-translations-data/db/models.json
+             (registry generated 2026-10-13T00:44:54Z; pinned snapshot in
+             src/engines/bergamot/registry.pinned.json with the SHA-256 of every file)
+   License : MPL 2.0 — per https://github.com/mozilla/translations ("The model files are
+             distributed under the MPL 2.0 license."), checked 2026-10-13. The older
+             mozilla/firefox-translations-models repository is no longer maintained and points
+             to the same storage.
+
+3. ELD — Efficient Language Detector (n-gram data + code, bundled in offscreen.js)
+   Package : eld 2.1.0 (npm), by Nito T.M.
+   License : Apache License 2.0 — https://github.com/nitotm/efficient-language-detector-js
+
+4. Chrome built-in Translator / Language Detector APIs are part of the browser and are only
+   called, not bundled.
+
+Brainbox name and icon: from this repository (src/Translumo/Resources/Brainbox/).

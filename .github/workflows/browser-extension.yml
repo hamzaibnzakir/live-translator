@@ -1,0 +1,105 @@
+name: Brainbox Translate extension (build, lint, tests, release zip)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main, "claude/**", "feat/**", "fix/**" ]
+    paths: [ "browser-extension/**", ".github/workflows/browser-extension.yml" ]
+    tags: [ "ext-v*" ]
+  pull_request:
+    paths: [ "browser-extension/**", ".github/workflows/browser-extension.yml" ]
+
+permissions:
+  contents: write   # release asset on ext-v* tags + test report on the ci-results branch
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    working-directory: browser-extension
+
+jobs:
+  extension:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: browser-extension/package-lock.json
+
+      - name: Install
+        run: npm ci
+
+      - name: Lint (ESLint) + typecheck (TypeScript strict)
+        run: npm run lint
+
+      - name: Unit tests (Vitest)
+        run: npx vitest run --reporter=default --reporter=json --outputFile=reports/unit-results.json
+
+      - name: Cache verified language packs used by tests
+        uses: actions/cache@v4
+        with:
+          path: browser-extension/tests/.cache/packs
+          key: packs-${{ hashFiles('browser-extension/src/engines/bergamot/registry.pinned.json') }}
+
+      - name: Engine tests (real Bergamot WASM, real models fr→en, ja→en, en→es, pivot)
+        run: npx vitest run --config vitest.engine.config.ts --reporter=default --reporter=json --outputFile=reports/engine-results.json
+
+      - name: Build
+        run: npm run build
+
+      - name: Install Chromium for Playwright
+        run: npx playwright install --with-deps chromium
+
+      - name: End-to-end tests (Chromium + unpacked extension + Discord-like fixture)
+        run: xvfb-run -a npx playwright test --project=e2e
+
+      - name: Performance test (500 messages, 3 packs)
+        run: xvfb-run -a npx playwright test --project=perf
+
+      - name: Package extension zip
+        run: npm run build && npm run zip
+
+      - name: Upload extension zip
+        uses: actions/upload-artifact@v4
+        with:
+          name: brainbox-translate-extension
+          path: browser-extension/brainbox-translate-*.zip
+
+      - name: Write test report
+        if: always()
+        run: node scripts/report.mjs
+
+      - name: Upload test report + screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: brainbox-translate-test-report
+          path: |
+            browser-extension/reports/
+            browser-extension/playwright-report/
+
+      - name: Publish report to ci-results branch
+        if: always() && github.event_name == 'push'
+        working-directory: .
+        run: |
+          set -e
+          git config user.name "brainbox-ci"; git config user.email "ci@users.noreply.github.com"
+          rm -rf /tmp/ci && mkdir -p /tmp/ci && cp -r browser-extension/reports/* /tmp/ci/
+          # Only browser-extension/ is replaced; the Windows app's reports on this branch are kept.
+          if git fetch origin ci-results; then git checkout -B ci-results origin/ci-results; else git checkout --orphan ci-results && git rm -rq .; fi
+          rm -rf browser-extension && mkdir -p browser-extension && cp -r /tmp/ci/* browser-extension/
+          git add browser-extension && git commit -qm "Extension test report for ${GITHUB_SHA::8}" || exit 0
+          git push origin ci-results
+
+      - name: Release asset (ext-v* tags)
+        if: startsWith(github.ref, 'refs/tags/ext-v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: browser-extension/brainbox-translate-*.zip

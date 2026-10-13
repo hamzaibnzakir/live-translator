@@ -17,8 +17,6 @@ export const EMBED_TEXT = [
   '[class*="embedAuthorName"]', '[class*="embedTitle"]', '[class*="embedDescription"]',
   '[class*="embedFieldName"]', '[class*="embedFieldValue"]', '[class*="embedFooterText"]',
 ].join(', ');
-/** Forum channel post cards (title + first message preview). */
-export const FORUM_TEXT = '[data-item-id] [class*="postTitleText"], [data-item-id] [class*="messageContent"]';
 /** Slate editor of the message box. */
 export const COMPOSER_TEXTBOX = '[role="textbox"][data-slate-editor="true"], div[role="textbox"][contenteditable="true"]';
 /** Visual container of the message box (used only to position our button). */
@@ -54,7 +52,7 @@ export function parseRoute(pathname: string): { guildId: string; channelId: stri
   return m ? { guildId: m[1]!, channelId: m[3] ?? m[2]! } : null;
 }
 
-export interface Block { el: Element; key: string; kind: 'content' | 'reply' | 'embed' | 'forum' }
+export interface Block { el: Element; key: string; kind: 'content' | 'reply' | 'embed' }
 
 /** Translatable text blocks of one message row, each with a stable key. */
 export function messageBlocks(item: Element): Block[] {
@@ -74,15 +72,6 @@ export function messageBlocks(item: Element): Block[] {
     // Skip nested matches (a description inside a matching wrapper).
     if (el.parentElement?.closest(EMBED_TEXT)) return;
     out.push({ el, key: `${ids.messageId}:embed:${i}`, kind: 'embed' });
-  });
-  return out;
-}
-
-export function forumBlocks(root: ParentNode): Block[] {
-  const out: Block[] = [];
-  root.querySelectorAll(FORUM_TEXT).forEach((el, i) => {
-    const card = el.closest('[data-item-id]');
-    out.push({ el, key: `forum:${card?.getAttribute('data-item-id') ?? i}:${i}`, kind: 'forum' });
   });
   return out;
 }

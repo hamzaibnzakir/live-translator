@@ -1,0 +1,85 @@
+2026-10-13 11:41:41.788 [INF] Brainbox Live Translator starting (autostart=False, OS 10.0.20348.0).
+2026-10-13 11:41:41.837 [INF] Capture backend: GDI
+2026-10-13 11:41:41.838 [INF] Windows OCR recognizers: en-US, ja
+2026-10-13 11:41:41.971 [INF] ScreenWatcher started.
+2026-10-13 11:41:42.499 [DBG] Tick: 2 tiles changed, 0 dirty, 1 region(s) ready: [16,16 1888x1056]
+2026-10-13 11:41:43.559 [DBG] OCR [0,16 1920x1056]: 64 lines (62 kept) +62 -0 ~0: Recycl[en-US] | bin\ \Runner . Listener . exe" }[en-US] | : INFO" , "ts" :1791891409.5794356, "logger" : "hosted-compute-agent", "[en-US] | msg" : "Request processing,[en-US] | waiting for completio[en-US] | n or finish request message... ", "orchestration ld[en-US] | • " : "dc73da63-91e8-8fe2-bd55-6633b2ca99f7. windows.[en-US] | default"[en-US] | "source corr[en-US] | EPIC[en-US] | elation[en-US] | 8ff507875dec4ac2-e[en-US] | Brainbox Self-Test[en-US] | AMCs I[en-US] | nt to run job", "or[en-US] | 9b2f-1b35-72d5-14e[en-US] | chestrati[en-US] | Launc[en-US] | Brainbox self-test page[en-US] | 3-c638cf[en-US] | c73da63-91Ø8-8fØ2[en-US] | bdss-663[en-US] | raceparent" : "ee-b7[en-US] | Bienvenue dans le monde de la traduction[en-US] | c96U497E[en-US] | Hub" , "orchestratio[en-US] | 72d5-14e3-c638cfe2[en-US] | 東京の天気は晴れです[ja] | 893ぎ・, ” tー[ja] | こ73da53-9168-8十62 -[ja] | raceparent" : "ee-b7[en-US] | bdss-663[en-US] | c96U497E[en-US] | This sentence is already written in English[en-US] | '2.337 .e " "[en-US] | ' , orche[en-US] | stration[en-US] | f-1b35-72d5-14e3-c[en-US] | Goo[en-US] | 638cfe28E[en-US] | Chr[en-US] | istening for Jobs"[en-US] | , "orchest[en-US] | 7bfc9b2f-1b35-72d5[en-US] | -14e3-c€[en-US] | nning job: windows[en-US] | " , "orches[en-US] | "7bfc9b2f-1b35-72d[en-US] | Micr[en-US] | s-14e3-c€[en-US] | Edg[en-US] | age" , "orchestratio[en-US] | 72ds-14e3-c638cfe2[en-US] | 893e" , "traceparent" . "[en-US] | jobName" : "windows" )[en-US] | • ee-b7c96e549783e7eeac81a662da243cee-8ffse7875dec4ac2-e1" , "[en-US] | R 46.1[en-US] | Unity Hub[en-US] | Test Mode[en-US] | Windows Server 2022 Datacenter[en-US] | ににあに21[ja] | 11:41 AM[en-US]
+2026-10-13 11:41:43.565 [DBG] Line 'Recycl' → AlreadyTargetLanguage
+2026-10-13 11:41:43.566 [DBG] Line 'bin\ \Runner . Listener . exe" }' → AlreadyTargetLanguage
+2026-10-13 11:41:43.566 [DBG] Line ': INFO" , "ts" :1791891409.5794356, "logger" : "hosted-compute-agent", "' → Code
+2026-10-13 11:41:43.566 [DBG] Line 'msg" : "Request processing,' → AlreadyTargetLanguage
+2026-10-13 11:41:43.566 [DBG] Line 'waiting for completio' → AlreadyTargetLanguage
+2026-10-13 11:41:43.566 [DBG] Line 'n or finish request message... ", "orchestration ld' → AlreadyTargetLanguage
+2026-10-13 11:41:43.566 [DBG] Line '• " : "dc73da63-91e8-8fe2-bd55-6633b2ca99f7. windows.' → Code
+2026-10-13 11:41:43.566 [DBG] Line 'default"' → AlreadyTargetLanguage
+2026-10-13 11:41:43.567 [DBG] Line '"source corr' → AlreadyTargetLanguage
+2026-10-13 11:41:43.567 [DBG] Line 'EPIC' → AlreadyTargetLanguage
+2026-10-13 11:41:43.567 [DBG] Line 'elation' → AlreadyTargetLanguage
+2026-10-13 11:41:43.567 [DBG] Line '8ff507875dec4ac2-e' → Code
+2026-10-13 11:41:43.567 [DBG] Line 'Brainbox Self-Test' → AlreadyTargetLanguage
+2026-10-13 11:41:43.567 [DBG] Line 'AMCs I' → AlreadyTargetLanguage
+2026-10-13 11:41:43.567 [DBG] Line 'nt to run job", "or' → AlreadyTargetLanguage
+2026-10-13 11:41:43.567 [DBG] Line '9b2f-1b35-72d5-14e' → Symbols
+2026-10-13 11:41:43.567 [DBG] Line 'chestrati' → AlreadyTargetLanguage
+2026-10-13 11:41:43.567 [DBG] Line 'Launc' → AlreadyTargetLanguage
+2026-10-13 11:41:43.567 [DBG] Line 'Brainbox self-test page' → AlreadyTargetLanguage
+2026-10-13 11:41:43.567 [DBG] Line '3-c638cf' → Code
+2026-10-13 11:41:43.567 [DBG] Line 'c73da63-91Ø8-8fØ2' → Code
+2026-10-13 11:41:43.567 [DBG] Line 'bdss-663' → Code
+2026-10-13 11:41:43.567 [DBG] Line 'raceparent" : "ee-b7' → AlreadyTargetLanguage
+2026-10-13 11:41:43.567 [DBG] Line 'Bienvenue dans le monde de la traduction' → Translate
+2026-10-13 11:41:43.569 [DBG] Line 'c96U497E' → Code
+2026-10-13 11:41:43.569 [DBG] Line 'Hub" , "orchestratio' → AlreadyTargetLanguage
+2026-10-13 11:41:43.569 [DBG] Line '72d5-14e3-c638cfe2' → Code
+2026-10-13 11:41:43.569 [DBG] Line '東京の天気は晴れです' → Translate
+2026-10-13 11:41:43.570 [DBG] Line '893ぎ・, ” tー' → Translate
+2026-10-13 11:41:43.570 [DBG] Line 'こ73da53-9168-8十62 -' → Translate
+2026-10-13 11:41:43.570 [DBG] Line 'raceparent" : "ee-b7' → AlreadyTargetLanguage
+2026-10-13 11:41:43.570 [DBG] Line 'bdss-663' → Code
+2026-10-13 11:41:43.570 [DBG] Line 'c96U497E' → Code
+2026-10-13 11:41:43.570 [DBG] Line 'This sentence is already written in English' → AlreadyTargetLanguage
+2026-10-13 11:41:43.570 [DBG] Line ''2.337 .e " "' → TooShort
+2026-10-13 11:41:43.570 [DBG] Line '' , orche' → Garbled
+2026-10-13 11:41:43.570 [DBG] Line 'stration' → AlreadyTargetLanguage
+2026-10-13 11:41:43.570 [DBG] Line 'f-1b35-72d5-14e3-c' → Symbols
+2026-10-13 11:41:43.570 [DBG] Line 'Goo' → AlreadyTargetLanguage
+2026-10-13 11:41:43.570 [DBG] Line '638cfe28E' → Code
+2026-10-13 11:41:43.570 [DBG] Line 'Chr' → AlreadyTargetLanguage
+2026-10-13 11:41:43.570 [DBG] Line 'istening for Jobs"' → AlreadyTargetLanguage
+2026-10-13 11:41:43.570 [DBG] Line ', "orchest' → AlreadyTargetLanguage
+2026-10-13 11:41:43.570 [DBG] Line '7bfc9b2f-1b35-72d5' → Code
+2026-10-13 11:41:43.570 [DBG] Line '-14e3-c€' → Symbols
+2026-10-13 11:41:43.570 [DBG] Line 'nning job: windows' → AlreadyTargetLanguage
+2026-10-13 11:41:43.570 [DBG] Line '" , "orches' → Garbled
+2026-10-13 11:41:43.570 [DBG] Line '"7bfc9b2f-1b35-72d' → Code
+2026-10-13 11:41:43.570 [DBG] Line 'Micr' → AlreadyTargetLanguage
+2026-10-13 11:41:43.570 [DBG] Line 's-14e3-c€' → Code
+2026-10-13 11:41:43.570 [DBG] Line 'Edg' → AlreadyTargetLanguage
+2026-10-13 11:41:43.570 [DBG] Line 'age" , "orchestratio' → AlreadyTargetLanguage
+2026-10-13 11:41:43.570 [DBG] Line '72ds-14e3-c638cfe2' → Code
+2026-10-13 11:41:43.570 [DBG] Line '893e" , "traceparent" . "' → Code
+2026-10-13 11:41:43.571 [DBG] Line 'jobName" : "windows" )' → AlreadyTargetLanguage
+2026-10-13 11:41:43.571 [DBG] Line '• ee-b7c96e549783e7eeac81a662da243cee-8ffse7875dec4ac2-e1" , "' → Code
+2026-10-13 11:41:43.571 [DBG] Line 'R 46.1' → TooShort
+2026-10-13 11:41:43.571 [DBG] Line 'Unity Hub' → AlreadyTargetLanguage
+2026-10-13 11:41:43.571 [DBG] Line 'Test Mode' → AlreadyTargetLanguage
+2026-10-13 11:41:43.571 [DBG] Line 'Windows Server 2022 Datacenter' → AlreadyTargetLanguage
+2026-10-13 11:41:43.571 [DBG] Line 'ににあに21' → Garbled
+2026-10-13 11:41:43.571 [DBG] Line '11:41 AM' → Symbols
+2026-10-13 11:41:45.640 [DBG] Tick: 2 tiles changed, 0 dirty, 1 region(s) ready: [624,1008 96x64]
+2026-10-13 11:41:45.644 [DBG] OCR [624,1008 96x64]: 0 lines (0 kept) +0 -0 ~0: 
+2026-10-13 11:41:47.748 [DBG] Tick: 2 tiles changed, 0 dirty, 1 region(s) ready: [624,1008 96x64]
+2026-10-13 11:41:47.794 [DBG] OCR [624,1008 96x64]: 0 lines (0 kept) +0 -0 ~0: 
+2026-10-13 11:41:49.540 [DBG] Tick: 0 tiles changed, 0 dirty, 1 region(s) ready: [624,1008 96x64]
+2026-10-13 11:41:49.583 [DBG] OCR [624,1008 96x64]: 0 lines (0 kept) +0 -0 ~0: 
+2026-10-13 11:41:53.428 [DBG] Translated via Ollama in 9828 ms: Bienvenue dans le monde de la traduction => Welcome to the world of translation | 東京の天気は晴れです => The weather in Tokyo is clear | 893ぎ・, ” tー => 893g, 't- | こ73da53-9168-8十62 - => 073d5-9168-862-
+2026-10-13 11:42:09.386 [DBG] Tick: 0 tiles changed, 0 dirty, 1 region(s) ready: [112,176 544x96]
+2026-10-13 11:42:09.426 [DBG] OCR [53,163 603x109]: 8 lines (8 kept) +6 -4 ~0: chestrati[en-US] | Brainbox self-test page[en-US] | 3-c638cfE[en-US] | {"level"[en-US] | bd55-6632[en-US] | Le train arrive dans cinq minutes[en-US] | c96e5497E[en-US] | {"level"[en-US]
+2026-10-13 11:42:09.427 [DBG] Line '3-c638cfE' → Code
+2026-10-13 11:42:09.427 [DBG] Line '{"level"' → AlreadyTargetLanguage
+2026-10-13 11:42:09.427 [DBG] Line 'bd55-6632' → Symbols
+2026-10-13 11:42:09.427 [DBG] Line 'Le train arrive dans cinq minutes' → Translate
+2026-10-13 11:42:09.427 [DBG] Line 'c96e5497E' → Code
+2026-10-13 11:42:09.427 [DBG] Line '{"level"' → AlreadyTargetLanguage
+2026-10-13 11:42:12.946 [DBG] Translated via Ollama in 3516 ms: Le train arrive dans cinq minutes => The train is arriving in five minutes.
+2026-10-13 11:42:13.053 [INF] Brainbox stopped.

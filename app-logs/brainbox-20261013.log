@@ -1,0 +1,11 @@
+2026-10-13 11:40:06.341 [INF] Brainbox Live Translator starting (autostart=False, OS 10.0.20348.0).
+2026-10-13 11:40:06.394 [INF] Capture backend: GDI
+2026-10-13 11:40:06.395 [INF] Windows OCR recognizers: en-US, ja
+2026-10-13 11:40:06.573 [INF] ScreenWatcher started.
+2026-10-13 11:40:42.873 [WRN] Translation provider failed (1x), backing off: Custom AI is not reachable at http://127.0.0.1:62188/v1 (No connection could be made because the target machine actively refused it. (127.0.0.1:62188)).
+2026-10-13 11:40:47.102 [WRN] Translation provider failed (2x), backing off: Custom AI is not reachable at http://127.0.0.1:62188/v1 (No connection could be made because the target machine actively refused it. (127.0.0.1:62188)).
+2026-10-13 11:40:51.123 [INF] Custom AI recovered.
+2026-10-13 11:40:56.421 [INF] Virtual desktop switch detected (moved overlay: False).
+2026-10-13 11:40:59.484 [INF] Capture backend: Desktop Duplication (GPU)
+2026-10-13 11:41:01.387 [INF] Capture backend: GDI
+2026-10-13 11:41:11.448 [INF] Brainbox stopped.

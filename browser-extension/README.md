@@ -74,14 +74,15 @@ Run everything: `npm ci && npm run lint && npm test && npm run test:engine && np
 
 | Metric | Result |
 |---|---|
-| New incoming message → English (warm pack) | **p50 77 ms, max 94 ms** (target < 300 ms ✅) |
-| Page open, visible messages, warm packs | p50 ~0.7 s (content-script start + ~25 messages at once) |
-| Page open right after model (re)load | p50 ~1.6 s — first use of a pack loads the model (0.5–4 s, once per session) |
-| Catching up on history while scrolling | ~21 messages/s |
+| New incoming message → English (warm pack) | **p50 71 ms, max 77 ms** over 10 messages (target < 300 ms ✅) |
+| Page open, visible messages, warm packs | p50 ~0.56 s (includes content-script start-up and ~25 visible + nearby messages at once) |
+| Page open, first translated message | 0.40 s after navigation start (0.22 s after the first row appeared) |
+| First use of a pack in a session | model load 0.5–4 s, once (Japanese base model is the slowest) |
+| Catching up on history while scrolling | ~26 messages/s (435 messages in 17 s) |
 | Main-thread long tasks during the whole run | **0** |
-| Content-script idle main-thread cost | ~12–20 ms per 3 s (polling noise of the probe itself included) |
-| Page JS heap | ~7–11 MB |
-| **Memory with packs in RAM** | ⚠️ **~0.5 GB per loaded Bergamot model** (fr-en 0.52 GB, ja-en 0.85 GB WASM heap; extension process RSS ~1.1 GB with two loaded). **This misses your ~150 MB target.** Measured: it is Marian's runtime allocation inside the Bergamot WASM build, per model, independent of workspace/batch settings; WebAssembly memory can't shrink. Mitigations shipped: max 2 models resident, a model is unloaded after 2 min unused, installed-but-unused packs cost 0 RAM, and Auto prefers Chrome's built-in engine (runs in Chrome's own service) when it's ready. |
+| Content-script idle main-thread cost | ~13 ms per 3 s (includes the measuring probe's own timer jitter) |
+| Page JS heap | ~6–12 MB |
+| **Memory with packs in RAM** | ⚠️ **~0.5 GB per loaded Bergamot model** (fr-en 0.52 GB, ja-en 0.85 GB WASM heap; extension process RSS ~1.1 GB with two loaded, ~1.6 GB with three). **This misses your ~150 MB target.** Measured: it is Marian's runtime allocation inside the Bergamot WASM build, per model, independent of workspace/batch settings; WebAssembly memory can't shrink. Mitigations shipped: max 2 models resident (a 3rd only while all are busy), a model is unloaded after 2 min unused, installed-but-unused packs cost 0 RAM, and Auto prefers Chrome's built-in engine (runs in Chrome's own service) when it's ready. |
 
 CI (`.github/workflows/browser-extension.yml`) runs all of the above on every push touching `browser-extension/`, uploads the zip and a report with screenshots as artifacts, publishes the report to the `ci-results` branch (`browser-extension/REPORT.md`), and attaches the zip to a GitHub release for `ext-v*` tags.
 

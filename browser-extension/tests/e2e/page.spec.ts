@@ -12,7 +12,7 @@ test.describe.serial('Translate any page', () => {
 
   test('mixed-language page: translate, follow late content, then Show original restores it exactly', async ({ bb }) => {
     const page = await bb.context.newPage();
-    const url = `${bb.fixtureUrl}/mixed.html`;
+    const url = `${bb.fixtureUrl}/mixed.html?t=${Date.now()}`; // unique: the tab is looked up by URL
     await page.goto(url);
     await page.waitForSelector('#fr-late');                 // let the page finish its own late insert first…
     const original = await page.evaluate(() => ({ html: document.body.innerHTML, title: document.title }));
@@ -56,7 +56,7 @@ test.describe.serial('Translate any page', () => {
 
   test('right-click "Translate selection to English" shows a card with Copy', async ({ bb }) => {
     const page = await bb.context.newPage();
-    const url = `${bb.fixtureUrl}/mixed.html`;
+    const url = `${bb.fixtureUrl}/mixed.html?t=${Date.now()}`;
     await page.goto(url);
     await bb.context.grantPermissions(['clipboard-read', 'clipboard-write'], { origin: bb.fixtureUrl });
     await page.evaluate(() => { const r = document.createRange(); r.selectNodeContents(document.getElementById('li2')!); getSelection()!.removeAllRanges(); getSelection()!.addRange(r); });

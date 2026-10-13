@@ -18,11 +18,13 @@ test('Chrome built-in Translator API: availability in content script, offscreen 
     const T = (self as unknown as { Translator?: { availability(o: object): Promise<string> } }).Translator;
     return { Translator: typeof T, availability: T ? await T.availability({ sourceLanguage: 'fr', targetLanguage: 'en' }) : 'n/a' };
   });
+  await page.close();
   const browserVersion = bb.context.browser()?.version() ?? (await ext.evaluate(() => navigator.userAgent));
   const result = { browserVersion, mainWorld, offscreen, extensionPage: extPage, testedAt: new Date().toISOString() };
   mkdirSync(join(ROOT, 'reports'), { recursive: true });
   writeFileSync(join(ROOT, 'reports', 'chrome-builtin.json'), JSON.stringify(result, null, 2));
   console.log('Chrome built-in API probe:', JSON.stringify(result));
+  await ext.close();
   expect(extPage.Translator).toBe('function');
 
   if (offscreen.chrome !== 'ready') {

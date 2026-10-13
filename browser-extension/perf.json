@@ -1,0 +1,67 @@
+{
+  "messages": 500,
+  "packsLoaded": [
+    "fr-en",
+    "ja-en",
+    "es-en"
+  ],
+  "oneTimeModelLoadMs": 1080,
+  "timeToFirstTranslatedMessageMs": 298,
+  "firstTranslatedAfterFirstRowMountMs": 165,
+  "visibleMessages": 6,
+  "newMessageLatencyMs": {
+    "n": 10,
+    "p50": 65,
+    "p95": 76,
+    "max": 76,
+    "all": [
+      73,
+      65,
+      65,
+      51,
+      68,
+      76,
+      49,
+      49,
+      63,
+      65
+    ]
+  },
+  "warmVisibleMessageLatencyMs": {
+    "n": 6,
+    "p50": 443,
+    "p95": 476,
+    "max": 476
+  },
+  "coldVisibleMessageLatencyMs": {
+    "p50": 511,
+    "p95": 544,
+    "max": 544
+  },
+  "history": {
+    "messagesTranslated": 435,
+    "messagesPerSecond": 26.4,
+    "engineTexts": 287,
+    "seconds": 16.5,
+    "engineTextsPerSecond": 17.4,
+    "engineCalls": 148,
+    "cacheHits": 0
+  },
+  "longTasks": {
+    "count": 0,
+    "totalMs": 0,
+    "maxMs": 0
+  },
+  "idleMainThreadBusyMsPer3s": 9,
+  "memory": {
+    "pageJsHeapMB": 12,
+    "extensionProcessRssMB_before": 1625,
+    "extensionProcessRssMB_with3packs": 1636,
+    "wasmHeapReservedMB": [
+      "fr-en:523",
+      "ja-en:853",
+      "es-en:522"
+    ],
+    "allChromiumRssMB": 2638
+  }
+}

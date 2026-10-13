@@ -1,0 +1,205 @@
+{
+  "config": {
+    "configFile": "/home/runner/work/live-translator/live-translator/browser-extension/playwright.config.ts",
+    "rootDir": "/home/runner/work/live-translator/live-translator/browser-extension/tests",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": "/home/runner/work/live-translator/live-translator/browser-extension/tests/e2e/global-setup.ts",
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "ci": {
+        "commitHref": "https://github.com/hamzaibnzakir/live-translator/commit/81285e74a334dcc3e09541aafaebc27ef09b56bc",
+        "commitHash": "81285e74a334dcc3e09541aafaebc27ef09b56bc",
+        "buildHref": "https://github.com/hamzaibnzakir/live-translator/actions/runs/38432344290"
+      },
+      "gitCommit": {
+        "shortHash": "81285e7",
+        "hash": "81285e74a334dcc3e09541aafaebc27ef09b56bc",
+        "subject": "README: perf table from final run",
+        "body": "README: perf table from final run\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_017jf3M1hCcHiAxxQsgZJrDj\n",
+        "author": {
+          "name": "Claude",
+          "email": "noreply@anthropic.com",
+          "time": 1791909585000
+        },
+        "committer": {
+          "name": "Claude",
+          "email": "noreply@anthropic.com",
+          "time": 1791909585000
+        },
+        "branch": "claude/brainbox-translate-extension-eh7mbh"
+      },
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "html",
+        {
+          "open": "never",
+          "outputFolder": "playwright-report"
+        }
+      ],
+      [
+        "json",
+        {
+          "outputFile": "reports/e2e-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/home/runner/work/live-translator/live-translator/browser-extension/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/hamzaibnzakir/live-translator/commit/81285e74a334dcc3e09541aafaebc27ef09b56bc",
+            "commitHash": "81285e74a334dcc3e09541aafaebc27ef09b56bc",
+            "buildHref": "https://github.com/hamzaibnzakir/live-translator/actions/runs/38432344290"
+          },
+          "gitCommit": {
+            "shortHash": "81285e7",
+            "hash": "81285e74a334dcc3e09541aafaebc27ef09b56bc",
+            "subject": "README: perf table from final run",
+            "body": "README: perf table from final run\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_017jf3M1hCcHiAxxQsgZJrDj\n",
+            "author": {
+              "name": "Claude",
+              "email": "noreply@anthropic.com",
+              "time": 1791909585000
+            },
+            "committer": {
+              "name": "Claude",
+              "email": "noreply@anthropic.com",
+              "time": 1791909585000
+            },
+            "branch": "claude/brainbox-translate-extension-eh7mbh"
+          },
+          "actualWorkers": 1
+        },
+        "id": "e2e",
+        "name": "e2e",
+        "testDir": "/home/runner/work/live-translator/live-translator/browser-extension/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/e2e\\/.*\\.spec\\.ts/"
+        ],
+        "timeout": 120000
+      },
+      {
+        "outputDir": "/home/runner/work/live-translator/live-translator/browser-extension/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/hamzaibnzakir/live-translator/commit/81285e74a334dcc3e09541aafaebc27ef09b56bc",
+            "commitHash": "81285e74a334dcc3e09541aafaebc27ef09b56bc",
+            "buildHref": "https://github.com/hamzaibnzakir/live-translator/actions/runs/38432344290"
+          },
+          "gitCommit": {
+            "shortHash": "81285e7",
+            "hash": "81285e74a334dcc3e09541aafaebc27ef09b56bc",
+            "subject": "README: perf table from final run",
+            "body": "README: perf table from final run\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_017jf3M1hCcHiAxxQsgZJrDj\n",
+            "author": {
+              "name": "Claude",
+              "email": "noreply@anthropic.com",
+              "time": 1791909585000
+            },
+            "committer": {
+              "name": "Claude",
+              "email": "noreply@anthropic.com",
+              "time": 1791909585000
+            },
+            "branch": "claude/brainbox-translate-extension-eh7mbh"
+          },
+          "actualWorkers": 1
+        },
+        "id": "perf",
+        "name": "perf",
+        "testDir": "/home/runner/work/live-translator/live-translator/browser-extension/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "/perf\\/.*\\.spec\\.ts/"
+        ],
+        "timeout": 600000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.56.1",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "perf/perf.spec.ts",
+      "file": "perf/perf.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "500 messages: first visible translation, per-message latency, throughput, long tasks, memory",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 600000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "perf",
+              "projectName": "perf",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 33457,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "{\n  \"messages\": 500,\n  \"packsLoaded\": [\n    \"fr-en\",\n    \"ja-en\",\n    \"es-en\"\n  ],\n  \"oneTimeModelLoadMs\": 1080,\n  \"timeToFirstTranslatedMessageMs\": 298,\n  \"firstTranslatedAfterFirstRowMountMs\": 165,\n  \"visibleMessages\": 6,\n  \"newMessageLatencyMs\": {\n    \"n\": 10,\n    \"p50\": 65,\n    \"p95\": 76,\n    \"max\": 76,\n    \"all\": [\n      73,\n      65,\n      65,\n      51,\n      68,\n      76,\n      49,\n      49,\n      63,\n      65\n    ]\n  },\n  \"warmVisibleMessageLatencyMs\": {\n    \"n\": 6,\n    \"p50\": 443,\n    \"p95\": 476,\n    \"max\": 476\n  },\n  \"coldVisibleMessageLatencyMs\": {\n    \"p50\": 511,\n    \"p95\": 544,\n    \"max\": 544\n  },\n  \"history\": {\n    \"messagesTranslated\": 435,\n    \"messagesPerSecond\": 26.4,\n    \"engineTexts\": 287,\n    \"seconds\": 16.5,\n    \"engineTextsPerSecond\": 17.4,\n    \"engineCalls\": 148,\n    \"cacheHits\": 0\n  },\n  \"longTasks\": {\n    \"count\": 0,\n    \"totalMs\": 0,\n    \"maxMs\": 0\n  },\n  \"idleMainThreadBusyMsPer3s\": 9,\n  \"memory\": {\n    \"pageJsHeapMB\": 12,\n    \"extensionProcessRssMB_before\": 1625,\n    \"extensionProcessRssMB_with3packs\": 1636,\n    \"wasmHeapReservedMB\": [\n      \"fr-en:523\",\n      \"ja-en:853\",\n      \"es-en:522\"\n    ],\n    \"allChromiumRssMB\": 2638\n  }\n}\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-13T16:42:43.158Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8eec995a560300e490f7-213bbb452792a896f2db",
+          "file": "perf/perf.spec.ts",
+          "line": 22,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-13T16:42:41.804Z",
+    "duration": 34938.908,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

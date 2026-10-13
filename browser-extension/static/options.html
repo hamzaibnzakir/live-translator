@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Brainbox Translate — Settings</title><link rel="stylesheet" href="ui.css">
+<style>main{max-width:860px;margin:0 auto}.cols{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(max-width:700px){.cols{grid-template-columns:1fr}}
+nav{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 10px}nav a{color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:999px;border:1px solid var(--border);background:var(--surface)}
+#packs-table td:first-child{white-space:nowrap}.focus{box-shadow:0 0 0 2px var(--violet)}</style></head>
+<body>
+<div class="glow"></div>
+<header style="max-width:860px;margin:0 auto"><img src="icons/icon-48.png" alt=""><h1>Brainbox <span class="grad">Translate</span> · Settings</h1><span class="sp"></span><span class="tag ok">🔒 On-device</span></header>
+<main>
+<nav><a href="#general">General</a><a href="#packs">Language packs</a><a href="#discord">Discord</a><a href="#sites">Websites</a><a href="#ai">AI polish</a><a href="#advanced">Clipboard &amp; cache</a></nav>
+
+<section class="card" id="general"><h2>General</h2>
+  <div class="cols">
+    <div><div class="muted">Translate into</div><select id="target"></select></div>
+    <div><div class="muted">Engine</div><select id="engine"><option value="auto">Auto (Chrome built-in when ready, else offline Bergamot)</option><option value="chrome">Chrome built-in (fallback to Bergamot)</option><option value="bergamot">Offline Bergamot only</option></select></div>
+  </div>
+  <div id="engine-status" class="hint" style="margin-top:8px"></div>
+  <label class="sw"><input type="checkbox" id="autoDownloadPacks"> Download offline packs automatically when a new language appears</label>
+  <div class="hint">Off = Brainbox asks first. Packs come from Mozilla's model storage, are SHA-256 verified and then work offline.</div>
+  <div class="row" style="margin-top:8px"><span class="muted">Minimum detection confidence</span><input type="number" id="minConfidence" min="0" max="1" step="0.05" style="width:90px"></div>
+</section>
+
+<section class="card" id="packs"><h2>Language packs</h2>
+  <div class="row wrap" style="margin-bottom:8px"><input type="text" id="pack-search" placeholder="Search language…" class="grow"><span class="muted" id="storage-line"></span></div>
+  <div id="pack-focus"></div>
+  <table id="packs-table"><thead><tr><th>Language</th><th>→ <span class="tl">English</span></th><th><span class="tl">English</span> →</th><th>Chrome built-in</th><th></th></tr></thead><tbody></tbody></table>
+</section>
+
+<section class="card" id="discord"><h2>Discord</h2>
+  <label class="sw"><input type="checkbox" data-k="discord.enabled"> Translate messages on discord.com</label>
+  <div class="row"><span class="muted">New servers/channels</span><select data-k="discord.defaultMode" style="width:auto"><option value="always">Auto-translate</option><option value="ask">Ask first</option><option value="never">Don't translate</option></select></div>
+  <label class="sw"><input type="checkbox" data-k="discord.marker"> Show the small Brainbox dot on translated messages</label>
+  <label class="sw"><input type="checkbox" data-k="discord.hoverOriginal"> Hover a message to see the original</label>
+  <label class="sw"><input type="checkbox" data-k="discord.altClickRestore"> Alt+click swaps a message back to the original <span class="faint">(replaces Discord's Alt+click "mark unread" on translated text)</span></label>
+  <label class="sw"><input type="checkbox" data-k="discord.backTranslationPreview"> Show "they will read …" back-translation when replying</label>
+  <div class="row"><span class="muted">Reply hotkey</span><input type="text" id="hotkey" readonly style="width:180px" title="Click, then press the new shortcut"><button class="ghost small" id="hotkey-reset">Reset</button></div>
+  <div class="hint">The Discord desktop app is Electron and can't load extensions — use discord.com in Chrome (or Chrome → ⋮ → Cast, save and share → Install page as app).</div>
+  <h2 style="margin-top:12px">Remembered servers &amp; channels</h2><div id="discord-rules" class="muted">None yet.</div>
+</section>
+
+<section class="card" id="sites"><h2>Websites</h2>
+  <div class="cols"><div><div class="muted">Always translate</div><div id="sites-always" class="faint">None</div></div><div><div class="muted">Never translate</div><div id="sites-never" class="faint">None</div></div></div>
+  <div class="hint">Add sites from the toolbar popup → This page. "Always" asks Chrome for access to that one site only.</div>
+</section>
+
+<section class="card" id="ai"><h2>Polish with AI (optional, off by default)</h2>
+  <label class="sw"><input type="checkbox" id="polish-enabled"> Show "✨ Polish with AI" on messages (sends that one message to your local server only when you click)</label>
+  <div class="cols"><div><div class="muted">Endpoint (OpenAI-compatible)</div><input type="url" id="polish-endpoint" placeholder="http://localhost:1234/v1"></div><div><div class="muted">Model (empty = first loaded)</div><input type="text" id="polish-model"></div></div>
+  <div class="row" style="margin-top:8px"><button class="ghost small" id="polish-lmstudio">LM Studio :1234</button><button class="ghost small" id="polish-ollama">Ollama :11434</button><button class="small" id="polish-test">Test</button><span id="polish-result" class="muted"></span></div>
+</section>
+
+<section class="card" id="advanced"><h2>Clipboard &amp; cache</h2>
+  <label class="sw"><input type="checkbox" id="clipboardMode"> Clipboard mode: a hotkey translates what's on the clipboard and puts the result back</label>
+  <div class="hint">Set the key at chrome://extensions/shortcuts ("Translate the clipboard"). Turning this on asks for clipboard-read permission.</div>
+  <div class="row" style="margin-top:8px"><button class="danger small" id="clear-cache">Clear translation cache</button><span id="cache-line" class="muted"></span></div>
+  <div class="row" style="margin-top:8px"><span class="muted">Cache size limit (entries)</span><input type="number" id="cacheMaxEntries" min="1000" step="1000" style="width:120px"></div>
+</section>
+<p class="faint">Privacy: nothing leaves your computer unless you download a pack or click "Polish with AI". No API keys, no accounts. Brainbox never uses Discord's API or your token and never sends messages for you.</p>
+</main>
+<div class="toast" id="toast" style="display:none"></div>
+<script src="options.js"></script>
+</body></html>

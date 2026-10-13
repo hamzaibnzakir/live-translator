@@ -1,0 +1,2929 @@
+{
+ "source": "https://storage.googleapis.com/moz-fx-translations-data--303e-prod-translations-data/db/models.json",
+ "baseUrl": "https://storage.googleapis.com/moz-fx-translations-data--303e-prod-translations-data",
+ "registryGenerated": "2026-10-13T00:44:54Z",
+ "pinnedAt": "2026-10-13T12:07:13.657Z",
+ "license": "Models: Mozilla Firefox Translations (MPL-2.0 / see NOTICE)",
+ "pairs": {
+  "af-en": {
+   "from": "af",
+   "to": "en",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/af-en/next26_HIyjLJaNReijN0eJouAJBw/exported/lex.50.50.afen.s2t.bin.gz",
+     "sha256": "7e8fd0a4043ae2118d9f1552037c4c40a8887d1ecc05161eb7c27dec0aa7ba41",
+     "size": 2133684
+    },
+    "model": {
+     "path": "models/af-en/next26_HIyjLJaNReijN0eJouAJBw/exported/model.afen.intgemm.alphas.bin.gz",
+     "sha256": "0346a8b3e3a0d9fbe65012b80d2d56c1ce027725b4065442c7eeda635b606def",
+     "size": 23479680,
+     "uncompressedSha256": "d43baa7ab565a6cdc2bc230a4ab6fcaf7b4a871e53e42cc7128e55871ef36086",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/af-en/next26_HIyjLJaNReijN0eJouAJBw/exported/vocab.afen.spm.gz",
+     "sha256": "3fb78ba5b6965c131c6437a3862e20540121b5cd5b2c7e8aa1760f2e780926ed",
+     "size": 408581
+    }
+   }
+  },
+  "ar-en": {
+   "from": "ar",
+   "to": "en",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/ar-en/retrain_base-memory_X9fDxFreTOCslPKzb1CXTg/exported/lex.50.50.aren.s2t.bin.gz",
+     "sha256": "59335a02934f19f5e9bf171de9db8b73b5e95a69dce03a7d2fe6e9e43e3f849e",
+     "size": 2259861
+    },
+    "model": {
+     "path": "models/ar-en/retrain_base-memory_X9fDxFreTOCslPKzb1CXTg/exported/model.aren.intgemm.alphas.bin.gz",
+     "sha256": "31e032a402a8463a1e19c8e355529f73c0732926b22b1eadc8bade39ecc23a80",
+     "size": 23224456,
+     "uncompressedSha256": "7b7af0282dc5f4d8805b9a298c2fa828967e3f09ca10f1942ebeea0b2cfc12fa",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/ar-en/retrain_base-memory_X9fDxFreTOCslPKzb1CXTg/exported/vocab.aren.spm.gz",
+     "sha256": "c379c52857c2f0886ae52a255ac770e5992524782ee20bb0966deca079e9595f",
+     "size": 416700
+    }
+   }
+  },
+  "az-en": {
+   "from": "az",
+   "to": "en",
+   "architecture": "base-memory",
+   "releaseStatus": null,
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/az-en/next26-distil-bt_euvrgq58RB2_-glyT2Rfdg/exported/lex.50.50.azen.s2t.bin.gz",
+     "sha256": "739cf8b907f115becbc7b1d957c839d2644515505a53557e09e4be66cd87f729",
+     "size": 2443914
+    },
+    "model": {
+     "path": "models/az-en/next26-distil-bt_euvrgq58RB2_-glyT2Rfdg/exported/model.azen.intgemm.alphas.bin.gz",
+     "sha256": "2d7c26afd03e33f84ebed89baca5b7b81c83f58b4b8b0ff83e5ffa40c48842d9",
+     "size": 22943831,
+     "uncompressedSha256": "defaed6e089f588a605810b032d870b508e6909a5cc4bc2ca27c3ab35e42ef7a",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/az-en/next26-distil-bt_euvrgq58RB2_-glyT2Rfdg/exported/vocab.azen.spm.gz",
+     "sha256": "3104529a329df6c77c7fa2215dfe0fa7b94997d71913c8366102f57ac73646a5",
+     "size": 419697
+    }
+   }
+  },
+  "be-en": {
+   "from": "be",
+   "to": "en",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/be-en/next26-distil-bt_XYnREECUTc2uO371KfMnkA/exported/lex.50.50.been.s2t.bin.gz",
+     "sha256": "536b0b7aed18dee1879c449c35d626b8fdba738f11a4380971d76afa9cfa8359",
+     "size": 2182133
+    },
+    "model": {
+     "path": "models/be-en/next26-distil-bt_XYnREECUTc2uO371KfMnkA/exported/model.been.intgemm.alphas.bin.gz",
+     "sha256": "4c67c2497ae726e32400e8c2dd92f17fac92e15aac8515562352fd2454667fcd",
+     "size": 22664530,
+     "uncompressedSha256": "bd7148a6eef3df7d631f4ad1ebc01cd5770404a224c3c35eb54a901ac5340563",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/be-en/next26-distil-bt_XYnREECUTc2uO371KfMnkA/exported/vocab.been.spm.gz",
+     "sha256": "5b34ef9ff5f6fd0321d72a08a1e84c9127c6373711f646ec68df451ea1e543ae",
+     "size": 435603
+    }
+   }
+  },
+  "bg-en": {
+   "from": "bg",
+   "to": "en",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/bg-en/retrain_hr_WvwHu4k6TgmJ2YTvL4Mu2g/exported/lex.50.50.bgen.s2t.bin.gz",
+     "sha256": "54e5f362ad9d24aa33e928cf388cc7f26269304ae86f862204ae755449cc8e61",
+     "size": 2187053
+    },
+    "model": {
+     "path": "models/bg-en/retrain_hr_WvwHu4k6TgmJ2YTvL4Mu2g/exported/model.bgen.intgemm.alphas.bin.gz",
+     "sha256": "7a16f2855a4d046f77deaa16105338bc29ed42d6eebd8a26908ea7e1da60b736",
+     "size": 22399269,
+     "uncompressedSha256": "78f7e6e1435cc2d4a29cf597f493187fe29ddb9ce9d3766c287e2e6d37052d01",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/bg-en/retrain_hr_WvwHu4k6TgmJ2YTvL4Mu2g/exported/vocab.bgen.spm.gz",
+     "sha256": "405926c43e22c5eaaef6316c545dfbcf4017f492366a09b2c029921c6651b05d",
+     "size": 434940
+    }
+   }
+  },
+  "bn-en": {
+   "from": "bn",
+   "to": "en",
+   "architecture": "tiny",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/bn-en/h1-2025_XcpBlhA1SyOJCH2UzoIMyQ/exported/lex.50.50.bnen.s2t.bin.gz",
+     "sha256": "8c4bf16a8a83f6c21a25f39eb1b1f935cb60e21a5afaa83b1e0fcd40e0180a82",
+     "size": 2264284
+    },
+    "model": {
+     "path": "models/bn-en/h1-2025_XcpBlhA1SyOJCH2UzoIMyQ/exported/model.bnen.intgemm.alphas.bin.gz",
+     "sha256": "1a2e5bfd8d75c8cddd6a802f9e2a2a82b626ec88fbcb5575e242a306bc1ebe9b",
+     "size": 12665857,
+     "uncompressedSha256": "14c1d9e92918e8d04cb0ed351ae386c3b5d5c62a6dc601d9515f4c7e6c2a3a56",
+     "uncompressedSize": 17141051
+    },
+    "vocab": {
+     "path": "models/bn-en/h1-2025_XcpBlhA1SyOJCH2UzoIMyQ/exported/vocab.bnen.spm.gz",
+     "sha256": "11660de65a60243f944dc7a099beaeab8f061d8526aed15c476416a6dd906793",
+     "size": 437571
+    }
+   }
+  },
+  "ca-en": {
+   "from": "ca",
+   "to": "en",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/ca-en/target-side-dedup_xxxxxxxxRxSxxxxxxxxxxA/exported/lex.50.50.caen.s2t.bin.gz",
+     "sha256": "3f8c8c81ab110e3dd77bca0c1b39e66e352cdf3da95e5275a148478cf81942f4",
+     "size": 2257590
+    },
+    "model": {
+     "path": "models/ca-en/target-side-dedup_xxxxxxxxRxSxxxxxxxxxxA/exported/model.caen.intgemm.alphas.bin.gz",
+     "sha256": "7b27f998a05917ca3f854d1ac45e70f8b23119d3b132114b57cbaaafe6cc63d0",
+     "size": 22787743,
+     "uncompressedSha256": "b7f9c70823052f60c257eb1c4eff893abea3648aa9d1c23c8774e1e5ef061434",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/ca-en/target-side-dedup_xxxxxxxxRxSxxxxxxxxxxA/exported/vocab.caen.spm.gz",
+     "sha256": "93398a42647c0af477281e9c2156f494641c18191800204b2516360ca1abb111",
+     "size": 409662
+    }
+   }
+  },
+  "cs-en": {
+   "from": "cs",
+   "to": "en",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/cs-en/retrain_hr_EwWhUov8TP6D_oolATvbUA/exported/lex.50.50.csen.s2t.bin.gz",
+     "sha256": "ab2d7fdd47fab92bf27b80cdb32d5ec6820f784127e7c0d080ffe8005a6b58cc",
+     "size": 2493702
+    },
+    "model": {
+     "path": "models/cs-en/retrain_hr_EwWhUov8TP6D_oolATvbUA/exported/model.csen.intgemm.alphas.bin.gz",
+     "sha256": "b3a43eedf9ed1dc250ea44aaea3740c9e032a606eaae0e80ae5702f418b056f3",
+     "size": 22830296,
+     "uncompressedSha256": "c815273b31074492eaab0ccd78d33d7ac16f94088707ab2492abaedcb9ee0b75",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/cs-en/retrain_hr_EwWhUov8TP6D_oolATvbUA/exported/vocab.csen.spm.gz",
+     "sha256": "6c35be6ead9eddbc2c2bda2a059c9cb91690314c15139b347d8e1f79a318f973",
+     "size": 412691
+    }
+   }
+  },
+  "da-en": {
+   "from": "da",
+   "to": "en",
+   "architecture": "tiny",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/da-en/spring-2024_U1vVpsWWT-K4L9pRfP1K1g/exported/lex.50.50.daen.s2t.bin.gz",
+     "sha256": "ab1656c067409541b3bdffd2878f3201ba51de70a42520da870de687ed37c0b8",
+     "size": 2170970
+    },
+    "model": {
+     "path": "models/da-en/spring-2024_U1vVpsWWT-K4L9pRfP1K1g/exported/model.daen.intgemm.alphas.bin.gz",
+     "sha256": "483abf1ae01a79f3231f22b5c0aa44b8696fa0d5527801c7588a07ae2700836e",
+     "size": 12525769,
+     "uncompressedSha256": "2c1ace24220c905404bbb1de14bfeda8a391ef8d6c56f3b193a9d3e340d99b12",
+     "uncompressedSize": 17141051
+    },
+    "vocab": {
+     "path": "models/da-en/spring-2024_U1vVpsWWT-K4L9pRfP1K1g/exported/vocab.daen.spm.gz",
+     "sha256": "b0055ebdf5291b666c33f15ef41abba6820c09703fff7f6b1fc2726fa10ede73",
+     "size": 399344
+    }
+   }
+  },
+  "de-en": {
+   "from": "de",
+   "to": "en",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/de-en/retrain_hr2_WZOW24i4QJmIib61LeHfwg/exported/lex.50.50.deen.s2t.bin.gz",
+     "sha256": "231e9caf62e0e867775d5f4c1f4cfae21e37c70d9bf2bd628fa468aeeb2ba869",
+     "size": 2626658
+    },
+    "model": {
+     "path": "models/de-en/retrain_hr2_WZOW24i4QJmIib61LeHfwg/exported/model.deen.intgemm.alphas.bin.gz",
+     "sha256": "38b245bcfc23f6d61fd98a187436ea1320a38f41896df411b103df3e83f51681",
+     "size": 22403755,
+     "uncompressedSha256": "3e6f7c2c2425d10824797270b382bee718ff34af2cab9308841c82ca46dc6f20",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/de-en/retrain_hr2_WZOW24i4QJmIib61LeHfwg/exported/vocab.deen.spm.gz",
+     "sha256": "88dcd7fdbf20dc60837ce837244d0d55b20f7079f2cbd2ba8e63530632028310",
+     "size": 413879
+    }
+   }
+  },
+  "el-en": {
+   "from": "el",
+   "to": "en",
+   "architecture": "tiny",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/el-en/spring-2024_RJucgx7LRMKB9E4oSSzdtA/exported/lex.50.50.elen.s2t.bin.gz",
+     "sha256": "eef43a7471758df2a43f505e5670f3509093ab6a0742a3110d873047cc0913af",
+     "size": 1851246
+    },
+    "model": {
+     "path": "models/el-en/spring-2024_RJucgx7LRMKB9E4oSSzdtA/exported/model.elen.intgemm.alphas.bin.gz",
+     "sha256": "3a1d8af5cdf9ab4ace92dc988f496eb5d4e5c905834aa254b688c95a0fd5863f",
+     "size": 12696541,
+     "uncompressedSha256": "0a43c3716156061494d995d0c88113e789f8d919e0c88a15bc1ad360e0482a8c",
+     "uncompressedSize": 17141051
+    },
+    "vocab": {
+     "path": "models/el-en/spring-2024_RJucgx7LRMKB9E4oSSzdtA/exported/vocab.elen.spm.gz",
+     "sha256": "076f2f01f855b08870083c569bd264d22e5bee3c35d30a1d16f7c42ae0bfc50f",
+     "size": 419174
+    }
+   }
+  },
+  "en-af": {
+   "from": "en",
+   "to": "af",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-af/next26_CqoXSiBvSUq9Co3ePAYA1w/exported/lex.50.50.enaf.s2t.bin.gz",
+     "sha256": "1b44bcffeed3096e7dfdbf536bed0bbe73f002590208db4d99b2351469f88489",
+     "size": 1667268
+    },
+    "model": {
+     "path": "models/en-af/next26_CqoXSiBvSUq9Co3ePAYA1w/exported/model.enaf.intgemm.alphas.bin.gz",
+     "sha256": "42e0295b3dc0dfa933d3fe38332e5f213a75a651f0a33ceea9e825b4dace7783",
+     "size": 23561122,
+     "uncompressedSha256": "afc1dcb25774e61f513fe722e037744a18c23063ba799bb01f5cdec5cc79b502",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/en-af/next26_CqoXSiBvSUq9Co3ePAYA1w/exported/vocab.enaf.spm.gz",
+     "sha256": "2dfecb5a5e2182f3ee235ac612f6a259c8a77d665fdca4cb50e959ffec9cded7",
+     "size": 409344
+    }
+   }
+  },
+  "en-ar": {
+   "from": "en",
+   "to": "ar",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-ar/retrain_base-memory_G3CmhwG_TZext3cys-udHg/exported/lex.50.50.enar.s2t.bin.gz",
+     "sha256": "b7466406d7f5e0c493bc65dc7de221aa3e6cd7f95c6fc7dd1e73759520c937ac",
+     "size": 1639219
+    },
+    "model": {
+     "path": "models/en-ar/retrain_base-memory_G3CmhwG_TZext3cys-udHg/exported/model.enar.intgemm.alphas.bin.gz",
+     "sha256": "88e85e33403cda6b1a529f32dc30c0977a4234285d6f8340e0d630da21b176e5",
+     "size": 22857819,
+     "uncompressedSha256": "ae659d7045fc2e5d6ba50583586a5d94ee4358d92c019847e37b57a0e627faa8",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/en-ar/retrain_base-memory_G3CmhwG_TZext3cys-udHg/exported/vocab.enar.spm.gz",
+     "sha256": "3a4b9e81c0f73ef8ed02c254b3ae99d64f8265afa54a6b838a0870bb4f9d0369",
+     "size": 418930
+    }
+   }
+  },
+  "en-az": {
+   "from": "en",
+   "to": "az",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-az/next26_ZfHA551CQiOdY5lzUcGhVA/exported/lex.50.50.enaz.s2t.bin.gz",
+     "sha256": "0549d1da8a27ec001ccdf0a23222b2d473a8c79201780b72ef4050f58ff5ddaa",
+     "size": 1673403
+    },
+    "model": {
+     "path": "models/en-az/next26_ZfHA551CQiOdY5lzUcGhVA/exported/model.enaz.intgemm.alphas.bin.gz",
+     "sha256": "62e4fb429410269722bdb173dcae806498729283c74f57b9b8581da2de86554c",
+     "size": 23035063,
+     "uncompressedSha256": "fcf1f5f36dd586db7078e938252f17ecb90ae6f2d1b28952fc3878738f81336a",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/en-az/next26_ZfHA551CQiOdY5lzUcGhVA/exported/vocab.enaz.spm.gz",
+     "sha256": "4e38edb28396535c8632677ae4f6d7b7ded62d982a695440ef6b9bf16334a9e4",
+     "size": 420132
+    }
+   }
+  },
+  "en-be": {
+   "from": "en",
+   "to": "be",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-be/next26-beam4_EsLoydFIQ42maj5NJ8d6Qg/exported/lex.50.50.enbe.s2t.bin.gz",
+     "sha256": "efb5cf5599c41a2d7734c3021fd0c6be5281e4b4e960e2da552cbda8b4620288",
+     "size": 1342392
+    },
+    "model": {
+     "path": "models/en-be/next26-beam4_EsLoydFIQ42maj5NJ8d6Qg/exported/model.enbe.intgemm.alphas.bin.gz",
+     "sha256": "9e9e5666212faa538dfc81bb06032851243c4250f3807d37db35c9ddd5905b83",
+     "size": 22851751,
+     "uncompressedSha256": "88fb3a6e2cc4b936313596eef445a548e63e1ca3ef0dfa54b88229c3ce877116",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/en-be/next26-beam4_EsLoydFIQ42maj5NJ8d6Qg/exported/vocab.enbe.spm.gz",
+     "sha256": "a53745ded24566724ae91a0e67e9a89df209e359ec50304d1b3ec775d3c62f98",
+     "size": 437794
+    }
+   }
+  },
+  "en-bg": {
+   "from": "en",
+   "to": "bg",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-bg/retrain_hr_eAF9fkYRScmBmvvfdT4XWw/exported/lex.50.50.enbg.s2t.bin.gz",
+     "sha256": "622efe6dd21c6b142d87457be6d045fb18625b14dedc0ce7e875fe9ee3d5d05c",
+     "size": 1548577
+    },
+    "model": {
+     "path": "models/en-bg/retrain_hr_eAF9fkYRScmBmvvfdT4XWw/exported/model.enbg.intgemm.alphas.bin.gz",
+     "sha256": "ae4b41190c7a0ff662fcda88a2c22fb2f0e09a8f9f5bc28632b23236e1d3ac0b",
+     "size": 23432015,
+     "uncompressedSha256": "e2b30db98ac6706efc893067a74e51f36f015a8f820fe8a4f0f5052fa6a22f30",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/en-bg/retrain_hr_eAF9fkYRScmBmvvfdT4XWw/exported/vocab.enbg.spm.gz",
+     "sha256": "6647c72913621a7edbf04923573a7967092f29d3f3b35f570b7edd076e2437c2",
+     "size": 434940
+    }
+   }
+  },
+  "en-bn": {
+   "from": "en",
+   "to": "bn",
+   "architecture": "tiny",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-bn/h1-2025_TYlSskC_Sk6lBlfWRetXmg/exported/lex.50.50.enbn.s2t.bin.gz",
+     "sha256": "912cd83ad6b07d9df92b073f1bcbd49303c2b2ddba0b4d29d85b66b6f0b67f95",
+     "size": 1607697
+    },
+    "model": {
+     "path": "models/en-bn/h1-2025_TYlSskC_Sk6lBlfWRetXmg/exported/model.enbn.intgemm.alphas.bin.gz",
+     "sha256": "df17fb759afe3172d4ea0ded8abbe5b74d945a8acb0cac99e8fd55f92f926d8b",
+     "size": 12821521,
+     "uncompressedSha256": "b63c8d5f8fdc1fcb8bbb2d20c751faab94af67ee1822427665119c93a11f6596",
+     "uncompressedSize": 17141051
+    },
+    "vocab": {
+     "path": "models/en-bn/h1-2025_TYlSskC_Sk6lBlfWRetXmg/exported/vocab.enbn.spm.gz",
+     "sha256": "96e8b61918f5307f368937ff59f4cfea0bb7eb816e34f81bea6ac09399ee4b30",
+     "size": 437373
+    }
+   }
+  },
+  "en-bs": {
+   "from": "en",
+   "to": "bs",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-bs/hbs-topk10_HBBkp2ozSYaY9f7WVGRtpA/exported/lex.50.50.enbs.s2t.bin.gz",
+     "sha256": "c7b27ab1102a5a6cf1ec24a0fe14c3f46e0e0910fd5a5e48507d79b1f11d112a",
+     "size": 1682912
+    },
+    "model": {
+     "path": "models/en-bs/hbs-topk10_HBBkp2ozSYaY9f7WVGRtpA/exported/model.enbs.intgemm.alphas.bin.gz",
+     "sha256": "b52aeed2c3e86a2278304fa2269d9904ed3feb51522c3b5997099c173650f098",
+     "size": 22932779,
+     "uncompressedSha256": "27575113fffad6c45a0bad36bd1823c4f319ed30f65ec134815b67bdae0d9f8d",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/en-bs/hbs-topk10_HBBkp2ozSYaY9f7WVGRtpA/exported/vocab.enbs.spm.gz",
+     "sha256": "b633dcfcedd4b6c5990159ec17eb127b601a5eeddc6f85ec744b4c394276ddf4",
+     "size": 412204
+    }
+   }
+  },
+  "en-ca": {
+   "from": "en",
+   "to": "ca",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-ca/short-sentences_dqpjVFEaT2WLVB2nV0_H2g/exported/lex.50.50.enca.s2t.bin.gz",
+     "sha256": "ee1445b2517bb5fc13312890d0154e847279e0a780d72ee5f3b5b13867ab84ce",
+     "size": 2085904
+    },
+    "model": {
+     "path": "models/en-ca/short-sentences_dqpjVFEaT2WLVB2nV0_H2g/exported/model.enca.intgemm.alphas.bin.gz",
+     "sha256": "78c40c9f71e3456021d7aadd4cfd4e0b3665bd202e31eb0da09d1b835503b28d",
+     "size": 23174479,
+     "uncompressedSha256": "735881c99ff303e55eb2e92a3b86762523d5dd1a4797b2574b851062051426ee",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/en-ca/short-sentences_dqpjVFEaT2WLVB2nV0_H2g/exported/vocab.enca.spm.gz",
+     "sha256": "873d5c52e9ff336a8dd24695de1ef4293c82f71e8e8a1c5370791292192c35d9",
+     "size": 409866
+    }
+   }
+  },
+  "en-cs": {
+   "from": "en",
+   "to": "cs",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-cs/retrain_hr_F_JF0vqvSjSwn3caQQcicA/exported/lex.50.50.encs.s2t.bin.gz",
+     "sha256": "e5e54ed7488b5beafef1947788534b6e3919ebe658d0a432ef00962bac1769ff",
+     "size": 1896925
+    },
+    "model": {
+     "path": "models/en-cs/retrain_hr_F_JF0vqvSjSwn3caQQcicA/exported/model.encs.intgemm.alphas.bin.gz",
+     "sha256": "363519c1560786f8c9c85737431ec61c770623b1ee99dff7b154019ab202d8d9",
+     "size": 23192301,
+     "uncompressedSha256": "1d7855f91c3e2b8ef79fbea62707d46ceb8a1ad01834ef6dd500f32a7006cc2c",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/en-cs/retrain_hr_F_JF0vqvSjSwn3caQQcicA/exported/vocab.encs.spm.gz",
+     "sha256": "842c1396415257eb864d1ce4722eece82f024a23ecdc4e1be5defcdf6b6d2c0e",
+     "size": 412691
+    }
+   }
+  },
+  "en-da": {
+   "from": "en",
+   "to": "da",
+   "architecture": "tiny",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-da/spring-2024_XUm0Ij8WSfabkKeKA_Xv_g/exported/lex.50.50.enda.s2t.bin.gz",
+     "sha256": "c3d79a2ba450f92ec7cb4f38a39d7b3e157417f6fb60d060fa6f3f2c05d31de9",
+     "size": 1582768
+    },
+    "model": {
+     "path": "models/en-da/spring-2024_XUm0Ij8WSfabkKeKA_Xv_g/exported/model.enda.intgemm.alphas.bin.gz",
+     "sha256": "5afaea5545cfc759ad1d2c320d17606e95efcfb0c6e4d9019903ee4c00b8091f",
+     "size": 12723889,
+     "uncompressedSha256": "0157ed1162dd5a7a0fc6a3cc86014ec21cb47a8febf77164df24d8921270bb29",
+     "uncompressedSize": 17141051
+    },
+    "vocab": {
+     "path": "models/en-da/spring-2024_XUm0Ij8WSfabkKeKA_Xv_g/exported/vocab.enda.spm.gz",
+     "sha256": "2d9ff33c0adfc4a137ba0cc51f64e7886ae92dbd53fd718cce30fb6ec9aa33c2",
+     "size": 398818
+    }
+   }
+  },
+  "en-de": {
+   "from": "en",
+   "to": "de",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-de/retrain_hr_fix_names_SCgGhxUPQ2WAECHLRtzrMg/exported/lex.50.50.ende.s2t.bin.gz",
+     "sha256": "0370d79cda6fed5dfa8f9b2a0009459bd2766893825bb5b8b5114169d18da6c4",
+     "size": 2314750
+    },
+    "model": {
+     "path": "models/en-de/retrain_hr_fix_names_SCgGhxUPQ2WAECHLRtzrMg/exported/model.ende.intgemm.alphas.bin.gz",
+     "sha256": "e3a74458faba3ab2752ed8355c5e3979f13395279c8fc1bd3f54a3c2316e4975",
+     "size": 22992073,
+     "uncompressedSha256": "8df29d9494d19f47fd5d97c6a73474c6f657e9f81c1a607c431d02befdf3810f",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/en-de/retrain_hr_fix_names_SCgGhxUPQ2WAECHLRtzrMg/exported/vocab.ende.spm.gz",
+     "sha256": "3b2ddbfac73f994f151a8994447d6b3d41ab0d3435da56f79c233f34d03e45c2",
+     "size": 413879
+    }
+   }
+  },
+  "en-el": {
+   "from": "en",
+   "to": "el",
+   "architecture": "tiny",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-el/spring-2024_Y3ThG3XkTxG4ROUQK2LpVg/exported/lex.50.50.enel.s2t.bin.gz",
+     "sha256": "e03309c345e05bf23956a9e3d637d65cea1e75f323dbcb958c51cfb58397306a",
+     "size": 1352643
+    },
+    "model": {
+     "path": "models/en-el/spring-2024_Y3ThG3XkTxG4ROUQK2LpVg/exported/model.enel.intgemm.alphas.bin.gz",
+     "sha256": "cfe3af93ed24be241638ff246b716855bfcb7273b7a57c4fb6ac73bbe660479a",
+     "size": 12808027,
+     "uncompressedSha256": "724b358d399c6b23444de36d76e9e2630c7024c29d9e617323b820a11631535a",
+     "uncompressedSize": 17141051
+    },
+    "vocab": {
+     "path": "models/en-el/spring-2024_Y3ThG3XkTxG4ROUQK2LpVg/exported/vocab.enel.spm.gz",
+     "sha256": "bfbab13d4ff67e08e98e9203ab0d7efd02fa143614b3244da1902baf47793b26",
+     "size": 419275
+    }
+   }
+  },
+  "en-es": {
+   "from": "en",
+   "to": "es",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-es/retrain_hr_fix_names_CUAEXUHoQum_cFqh-ZAryw/exported/lex.50.50.enes.s2t.bin.gz",
+     "sha256": "37a067966f28ff0ba430fddb7412bc5b07afa2cd2fd5a46d9ad74045a1a06380",
+     "size": 2265250
+    },
+    "model": {
+     "path": "models/en-es/retrain_hr_fix_names_CUAEXUHoQum_cFqh-ZAryw/exported/model.enes.intgemm.alphas.bin.gz",
+     "sha256": "fe4025fde24a4d5f80533cfb7acd53d0eb7f194dfc2d8f427f0d4563cfb6ac06",
+     "size": 22698792,
+     "uncompressedSha256": "3b1c399511c01c84c36fae5c0524df44096288efdc8236e182b5c97d7ad2244c",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/en-es/retrain_hr_fix_names_CUAEXUHoQum_cFqh-ZAryw/exported/vocab.enes.spm.gz",
+     "sha256": "ae2760c04bc6eb5362b16e5c2f145c376bb04bac421c33ba3c0766805e6f03b3",
+     "size": 409312
+    }
+   }
+  },
+  "en-et": {
+   "from": "en",
+   "to": "et",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-et/retrain_hr_GubU3EaMRY2VkR8p1dPUNw/exported/lex.50.50.enet.s2t.bin.gz",
+     "sha256": "9b1fd077aa1b6f77193caef680dfbfb21a783750d6bc94903c0ae9e83bc8d683",
+     "size": 1865410
+    },
+    "model": {
+     "path": "models/en-et/retrain_hr_GubU3EaMRY2VkR8p1dPUNw/exported/model.enet.intgemm.alphas.bin.gz",
+     "sha256": "f65765a60a5ad5e0db457ee7aca053bd50fc5653b3d1edf3e3d11282db026580",
+     "size": 22951751,
+     "uncompressedSha256": "36bdc87f8d500861a5d286ebd3ea58df530da87e31b8a233f5e9c46c300c281d",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/en-et/retrain_hr_GubU3EaMRY2VkR8p1dPUNw/exported/vocab.enet.spm.gz",
+     "sha256": "4fb13bc455726ffb3434a68bd210a83231198c9a62a059debf804821428044c4",
+     "size": 414262
+    }
+   }
+  },
+  "en-eu": {
+   "from": "en",
+   "to": "eu",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-eu/eneu-baseline_IXuA7hOrQPCVZJOp6LIYVw/exported/lex.50.50.eneu.s2t.bin.gz",
+     "sha256": "801983dc96c65194ca5f4b4091b6b94a995695b274eb7712f9dc60676f1e59aa",
+     "size": 1638880
+    },
+    "model": {
+     "path": "models/en-eu/eneu-baseline_IXuA7hOrQPCVZJOp6LIYVw/exported/model.eneu.intgemm.alphas.bin.gz",
+     "sha256": "bb541caf59ff3abd99ccd6270640b47f07831b1615355033cb94d841b5ea0a26",
+     "size": 23068167,
+     "uncompressedSha256": "f28d03817b718806c9262e3d76960efb8cbd04d0721307c8e23edcae9364150a",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/en-eu/eneu-baseline_IXuA7hOrQPCVZJOp6LIYVw/exported/vocab.eneu.spm.gz",
+     "sha256": "ff4a327aeae0d1fac1b2a331980e9e518b8e0778ce62eb557fc6d997101321be",
+     "size": 409774
+    }
+   }
+  },
+  "en-fa": {
+   "from": "en",
+   "to": "fa",
+   "architecture": "tiny",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-fa/h1-2025_c_TYU1BOTByxOnnkAunO7g/exported/lex.50.50.enfa.s2t.bin.gz",
+     "sha256": "a5fc8b6d661f493767954c138c40b336e10aa8d2a1957ecb330face9e2fd36d2",
+     "size": 1728367
+    },
+    "model": {
+     "path": "models/en-fa/h1-2025_c_TYU1BOTByxOnnkAunO7g/exported/model.enfa.intgemm.alphas.bin.gz",
+     "sha256": "9200d122bb62c7935f9c31a2d84c5503d22c0905d4f9e965743099b7c3748c8b",
+     "size": 13058508,
+     "uncompressedSha256": "456ad3952bcc59d208c76baba4dcef340ee4239416bd760d6fec27f9a16228f8",
+     "uncompressedSize": 17141051
+    },
+    "vocab": {
+     "path": "models/en-fa/h1-2025_c_TYU1BOTByxOnnkAunO7g/exported/vocab.enfa.spm.gz",
+     "sha256": "9a9961f08f3c015e8b0963d6537d931e0d3829736b9ab9766fcfaabf4f32cab4",
+     "size": 416223
+    }
+   }
+  },
+  "en-fi": {
+   "from": "en",
+   "to": "fi",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-fi/retrain_hr_b45LsGaNQFyDRhHAvBbKrA/exported/lex.50.50.enfi.s2t.bin.gz",
+     "sha256": "c6b670273bdac5e96c78a2dd50c70a3b93bde60af6ead06ffb9f852c9e44c023",
+     "size": 1875557
+    },
+    "model": {
+     "path": "models/en-fi/retrain_hr_b45LsGaNQFyDRhHAvBbKrA/exported/model.enfi.intgemm.alphas.bin.gz",
+     "sha256": "e75f0b5e86b03273ac1cca68184544913a0ff6483d6f9a01defd19bf973e49cf",
+     "size": 22580027,
+     "uncompressedSha256": "88b0caa4cc6980d632801cb2b1950748f1dc43ad2ac83678917ad86c720b5cdd",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/en-fi/retrain_hr_b45LsGaNQFyDRhHAvBbKrA/exported/vocab.enfi.spm.gz",
+     "sha256": "607524d7b6b8460d823c6b0e90a6593be682bc334a6f9c2c0f0d3767be66bdf9",
+     "size": 414280
+    }
+   }
+  },
+  "en-fr": {
+   "from": "en",
+   "to": "fr",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-fr/retrain_hr_NLIxDbE1TBGyOTI-zwZagw/exported/lex.50.50.enfr.s2t.bin.gz",
+     "sha256": "055987f0b585b61c4914fb4469e2392fda0b25d3f7784275974f920e7b631997",
+     "size": 2297334
+    },
+    "model": {
+     "path": "models/en-fr/retrain_hr_NLIxDbE1TBGyOTI-zwZagw/exported/model.enfr.intgemm.alphas.bin.gz",
+     "sha256": "22cdaf3dc9a1da6e5818b5576737182467f3cd97e6fd6f94e4273eb7b56d1e3f",
+     "size": 23045432,
+     "uncompressedSha256": "6322e296d4fecfe395a8d5723da4ec37ecbe6d7613bb1dfcf4b28e2a47498b68",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/en-fr/retrain_hr_NLIxDbE1TBGyOTI-zwZagw/exported/vocab.enfr.spm.gz",
+     "sha256": "5dcadaad8191fb4eb7677bce07098a20221dec95976a4db796f3a17cc82b4541",
+     "size": 409706
+    }
+   }
+  },
+  "en-gl": {
+   "from": "en",
+   "to": "gl",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-gl/engl-finetranslations_d_vpGU94Qz-VGUAvC-QW1w/exported/lex.50.50.engl.s2t.bin.gz",
+     "sha256": "3df735baa7c32d22d2e8d42f7279fbcc059e384f5c60be6f641dd621a5ea756d",
+     "size": 1598079
+    },
+    "model": {
+     "path": "models/en-gl/engl-finetranslations_d_vpGU94Qz-VGUAvC-QW1w/exported/model.engl.intgemm.alphas.bin.gz",
+     "sha256": "a1c5bb32756e0165ac3cb9cd5d68eabb08db5d649d532e38be0728729bbb33ef",
+     "size": 23427851,
+     "uncompressedSha256": "bec08e5408932c3813ccfb565ab7003d334dd6ca148c9d2bd074e17b8c0be1b1",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/en-gl/engl-finetranslations_d_vpGU94Qz-VGUAvC-QW1w/exported/vocab.engl.spm.gz",
+     "sha256": "160e04cc1f2b165d7f17b27027c74d144660589b155f17832ad754657cd8587e",
+     "size": 410563
+    }
+   }
+  },
+  "en-gu": {
+   "from": "en",
+   "to": "gu",
+   "architecture": "tiny",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-gu/h1-2025_Na2-WpCIR1Sdy17l-XDeLA/exported/lex.50.50.engu.s2t.bin.gz",
+     "sha256": "2ab0f92654a4314fc64ad52cfec32aaa1d187e969d209990fcac41c96a5073ae",
+     "size": 1529098
+    },
+    "model": {
+     "path": "models/en-gu/h1-2025_Na2-WpCIR1Sdy17l-XDeLA/exported/model.engu.intgemm.alphas.bin.gz",
+     "sha256": "66003a2deb5b2bdf65748c344dbbb94d73b8f225aea3a66caab17b41c5e0ad2e",
+     "size": 12657911,
+     "uncompressedSha256": "0f2c8bc7f13ecb9b89459e8fd9af6d8736e0f6b1c8f8a80f747fcdc030d0a588",
+     "uncompressedSize": 17141051
+    },
+    "vocab": {
+     "path": "models/en-gu/h1-2025_Na2-WpCIR1Sdy17l-XDeLA/exported/vocab.engu.spm.gz",
+     "sha256": "9f79169080b255c5683d9ad6cc263724b09b215cc1010cd7b9a2f5de2dcd5748",
+     "size": 434881
+    }
+   }
+  },
+  "en-he": {
+   "from": "en",
+   "to": "he",
+   "architecture": "tiny",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-he/h1-2025_QtanzRiDRISacRVw4WzWYQ/exported/lex.50.50.enhe.s2t.bin.gz",
+     "sha256": "8dda768bc3a852547dd141e2945cdd9667eb2ffa3837bdb4a917f3f95481897c",
+     "size": 1567190
+    },
+    "model": {
+     "path": "models/en-he/h1-2025_QtanzRiDRISacRVw4WzWYQ/exported/model.enhe.intgemm.alphas.bin.gz",
+     "sha256": "61a2281fbef3dc440c9e9a8a3c064e34addf4a63fe584b1e523b7ee809b1870e",
+     "size": 12979964,
+     "uncompressedSha256": "e37ac6e6f131704c85deb94a657aa20afbb44db2879f44aec9c33a34f4467587",
+     "uncompressedSize": 17141051
+    },
+    "vocab": {
+     "path": "models/en-he/h1-2025_QtanzRiDRISacRVw4WzWYQ/exported/vocab.enhe.spm.gz",
+     "sha256": "4eee1f6ed468177c2397976cfaddaa58a61966944a732579957cc27b480b7ab6",
+     "size": 411686
+    }
+   }
+  },
+  "en-hi": {
+   "from": "en",
+   "to": "hi",
+   "architecture": "tiny",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-hi/h1-2025_KoJuCNf_Q42R2Bz6j2jlOQ/exported/lex.50.50.enhi.s2t.bin.gz",
+     "sha256": "ce5f1dd9d4fb343cb6e0da91e4603e50b673b91ea22b50b959a0dc199d4e9dd9",
+     "size": 1690062
+    },
+    "model": {
+     "path": "models/en-hi/h1-2025_KoJuCNf_Q42R2Bz6j2jlOQ/exported/model.enhi.intgemm.alphas.bin.gz",
+     "sha256": "751032330fe04b9dd4e1245c4dcf8f58dd6836daa7ed3f3b93be52eb1fca9ba4",
+     "size": 12736263,
+     "uncompressedSha256": "18682fa6aa1c1b2f78a6fcbcb354755094d623e65436ef7821720c5213e11a49",
+     "uncompressedSize": 17141051
+    },
+    "vocab": {
+     "path": "models/en-hi/h1-2025_KoJuCNf_Q42R2Bz6j2jlOQ/exported/vocab.enhi.spm.gz",
+     "sha256": "bb3bf8252b14fa57100beb371824cf51a7281e833a3becec135721fe679ce076",
+     "size": 430026
+    }
+   }
+  },
+  "en-hr": {
+   "from": "en",
+   "to": "hr",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-hr/hbs-topk10_PLHJ-5OxSNyWlwZM12Kghw/exported/lex.50.50.enhr.s2t.bin.gz",
+     "sha256": "762e3a5f92e10219464e12bdb57bc613aeec61831fe620f614141f16dbc65cf7",
+     "size": 1713561
+    },
+    "model": {
+     "path": "models/en-hr/hbs-topk10_PLHJ-5OxSNyWlwZM12Kghw/exported/model.enhr.intgemm.alphas.bin.gz",
+     "sha256": "fc8c132323b62fa91d2413532444825e727e660bb466fd7fe403d1b391a1afdc",
+     "size": 22758240,
+     "uncompressedSha256": "2f34590dff70aec009d3c6e9bee7a4a18aa6a0a1978c7dc49c686eb454b77704",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/en-hr/hbs-topk10_PLHJ-5OxSNyWlwZM12Kghw/exported/vocab.enhr.spm.gz",
+     "sha256": "5f32baf8df8f3203b3e85aa4997fa93e561434f3c1daa85b952e474710617989",
+     "size": 410897
+    }
+   }
+  },
+  "en-hu": {
+   "from": "en",
+   "to": "hu",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-hu/next26_Tzv045N-SASkA8X287pEqg/exported/lex.50.50.enhu.s2t.bin.gz",
+     "sha256": "b504786f6e25eb788272d07cdaa331f9ff7e15728d272c2420319b2b172cf0ef",
+     "size": 1794658
+    },
+    "model": {
+     "path": "models/en-hu/next26_Tzv045N-SASkA8X287pEqg/exported/model.enhu.intgemm.alphas.bin.gz",
+     "sha256": "3c0d834c5b4542b5af34c2fe97cab15bd13f41192b4b5f1269c43d8376f8d5d8",
+     "size": 22889950,
+     "uncompressedSha256": "0c42f56edca74b3f732a74c64553c47d0005b50cf095f43024601985fab5d461",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/en-hu/next26_Tzv045N-SASkA8X287pEqg/exported/vocab.enhu.spm.gz",
+     "sha256": "a3d762e07561ede58968703ed9dbcb0b281fbb1a58c99160dd2cb1fffa2feb04",
+     "size": 421527
+    }
+   }
+  },
+  "en-id": {
+   "from": "en",
+   "to": "id",
+   "architecture": "tiny",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-id/spring-2024_bbjDBFoDTNGSUo2if3ET_A/exported/lex.50.50.enid.s2t.bin.gz",
+     "sha256": "41853979c81022487542eceed4994078bd144c63fff84a421616f3cc8f3162c1",
+     "size": 1734565
+    },
+    "model": {
+     "path": "models/en-id/spring-2024_bbjDBFoDTNGSUo2if3ET_A/exported/model.enid.intgemm.alphas.bin.gz",
+     "sha256": "08bf854041ee20e955c013f17d86ae562b29388304151071e176b579e78fb0be",
+     "size": 12503257,
+     "uncompressedSha256": "f81f13eef703a4e0650ffc3138a0f4bab7b6c8bfd173ef1b7bda68d16b8bc7e8",
+     "uncompressedSize": 17141051
+    },
+    "vocab": {
+     "path": "models/en-id/spring-2024_bbjDBFoDTNGSUo2if3ET_A/exported/vocab.enid.spm.gz",
+     "sha256": "49af04de6f0e3c21afcb274e7a6931c8f9efae38932e2671b692bf1b6f6d279b",
+     "size": 379806
+    }
+   }
+  },
+  "en-is": {
+   "from": "en",
+   "to": "is",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-is/docmt-vocab_EkZBaZqDS5Cce_lC2BpxlA/exported/lex.50.50.enis.s2t.bin.gz",
+     "sha256": "ac58e32149fde7fc848312ff4eb2b41679d08d2244ee329085d147bd776457e9",
+     "size": 1977789
+    },
+    "model": {
+     "path": "models/en-is/docmt-vocab_EkZBaZqDS5Cce_lC2BpxlA/exported/model.enis.intgemm.alphas.bin.gz",
+     "sha256": "2197e9070d9da37ad15cd9b71650006bc1703ef84b09e136d25dbda025a793df",
+     "size": 22588003,
+     "uncompressedSha256": "459626236a49158aa555facd23e5f594e2f8416f4ebad32e0548af94c5b1ae0c",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/en-is/docmt-vocab_EkZBaZqDS5Cce_lC2BpxlA/exported/vocab.enis.spm.gz",
+     "sha256": "38d5822b0b6de5198d28c0c60fd87b3957d2b02b1bc9882778e6cc04dc8a79db",
+     "size": 413543
+    }
+   }
+  },
+  "en-it": {
+   "from": "en",
+   "to": "it",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-it/retrain_hr_fix_names_GPSr_u8PSmC9fOx1ZDCHoA/exported/lex.50.50.enit.s2t.bin.gz",
+     "sha256": "cd7ef06c0b872c15286a9796f105eb62693f14665490546ac70ce1c6c8f16d47",
+     "size": 2209348
+    },
+    "model": {
+     "path": "models/en-it/retrain_hr_fix_names_GPSr_u8PSmC9fOx1ZDCHoA/exported/model.enit.intgemm.alphas.bin.gz",
+     "sha256": "cfff470e9f29e27132723589a8bc985648f92773410e5f6fc43293d9e19f97f1",
+     "size": 23892889,
+     "uncompressedSha256": "248f47568788ecc351da7e5e07064d4153b4f71e011364ae2c931ffeec4d1cc2",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/en-it/retrain_hr_fix_names_GPSr_u8PSmC9fOx1ZDCHoA/exported/vocab.enit.spm.gz",
+     "sha256": "8f99a6f493bf7e1a03fbba19928d7dc7bf9a1b7938238467f3e80a58c0d50485",
+     "size": 407598
+    }
+   }
+  },
+  "en-ja": {
+   "from": "en",
+   "to": "ja",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-ja/llmaat_finetune10M_qe8_f2_ApiGGQIwTKuF9i_k3n9Q2Q/exported/lex.50.50.enja.s2t.bin.gz",
+     "sha256": "7966382f7a9ba15993c67721526921d8901caa0f8add56eff04e4bb327d57c11",
+     "size": 2341409
+    },
+    "model": {
+     "path": "models/en-ja/llmaat_finetune10M_qe8_f2_ApiGGQIwTKuF9i_k3n9Q2Q/exported/model.enja.intgemm.alphas.bin.gz",
+     "sha256": "99fc8fc120189930beadacb2eef4b049d0794ac6132d1266340e457c95730368",
+     "size": 33052218,
+     "uncompressedSha256": "59ae659f9bb63e4f81f474fe3c03d3f4499434b5f9e779fab7c12a45f31fd562",
+     "uncompressedSize": 43849787
+    },
+    "srcVocab": {
+     "path": "models/en-ja/llmaat_finetune10M_qe8_f2_ApiGGQIwTKuF9i_k3n9Q2Q/exported/srcvocab.enja.spm.gz",
+     "sha256": "12d8ffc83fc0bb61494d95701f6a298bbad5c999a043d4a48a1c1bd61e092167",
+     "size": 404352
+    },
+    "trgVocab": {
+     "path": "models/en-ja/llmaat_finetune10M_qe8_f2_ApiGGQIwTKuF9i_k3n9Q2Q/exported/trgvocab.enja.spm.gz",
+     "sha256": "be7fec234b5fc94616276ee6cca69f3a8cbfa6762fdf278dfc6b11eaf669cc48",
+     "size": 431278
+    }
+   }
+  },
+  "en-kn": {
+   "from": "en",
+   "to": "kn",
+   "architecture": "tiny",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-kn/h1-2025_DDVsjRwsQ8GL3-JAiAmmfQ/exported/lex.50.50.enkn.s2t.bin.gz",
+     "sha256": "3227fa0bba2fbec768b2648fec014bea5cb5384d85c0199afb36abe5281db658",
+     "size": 1416160
+    },
+    "model": {
+     "path": "models/en-kn/h1-2025_DDVsjRwsQ8GL3-JAiAmmfQ/exported/model.enkn.intgemm.alphas.bin.gz",
+     "sha256": "e7f684fea84a6a69522e77388fd09f015b513511ed36192f0493d0faf52380ad",
+     "size": 13009213,
+     "uncompressedSha256": "17a5ddc86e24f62c04aa15272930275812b5c1674bec50a877528680d5834d2d",
+     "uncompressedSize": 17141051
+    },
+    "vocab": {
+     "path": "models/en-kn/h1-2025_DDVsjRwsQ8GL3-JAiAmmfQ/exported/vocab.enkn.spm.gz",
+     "sha256": "2a501f3862d4e27269c457f82084a714a03f44b7e05ce92daef5dff0389f8860",
+     "size": 450046
+    }
+   }
+  },
+  "en-ko": {
+   "from": "en",
+   "to": "ko",
+   "architecture": "base",
+   "releaseStatus": "Release Desktop",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-ko/cjk_hplt2_Fzrv_XPwTs6KVNkktUeuOA/exported/lex.50.50.enko.s2t.bin.gz",
+     "sha256": "edba23122463a94c4c6038ac6ac78ec3ae3655d73c717bc14a92b7a3a285cbe6",
+     "size": 3697379
+    },
+    "model": {
+     "path": "models/en-ko/cjk_hplt2_Fzrv_XPwTs6KVNkktUeuOA/exported/model.enko.intgemm.alphas.bin.gz",
+     "sha256": "582f6dfeb263b3131f59e76155ce625d7147ae7961c271e2df7512a205268318",
+     "size": 45488445,
+     "uncompressedSha256": "1c310a79b61b8824b2eb26b045db043d92722f3e66ea06998f7c89f48da9f6bc",
+     "uncompressedSize": 59504955
+    },
+    "vocab": {
+     "path": "models/en-ko/cjk_hplt2_Fzrv_XPwTs6KVNkktUeuOA/exported/vocab.enko.spm.gz",
+     "sha256": "898aaf7e3cb7a2c93f8cb7905f878b87624b1a00ab183f4338e5aa2ff793f203",
+     "size": 706904
+    }
+   }
+  },
+  "en-lt": {
+   "from": "en",
+   "to": "lt",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-lt/h1-2025_CpawQ31iTrmnax9Xi0DkBw/exported/lex.50.50.enlt.s2t.bin.gz",
+     "sha256": "50fac179bb99a9cabbe3dea1f7d23df50b8342cad4fe8fe4ba93ad31e36a867b",
+     "size": 1769752
+    },
+    "model": {
+     "path": "models/en-lt/h1-2025_CpawQ31iTrmnax9Xi0DkBw/exported/model.enlt.intgemm.alphas.bin.gz",
+     "sha256": "5ad6f4e62d3ef8cc63310bcce79c69ea59c2c25bb7b966bcc269ca32dcacc004",
+     "size": 22865642,
+     "uncompressedSha256": "d27c676d9d761c2abfffec83956e32b2923f3f745b56acdbd84c49d888cdc94e",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/en-lt/h1-2025_CpawQ31iTrmnax9Xi0DkBw/exported/vocab.enlt.spm.gz",
+     "sha256": "a337b0ec21968a4dbdb147e755f9b34f59ae438192f7148da607dbae9c839b87",
+     "size": 403356
+    }
+   }
+  },
+  "en-lv": {
+   "from": "en",
+   "to": "lv",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-lv/h1-2025_L9sajlF2TCKfEzDro4tK3Q/exported/lex.50.50.enlv.s2t.bin.gz",
+     "sha256": "f5cdd08a781f95aaa8473c0286d4878a7935aedd591b4ce00abc2a30a5a0c5d9",
+     "size": 1725879
+    },
+    "model": {
+     "path": "models/en-lv/h1-2025_L9sajlF2TCKfEzDro4tK3Q/exported/model.enlv.intgemm.alphas.bin.gz",
+     "sha256": "559b5f51424888b10b1872e7348906e946ac702d62b1ef9872ecb49ea865537d",
+     "size": 23727668,
+     "uncompressedSha256": "715f9f444dffa0b39e71955c28bffd30afa4cc8300a192ec8fabb766cc5ba11d",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/en-lv/h1-2025_L9sajlF2TCKfEzDro4tK3Q/exported/vocab.enlv.spm.gz",
+     "sha256": "9a76e5785b64445762b1771ba9c15468e20794530e332880a25999362c7c7774",
+     "size": 407540
+    }
+   }
+  },
+  "en-ml": {
+   "from": "en",
+   "to": "ml",
+   "architecture": "tiny",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-ml/h1-2025_UylcthuMRoelqd6lsCbXJw/exported/lex.50.50.enml.s2t.bin.gz",
+     "sha256": "f8b294d0a490b8dfd60d300cc6688eef6fcb5f519f9b17ac05c137bb20bfc804",
+     "size": 1275347
+    },
+    "model": {
+     "path": "models/en-ml/h1-2025_UylcthuMRoelqd6lsCbXJw/exported/model.enml.intgemm.alphas.bin.gz",
+     "sha256": "276ea5a40a974ac039ff83e0594986a8110820602eedff616838e8914e2e6d91",
+     "size": 12570038,
+     "uncompressedSha256": "c461749c8315f6417104cf4df32e5063e86cb101203f9629512294c1c8ab5337",
+     "uncompressedSize": 17141051
+    },
+    "vocab": {
+     "path": "models/en-ml/h1-2025_UylcthuMRoelqd6lsCbXJw/exported/vocab.enml.spm.gz",
+     "sha256": "388cfec515765b48792a0be3fb383f9dc6aefbd646c1e09ec3440fc8ce18a6df",
+     "size": 454768
+    }
+   }
+  },
+  "en-mr": {
+   "from": "en",
+   "to": "mr",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-mr/indictrans2-teacher_YxWwPatgTHy0imIiIafh5A/exported/lex.50.50.enmr.s2t.bin.gz",
+     "sha256": "d82ee8a5263ea6ea6f381fe3b7dbb5c1b9824b4b913624d13d06f7ecba3b17f9",
+     "size": 1401383
+    },
+    "model": {
+     "path": "models/en-mr/indictrans2-teacher_YxWwPatgTHy0imIiIafh5A/exported/model.enmr.intgemm.alphas.bin.gz",
+     "sha256": "abe49fc43de91f56acaa9a54ca12af46af54831536ceff05d44f1884646a0c14",
+     "size": 22896929,
+     "uncompressedSha256": "1520f77c2f1c703b6148e4452b376ac28aec1e63c467eedec8a986864827ce8c",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/en-mr/indictrans2-teacher_YxWwPatgTHy0imIiIafh5A/exported/vocab.enmr.spm.gz",
+     "sha256": "7b0177f027fb647137a9907b51584593a77679fdd6b3a8b296016e2f4b4b1615",
+     "size": 443275
+    }
+   }
+  },
+  "en-ms": {
+   "from": "en",
+   "to": "ms",
+   "architecture": "tiny",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-ms/h1-2025_Ba76abX1Qtums6Vbv95tzg/exported/lex.50.50.enms.s2t.bin.gz",
+     "sha256": "af50b88c0072cc3762774f2d5021911cbf40e577cf2903e80824397e5abdffb1",
+     "size": 2044118
+    },
+    "model": {
+     "path": "models/en-ms/h1-2025_Ba76abX1Qtums6Vbv95tzg/exported/model.enms.intgemm.alphas.bin.gz",
+     "sha256": "d067740465b320693c79d9ebe32b9de911a3340d0a0b2ff408a3e9126980af49",
+     "size": 13039668,
+     "uncompressedSha256": "3d6961462ffa711413d513624d7e6399b3560c2b0994daa73b0a45699e657af8",
+     "uncompressedSize": 17141051
+    },
+    "vocab": {
+     "path": "models/en-ms/h1-2025_Ba76abX1Qtums6Vbv95tzg/exported/vocab.enms.spm.gz",
+     "sha256": "26c4054e6712e3ad44a4a28ebb4e91dcd0f9b41848997bbfaf90ba5aee3fc99c",
+     "size": 404033
+    }
+   }
+  },
+  "en-nb": {
+   "from": "en",
+   "to": "nb",
+   "architecture": "tiny",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-nb/h1-2025_A0d8NsivR6Szy2dI4Nz6FQ/exported/lex.50.50.ennb.s2t.bin.gz",
+     "sha256": "167cf6486244d0058495f7705ceda5635a2c58a605c4ad39357622080cf4e93d",
+     "size": 2193397
+    },
+    "model": {
+     "path": "models/en-nb/h1-2025_A0d8NsivR6Szy2dI4Nz6FQ/exported/model.ennb.intgemm.alphas.bin.gz",
+     "sha256": "c543860054818a8a5f6bf0fa782c9c538658b35bcb01bf0f56f7f880e25f6b7e",
+     "size": 12713727,
+     "uncompressedSha256": "78429eb7f544361061c9d9ec2f0872adf30b76e4c9ef3dbaab1210a0f2aa19b5",
+     "uncompressedSize": 17141051
+    },
+    "vocab": {
+     "path": "models/en-nb/h1-2025_A0d8NsivR6Szy2dI4Nz6FQ/exported/vocab.ennb.spm.gz",
+     "sha256": "76e2cc7654d8282a8dc5b139a78d047aa2e71563cf671bd15f4dfc9bfdf75dad",
+     "size": 409037
+    }
+   }
+  },
+  "en-nl": {
+   "from": "en",
+   "to": "nl",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-nl/retrain_hr_fix_names_fR8XhBiBQniIbi4I_ebJ2Q/exported/lex.50.50.ennl.s2t.bin.gz",
+     "sha256": "b95c612e69270142c352589b4082b936810ec02ab7842c2a573bab6441709d06",
+     "size": 2155034
+    },
+    "model": {
+     "path": "models/en-nl/retrain_hr_fix_names_fR8XhBiBQniIbi4I_ebJ2Q/exported/model.ennl.intgemm.alphas.bin.gz",
+     "sha256": "a1ab24477ca1289e123e9a2817434f99b47b9b5e461ec65ad273f3dd394814a2",
+     "size": 23386633,
+     "uncompressedSha256": "7e8402da61972dc2fdcf7147c7f1e12f7916a6d9349514ee7a731288357575a9",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/en-nl/retrain_hr_fix_names_fR8XhBiBQniIbi4I_ebJ2Q/exported/vocab.ennl.spm.gz",
+     "sha256": "0b12be4ccd0ee5182ad7e8ecd3254eece806ae183bece90fa625ceae7c851f80",
+     "size": 410222
+    }
+   }
+  },
+  "en-no": {
+   "from": "en",
+   "to": "no",
+   "architecture": "tiny",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-no/h1-2025_A0d8NsivR6Szy2dI4Nz6FQ/exported/lex.50.50.enno.s2t.bin.gz",
+     "sha256": "167cf6486244d0058495f7705ceda5635a2c58a605c4ad39357622080cf4e93d",
+     "size": 2193397
+    },
+    "model": {
+     "path": "models/en-no/h1-2025_A0d8NsivR6Szy2dI4Nz6FQ/exported/model.enno.intgemm.alphas.bin.gz",
+     "sha256": "c543860054818a8a5f6bf0fa782c9c538658b35bcb01bf0f56f7f880e25f6b7e",
+     "size": 12713727,
+     "uncompressedSha256": "78429eb7f544361061c9d9ec2f0872adf30b76e4c9ef3dbaab1210a0f2aa19b5",
+     "uncompressedSize": 17141051
+    },
+    "vocab": {
+     "path": "models/en-no/h1-2025_A0d8NsivR6Szy2dI4Nz6FQ/exported/vocab.enno.spm.gz",
+     "sha256": "76e2cc7654d8282a8dc5b139a78d047aa2e71563cf671bd15f4dfc9bfdf75dad",
+     "size": 409037
+    }
+   }
+  },
+  "en-pl": {
+   "from": "en",
+   "to": "pl",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-pl/retrain_hr_fix_names_YmTlfuUsSKCbUp75UXaUuw/exported/lex.50.50.enpl.s2t.bin.gz",
+     "sha256": "6e7cbf38d9298877d9631a33a7bd3608326ba169be9a0fe9c7b2ee0c6c7e6d59",
+     "size": 1874327
+    },
+    "model": {
+     "path": "models/en-pl/retrain_hr_fix_names_YmTlfuUsSKCbUp75UXaUuw/exported/model.enpl.intgemm.alphas.bin.gz",
+     "sha256": "80b549e5f4d1d1db3f66f850c71683c9449a259e6eac2abe3b8f04f0781088ed",
+     "size": 22577447,
+     "uncompressedSha256": "b0b59716bcc8f46b8dc6ab5c32a2732acaad42a5a6d9ae9b472526a1bb0d71d4",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/en-pl/retrain_hr_fix_names_YmTlfuUsSKCbUp75UXaUuw/exported/vocab.enpl.spm.gz",
+     "sha256": "13b8f1dc8bf7a29d052008d78aa4429b1311f8fd0fcb63c5490fe1714b00606c",
+     "size": 413194
+    }
+   }
+  },
+  "en-pt": {
+   "from": "en",
+   "to": "pt",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-pt/retrain_hr_fix_names_Vnb0RUXTTd67hR-oLHM3eg/exported/lex.50.50.enpt.s2t.bin.gz",
+     "sha256": "265cff4ca31d3fc95628181de98cf668868b44903d69680284dc456aa4191545",
+     "size": 2117608
+    },
+    "model": {
+     "path": "models/en-pt/retrain_hr_fix_names_Vnb0RUXTTd67hR-oLHM3eg/exported/model.enpt.intgemm.alphas.bin.gz",
+     "sha256": "afb5ae08a2e40b622cd191584cca1df00721fea43de85cec74191fc180370f08",
+     "size": 23340019,
+     "uncompressedSha256": "07892fd2544ee79dcb643615d8f2debb9793fae16842e87c328e27a3dd26a770",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/en-pt/retrain_hr_fix_names_Vnb0RUXTTd67hR-oLHM3eg/exported/vocab.enpt.spm.gz",
+     "sha256": "c2fbaf26f10563c77fa95cca465ad3666f61dd08bfaef5bb170abd582901f389",
+     "size": 408686
+    }
+   }
+  },
+  "en-ro": {
+   "from": "en",
+   "to": "ro",
+   "architecture": "tiny",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-ro/spring-2024_Ov3G4D_DRJa-4qTlILkPhg/exported/lex.50.50.enro.s2t.bin.gz",
+     "sha256": "a64099f219a6e4eee89085283ace66e8f0171d43b168ba155dffc2fa4dcdc9b1",
+     "size": 1846074
+    },
+    "model": {
+     "path": "models/en-ro/spring-2024_Ov3G4D_DRJa-4qTlILkPhg/exported/model.enro.intgemm.alphas.bin.gz",
+     "sha256": "3596ee3bc1461c96f28edf200f4235fdfd4e0cb8434fa86ad04762d4a10d7a66",
+     "size": 12207487,
+     "uncompressedSha256": "aa98c415e5beb1c5ee2f7d2508a3bbba949be223d7d9e5e1788ad0ae8598dda5",
+     "uncompressedSize": 17141051
+    },
+    "vocab": {
+     "path": "models/en-ro/spring-2024_Ov3G4D_DRJa-4qTlILkPhg/exported/vocab.enro.spm.gz",
+     "sha256": "61a75f040f035844ec5d54edf5f80831cd8ad58bfa539a7e707a7f6a5bd25c63",
+     "size": 397137
+    }
+   }
+  },
+  "en-ru": {
+   "from": "en",
+   "to": "ru",
+   "architecture": "base",
+   "releaseStatus": "Release Desktop",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-ru/student_base_AYqN3ysXRp2EGkEqeaA5Rg/exported/lex.50.50.enru.s2t.bin.gz",
+     "sha256": "6f00f5d955b8b259cb4a78e5badf0958e5fef3ce153fd77a6dea0324518bb1b8",
+     "size": 1348215
+    },
+    "model": {
+     "path": "models/en-ru/student_base_AYqN3ysXRp2EGkEqeaA5Rg/exported/model.enru.intgemm.alphas.bin.gz",
+     "sha256": "3c6e3ffd275c96a220ae28ddb55b8c2b86b44ffecc1eeb6c8195c1536de4ac74",
+     "size": 30698731,
+     "uncompressedSha256": "0ef9a209c5edc46692750e7505b3695655b1c7c3ec73058b641201ef18c481ce",
+     "uncompressedSize": 42992955
+    },
+    "vocab": {
+     "path": "models/en-ru/student_base_AYqN3ysXRp2EGkEqeaA5Rg/exported/vocab.enru.spm.gz",
+     "sha256": "07ed9055319f2adc50a16bc7e636fe1547ab745eb986e40b6384956dc1fc6cfd",
+     "size": 419005
+    }
+   }
+  },
+  "en-sk": {
+   "from": "en",
+   "to": "sk",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-sk/h1-2025_NbGVkenLTPiss8w800509A/exported/lex.50.50.ensk.s2t.bin.gz",
+     "sha256": "a772fa9a45d574bfedeeb6d92c7e7f8b0a8e765d5f7517cc62f8a847517a29b9",
+     "size": 1708788
+    },
+    "model": {
+     "path": "models/en-sk/h1-2025_NbGVkenLTPiss8w800509A/exported/model.ensk.intgemm.alphas.bin.gz",
+     "sha256": "71cec9a790bb24e673d47f41f2778491f5a84d00663fc739f94f50bcf0f49940",
+     "size": 22902983,
+     "uncompressedSha256": "e33af359fd58c8958104b1b74b3ea302800ccba2f125c1629e09d7f9dd9a3804",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/en-sk/h1-2025_NbGVkenLTPiss8w800509A/exported/vocab.ensk.spm.gz",
+     "sha256": "8fe4f76b56a8fa4aa48c60433306f536d19805116e104fc8230b3681ee99a8ed",
+     "size": 405652
+    }
+   }
+  },
+  "en-sl": {
+   "from": "en",
+   "to": "sl",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-sl/h1-2025_Ph0DK4RhRMe7z4cLk-f7eg/exported/lex.50.50.ensl.s2t.bin.gz",
+     "sha256": "c7b803feb615b1442e1caf4c3a4d34fd7660dc31ac1088146ad410e338a5391a",
+     "size": 1741316
+    },
+    "model": {
+     "path": "models/en-sl/h1-2025_Ph0DK4RhRMe7z4cLk-f7eg/exported/model.ensl.intgemm.alphas.bin.gz",
+     "sha256": "851c720e75803a92dae757086345cf5a3cd25740cc9990d08c42b234533d7601",
+     "size": 22669559,
+     "uncompressedSha256": "a34fc5cc2f52733f64e37f8512cf1ddc4723c08a7a1a59d01fc2b6e641fc2280",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/en-sl/h1-2025_Ph0DK4RhRMe7z4cLk-f7eg/exported/vocab.ensl.spm.gz",
+     "sha256": "07d9137c7e54457325d6b5220382b5f184d34903fa99cabc10f7b98869220124",
+     "size": 398763
+    }
+   }
+  },
+  "en-sq": {
+   "from": "en",
+   "to": "sq",
+   "architecture": "tiny",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-sq/h1-2025_HIreYm8_RDymI1qFdn0V5Q/exported/lex.50.50.ensq.s2t.bin.gz",
+     "sha256": "5574cfe5535581928b3bd7a84a064ae99e454662a28c8b25552de2aed2c8b685",
+     "size": 1599959
+    },
+    "model": {
+     "path": "models/en-sq/h1-2025_HIreYm8_RDymI1qFdn0V5Q/exported/model.ensq.intgemm.alphas.bin.gz",
+     "sha256": "d4e05ecf916e215e0d94e411217100ddfe61a1ea8057d47b5aa6e0296fa32f19",
+     "size": 13366206,
+     "uncompressedSha256": "8a90d17ab2798509e639e544caa1d577f7cf87c31b9ab7e53890c8d1d59b6eee",
+     "uncompressedSize": 17141051
+    },
+    "vocab": {
+     "path": "models/en-sq/h1-2025_HIreYm8_RDymI1qFdn0V5Q/exported/vocab.ensq.spm.gz",
+     "sha256": "ad4bf4db75d99c491f6ab972deec4e9af3777b1721666c55f71bb01c7d92025d",
+     "size": 410650
+    }
+   }
+  },
+  "en-sr": {
+   "from": "en",
+   "to": "sr",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-sr/hbs-topk10_KZK68xhrQWWeK6xcMRtd9A/exported/lex.50.50.ensr.s2t.bin.gz",
+     "sha256": "70f341b44df4810a74610acc8da8e2ccfb952ae429ce30bcc3eb1cfc88c6f44a",
+     "size": 1289317
+    },
+    "model": {
+     "path": "models/en-sr/hbs-topk10_KZK68xhrQWWeK6xcMRtd9A/exported/model.ensr.intgemm.alphas.bin.gz",
+     "sha256": "ba59dc385a47f64260a19509e3710d32170abab0f2b89cfa5b74f5a6243ffc4c",
+     "size": 23014587,
+     "uncompressedSha256": "d26e1c5a01f917c38ccda17d1bf116024ac4d988105e1bbf70bc5e8f9191c57a",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/en-sr/hbs-topk10_KZK68xhrQWWeK6xcMRtd9A/exported/vocab.ensr.spm.gz",
+     "sha256": "b4b18fbaea393097804f1bd2ea068a43700a5500569ec3499a27a98cd2aac328",
+     "size": 433623
+    }
+   }
+  },
+  "en-sv": {
+   "from": "en",
+   "to": "sv",
+   "architecture": "tiny",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-sv/spring-2024_bQQme71PS4eZRDl3NM-kgA/exported/lex.50.50.ensv.s2t.bin.gz",
+     "sha256": "0480c83e15f1d2dcee68873eee5fb66c2912884ab2757ff201e6b6ab9be38ed7",
+     "size": 1921270
+    },
+    "model": {
+     "path": "models/en-sv/spring-2024_bQQme71PS4eZRDl3NM-kgA/exported/model.ensv.intgemm.alphas.bin.gz",
+     "sha256": "f2fee438e0770428c06a4fa1e938175bf7c37f3a288313c317853b646437eb81",
+     "size": 12775086,
+     "uncompressedSha256": "65ea0db8e658435846f297384face62dbf1804cfc92de8388b0e368e6ecc25a7",
+     "uncompressedSize": 17141051
+    },
+    "vocab": {
+     "path": "models/en-sv/spring-2024_bQQme71PS4eZRDl3NM-kgA/exported/vocab.ensv.spm.gz",
+     "sha256": "534e7f952f6bb97903301332836bab5d76cbc965592a9f1af77ace05e84e2edf",
+     "size": 398384
+    }
+   }
+  },
+  "en-ta": {
+   "from": "en",
+   "to": "ta",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-ta/next26-nobcbpcc_RgO3iURPQH2EjhUm533NWA/exported/lex.50.50.enta.s2t.bin.gz",
+     "sha256": "49cef4534549e65f20eb34685f619d235d1e081856eb98f7e4e7f72ad04dae7c",
+     "size": 1434399
+    },
+    "model": {
+     "path": "models/en-ta/next26-nobcbpcc_RgO3iURPQH2EjhUm533NWA/exported/model.enta.intgemm.alphas.bin.gz",
+     "sha256": "ea49da91490cd9b9a8fa11e9a15997d0f8fafefd4b35d9fa5123028becbc6bbb",
+     "size": 23206004,
+     "uncompressedSha256": "83266ea604611756d1c3c358d7bed1fdf79a646c1f701b42c1db501c237c0f3b",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/en-ta/next26-nobcbpcc_RgO3iURPQH2EjhUm533NWA/exported/vocab.enta.spm.gz",
+     "sha256": "f298bd508aea203450897907cafe1238c5e917721864f361ae7038adafff57af",
+     "size": 449763
+    }
+   }
+  },
+  "en-te": {
+   "from": "en",
+   "to": "te",
+   "architecture": "tiny",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-te/h1-2025_J_7yoPHaRJqsevUR512RsQ/exported/lex.50.50.ente.s2t.bin.gz",
+     "sha256": "63eea185036a52cd43b70537ac3526a93dd8d04c7904daeffcf4a00d60f2ed6e",
+     "size": 1434105
+    },
+    "model": {
+     "path": "models/en-te/h1-2025_J_7yoPHaRJqsevUR512RsQ/exported/model.ente.intgemm.alphas.bin.gz",
+     "sha256": "975698af4c7810bdac720590fa6c1fc9dee57c6b68c7bca535314e8bb5d96754",
+     "size": 12590862,
+     "uncompressedSha256": "a3fee2fcd39df975da28666c536adff60147dce59062fca6097bb42fb2a52500",
+     "uncompressedSize": 17141051
+    },
+    "vocab": {
+     "path": "models/en-te/h1-2025_J_7yoPHaRJqsevUR512RsQ/exported/vocab.ente.spm.gz",
+     "sha256": "1048434654e9a22eb960ad738650ecd2b989a5699bb7621f2a275698642c480d",
+     "size": 448838
+    }
+   }
+  },
+  "en-th": {
+   "from": "en",
+   "to": "th",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-th/new-opuscleaner-en-th-onestage-topk10_WIvJuHhrSyiXLtJBJOUrsA/exported/lex.50.50.enth.s2t.bin.gz",
+     "sha256": "ae7b432685ed724d9f663e0b5b8fe834982597c679fb6f5afb2045d60cbd1d19",
+     "size": 1601933
+    },
+    "model": {
+     "path": "models/en-th/new-opuscleaner-en-th-onestage-topk10_WIvJuHhrSyiXLtJBJOUrsA/exported/model.enth.intgemm.alphas.bin.gz",
+     "sha256": "8e736bcca5844f977ee1ee653167e17bbc73d94e50bad18108335dba0b8b9837",
+     "size": 22976729,
+     "uncompressedSha256": "80e326097655fca75f841130da3338a849aa245374e1616448bcf37b9523a05a",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/en-th/new-opuscleaner-en-th-onestage-topk10_WIvJuHhrSyiXLtJBJOUrsA/exported/vocab.enth.spm.gz",
+     "sha256": "afa8d8be186df4c9b4acb684d9473e2dfd9f33e4f12b862fcef8cec34d323ecd",
+     "size": 450379
+    }
+   }
+  },
+  "en-tl": {
+   "from": "en",
+   "to": "tl",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-tl/next26-nllb-bc09_DGa0cH2-QKOhfrPkVbnJFQ/exported/lex.50.50.entl.s2t.bin.gz",
+     "sha256": "51e74c9c75fc915dafad998f4fe41a5607c1c37237f58178056b90a46d178748",
+     "size": 1412886
+    },
+    "model": {
+     "path": "models/en-tl/next26-nllb-bc09_DGa0cH2-QKOhfrPkVbnJFQ/exported/model.entl.intgemm.alphas.bin.gz",
+     "sha256": "b04d64df4bcc1eef3c8a697052a0e4542cbce1c56192e6a6d044b4766b787786",
+     "size": 23500661,
+     "uncompressedSha256": "33b71965ab9c9c533c63444551c9483e811dd540e75e4cfe21d062a83a60b72f",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/en-tl/next26-nllb-bc09_DGa0cH2-QKOhfrPkVbnJFQ/exported/vocab.entl.spm.gz",
+     "sha256": "8744f8a824935e4d5703ced3582180737ee52088da8be8d94ce321f0fea02627",
+     "size": 408817
+    }
+   }
+  },
+  "en-tr": {
+   "from": "en",
+   "to": "tr",
+   "architecture": "tiny",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-tr/spring-2024_LiFGeNrEQpKdNlziG2qP_A/exported/lex.50.50.entr.s2t.bin.gz",
+     "sha256": "cf74d4edec0b51affd30a43e6bd2c2274bf4ce7fd54c24fd293db2c5c4bf043d",
+     "size": 1546258
+    },
+    "model": {
+     "path": "models/en-tr/spring-2024_LiFGeNrEQpKdNlziG2qP_A/exported/model.entr.intgemm.alphas.bin.gz",
+     "sha256": "52d10136b1a4804879989aa9ee146e83ced75aa0ce2d371b4e582473ed6b9020",
+     "size": 13159314,
+     "uncompressedSha256": "ea3cd4ee09de190df265c78d84260e277a9a8a3ddff05eb55d72afe7fc0fdbf4",
+     "uncompressedSize": 17141051
+    },
+    "vocab": {
+     "path": "models/en-tr/spring-2024_LiFGeNrEQpKdNlziG2qP_A/exported/vocab.entr.spm.gz",
+     "sha256": "01e55973e65a34c5efbdce3968857d4e53998b4bef131c5125a19f8e44d8f87c",
+     "size": 395473
+    }
+   }
+  },
+  "en-ug": {
+   "from": "en",
+   "to": "ug",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-ug/davidv-hymt2_xxxxxxxxRxSxxxxxxxxxxA/exported/lex.50.50.enug.s2t.bin.gz",
+     "sha256": "565a6a52a99efc2567fe5f59bacf6c89fc60522a0ed47965eab22c73ec4fb9c9",
+     "size": 990376
+    },
+    "model": {
+     "path": "models/en-ug/davidv-hymt2_xxxxxxxxRxSxxxxxxxxxxA/exported/model.enug.intgemm.alphas.bin.gz",
+     "sha256": "383d92e0d75e809d34b7f660fbfe0244274a50170c173750acba28c3ac50087e",
+     "size": 24223157,
+     "uncompressedSha256": "0fe41f8efab57c8f763d82af523f0219f5e4b90d559abccb4bf0c51d6af16660",
+     "uncompressedSize": 31561635
+    },
+    "vocab": {
+     "path": "models/en-ug/davidv-hymt2_xxxxxxxxRxSxxxxxxxxxxA/exported/vocab.enug.spm.gz",
+     "sha256": "a4b7e3d1b265393cc9b2cbe12681853c47f8336876417d225031a8be832e64ff",
+     "size": 406290
+    }
+   }
+  },
+  "en-uk": {
+   "from": "en",
+   "to": "uk",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-uk/docmt-vocab_a2OVwdI-Sg-SBZ_0Joqb0w/exported/lex.50.50.enuk.s2t.bin.gz",
+     "sha256": "0c368488f43c5165c341b5112a02e42a1fabcc7bd0103d56262da025a9b3196f",
+     "size": 1564122
+    },
+    "model": {
+     "path": "models/en-uk/docmt-vocab_a2OVwdI-Sg-SBZ_0Joqb0w/exported/model.enuk.intgemm.alphas.bin.gz",
+     "sha256": "a832a434ce97764c285dd9f7c193d0c283b80a61bf93fbafdcb8a6bd02273e12",
+     "size": 22864374,
+     "uncompressedSha256": "ed8bb4a811e1c45a259e91052080d25e5c8b4e2df0e59cb1521c04a57855ef97",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/en-uk/docmt-vocab_a2OVwdI-Sg-SBZ_0Joqb0w/exported/vocab.enuk.spm.gz",
+     "sha256": "3e8e291d2c09f9ef98bace26e8092269807bbdad69f367d9a11b5c7c2cc009bb",
+     "size": 436850
+    }
+   }
+  },
+  "en-ur": {
+   "from": "en",
+   "to": "ur",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-ur/indictrans2_SUOSu0mESlOMc6IkS5_3sQ/exported/lex.50.50.enur.s2t.bin.gz",
+     "sha256": "5b41a291b3e8bf5ea216a99c2e47d583427b16f6a3d173fdc1a4ff4b6f46efc8",
+     "size": 1498625
+    },
+    "model": {
+     "path": "models/en-ur/indictrans2_SUOSu0mESlOMc6IkS5_3sQ/exported/model.enur.intgemm.alphas.bin.gz",
+     "sha256": "6cfe125daa21fcb9b3b602152fd4961ef47e609a9272ef14b788c1be2bd4435d",
+     "size": 22684591,
+     "uncompressedSha256": "0c29a5776a42ccb68f7969f41e64c0cd7a16ff00a5bfed0ed2809039febc202e",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/en-ur/indictrans2_SUOSu0mESlOMc6IkS5_3sQ/exported/vocab.enur.spm.gz",
+     "sha256": "7d3a5e2f33c1e6959beadb7e31427046d13f588a7becbcb51f54bc1ea31862a1",
+     "size": 417745
+    }
+   }
+  },
+  "en-vi": {
+   "from": "en",
+   "to": "vi",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-vi/test_prompsit_Ep8JhBQ3QRizDT91JVy8KQ/exported/lex.50.50.envi.s2t.bin.gz",
+     "sha256": "12e8809c89d33dd1052c1619733d84fb7be9f49e5e72102e71fcf9f13c47737a",
+     "size": 2246027
+    },
+    "model": {
+     "path": "models/en-vi/test_prompsit_Ep8JhBQ3QRizDT91JVy8KQ/exported/model.envi.intgemm.alphas.bin.gz",
+     "sha256": "0c0c339e218ca55ee577e4f0f800ba5bd0ad57f76ac940978e95663cf36bbe4a",
+     "size": 24244705,
+     "uncompressedSha256": "04fa6044593a404c2aa02b3096f203880852df6f8f41e5eb966ed9f2b4366737",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/en-vi/test_prompsit_Ep8JhBQ3QRizDT91JVy8KQ/exported/vocab.envi.spm.gz",
+     "sha256": "497f3de63d59fd9f89bafc5e215e5cc8a308981f49a94de813c8fd0490885e25",
+     "size": 400183
+    }
+   }
+  },
+  "en-zh": {
+   "from": "en",
+   "to": "zh",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-zh/llmaat_finetune10M_qe8_f2_ByQcSxGXQRqGi-UTxYE43g/exported/lex.50.50.enzh.s2t.bin.gz",
+     "sha256": "806f75821c0b838f4a8f4afe5bab3db8289cb7e5187753ba04c3bceadd75687a",
+     "size": 2536039
+    },
+    "model": {
+     "path": "models/en-zh/llmaat_finetune10M_qe8_f2_ByQcSxGXQRqGi-UTxYE43g/exported/model.enzh.intgemm.alphas.bin.gz",
+     "sha256": "7f255403b3bb2502f08ac4d5ca397a8a5a13f899d2f2e987a4934e089d241d16",
+     "size": 33375922,
+     "uncompressedSha256": "4e5accc141373565ddc8fa1565bceaa8d0c3482a82cab8131c719ebcc6c2157c",
+     "uncompressedSize": 43849787
+    },
+    "srcVocab": {
+     "path": "models/en-zh/llmaat_finetune10M_qe8_f2_ByQcSxGXQRqGi-UTxYE43g/exported/srcvocab.enzh.spm.gz",
+     "sha256": "7846e3c236388390f4e5d321f8413d67f34c1bab5f066165eeb673bfd07607cc",
+     "size": 407784
+    },
+    "trgVocab": {
+     "path": "models/en-zh/llmaat_finetune10M_qe8_f2_ByQcSxGXQRqGi-UTxYE43g/exported/trgvocab.enzh.spm.gz",
+     "sha256": "4d641ce165b1f8478ee2ffb5149d2d46fab3779dc8fa1e9b97f9af1d2206c091",
+     "size": 425748
+    }
+   }
+  },
+  "en-zh_hant": {
+   "from": "en",
+   "to": "zh_hant",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/en-zh_hant/zh_hant_llmaat_finetune10M_qe8_f2_aQ8azdOMQOSBVjBDOVDIZQ/exported/lex.50.50.enzh_hant.s2t.bin.gz",
+     "sha256": "b254c97043a9ba5ff2791abac8b411dc024de6257576745a522ccc6c92421870",
+     "size": 2290215
+    },
+    "model": {
+     "path": "models/en-zh_hant/zh_hant_llmaat_finetune10M_qe8_f2_aQ8azdOMQOSBVjBDOVDIZQ/exported/model.enzh_hant.intgemm.alphas.bin.gz",
+     "sha256": "79cb710e5e66bb0490368bf158f42aff800a0f9ef2f6449d98dfb654f2d02669",
+     "size": 33291007,
+     "uncompressedSha256": "559ab90d723a58c1f1e2ab7cc12137bc667af5ba3e325e3eb30b5cdc930db520",
+     "uncompressedSize": 43849787
+    },
+    "srcVocab": {
+     "path": "models/en-zh_hant/zh_hant_llmaat_finetune10M_qe8_f2_aQ8azdOMQOSBVjBDOVDIZQ/exported/srcvocab.enzh_hant.spm.gz",
+     "sha256": "5ad55cf62d3e8b0a1cefacc0086b1ceb26d0df6415205714effa76bbb1a3063b",
+     "size": 404976
+    },
+    "trgVocab": {
+     "path": "models/en-zh_hant/zh_hant_llmaat_finetune10M_qe8_f2_aQ8azdOMQOSBVjBDOVDIZQ/exported/trgvocab.enzh_hant.spm.gz",
+     "sha256": "324622c18601da5784569eeda74b77e5ae96b164657eb8029a9dabfdcd29803b",
+     "size": 416659
+    }
+   }
+  },
+  "es-en": {
+   "from": "es",
+   "to": "en",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/es-en/retrain_hr_HbNjJ60BTwmVTbhfFxuduA/exported/lex.50.50.esen.s2t.bin.gz",
+     "sha256": "3d7856bfa3b12804bdc80f12fd828fd9062c462113ab73fbf87c5c3b68420813",
+     "size": 2543246
+    },
+    "model": {
+     "path": "models/es-en/retrain_hr_HbNjJ60BTwmVTbhfFxuduA/exported/model.esen.intgemm.alphas.bin.gz",
+     "sha256": "54247f1e057180bca1d404dfd5c12836f65bc96cef7af98e59e55acb8bd093b1",
+     "size": 23288494,
+     "uncompressedSha256": "4aed7734152ae0045d1a69ae49c86cfda18f53c61f90e95e1d1de1c7c7c3b033",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/es-en/retrain_hr_HbNjJ60BTwmVTbhfFxuduA/exported/vocab.esen.spm.gz",
+     "sha256": "1658b529b8858cf2e1e8cef2c4e2d69654d77b5f714ac52205864b336dfeb3ee",
+     "size": 409312
+    }
+   }
+  },
+  "et-en": {
+   "from": "et",
+   "to": "en",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/et-en/retrain_hr_RNXxp-Q9Q4GRExCoMAT77Q/exported/lex.50.50.eten.s2t.bin.gz",
+     "sha256": "7e4df142ad4f27d18e3e7f38efb9f39ec1f8c110e6ef7633f6b284f00ecb1337",
+     "size": 2321326
+    },
+    "model": {
+     "path": "models/et-en/retrain_hr_RNXxp-Q9Q4GRExCoMAT77Q/exported/model.eten.intgemm.alphas.bin.gz",
+     "sha256": "66d74dbc32b4ed8fe867fb466a7c4b8aaf7b13f66e4a8b7180b27b931fcb69b4",
+     "size": 22785077,
+     "uncompressedSha256": "df844b3a6df906b2e0682fb7765694f35b351854db00f964896d9c8c365fbff3",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/et-en/retrain_hr_RNXxp-Q9Q4GRExCoMAT77Q/exported/vocab.eten.spm.gz",
+     "sha256": "ae1edb16d6c7c7b9591f128038a98c4555ea3dfb9c0abfd80ee3bb4caebf8cae",
+     "size": 414262
+    }
+   }
+  },
+  "eu-en": {
+   "from": "eu",
+   "to": "en",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/eu-en/euen-finetranslations_Blfz7PCVT4qOGYPj9q6oMg/exported/lex.50.50.euen.s2t.bin.gz",
+     "sha256": "7db2a5118755783785d5d8c7abbd17fbb355dadd4133139ddf74a7c50dac6f4e",
+     "size": 1896953
+    },
+    "model": {
+     "path": "models/eu-en/euen-finetranslations_Blfz7PCVT4qOGYPj9q6oMg/exported/model.euen.intgemm.alphas.bin.gz",
+     "sha256": "8786171cbe14aa01689d1bf3c276ec1f4ad4072ef42aad9a4b40f5b22366c147",
+     "size": 23241057,
+     "uncompressedSha256": "f0a31e26b381d6340b069da4d505e11d18ac91e42f0189d37ed5fe6aa3685ed4",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/eu-en/euen-finetranslations_Blfz7PCVT4qOGYPj9q6oMg/exported/vocab.euen.spm.gz",
+     "sha256": "374721d13320d60ba9087d75030d8aa18f94dcaf102ac94251ba9e520600277a",
+     "size": 412669
+    }
+   }
+  },
+  "fa-en": {
+   "from": "fa",
+   "to": "en",
+   "architecture": "tiny",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/fa-en/h1-2025_dyvKzoMQToKWHx7bbP-TtQ/exported/lex.50.50.faen.s2t.bin.gz",
+     "sha256": "3ff28e45fbe6ef1742d65f525fda0c0be2255cb04cffdcfb0f9e1c21635dde90",
+     "size": 1939291
+    },
+    "model": {
+     "path": "models/fa-en/h1-2025_dyvKzoMQToKWHx7bbP-TtQ/exported/model.faen.intgemm.alphas.bin.gz",
+     "sha256": "b72e5c310d36cc5f92f143f44bd3d5ce645c1ba71668ec016f4a947e39880a2b",
+     "size": 13071390,
+     "uncompressedSha256": "aa326306c177e11129de5bfeba518abc499c0b6005492766748a9c9ea6f4c712",
+     "uncompressedSize": 17141051
+    },
+    "vocab": {
+     "path": "models/fa-en/h1-2025_dyvKzoMQToKWHx7bbP-TtQ/exported/vocab.faen.spm.gz",
+     "sha256": "23252b82bf5299f6e26925b0e40f0f3bf35d51c954e5d4402cc4072c62db6c24",
+     "size": 416123
+    }
+   }
+  },
+  "fi-en": {
+   "from": "fi",
+   "to": "en",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/fi-en/retrain_hr_C7-zSzS7Tm6zkOfVP7k0Gw/exported/lex.50.50.fien.s2t.bin.gz",
+     "sha256": "cfc9a2b2feeb41593e23291962bf274ba4d5400f395cbcfa1ed1c5b6eaa098a7",
+     "size": 2580517
+    },
+    "model": {
+     "path": "models/fi-en/retrain_hr_C7-zSzS7Tm6zkOfVP7k0Gw/exported/model.fien.intgemm.alphas.bin.gz",
+     "sha256": "76a66ef31861fa6d3abf55f960165cb6b3dbffad8fc6371e1965dd4ec33a7bf5",
+     "size": 22935246,
+     "uncompressedSha256": "e3887341f18bcc7787d9b59eb1229b56eefce18d49b7ebf1e62c55d65a377321",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/fi-en/retrain_hr_C7-zSzS7Tm6zkOfVP7k0Gw/exported/vocab.fien.spm.gz",
+     "sha256": "520424fc428c6465d64a9d48c0d14cc7bc6565a172bf9edf9220f6c62219e479",
+     "size": 414280
+    }
+   }
+  },
+  "fr-en": {
+   "from": "fr",
+   "to": "en",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/fr-en/retrain_hr_EFgIftH_RrCyzl5gjemVNg/exported/lex.50.50.fren.s2t.bin.gz",
+     "sha256": "395aa7767220e1bcfc085f2b2787ff98005d0075e55451f1e0832885e3d9642a",
+     "size": 2649934
+    },
+    "model": {
+     "path": "models/fr-en/retrain_hr_EFgIftH_RrCyzl5gjemVNg/exported/model.fren.intgemm.alphas.bin.gz",
+     "sha256": "06b1eeedd3944260d00a393d12ec7192490c5b7c930b97212faf4d5f5c90a2ee",
+     "size": 23175075,
+     "uncompressedSha256": "15f997bc0d13808b0b0fbd0786e684a3c8a52adcd8071844b76123fdacbf2b90",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/fr-en/retrain_hr_EFgIftH_RrCyzl5gjemVNg/exported/vocab.fren.spm.gz",
+     "sha256": "8d15b219ffd32327b4cabf0d94a05a4fecb8923a4f386badbcbe5e86ede453a7",
+     "size": 409706
+    }
+   }
+  },
+  "gl-en": {
+   "from": "gl",
+   "to": "en",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/gl-en/gl-finetranslations_M9yGl6Y4Q5ysCI8bqEZfTQ/exported/lex.50.50.glen.s2t.bin.gz",
+     "sha256": "ad9d0fd9d086347d4203c30a48b8d70454e5f47b208aeba71885b43b582f1546",
+     "size": 2191952
+    },
+    "model": {
+     "path": "models/gl-en/gl-finetranslations_M9yGl6Y4Q5ysCI8bqEZfTQ/exported/model.glen.intgemm.alphas.bin.gz",
+     "sha256": "bb1816755766dbb88c6eb8668cdd4aab49f2734acc58645e898696e42bc93d87",
+     "size": 23054964,
+     "uncompressedSha256": "7e8ea0279166c72b0b430327533c643a88f26e80e4a9f9f294244a84213f3e6d",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/gl-en/gl-finetranslations_M9yGl6Y4Q5ysCI8bqEZfTQ/exported/vocab.glen.spm.gz",
+     "sha256": "62378ca0109bb10f85c0b2c4999dc947452bd500539bfc63f9d61a43b0a7dc8f",
+     "size": 410400
+    }
+   }
+  },
+  "gu-en": {
+   "from": "gu",
+   "to": "en",
+   "architecture": "tiny",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/gu-en/h1-2025_AbHCTUgSSguJ1-Pq-XLnVA/exported/lex.50.50.guen.s2t.bin.gz",
+     "sha256": "30b6417f113a993a73fb9f6b58db94df23e2a2192fe0f70b3a422019ccf33d31",
+     "size": 2028621
+    },
+    "model": {
+     "path": "models/gu-en/h1-2025_AbHCTUgSSguJ1-Pq-XLnVA/exported/model.guen.intgemm.alphas.bin.gz",
+     "sha256": "f78d8f7120b7e3092f83639f4b2600459ea016dabaed037f20e651d015ca070a",
+     "size": 12917932,
+     "uncompressedSha256": "7b16e4e64f2776c73d87db01922c091738566b6a6092a42488cbaee1385cb4ab",
+     "uncompressedSize": 17141051
+    },
+    "vocab": {
+     "path": "models/gu-en/h1-2025_AbHCTUgSSguJ1-Pq-XLnVA/exported/vocab.guen.spm.gz",
+     "sha256": "3113b3e5e6d507555858fda228517d407ebabc39d5d7e6e1522f9aa8f083a598",
+     "size": 435011
+    }
+   }
+  },
+  "hbs-en": {
+   "from": "hbs",
+   "to": "en",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/hbs-en/hbs_d85wHYN_SUmGIqekvLSNjA/exported/lex.50.50.hbsen.s2t.bin.gz",
+     "sha256": "a6bd3bdd8c979cba468d81c2b51c7ecf7127caf003c81c221d58cc8fed5ffdba",
+     "size": 2578631
+    },
+    "model": {
+     "path": "models/hbs-en/hbs_d85wHYN_SUmGIqekvLSNjA/exported/model.hbsen.intgemm.alphas.bin.gz",
+     "sha256": "0d8d96f70543bbe38ade511f50082a4620835f31b571c0d8e7aafb59fa6232c0",
+     "size": 22949263,
+     "uncompressedSha256": "744c61ec0b987c44717f192fcebda7c2a1ac34f5cbfb56672771d28ff79c82c7",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/hbs-en/hbs_d85wHYN_SUmGIqekvLSNjA/exported/vocab.hbsen.spm.gz",
+     "sha256": "43b9a29ee78dbbd87528eac7a34d7237add158ceab6b95e6584b8c3f7e22414d",
+     "size": 410336
+    }
+   }
+  },
+  "he-en": {
+   "from": "he",
+   "to": "en",
+   "architecture": "tiny",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/he-en/h1-2025_IZKPrf3xQaKu56F3zmH0cw/exported/lex.50.50.heen.s2t.bin.gz",
+     "sha256": "49691f4355a870ad49137100d1559b2e3505b7c4419d47e5261b6e772264c2fc",
+     "size": 2232949
+    },
+    "model": {
+     "path": "models/he-en/h1-2025_IZKPrf3xQaKu56F3zmH0cw/exported/model.heen.intgemm.alphas.bin.gz",
+     "sha256": "42b8846343a6bda677c20846622bdb9087a84ab37b0b50d90f3e6135b622505f",
+     "size": 12999905,
+     "uncompressedSha256": "7291cab3ec483b8cf524da96201fe947dca8c550132be21a06badeb946b5c079",
+     "uncompressedSize": 17141051
+    },
+    "vocab": {
+     "path": "models/he-en/h1-2025_IZKPrf3xQaKu56F3zmH0cw/exported/vocab.heen.spm.gz",
+     "sha256": "780458822f46ab6471bd531223fa87ebd408140f16f3d6d6e3136c0b410bd316",
+     "size": 411769
+    }
+   }
+  },
+  "hi-en": {
+   "from": "hi",
+   "to": "en",
+   "architecture": "tiny",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/hi-en/h1-2025_IcUQD-GbSJWB6WV08oDoEw/exported/lex.50.50.hien.s2t.bin.gz",
+     "sha256": "9647fd7a38db4bafa549f73bf34cabd5a415cd34f3acd7212fced93f163dbd49",
+     "size": 2319675
+    },
+    "model": {
+     "path": "models/hi-en/h1-2025_IcUQD-GbSJWB6WV08oDoEw/exported/model.hien.intgemm.alphas.bin.gz",
+     "sha256": "d30d257188bec64fceeb37483a6be8c54f1246583ad4e4f99dda174b630afeb3",
+     "size": 12752013,
+     "uncompressedSha256": "c82fd6ed3794b79fb9dde0718a22324502a408a9eca73497b5d0a4b8024ec6de",
+     "uncompressedSize": 17141051
+    },
+    "vocab": {
+     "path": "models/hi-en/h1-2025_IcUQD-GbSJWB6WV08oDoEw/exported/vocab.hien.spm.gz",
+     "sha256": "7554161ff543abf09200b4feec83328259b0acb0e58003d834ad43bac47f6124",
+     "size": 430096
+    }
+   }
+  },
+  "hr-en": {
+   "from": "hr",
+   "to": "en",
+   "architecture": "tiny",
+   "releaseStatus": null,
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/hr-en/spring-2024_eIcYjCedS26HE07kVyt5Qw/exported/lex.50.50.hren.s2t.bin.gz",
+     "sha256": "2537de8fd6f27e31eda0b25d2fd426d1c69e04097ab9020f58b644af635c28a7",
+     "size": 1888089
+    },
+    "model": {
+     "path": "models/hr-en/spring-2024_eIcYjCedS26HE07kVyt5Qw/exported/model.hren.intgemm.alphas.bin.gz",
+     "sha256": "b0c1857d701bca4c42d8daa8debf4fa93bbc1ab0fc5618330c351cb46c3636d5",
+     "size": 13050395,
+     "uncompressedSha256": "fa6c8220d3f1c41eb75b720859971dbe3acb6bf63691656c58faa4cdc28d918d",
+     "uncompressedSize": 17141051
+    },
+    "vocab": {
+     "path": "models/hr-en/spring-2024_eIcYjCedS26HE07kVyt5Qw/exported/vocab.hren.spm.gz",
+     "sha256": "a8bd79201f937ac6a9d186d851a377b436781e5ac8b7b380de548a2683164e38",
+     "size": 394548
+    }
+   }
+  },
+  "hu-en": {
+   "from": "hu",
+   "to": "en",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/hu-en/next26_ehk9UNnTTNCsQ0eZhWcNXg/exported/lex.50.50.huen.s2t.bin.gz",
+     "sha256": "1c3183ac06603c24bc591eb68f96bc8d7398a3e962ae406799b7fee064e2d35d",
+     "size": 2433968
+    },
+    "model": {
+     "path": "models/hu-en/next26_ehk9UNnTTNCsQ0eZhWcNXg/exported/model.huen.intgemm.alphas.bin.gz",
+     "sha256": "d864f7fbac38f7c0e3d9472d5a66776130440f7505126dcbe2238b9ffe897e8f",
+     "size": 22582446,
+     "uncompressedSha256": "477d9ff69eaaf692e9c87b5bad681748f56da2f81b0dd393665c90f5d6f7d55e",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/hu-en/next26_ehk9UNnTTNCsQ0eZhWcNXg/exported/vocab.huen.spm.gz",
+     "sha256": "60fee5e35a452369e2920f6e2377d0da59df673945137af90040bfd46b3d5f6a",
+     "size": 421716
+    }
+   }
+  },
+  "id-en": {
+   "from": "id",
+   "to": "en",
+   "architecture": "tiny",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/id-en/spring-2024_Yl0wXq-iQE6G9PpA3AQfcg/exported/lex.50.50.iden.s2t.bin.gz",
+     "sha256": "029091e65df311e17c7e5a199505372dc3892937046b918ac18695aede08e344",
+     "size": 1818222
+    },
+    "model": {
+     "path": "models/id-en/spring-2024_Yl0wXq-iQE6G9PpA3AQfcg/exported/model.iden.intgemm.alphas.bin.gz",
+     "sha256": "625c237e7d1cdc12b0d9e2e666c0d3b674e13d50461268467aaa0b78c2cc5d93",
+     "size": 13010657,
+     "uncompressedSha256": "eeed3d8c2c78ec7011b31b2419e1d2dfdf2a7cc0ee0dbb1fcd164c934cb5d328",
+     "uncompressedSize": 17141051
+    },
+    "vocab": {
+     "path": "models/id-en/spring-2024_Yl0wXq-iQE6G9PpA3AQfcg/exported/vocab.iden.spm.gz",
+     "sha256": "74daf618f0c78d508fda867f30983e9e5679a4e21c4cd42f5dcd5e501448f48e",
+     "size": 379859
+    }
+   }
+  },
+  "is-en": {
+   "from": "is",
+   "to": "en",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/is-en/docmt-vocab_I4Fy2MnOQHSOT4SYlCjPWw/exported/lex.50.50.isen.s2t.bin.gz",
+     "sha256": "a6a84f722b707da7684a47088ee569ebf8703ac210fa7655a871fa8fc4d0be95",
+     "size": 2012853
+    },
+    "model": {
+     "path": "models/is-en/docmt-vocab_I4Fy2MnOQHSOT4SYlCjPWw/exported/model.isen.intgemm.alphas.bin.gz",
+     "sha256": "b718b397b3c5cd1227bdfff61f5103a63991f73ecd47d462cccafbdbda4647b2",
+     "size": 23229378,
+     "uncompressedSha256": "d2c285755d37f710458f1a49db5391a123e4e41ca7bd9829dd87cc61e4907ee6",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/is-en/docmt-vocab_I4Fy2MnOQHSOT4SYlCjPWw/exported/vocab.isen.spm.gz",
+     "sha256": "410332d7d2821eda3697d7b69748fe11510eedcd8a62a4aa5b014fc5be16b728",
+     "size": 412304
+    }
+   }
+  },
+  "it-en": {
+   "from": "it",
+   "to": "en",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/it-en/retrain_hr_d1nPDwVeSD6t-HdtWA4xNg/exported/lex.50.50.iten.s2t.bin.gz",
+     "sha256": "504877085b31edfa3d31a1918a9a42c20fcbf85ff018caf46c54641db5538e62",
+     "size": 2532929
+    },
+    "model": {
+     "path": "models/it-en/retrain_hr_d1nPDwVeSD6t-HdtWA4xNg/exported/model.iten.intgemm.alphas.bin.gz",
+     "sha256": "0bc7221c2730723ac4477e8aa1d1d5bd0b9c3450cb8d006a6f86fe5da9129c27",
+     "size": 23301774,
+     "uncompressedSha256": "21b70978ce2f3b4da7a06b5de86a09abe3acd30b9eee1b2ebb3582b9bad790bf",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/it-en/retrain_hr_d1nPDwVeSD6t-HdtWA4xNg/exported/vocab.iten.spm.gz",
+     "sha256": "df05fae498f519a828eb388cd08ec1b7205a8bcaf2405a5feb9f5e30c49a0977",
+     "size": 407598
+    }
+   }
+  },
+  "ja-en": {
+   "from": "ja",
+   "to": "en",
+   "architecture": "base",
+   "releaseStatus": "Release Desktop",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/ja-en/cjk_icu_base_U4VUAW3STh-bF0Sr-dX69g/exported/lex.50.50.jaen.s2t.bin.gz",
+     "sha256": "266617374a94add490a115f0594c0df18bbb696c94a056b396ddc53e5393dc7b",
+     "size": 4819431
+    },
+    "model": {
+     "path": "models/ja-en/cjk_icu_base_U4VUAW3STh-bF0Sr-dX69g/exported/model.jaen.intgemm.alphas.bin.gz",
+     "sha256": "483c9ad18e85fd0a8ccb15b305daf7929ee939abd606fdb55a4cacfa89a5be1f",
+     "size": 43084737,
+     "uncompressedSha256": "a9bf800679bba570520e1161d7b4fbfcb957add32ca35812134add85689752ad",
+     "uncompressedSize": 59504955
+    },
+    "vocab": {
+     "path": "models/ja-en/cjk_icu_base_U4VUAW3STh-bF0Sr-dX69g/exported/vocab.jaen.spm.gz",
+     "sha256": "339c8df4205f81e6a192ef2f7d1bbea928c183a2b07878723df895cf23daedac",
+     "size": 746616
+    }
+   }
+  },
+  "kn-en": {
+   "from": "kn",
+   "to": "en",
+   "architecture": "tiny",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/kn-en/h1-2025_Ql24XjW0Sp-zWsmLrV5TGQ/exported/lex.50.50.knen.s2t.bin.gz",
+     "sha256": "307468def521e5d4ede3b8699e10b5328958a57642293df22f5bc357688b474b",
+     "size": 2128860
+    },
+    "model": {
+     "path": "models/kn-en/h1-2025_Ql24XjW0Sp-zWsmLrV5TGQ/exported/model.knen.intgemm.alphas.bin.gz",
+     "sha256": "1c5aaf6fd69400dd13e519f321aad0577bd0bcdbee0e87097582dc037dc51f05",
+     "size": 13077357,
+     "uncompressedSha256": "49e8d3bd794b098047f7b177d9d0e6d3e49ac798c2b75bc132149cb46c5bfbfd",
+     "uncompressedSize": 17141051
+    },
+    "vocab": {
+     "path": "models/kn-en/h1-2025_Ql24XjW0Sp-zWsmLrV5TGQ/exported/vocab.knen.spm.gz",
+     "sha256": "739e6f45a056331f869328a2999d20952a33c5204516a5b3dc36d34020603e36",
+     "size": 450324
+    }
+   }
+  },
+  "ko-en": {
+   "from": "ko",
+   "to": "en",
+   "architecture": "base",
+   "releaseStatus": "Release Desktop",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/ko-en/cjk_icu_base_BnKgBdd0Rzq87oUYN3L9-A/exported/lex.50.50.koen.s2t.bin.gz",
+     "sha256": "18b4ecaf51d3aaaf96468d3132f27b4fd93e14b61ea2dc1450142533855ae0e8",
+     "size": 4380580
+    },
+    "model": {
+     "path": "models/ko-en/cjk_icu_base_BnKgBdd0Rzq87oUYN3L9-A/exported/model.koen.intgemm.alphas.bin.gz",
+     "sha256": "ef93436a9acfcb21945379a08ca876b1a3bfa90d03d1040c28b3b03bf701a5bd",
+     "size": 43140465,
+     "uncompressedSha256": "1c902d6f7a8d7e3efe6ff4f7d4960a369957bca4ce2ce4a6e8572c231d525090",
+     "uncompressedSize": 59504955
+    },
+    "vocab": {
+     "path": "models/ko-en/cjk_icu_base_BnKgBdd0Rzq87oUYN3L9-A/exported/vocab.koen.spm.gz",
+     "sha256": "8b2222617bf1dff2f129dbd5f609e8576c3a57f6ea952111dfb2a6f2da848dd6",
+     "size": 706864
+    }
+   }
+  },
+  "lt-en": {
+   "from": "lt",
+   "to": "en",
+   "architecture": "tiny",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/lt-en/spring-2024_aAroslw9Ru-c5cam6SvLBg/exported/lex.50.50.lten.s2t.bin.gz",
+     "sha256": "1851b00216bd8f6bac64223757fd547bb79e0b99b3a032078dab12f5f27a195e",
+     "size": 2308876
+    },
+    "model": {
+     "path": "models/lt-en/spring-2024_aAroslw9Ru-c5cam6SvLBg/exported/model.lten.intgemm.alphas.bin.gz",
+     "sha256": "88fa4bb09798d0f52d67f4f45a8540fdd4727bc1481cedc153dec4dc70ab892b",
+     "size": 12571257,
+     "uncompressedSha256": "0aa4571ede6f68db2f14d2662875b4d2e6323aeccd75e3b4377ab9072a22db70",
+     "uncompressedSize": 17141051
+    },
+    "vocab": {
+     "path": "models/lt-en/spring-2024_aAroslw9Ru-c5cam6SvLBg/exported/vocab.lten.spm.gz",
+     "sha256": "3be489b994ec61caa9ab9a0bd5cd6d5253daacf45f0cf7dcbc2bb56a8c25391c",
+     "size": 403960
+    }
+   }
+  },
+  "lv-en": {
+   "from": "lv",
+   "to": "en",
+   "architecture": "tiny",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/lv-en/spring-2024_fkUrjGNcQiWrTQ5BcYbkgg/exported/lex.50.50.lven.s2t.bin.gz",
+     "sha256": "720f6d513f64275daf17b7a9bf78835a442819fbf2d24ba199a3a1088349cfc0",
+     "size": 2131786
+    },
+    "model": {
+     "path": "models/lv-en/spring-2024_fkUrjGNcQiWrTQ5BcYbkgg/exported/model.lven.intgemm.alphas.bin.gz",
+     "sha256": "81d5f3b41f22c1759ce1398769e7732d8eb59b6056d6c46ad915e6ace05c6e01",
+     "size": 12689153,
+     "uncompressedSha256": "7a96dd363ae9b4485aa254ddbff042223a565a20bfe5ba0ba29b94d8ded0406a",
+     "uncompressedSize": 17141051
+    },
+    "vocab": {
+     "path": "models/lv-en/spring-2024_fkUrjGNcQiWrTQ5BcYbkgg/exported/vocab.lven.spm.gz",
+     "sha256": "8d4e565e5f39f6e0d5033c4b2fdfc5c1e85a5857f28859765f98ced0366a4a8d",
+     "size": 407237
+    }
+   }
+  },
+  "ml-en": {
+   "from": "ml",
+   "to": "en",
+   "architecture": "tiny",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/ml-en/h1-2025_Ahkzk6jNTAut7rz6laKkGQ/exported/lex.50.50.mlen.s2t.bin.gz",
+     "sha256": "27e7301494d48bed602e409d891a6501557d03c534610eb2c5eba0a9507a829b",
+     "size": 2296381
+    },
+    "model": {
+     "path": "models/ml-en/h1-2025_Ahkzk6jNTAut7rz6laKkGQ/exported/model.mlen.intgemm.alphas.bin.gz",
+     "sha256": "bb63f0267cb901f23c4fc664f1d50a2b4890900980486bedc9080cc5d19914a7",
+     "size": 12792306,
+     "uncompressedSha256": "5480719a5a8ac43acdf28db1c89a4d60837a475e1120ea0c4e021c4d5b7e6fd6",
+     "uncompressedSize": 17141051
+    },
+    "vocab": {
+     "path": "models/ml-en/h1-2025_Ahkzk6jNTAut7rz6laKkGQ/exported/vocab.mlen.spm.gz",
+     "sha256": "f5f0084c423c71fdca2a4c54a862b65de35f748f1b189c0a950fc57bf03a37e7",
+     "size": 454911
+    }
+   }
+  },
+  "mr-en": {
+   "from": "mr",
+   "to": "en",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/mr-en/indictrans2_TZJkvk4_Qy6353ek8nD7cw/exported/lex.50.50.mren.s2t.bin.gz",
+     "sha256": "7ef1c10621b5dad2475582477d4b19a325d9b1742d07467c11732962bee0d73b",
+     "size": 2327949
+    },
+    "model": {
+     "path": "models/mr-en/indictrans2_TZJkvk4_Qy6353ek8nD7cw/exported/model.mren.intgemm.alphas.bin.gz",
+     "sha256": "2567f631a3dea1e36c6e8cfd561220ddc35752589de7869b01a7b58deb26f545",
+     "size": 22289099,
+     "uncompressedSha256": "7e4ce4102d159b1d0154193859ee36e26232ad6b1bc656fd9de23ebf530d67b0",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/mr-en/indictrans2_TZJkvk4_Qy6353ek8nD7cw/exported/vocab.mren.spm.gz",
+     "sha256": "4cc85cb2bdd625afc12009d69a060e370b9045abe7e411e6afb36bd703b924ca",
+     "size": 443184
+    }
+   }
+  },
+  "ms-en": {
+   "from": "ms",
+   "to": "en",
+   "architecture": "tiny",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/ms-en/h1-2025_afzwIUAqQRWx5PtvozOHnw/exported/lex.50.50.msen.s2t.bin.gz",
+     "sha256": "456ad116209370d6ba4b5f90c4143ee008d02610dea582922b1b2d6cff0b0200",
+     "size": 2141259
+    },
+    "model": {
+     "path": "models/ms-en/h1-2025_afzwIUAqQRWx5PtvozOHnw/exported/model.msen.intgemm.alphas.bin.gz",
+     "sha256": "de212e0d42428858ee96027329ab1d55a6e77754ecaaa17ab58ad03e71c16fb1",
+     "size": 12538542,
+     "uncompressedSha256": "db5c9415591f8a35c5c72046227b9c9398acade5df8afb5e6ac9f11f7d6650d5",
+     "uncompressedSize": 17141051
+    },
+    "vocab": {
+     "path": "models/ms-en/h1-2025_afzwIUAqQRWx5PtvozOHnw/exported/vocab.msen.spm.gz",
+     "sha256": "1755f6619ae37dc8d694ebbec7b095b014ce6dc27ed8aac37bd7c749192e6997",
+     "size": 403877
+    }
+   }
+  },
+  "nb-en": {
+   "from": "nb",
+   "to": "en",
+   "architecture": "tiny",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/nb-en/h1-2025_YKogHXi6Q4es3P7fEWEaBw/exported/lex.50.50.nben.s2t.bin.gz",
+     "sha256": "0b80d2283d85c453f02e5ec63488359247f3e47669ff2a5d01c9bebf54df20eb",
+     "size": 2308582
+    },
+    "model": {
+     "path": "models/nb-en/h1-2025_YKogHXi6Q4es3P7fEWEaBw/exported/model.nben.intgemm.alphas.bin.gz",
+     "sha256": "61d94f5f3a514f6b54fa488f0de97ca8edea40509eab8bbfd3f25ba565353874",
+     "size": 13193689,
+     "uncompressedSha256": "00ab7b969156f6c948be59dad4755e47a24eeb31aa39f02f1de7bce43081cc2a",
+     "uncompressedSize": 17141051
+    },
+    "vocab": {
+     "path": "models/nb-en/h1-2025_YKogHXi6Q4es3P7fEWEaBw/exported/vocab.nben.spm.gz",
+     "sha256": "0801a124577a9f303084ac70c25513bbecf9e478d81493b97c0a8186a769e196",
+     "size": 409135
+    }
+   }
+  },
+  "nl-en": {
+   "from": "nl",
+   "to": "en",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/nl-en/retrain_hr_JbTCb42HREGvK8d6aOCjFQ/exported/lex.50.50.nlen.s2t.bin.gz",
+     "sha256": "ddc7811550e820a081353556f5b5bfdc907251a20850e945bfc887bcd28f8c56",
+     "size": 2616098
+    },
+    "model": {
+     "path": "models/nl-en/retrain_hr_JbTCb42HREGvK8d6aOCjFQ/exported/model.nlen.intgemm.alphas.bin.gz",
+     "sha256": "ed02d0f965fa78335a7ef326337267c04c5c444a7261ab4cdeb82fcfbb67d617",
+     "size": 22647743,
+     "uncompressedSha256": "ff987741ff15a5d94fff16cbef28f2b0a85a6e9547d982fad60ac09d16d11270",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/nl-en/retrain_hr_JbTCb42HREGvK8d6aOCjFQ/exported/vocab.nlen.spm.gz",
+     "sha256": "12c2bb8bf4d7b39cba7dc1b3eb16232ea29f1325e963eb9a29d7cc886c306599",
+     "size": 410222
+    }
+   }
+  },
+  "no-en": {
+   "from": "no",
+   "to": "en",
+   "architecture": "tiny",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/no-en/h1-2025_YKogHXi6Q4es3P7fEWEaBw/exported/lex.50.50.noen.s2t.bin.gz",
+     "sha256": "0b80d2283d85c453f02e5ec63488359247f3e47669ff2a5d01c9bebf54df20eb",
+     "size": 2308582
+    },
+    "model": {
+     "path": "models/no-en/h1-2025_YKogHXi6Q4es3P7fEWEaBw/exported/model.noen.intgemm.alphas.bin.gz",
+     "sha256": "61d94f5f3a514f6b54fa488f0de97ca8edea40509eab8bbfd3f25ba565353874",
+     "size": 13193689,
+     "uncompressedSha256": "00ab7b969156f6c948be59dad4755e47a24eeb31aa39f02f1de7bce43081cc2a",
+     "uncompressedSize": 17141051
+    },
+    "vocab": {
+     "path": "models/no-en/h1-2025_YKogHXi6Q4es3P7fEWEaBw/exported/vocab.noen.spm.gz",
+     "sha256": "0801a124577a9f303084ac70c25513bbecf9e478d81493b97c0a8186a769e196",
+     "size": 409135
+    }
+   }
+  },
+  "pl-en": {
+   "from": "pl",
+   "to": "en",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/pl-en/retrain_hr_HLLa6ZwsSomB0kyBr7Iz6w/exported/lex.50.50.plen.s2t.bin.gz",
+     "sha256": "7ad8ce0f56b7537a82e7e522a48ea440395a909c547621934cf70daa1c543c36",
+     "size": 2489764
+    },
+    "model": {
+     "path": "models/pl-en/retrain_hr_HLLa6ZwsSomB0kyBr7Iz6w/exported/model.plen.intgemm.alphas.bin.gz",
+     "sha256": "7f37aa5e065581c02fbd5fd4f3862a714944e223055edafe23095a68f3a49a76",
+     "size": 22630393,
+     "uncompressedSha256": "06dbab3baa3bbceab746bc6a3bba807878f38536382c03acddf59d3edf3b5d94",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/pl-en/retrain_hr_HLLa6ZwsSomB0kyBr7Iz6w/exported/vocab.plen.spm.gz",
+     "sha256": "90f3d5a707eb8b221ab4139de6146e4741ab3196fbadf4562b03d727a0f8b822",
+     "size": 413194
+    }
+   }
+  },
+  "pt-en": {
+   "from": "pt",
+   "to": "en",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/pt-en/retrain_hr_drxrs5bGSsOWvfK9lyZISw/exported/lex.50.50.pten.s2t.bin.gz",
+     "sha256": "b31185389533a97177cbf68ea756b78bfbaa24d31a865d72c6ed203fa414b2f6",
+     "size": 2487847
+    },
+    "model": {
+     "path": "models/pt-en/retrain_hr_drxrs5bGSsOWvfK9lyZISw/exported/model.pten.intgemm.alphas.bin.gz",
+     "sha256": "f2d2bb46d452cef561d35504bd198fa6c6ffc47187ee987406a2ac05d9c3935f",
+     "size": 22700409,
+     "uncompressedSha256": "7b854f1ec5a485dd33efd7c1bc01dd7d5a57f566957c5e47722af333f0ce9157",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/pt-en/retrain_hr_drxrs5bGSsOWvfK9lyZISw/exported/vocab.pten.spm.gz",
+     "sha256": "28c9eb4fb13f8eb661f6bb098560a1bf368d25ff890275028ea9d4f3f97b0416",
+     "size": 408686
+    }
+   }
+  },
+  "ro-en": {
+   "from": "ro",
+   "to": "en",
+   "architecture": "tiny",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/ro-en/spring-2024_RwH0W_MDRK2BmZA6VzAmBg/exported/lex.50.50.roen.s2t.bin.gz",
+     "sha256": "3b3fdee9bb65fe9053c4a1a5ae2bdfe6a4c251a329bd49b45ea9af8864baf7ea",
+     "size": 2159556
+    },
+    "model": {
+     "path": "models/ro-en/spring-2024_RwH0W_MDRK2BmZA6VzAmBg/exported/model.roen.intgemm.alphas.bin.gz",
+     "sha256": "217b5a3bf0aed1a2c9c47259159a4ec09fa673bf10049d23fe15902147e66785",
+     "size": 12722200,
+     "uncompressedSha256": "e7542557fc6dbafacddae7b48e67fcdb07bd67b3fb55a76139edf366eca5dbdb",
+     "uncompressedSize": 17141051
+    },
+    "vocab": {
+     "path": "models/ro-en/spring-2024_RwH0W_MDRK2BmZA6VzAmBg/exported/vocab.roen.spm.gz",
+     "sha256": "0f7ce73533f0c8549d8498c67e2db7502654a462ed81de687ba666dc4cf64706",
+     "size": 396717
+    }
+   }
+  },
+  "ru-en": {
+   "from": "ru",
+   "to": "en",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/ru-en/next26_RSpwfHrcSUC_rKTnhOEXzw/exported/lex.50.50.ruen.s2t.bin.gz",
+     "sha256": "012674431e3a248e5f647e88e254331eca37f661960ea82ceb93dab78850ccd8",
+     "size": 2139703
+    },
+    "model": {
+     "path": "models/ru-en/next26_RSpwfHrcSUC_rKTnhOEXzw/exported/model.ruen.intgemm.alphas.bin.gz",
+     "sha256": "1dc70ffc7dce84d46ad13b8c1908c46f0dfbf4e2ed1daaffb8b8b04315e00aa3",
+     "size": 22805722,
+     "uncompressedSha256": "aa0efa194b3dbd2da129ba0b8db8ef139126cb0914e57072f62061294746f1e2",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/ru-en/next26_RSpwfHrcSUC_rKTnhOEXzw/exported/vocab.ruen.spm.gz",
+     "sha256": "20f7d8032b12a7c1bba99784fca60ccf1d49e782f3cad8791e8cf0c2063b334c",
+     "size": 441622
+    }
+   }
+  },
+  "sk-en": {
+   "from": "sk",
+   "to": "en",
+   "architecture": "tiny",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/sk-en/spring-2024_TD01UwWXRKacv3wnYeVKbg/exported/lex.50.50.sken.s2t.bin.gz",
+     "sha256": "08fceba612fbf6f833ab188e1f7125c091656cdca2c886c84fca29e3960ddb16",
+     "size": 2348184
+    },
+    "model": {
+     "path": "models/sk-en/spring-2024_TD01UwWXRKacv3wnYeVKbg/exported/model.sken.intgemm.alphas.bin.gz",
+     "sha256": "5825c97bfc80435071da744ef05444119cac81f6bf80eeecd80098c741a04a4b",
+     "size": 12821519,
+     "uncompressedSha256": "1686f94838ace314719e945606a09a66dafd40847dd3fd352ad3f7a969aac62f",
+     "uncompressedSize": 17141051
+    },
+    "vocab": {
+     "path": "models/sk-en/spring-2024_TD01UwWXRKacv3wnYeVKbg/exported/vocab.sken.spm.gz",
+     "sha256": "3954450491e4470532267c6af9ae05fc9dfc1a739c7fbea0dc0ea83cc3e1eba4",
+     "size": 405122
+    }
+   }
+  },
+  "sl-en": {
+   "from": "sl",
+   "to": "en",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/sl-en/h1-2025_TCeLyjkQRL2YbTXrUhTlAg/exported/lex.50.50.slen.s2t.bin.gz",
+     "sha256": "09724499bd2a9abf5e2869642438adfc4a6e300069d0e0ec8ef18320441b58e6",
+     "size": 2138548
+    },
+    "model": {
+     "path": "models/sl-en/h1-2025_TCeLyjkQRL2YbTXrUhTlAg/exported/model.slen.intgemm.alphas.bin.gz",
+     "sha256": "ea4929781045086ea37e689fda03dfb75e77e5abaa10a43ae0f8ea252c248040",
+     "size": 23730414,
+     "uncompressedSha256": "9d15df58b60048366de4f7b6e727157ffdaea3a0fd1c1759ce232b057e2f991c",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/sl-en/h1-2025_TCeLyjkQRL2YbTXrUhTlAg/exported/vocab.slen.spm.gz",
+     "sha256": "2887bddbbd49efc3a26b1e787cb3fe2d343db05ec9f209413bd735e505144105",
+     "size": 398535
+    }
+   }
+  },
+  "sq-en": {
+   "from": "sq",
+   "to": "en",
+   "architecture": "tiny",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/sq-en/h1-2025_I8xy7KMeQoe3mMEV3umzfQ/exported/lex.50.50.sqen.s2t.bin.gz",
+     "sha256": "db1ffea7c7373f4e54074d08e4748f5d539c1e978cb26c3fc8dcdebeb1b5a4bd",
+     "size": 2165940
+    },
+    "model": {
+     "path": "models/sq-en/h1-2025_I8xy7KMeQoe3mMEV3umzfQ/exported/model.sqen.intgemm.alphas.bin.gz",
+     "sha256": "5cf0ca779d09e2c8af5a4b11c496db6cfcc86b059e762d8925a5d6cc33e2826a",
+     "size": 12593638,
+     "uncompressedSha256": "4b0ce319e7c8f7e1836ce18cb6522c83268e8cff54f2a7f5dcef270250a44475",
+     "uncompressedSize": 17141051
+    },
+    "vocab": {
+     "path": "models/sq-en/h1-2025_I8xy7KMeQoe3mMEV3umzfQ/exported/vocab.sqen.spm.gz",
+     "sha256": "b1d9e45bac3271e919939ca18688ccbf52d0e5d2bf901e4c55a2f17ecf9b00bd",
+     "size": 410423
+    }
+   }
+  },
+  "sr-en": {
+   "from": "sr",
+   "to": "en",
+   "architecture": "tiny",
+   "releaseStatus": null,
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/sr-en/spring-2024_H5GCfsx4SnqOP4YFIQdkdA/exported/lex.50.50.sren.s2t.bin.gz",
+     "sha256": "5bb28dd580aafc4eb6e74f05affbc15406d82a820fccaf41dfe4b0b47136480c",
+     "size": 2117763
+    },
+    "model": {
+     "path": "models/sr-en/spring-2024_H5GCfsx4SnqOP4YFIQdkdA/exported/model.sren.intgemm.alphas.bin.gz",
+     "sha256": "ba4534d2f4ad45bacbdb5f626636471f9861b1c0eaa58b5bff4a4932e2ca8c93",
+     "size": 12729754,
+     "uncompressedSha256": "99c44e9690a7ed2c1f13468765c3b1db2b8a8ae739980e4056d45dca613a1966",
+     "uncompressedSize": 17141051
+    },
+    "vocab": {
+     "path": "models/sr-en/spring-2024_H5GCfsx4SnqOP4YFIQdkdA/exported/vocab.sren.spm.gz",
+     "sha256": "5c6355d1a70c2074a36a5c48424d04d2362b8ce54f34ff5ac33c30405d0e2489",
+     "size": 403515
+    }
+   }
+  },
+  "sv-en": {
+   "from": "sv",
+   "to": "en",
+   "architecture": "tiny",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/sv-en/spring-2024_ObaRXwXeSW6HA_-J5_dE-g/exported/lex.50.50.sven.s2t.bin.gz",
+     "sha256": "aedabe4633446cf85b3e2ecc4139b88efed4c5a39b41d2f0d0bb99494c6b950c",
+     "size": 2165215
+    },
+    "model": {
+     "path": "models/sv-en/spring-2024_ObaRXwXeSW6HA_-J5_dE-g/exported/model.sven.intgemm.alphas.bin.gz",
+     "sha256": "5a5351596bc22c517908628924ac63bec5f81e7225c62bf6e42bb7c66cb41987",
+     "size": 12847259,
+     "uncompressedSha256": "92d79e2725718b84aed486473bdfcbe6bba3e7094922d4bead8a121cfa346372",
+     "uncompressedSize": 17141051
+    },
+    "vocab": {
+     "path": "models/sv-en/spring-2024_ObaRXwXeSW6HA_-J5_dE-g/exported/vocab.sven.spm.gz",
+     "sha256": "75c1784afa8d4b94d2f6ce064fb2facc2044c3cedfc0fbe25acd85f32b06589e",
+     "size": 397625
+    }
+   }
+  },
+  "ta-en": {
+   "from": "ta",
+   "to": "en",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/ta-en/next26_dwRqBIcMSDG7drW2_xDIMA/exported/lex.50.50.taen.s2t.bin.gz",
+     "sha256": "8842f8c6cdb15abc7523c706a3d99dd6d4f4eefb03625752fb5dda3a3195296f",
+     "size": 2410364
+    },
+    "model": {
+     "path": "models/ta-en/next26_dwRqBIcMSDG7drW2_xDIMA/exported/model.taen.intgemm.alphas.bin.gz",
+     "sha256": "f3cafdc392a0d2f8354d8eb6913aa8654b1e1f91a50554922fe82f05aa33d178",
+     "size": 23526938,
+     "uncompressedSha256": "5413fca6c35cd9c50157df1ebd425d6ca02713bfedc1ba7e5fb3050a437b13b6",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/ta-en/next26_dwRqBIcMSDG7drW2_xDIMA/exported/vocab.taen.spm.gz",
+     "sha256": "0e34d4d07742c809b26f756aa7d3eaa05b00d9d2d472d1646002b8f574e87e00",
+     "size": 451486
+    }
+   }
+  },
+  "te-en": {
+   "from": "te",
+   "to": "en",
+   "architecture": "tiny",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/te-en/h1-2025_YEapi_rWRsSUVTqbBTqupw/exported/lex.50.50.teen.s2t.bin.gz",
+     "sha256": "4b2e7a95965f9a666a99cf1e913fb752452e5626b51f0dc46392cdd57491c210",
+     "size": 2209444
+    },
+    "model": {
+     "path": "models/te-en/h1-2025_YEapi_rWRsSUVTqbBTqupw/exported/model.teen.intgemm.alphas.bin.gz",
+     "sha256": "78bbbf7d48277a0c8d05f04828a2c1c0b863f24cd743032c9ecd0a663d62f53c",
+     "size": 13202063,
+     "uncompressedSha256": "e2ec7b13ba6148eba309244ee17dc935f1b71e95bbf57154216f6247877abb7e",
+     "uncompressedSize": 17141051
+    },
+    "vocab": {
+     "path": "models/te-en/h1-2025_YEapi_rWRsSUVTqbBTqupw/exported/vocab.teen.spm.gz",
+     "sha256": "ec8090b2c966058b1e1efc7dc951dd7c0ccfb66b1efc0dcfb1f4063b7a89e9d0",
+     "size": 448555
+    }
+   }
+  },
+  "th-en": {
+   "from": "th",
+   "to": "en",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/th-en/new-opuscleaner-en-th_aIiNAAZbRny4ODcYGOMlEA/exported/lex.50.50.then.s2t.bin.gz",
+     "sha256": "5208d8211cedf98618b096e53367034e6a58862713afc6037e47405a0b3dcb4a",
+     "size": 2239323
+    },
+    "model": {
+     "path": "models/th-en/new-opuscleaner-en-th_aIiNAAZbRny4ODcYGOMlEA/exported/model.then.intgemm.alphas.bin.gz",
+     "sha256": "16b0406382e6f0f2602fea63c517519173b647ea93fb130dcfe221f94cbc3126",
+     "size": 22974117,
+     "uncompressedSha256": "f70a501324743668b031bee19cd001a66839e8e5dfc0b4a1c44d5ea99d4e8d66",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/th-en/new-opuscleaner-en-th_aIiNAAZbRny4ODcYGOMlEA/exported/vocab.then.spm.gz",
+     "sha256": "75744883f180dbe53b5298e1b7bc3b24083ce1a3dfa54911306347f96bb897c6",
+     "size": 451231
+    }
+   }
+  },
+  "tl-en": {
+   "from": "tl",
+   "to": "en",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/tl-en/next26-nllb-bc09_d-OV7HWbQLiAMXe-r1_EoA/exported/lex.50.50.tlen.s2t.bin.gz",
+     "sha256": "adba11d0558900238dad1e88bdaf0047f36cb8e99c68f64586f7a232608c266f",
+     "size": 2546344
+    },
+    "model": {
+     "path": "models/tl-en/next26-nllb-bc09_d-OV7HWbQLiAMXe-r1_EoA/exported/model.tlen.intgemm.alphas.bin.gz",
+     "sha256": "15036df3f096c21291c9559e71da6ba315d0363c93de30debb9219b87080084c",
+     "size": 23110247,
+     "uncompressedSha256": "be2e4b60b2be35d8f32e3f68f0a3a567e6a4a27c521d5a9fd6017d1e47599e37",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/tl-en/next26-nllb-bc09_d-OV7HWbQLiAMXe-r1_EoA/exported/vocab.tlen.spm.gz",
+     "sha256": "546a5117cc9767ce42d031d74cedac01c6c8e05864b7fd465aaa56b8e868c8eb",
+     "size": 408906
+    }
+   }
+  },
+  "tr-en": {
+   "from": "tr",
+   "to": "en",
+   "architecture": "tiny",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/tr-en/statmt_xxxxxxxxRxSxxxxxxxxxxA/exported/lex.50.50.tren.s2t.bin.gz",
+     "sha256": "e06304247fc4dfd55fcab21bfc9656a28f81fcf8efb2ccb0a5796b296bfeac1b",
+     "size": 2470683
+    },
+    "model": {
+     "path": "models/tr-en/statmt_xxxxxxxxRxSxxxxxxxxxxA/exported/model.tren.intgemm.alphas.bin.gz",
+     "sha256": "0939c2d12325a2f80a92d3c3ddaf718510837d03ee59303aa963b179368ec68a",
+     "size": 12362908,
+     "uncompressedSha256": "bd18594ac5a7f1d9997e7ea5bd80272082219cf8b1ce604766e4f207eb86abbf",
+     "uncompressedSize": 17140836
+    },
+    "vocab": {
+     "path": "models/tr-en/statmt_xxxxxxxxRxSxxxxxxxxxxA/exported/vocab.tren.spm.gz",
+     "sha256": "dfa22c3d15a6bdfb7765edc9e42c77daff8597a9ebe088fe886094ff0baeaef1",
+     "size": 409060
+    }
+   }
+  },
+  "ug-en": {
+   "from": "ug",
+   "to": "en",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/ug-en/davidv-hymt2_xxxxxxxxRxSxxxxxxxxxxA/exported/lex.50.50.ugen.s2t.bin.gz",
+     "sha256": "1424888ac2d83695241fd80c34485d6fbfe744f762ac174db175b98d5ee0b96d",
+     "size": 1702175
+    },
+    "model": {
+     "path": "models/ug-en/davidv-hymt2_xxxxxxxxRxSxxxxxxxxxxA/exported/model.ugen.intgemm.alphas.bin.gz",
+     "sha256": "1b8e3a46d74a52a6fd3bc9e46b22c60c725a7f6d4ed8dca1f61768578f68300c",
+     "size": 23536190,
+     "uncompressedSha256": "ffc0db5c5de708fb4dd6440b1d6b1e4645ad48a8963d98d9240aec8bb044d0f9",
+     "uncompressedSize": 31561635
+    },
+    "vocab": {
+     "path": "models/ug-en/davidv-hymt2_xxxxxxxxRxSxxxxxxxxxxA/exported/vocab.ugen.spm.gz",
+     "sha256": "ff3dcf8aa92393744ab1c3fd843e6cebd0feca5042d0cc654dfe8d9f07e20122",
+     "size": 406295
+    }
+   }
+  },
+  "uk-en": {
+   "from": "uk",
+   "to": "en",
+   "architecture": "tiny",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/uk-en/spring-2024_WEPBsc-zQWSDn34b5KFscw/exported/lex.50.50.uken.s2t.bin.gz",
+     "sha256": "86af22d2c43268f87fc5b5ba32485d25defceba5ed38195b27e6c25c44c07ab9",
+     "size": 1790588
+    },
+    "model": {
+     "path": "models/uk-en/spring-2024_WEPBsc-zQWSDn34b5KFscw/exported/model.uken.intgemm.alphas.bin.gz",
+     "sha256": "7cbdd1d664b22e757320ba47f79c7f658d3a581383e1f73868fce83b3fcad3d1",
+     "size": 12677432,
+     "uncompressedSha256": "2e7b8bc9d2569d8b4ae244e964cdc343a0aa3735cc83ecb664be84a37cb45f48",
+     "uncompressedSize": 17141051
+    },
+    "vocab": {
+     "path": "models/uk-en/spring-2024_WEPBsc-zQWSDn34b5KFscw/exported/vocab.uken.spm.gz",
+     "sha256": "7dbbba94effd24a118ade251686c0cea991217c29123362b36f56ea5f2de6362",
+     "size": 415266
+    }
+   }
+  },
+  "ur-en": {
+   "from": "ur",
+   "to": "en",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/ur-en/indictrans2-bt_UkKC_Ph4SVqxtSbkfmVM2g/exported/lex.50.50.uren.s2t.bin.gz",
+     "sha256": "77c4db97cbeb355e17048e9bb2fa58fc9da51d426b63c764d28eee28a2aae10c",
+     "size": 1833159
+    },
+    "model": {
+     "path": "models/ur-en/indictrans2-bt_UkKC_Ph4SVqxtSbkfmVM2g/exported/model.uren.intgemm.alphas.bin.gz",
+     "sha256": "dfde841519ac46727898d96db8653d1815144febb89e6ba507d421090939e026",
+     "size": 22876447,
+     "uncompressedSha256": "4915518d1699fb72c390603605d3ead9fb87a8c2f70092089a27df22a7c540d0",
+     "uncompressedSize": 31561787
+    },
+    "vocab": {
+     "path": "models/ur-en/indictrans2-bt_UkKC_Ph4SVqxtSbkfmVM2g/exported/vocab.uren.spm.gz",
+     "sha256": "a032fc0676566befe0cd7b1f4d56a52c13a716fd5ebad5f41b49c5e4c3796bc4",
+     "size": 418061
+    }
+   }
+  },
+  "vi-en": {
+   "from": "vi",
+   "to": "en",
+   "architecture": "tiny",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/vi-en/spring-2024_Nc0SHbrgQaiFt4_FmKBXOA/exported/lex.50.50.vien.s2t.bin.gz",
+     "sha256": "46a1a63af1fc0828e34ee23a2b2bc3daecf8ea30681a1b21dcb2461c61d1076f",
+     "size": 1887658
+    },
+    "model": {
+     "path": "models/vi-en/spring-2024_Nc0SHbrgQaiFt4_FmKBXOA/exported/model.vien.intgemm.alphas.bin.gz",
+     "sha256": "30239a051e58cbc0f8e256b46b9234a2a59b714bb09c091897f92786942e9861",
+     "size": 12914609,
+     "uncompressedSha256": "de4bf2b9ffb4d910e32720ec3a43655fb6f4062ce5219332f824fc1bdca7a5f4",
+     "uncompressedSize": 17141051
+    },
+    "vocab": {
+     "path": "models/vi-en/spring-2024_Nc0SHbrgQaiFt4_FmKBXOA/exported/vocab.vien.spm.gz",
+     "sha256": "cb532c07aeeb22e22f1319b0cff91659e7e8a8bbfd67b18f1eb513d277368474",
+     "size": 375643
+    }
+   }
+  },
+  "zh_hant-en": {
+   "from": "zh_hant",
+   "to": "en",
+   "architecture": "base-memory",
+   "releaseStatus": "Release",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/zh_hant-en/zh_hant_openlid_zh_tw_lr0002_WJi5Ozi7SZWC6hgfD5GhTA/exported/lex.50.50.zh_hanten.s2t.bin.gz",
+     "sha256": "69046bfea1a70a556b5669be3c014958698683ef3c3f00b8dfd5c6b4e8f4f8ca",
+     "size": 3268812
+    },
+    "model": {
+     "path": "models/zh_hant-en/zh_hant_openlid_zh_tw_lr0002_WJi5Ozi7SZWC6hgfD5GhTA/exported/model.zh_hanten.intgemm.alphas.bin.gz",
+     "sha256": "07af851b5a9160e84f3327e6f6151725e2712bed7b6b86edde5920fae107e55b",
+     "size": 33653648,
+     "uncompressedSha256": "0aee91790894458f5d367551f6edcd4c9cb97852c34f221bcbf9f4701ebcf0cd",
+     "uncompressedSize": 43849787
+    },
+    "srcVocab": {
+     "path": "models/zh_hant-en/zh_hant_openlid_zh_tw_lr0002_WJi5Ozi7SZWC6hgfD5GhTA/exported/srcvocab.zh_hanten.spm.gz",
+     "sha256": "e28a5484fce525e13a6cde4737b2fac08cb3c9cc60c13da9a6395c38833f7936",
+     "size": 423691
+    },
+    "trgVocab": {
+     "path": "models/zh_hant-en/zh_hant_openlid_zh_tw_lr0002_WJi5Ozi7SZWC6hgfD5GhTA/exported/trgvocab.zh_hanten.spm.gz",
+     "sha256": "071d675ee1a1b5faffbde94910814998f187df9717b007ae56d54d0a6ae791ac",
+     "size": 408143
+    }
+   }
+  },
+  "zh-en": {
+   "from": "zh",
+   "to": "en",
+   "architecture": "base",
+   "releaseStatus": "Release Desktop",
+   "files": {
+    "lexicalShortlist": {
+     "path": "models/zh-en/cjk_icu_base_LQeOIbF7Sbq3XA8lsRPotw/exported/lex.50.50.zhen.s2t.bin.gz",
+     "sha256": "b1bef5f75f5068877afdb2db0eeb670129165976bfa2af4889928f59c264b7b9",
+     "size": 4824122
+    },
+    "model": {
+     "path": "models/zh-en/cjk_icu_base_LQeOIbF7Sbq3XA8lsRPotw/exported/model.zhen.intgemm.alphas.bin.gz",
+     "sha256": "820f50dc36b1e25c97208fff0470bae7fda62bd6f371c4c4bf94947a9de58497",
+     "size": 44369188,
+     "uncompressedSha256": "3535442962ec8f4a553cc19b206befcac689ee9cddaea44fa91e21527fc30ac2",
+     "uncompressedSize": 59504955
+    },
+    "vocab": {
+     "path": "models/zh-en/cjk_icu_base_LQeOIbF7Sbq3XA8lsRPotw/exported/vocab.zhen.spm.gz",
+     "sha256": "fd0cc08ddcbe480e3be06e6a86cb8aaf75f946263a5d9fc7d2773a197990cfb2",
+     "size": 738862
+    }
+   }
+  }
+ }
+}

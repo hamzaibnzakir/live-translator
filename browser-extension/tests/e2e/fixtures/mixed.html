@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><title>Bienvenue dans notre boutique en ligne</title>
+<style>body{font:16px/1.5 system-ui;max-width:760px;margin:24px auto;background:#fff;color:#222}code,pre{background:#eee}.card{border:1px solid #ddd;padding:8px;margin:8px 0}</style></head>
+<body>
+<header><h1>Bienvenue dans notre boutique en ligne</h1><nav><a href="#a">Accueil</a> · <a href="#b">Nos produits</a> · <a href="#c">Nous contacter</a></nav></header>
+<main>
+  <p id="fr1">Nous vendons des vêtements faits à la main depuis plus de vingt ans.</p>
+  <p id="fr2">Tous nos produits sont <strong>fabriqués en France</strong> avec des matériaux de qualité.</p>
+  <p id="ja1">このお店は東京で一番人気があります。</p>
+  <p id="es1">Los envíos a España son gratuitos este mes.</p>
+  <p id="en1">This paragraph is already in English and must stay exactly the same.</p>
+  <ul><li id="li1">Livraison gratuite dès cinquante euros</li><li id="li2">Retours acceptés pendant trente jours</li></ul>
+  <table><tr><th>Produit</th><th>Prix</th></tr><tr><td id="td1">Chemise en lin</td><td>49,90 €</td></tr></table>
+  <pre id="code1"><code>const prix = calculerPrix(panier);</code></pre>
+  <p id="inline">Utilisez le code <code id="code2">BIENVENUE10</code> pour obtenir une réduction.</p>
+  <p id="notr" translate="no">Ce texte ne doit jamais être traduit.</p>
+  <form><input id="inp" value="Votre adresse e-mail"><textarea id="ta">Écrivez votre message ici</textarea>
+  <div id="ce" contenteditable="true">Texte modifiable par l'utilisateur</div></form>
+  <div id="later"></div>
+</main>
+<script>
+  setTimeout(() => {
+    const p = document.createElement('p'); p.id = 'fr-late';
+    p.textContent = 'Ce paragraphe a été chargé plus tard par la page.';
+    document.getElementById('later').appendChild(p);
+  }, 1500);
+</script>
+</body></html>

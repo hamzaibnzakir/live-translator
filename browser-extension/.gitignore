@@ -1,0 +1,9 @@
+node_modules/
+dist/
+tests/.cache/
+test-results/
+playwright-report/
+reports/
+*.zip
+tests/e2e/fixtures/dist/
+dist-test/

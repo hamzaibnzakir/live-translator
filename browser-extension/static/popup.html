@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Brainbox Translate</title><link rel="stylesheet" href="ui.css">
+<style>body{width:400px;min-height:480px}body.panel{width:auto}</style></head>
+<body>
+<div class="glow"></div>
+<header><img src="icons/icon-48.png" alt=""><h1>Brainbox <span class="grad">Translate</span></h1><span class="sp"></span>
+  <button class="ghost small" id="open-panel" title="Open in side panel">⫶</button><button class="ghost small" id="open-options" title="Settings">⚙</button></header>
+<main>
+  <div class="tabs" role="tablist"><button class="on" data-tab="quick" role="tab">Translate</button><button data-tab="page" role="tab">This page</button></div>
+  <section id="tab-quick">
+    <div class="card">
+      <div class="row" style="margin-bottom:6px"><span class="muted grow" id="src-label">Paste anything — language is detected</span><button class="ghost small" id="copy-src">Copy</button></div>
+      <textarea id="src" placeholder="Paste or type text in any language…" aria-label="Text to translate"></textarea>
+      <div class="row" style="margin:8px 0">
+        <span class="tag" id="detected">auto</span>
+        <button class="ghost small" id="swap" title="Swap languages">⇄</button>
+        <select id="to" class="grow" aria-label="Target language"></select>
+      </div>
+      <textarea id="out" readonly placeholder="Translation" aria-label="Translation"></textarea>
+      <div class="row" style="margin-top:8px"><span class="faint grow" id="engine-line">Ctrl+Enter = translate &amp; copy</span><button id="translate" class="small">Translate</button><button class="ghost small" id="copy-out">Copy</button></div>
+      <div id="pack-need" style="display:none;margin-top:8px"></div>
+    </div>
+  </section>
+  <section id="tab-page" style="display:none">
+    <div class="card">
+      <h2>This page</h2>
+      <div class="muted" id="site-line">…</div>
+      <div class="row" style="margin-top:10px"><button id="page-toggle">Translate this page</button><span class="faint">Alt+Shift+T</span></div>
+      <label class="sw"><input type="checkbox" id="site-always"> Always translate this site</label>
+      <label class="sw"><input type="checkbox" id="site-never"> Never translate this site</label>
+      <div class="hint" id="page-hint"></div>
+    </div>
+    <div class="card" id="discord-card" style="display:none">
+      <h2>Discord</h2>
+      <label class="sw"><input type="checkbox" id="discord-enabled"> Translate Discord messages</label>
+      <div class="hint">Per-server and per-channel choices are in Settings → Discord.</div>
+    </div>
+  </section>
+  <div class="row"><a href="#" id="open-packs" class="grow">Language packs</a><span class="faint" id="status-line"></span></div>
+</main>
+<div class="toast" id="toast" style="display:none"></div>
+<script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+{
+  "name": "brainbox-translate",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Brainbox Translate — on-device, in-place page translation for Discord and any website.",
+  "license": "Apache-2.0",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "watch": "node scripts/build.mjs --watch",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . && tsc --noEmit",
+    "test": "vitest run",
+    "test:engine": "vitest run --config vitest.engine.config.ts",
+    "test:e2e": "playwright test",
+    "perf": "playwright test --project=perf",
+    "zip": "node scripts/zip.mjs",
+    "pin-models": "node scripts/pin-models.mjs"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.5",
+    "@playwright/test": "^1.56.1",
+    "@types/chrome": "^0.3.5",
+    "@types/node": "^22.20.5",
+    "@types/react": "^18.3.31",
+    "@types/react-dom": "^18.3.7",
+    "esbuild": "^0.25.12",
+    "eslint": "^9.39.5",
+    "fake-indexeddb": "^6.2.5",
+    "jsdom": "^26.1.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "slate": "^0.133.7",
+    "slate-dom": "^0.133.6",
+    "slate-history": "^0.128.1",
+    "slate-react": "^0.133.8",
+    "typescript": "5.9",
+    "typescript-eslint": "^8.71.2",
+    "vitest": "3.2"
+  },
+  "dependencies": {
+    "@browsermt/bergamot-translator": "^0.4.9",
+    "eld": "^2.1.0"
+  }
+}

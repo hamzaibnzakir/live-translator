@@ -14,6 +14,9 @@ public sealed partial class GoogleWebProvider : ITranslationProvider, IDisposabl
     private static string GtxUrl(string sl, string tl, string q) =>
         $"https://translate.googleapis.com/translate_a/single?client=gtx&sl={sl}&tl={tl}&dt=t&q={q}";
 
+    private static string DictUrl(string sl, string tl, string q) =>
+        $"https://clients5.google.com/translate_a/t?client=dict-chrome-ex&sl={sl}&tl={tl}&q={q}";
+
     private static string MobileUrl(string sl, string tl, string q) =>
         $"https://translate.google.com/m?sl={sl}&tl={tl}&hl={tl}&q={q}";
 
@@ -66,33 +69,33 @@ public sealed partial class GoogleWebProvider : ITranslationProvider, IDisposabl
 
     private async Task<string> TranslateOneAsync(string text, string sl, string tl, CancellationToken ct)
     {
+        var q = Uri.EscapeDataString(text);
+        var attempts = new (string Url, Func<string, string> Parse)[]
+        {
+            (GtxUrl(sl, tl, q), ParseGtx),
+            (DictUrl(sl, tl, q), ParseDict),
+            (MobileUrl(sl, tl, q), ParseMobile),
+        };
+
         Exception? first = null;
-        try
+        Exception? last = null;
+        foreach (var (url, parse) in attempts)
         {
-            var url = GtxUrl(sl, tl, Uri.EscapeDataString(text));
-            var body = await GetAsync(url, ct).ConfigureAwait(false);
-            var parsed = ParseGtx(body);
-            if (!string.IsNullOrWhiteSpace(parsed)) return parsed;
-            first = new TranslationProviderException("Google returned an empty translation.");
-        }
-        catch (Exception ex) when (ex is not OperationCanceledException || !ct.IsCancellationRequested)
-        {
-            first = ex;
+            try
+            {
+                var parsed = parse(await GetAsync(url, ct).ConfigureAwait(false));
+                if (!string.IsNullOrWhiteSpace(parsed)) return parsed;
+                last = new TranslationProviderException("empty translation");
+            }
+            catch (Exception ex) when (ex is not OperationCanceledException || !ct.IsCancellationRequested)
+            {
+                last = ex;
+            }
+
+            first ??= last;
         }
 
-        try
-        {
-            var url = MobileUrl(sl, tl, Uri.EscapeDataString(text));
-            var body = await GetAsync(url, ct).ConfigureAwait(false);
-            var m = ResultContainerRegex().Match(body);
-            if (m.Success) return WebUtility.HtmlDecode(m.Groups[1].Value).Trim();
-        }
-        catch (Exception ex) when (ex is not OperationCanceledException || !ct.IsCancellationRequested)
-        {
-            throw new TranslationProviderException($"Google Translate is not reachable ({first?.Message ?? ex.Message}).", ex);
-        }
-
-        throw new TranslationProviderException($"Google Translate returned an unexpected response ({first?.Message}).", first ?? new InvalidOperationException());
+        throw new TranslationProviderException($"Google Translate is not reachable ({first?.Message ?? last?.Message}).", last ?? new InvalidOperationException());
     }
 
     private async Task<string> GetAsync(string url, CancellationToken ct)
@@ -128,6 +131,23 @@ public sealed partial class GoogleWebProvider : ITranslationProvider, IDisposabl
         }
 
         return sb.ToString();
+    }
+
+    /// <summary>Parses ["text"] or [["text","detected"]] (dict-chrome-ex).</summary>
+    internal static string ParseDict(string body)
+    {
+        using var doc = JsonDocument.Parse(body);
+        var root = doc.RootElement;
+        if (root.ValueKind != JsonValueKind.Array || root.GetArrayLength() == 0) return string.Empty;
+        var e = root[0];
+        if (e.ValueKind == JsonValueKind.Array && e.GetArrayLength() > 0) e = e[0];
+        return e.ValueKind == JsonValueKind.String ? WebUtility.HtmlDecode(e.GetString() ?? string.Empty) : string.Empty;
+    }
+
+    internal static string ParseMobile(string body)
+    {
+        var m = ResultContainerRegex().Match(body);
+        return m.Success ? WebUtility.HtmlDecode(m.Groups[1].Value).Trim() : string.Empty;
     }
 
     public void Dispose()

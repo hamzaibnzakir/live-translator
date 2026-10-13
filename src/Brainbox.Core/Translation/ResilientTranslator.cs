@@ -97,12 +97,14 @@ public sealed class ResilientTranslator
         }
 
         string? lastError = null;
+        string? primaryError = null;
         var index = 0;
         foreach (var (provider, breaker) in _chain)
         {
             if (breaker.IsOpen)
             {
                 lastError ??= breaker.LastError;
+                if (index == 0) primaryError = breaker.LastError;
                 index++;
                 continue;
             }
@@ -119,7 +121,7 @@ public sealed class ResilientTranslator
                 if (wasFailing) _log.Info($"{provider.Name} recovered.");
                 SetStatus(index == 0
                     ? new ProviderStatus(ProviderHealth.Healthy, provider.Name, null)
-                    : new ProviderStatus(ProviderHealth.Degraded, provider.Name, $"Using fallback {provider.Name}: {lastError}"));
+                    : new ProviderStatus(ProviderHealth.Degraded, provider.Name, $"{primaryError ?? lastError} — using {provider.Name} meanwhile"));
                 return new TranslationOutcome(result, provider.Name, null, _clock() - start);
             }
             catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested)
@@ -131,13 +133,17 @@ public sealed class ResilientTranslator
                 var msg = ex is TranslationProviderException ? ex.Message : $"{provider.Name}: {ex.Message}";
                 breaker.RecordFailure(msg);
                 lastError = msg;
+                if (index == 0) primaryError = msg;
                 _log.Warn($"Translation provider failed ({breaker.ConsecutiveFailures}x), backing off: {msg}");
             }
 
             index++;
         }
 
-        SetStatus(new ProviderStatus(ProviderHealth.Unavailable, _chain[0].Provider.Name, lastError ?? "All translation engines are unavailable."));
+        // Report the main engine's problem (that's what the user can fix), plus fallbacks if any.
+        var message = primaryError ?? lastError ?? "All translation engines are unavailable.";
+        if (_chain.Count > 1 && lastError != null && lastError != primaryError) message += $" (fallback also failed: {lastError})";
+        SetStatus(new ProviderStatus(ProviderHealth.Unavailable, _chain[0].Provider.Name, message));
         return new TranslationOutcome(null, null, lastError, _clock() - start);
     }
 

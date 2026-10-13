@@ -340,3 +340,84 @@ public class TranslationCacheTests
         public void Dispose() { }
     }
 }
+
+public class GoogleWebProviderTests
+{
+    private sealed class FakeGoogle : HttpMessageHandler
+    {
+        public List<string> Urls { get; } = new();
+        public Func<string, (System.Net.HttpStatusCode, string)> Reply { get; set; } = _ => (System.Net.HttpStatusCode.OK, "[[[\"Hello\",\"Bonjour\",null,null,10]],null,\"fr\"]");
+
+        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        {
+            var url = request.RequestUri!.ToString();
+            Urls.Add(url);
+            var (code, body) = Reply(url);
+            return Task.FromResult(new HttpResponseMessage(code) { Content = new StringContent(body) });
+        }
+    }
+
+    [Fact]
+    public void Parses_gtx_segments()
+    {
+        Assert.Equal("Welcome to the world.\nThe train arrives.",
+            GoogleWebProvider.ParseGtx("[[[\"Welcome to the world.\\n\",\"Bienvenue dans le monde.\\n\",null,null,10],[\"The train arrives.\",\"Le train arrive.\",null,null,10]],null,\"fr\"]"));
+    }
+
+    [Fact]
+    public async Task Batch_goes_out_as_one_request_and_is_split_back()
+    {
+        var fake = new FakeGoogle { Reply = _ => (System.Net.HttpStatusCode.OK, "[[[\"Hello\\n\",\"Bonjour\\n\"],[\"Goodbye\",\"Au revoir\"]]]") };
+        using var g = new GoogleWebProvider(fake);
+        var r = await g.TranslateAsync(new TranslationBatch(new[] { "Bonjour", "Au revoir" }, "en", null, Array.Empty<ContextEntry>()), CancellationToken.None);
+        Assert.Equal(new[] { "Hello", "Goodbye" }, r);
+        Assert.Single(fake.Urls);
+        Assert.Contains("sl=auto", fake.Urls[0]);
+        Assert.Contains("tl=en", fake.Urls[0]);
+    }
+
+    [Fact]
+    public async Task Falls_back_to_mobile_page_when_gtx_fails()
+    {
+        var fake = new FakeGoogle
+        {
+            Reply = url => url.Contains("googleapis", StringComparison.Ordinal)
+                ? (System.Net.HttpStatusCode.NotFound, "nope")
+                : (System.Net.HttpStatusCode.OK, "<div class=\"result-container\">Hello &amp; welcome</div>"),
+        };
+        using var g = new GoogleWebProvider(fake);
+        var r = await g.TranslateAsync(new TranslationBatch(new[] { "Bonjour et bienvenue" }, "en", "fr", Array.Empty<ContextEntry>()), CancellationToken.None);
+        Assert.Equal("Hello & welcome", r[0]);
+    }
+
+    [Fact]
+    public async Task Total_failure_is_a_provider_exception()
+    {
+        var fake = new FakeGoogle { Reply = _ => (System.Net.HttpStatusCode.NotFound, "") };
+        using var g = new GoogleWebProvider(fake);
+        await Assert.ThrowsAsync<TranslationProviderException>(() =>
+            g.TranslateAsync(new TranslationBatch(new[] { "x" }, "en", null, Array.Empty<ContextEntry>()), CancellationToken.None));
+    }
+
+    [Fact]
+    public async Task Live_google_endpoint_works_when_network_allowed()
+    {
+        // Runs for real on CI (BRAINBOX_LIVE_NET=1); skipped where the internet is not reachable.
+        if (Environment.GetEnvironmentVariable("BRAINBOX_LIVE_NET") != "1") return;
+        using var g = new GoogleWebProvider();
+        var r = await g.TranslateAsync(new TranslationBatch(new[] { "Bienvenue dans le monde de la traduction", "東京の天気は晴れです" }, "en", null, Array.Empty<ContextEntry>()), CancellationToken.None);
+        Assert.Contains("welcome", r[0], StringComparison.OrdinalIgnoreCase);
+        Assert.Contains("Tokyo", r[1], StringComparison.OrdinalIgnoreCase);
+    }
+
+    [Fact]
+    public async Task Status_names_the_main_engine_problem_not_the_fallback()
+    {
+        var local = new FakeProvider("LM Studio") { Down = true };
+        var cloud = new FakeProvider("Google") { Down = true };
+        var chain = new ResilientTranslator(new ITranslationProvider[] { local, cloud }, new FakeClock().Read);
+        await chain.TranslateAsync(new TranslationBatch(new[] { "x" }, "en", null, Array.Empty<ContextEntry>()), CancellationToken.None);
+        Assert.StartsWith("LM Studio", chain.Status.Message);
+        Assert.Contains("fallback also failed", chain.Status.Message);
+    }
+}

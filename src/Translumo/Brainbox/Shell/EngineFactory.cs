@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using Brainbox.Core.Diagnostics;
 using Brainbox.Core.Settings;
 using Brainbox.Core.Translation;
-using Translumo.Translation.Google;
 
 namespace Brainbox.Desktop.Shell
 {
@@ -34,6 +33,13 @@ namespace Brainbox.Desktop.Shell
             var owned = new List<IDisposable>();
             IVisionTranslator vision = null;
             var timeout = TimeSpan.FromSeconds(s.RequestTimeoutSeconds);
+
+            GoogleWebProvider OwnedGoogle()
+            {
+                var g = new GoogleWebProvider();
+                owned.Add(g);
+                return g;
+            }
 
             OpenAiCompatibleProvider Local(string name, string url, string model, string key = null)
             {
@@ -76,30 +82,17 @@ namespace Brainbox.Desktop.Shell
                     break;
 
                 case TranslationEngineKind.Google:
-                    providers.Add(Google());
+                    providers.Add(OwnedGoogle());
                     break;
             }
 
-            if (s.CloudFallback && s.Engine != TranslationEngineKind.Google) providers.Add(Google());
+            if (s.CloudFallback && s.Engine != TranslationEngineKind.Google) providers.Add(OwnedGoogle());
             if (providers.Count == 0) log.Warn("No translation engine configured.");
 
             return (new ResilientTranslator(providers, clock, log), vision, owned);
         }
 
-        public static ITranslationProvider Google()
-        {
-            var google = new AutoSourceGoogleTranslator();
-            return new DelegateTranslationProvider("Google Translate", isLocal: false,
-                (text, target, source, ct) => google.TranslateAsync(text, GoogleCode(target)), maxParallel: 3);
-        }
-
-        private static string GoogleCode(string iso) => iso switch
-        {
-            "zh" => "zh-CN",
-            "zh-TW" => "zh-TW",
-            "he" => "iw",
-            _ => iso,
-        };
+        public static ITranslationProvider Google() => new GoogleWebProvider();
 
         public static bool IsLoopback(string url)
         {

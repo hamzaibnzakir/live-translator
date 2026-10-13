@@ -61,6 +61,8 @@ jobs:
         run: dotnet build BrainboxLiveTranslator.sln -c Release --no-restore
 
       - name: Unit + pipeline integration tests (Brainbox.Core)
+        env:
+          BRAINBOX_LIVE_NET: "1"
         run: dotnet test src/Brainbox.Core.Tests/Brainbox.Core.Tests.csproj -c Release --no-build --logger "trx;LogFileName=brainbox-core.trx" --logger "console;verbosity=normal"
 
       - name: Existing Translumo tests

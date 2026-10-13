@@ -10,9 +10,9 @@ using System.Windows;
                                               //(used if a resource is not found in the page,
                                               // app, or any theme specific resource dictionaries)
 )]
-[assembly: AssemblyFileVersion("2.0.0")]
-[assembly: AssemblyInformationalVersion("2.0.0")]
-[assembly: AssemblyVersion("2.0.0")]
+[assembly: AssemblyFileVersion("2.0.1")]
+[assembly: AssemblyInformationalVersion("2.0.1")]
+[assembly: AssemblyVersion("2.0.1")]
 
 [assembly: AssemblyCompany("Brainbox")]
 [assembly: AssemblyProduct("Brainbox Live Translator")]

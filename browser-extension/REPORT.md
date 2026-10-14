@@ -1,6 +1,6 @@
 # Brainbox Translate — test report
 
-Generated 2026-10-13T19:29:16.995Z for commit 52ebb277.
+Generated 2026-10-14T03:12:37.132Z for commit dc6e0d30.
 
 ## Unit tests (Vitest)
 
@@ -37,7 +37,7 @@ Generated 2026-10-13T19:29:16.995Z for commit 52ebb277.
     "Translator": "function",
     "availability": "downloadable"
   },
-  "testedAt": "2026-10-13T19:27:56.004Z"
+  "testedAt": "2026-10-14T03:11:14.598Z"
 }
 ```
 
@@ -51,38 +51,38 @@ Generated 2026-10-13T19:29:16.995Z for commit 52ebb277.
     "ja-en",
     "es-en"
   ],
-  "oneTimeModelLoadMs": 1043,
-  "timeToFirstTranslatedMessageMs": 308,
-  "firstTranslatedAfterFirstRowMountMs": 177,
+  "oneTimeModelLoadMs": 989,
+  "timeToFirstTranslatedMessageMs": 296,
+  "firstTranslatedAfterFirstRowMountMs": 167,
   "visibleMessages": 6,
   "newMessageLatencyMs": {
     "n": 10,
-    "p50": 64,
-    "p95": 70,
-    "max": 70,
+    "p50": 56,
+    "p95": 67,
+    "max": 67,
     "all": [
+      56,
+      62,
+      63,
+      51,
       45,
-      68,
-      68,
-      53,
+      50,
+      51,
       52,
-      70,
-      52,
-      52,
-      64,
-      67
+      67,
+      66
     ]
   },
   "warmVisibleMessageLatencyMs": {
     "n": 6,
-    "p50": 460,
-    "p95": 493,
-    "max": 493
+    "p50": 445,
+    "p95": 478,
+    "max": 478
   },
   "coldVisibleMessageLatencyMs": {
-    "p50": 560,
-    "p95": 589,
-    "max": 589
+    "p50": 523,
+    "p95": 556,
+    "max": 556
   },
   "history": {
     "messagesTranslated": 435,
@@ -98,17 +98,17 @@ Generated 2026-10-13T19:29:16.995Z for commit 52ebb277.
     "totalMs": 0,
     "maxMs": 0
   },
-  "idleMainThreadBusyMsPer3s": 8,
+  "idleMainThreadBusyMsPer3s": 7,
   "memory": {
     "pageJsHeapMB": 8,
-    "extensionProcessRssMB_before": 1595,
-    "extensionProcessRssMB_with3packs": 1605,
+    "extensionProcessRssMB_before": 1613,
+    "extensionProcessRssMB_with3packs": 1622,
     "wasmHeapReservedMB": [
       "fr-en:523",
       "ja-en:853",
       "es-en:522"
     ],
-    "allChromiumRssMB": 2610
+    "allChromiumRssMB": 2619
   }
 }
 ```

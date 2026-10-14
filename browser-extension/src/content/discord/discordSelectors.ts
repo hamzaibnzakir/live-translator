@@ -19,8 +19,21 @@ export const EMBED_TEXT = [
 ].join(', ');
 /** Slate editor of the message box. */
 export const COMPOSER_TEXTBOX = '[role="textbox"][data-slate-editor="true"], div[role="textbox"][contenteditable="true"]';
-/** Visual container of the message box (used only to position our button). */
-export const COMPOSER_CONTAINER = '[class*="channelTextArea"], form';
+/** Visual container of a message box (used only to position our button). */
+export const COMPOSER_CONTAINER = '[class*="channelTextArea"], [class*="inputWrapper"], [class*="textArea"]';
+
+/** The box our pill sits above: the composer's visual container, or the editor itself. */
+export function composerBox(textbox: HTMLElement): Element {
+  const c = textbox.closest(COMPOSER_CONTAINER);
+  // Guard against a match that is the whole page / popout rather than the input.
+  if (c && c.getBoundingClientRect().height < 400) return c;
+  return textbox;
+}
+
+export function isVisible(el: Element): boolean {
+  const r = el.getBoundingClientRect();
+  return r.width > 0 && r.height > 0 && r.bottom > 0 && r.top < window.innerHeight;
+}
 
 /**
  * Elements whose content we never touch. Matching is done on elements inside message text.
@@ -76,8 +89,10 @@ export function messageBlocks(item: Element): Block[] {
   return out;
 }
 
+/** The channel's main message box (the lowest visible one), when no box has focus. */
 export function findComposer(root: ParentNode = document): HTMLElement | null {
-  return root.querySelector<HTMLElement>(COMPOSER_TEXTBOX);
+  const all = [...root.querySelectorAll<HTMLElement>(COMPOSER_TEXTBOX)].filter(isVisible);
+  return all.sort((a, b) => b.getBoundingClientRect().bottom - a.getBoundingClientRect().bottom)[0] ?? null;
 }
 
 /** Plain text of a Slate draft, one line per paragraph, without Slate's zero-width placeholders. */

@@ -8,7 +8,7 @@ import { translateProtected } from '../../shared/protect';
 import { pushRecent, saveSettings, type Settings } from '../../shared/settings';
 import { escapeHtml, formatBytes, type Overlay } from '../common/overlay';
 import { icon, LOGO_SVG } from '../common/theme';
-import { COMPOSER_CONTAINER, findComposer, parseRoute, readDraft } from './discordSelectors';
+import { COMPOSER_TEXTBOX, composerBox, findComposer, isVisible, parseRoute, readDraft } from './discordSelectors';
 import { replaceDraft } from './editor';
 import type { DiscordReader } from './reader';
 
@@ -20,7 +20,10 @@ export class Composer {
   private menu: HTMLElement;
   private textbox: HTMLElement | null = null;
   private override: string | null = null;
-  private undo: UndoState | null = null;
+  /** Undo state per message box (channel box, profile-popout DM box, thread box, edit box…). */
+  private undos = new WeakMap<HTMLElement, UndoState>();
+  private get undo(): UndoState | null { return this.textbox ? this.undos.get(this.textbox) ?? null : null; }
+  private set undo(v: UndoState | null) { if (!this.textbox) return; if (v) this.undos.set(this.textbox, v); else this.undos.delete(this.textbox); }
   private busy = false;
   private failed = false;
   private raf = 0;
@@ -43,7 +46,30 @@ export class Composer {
     });
     window.addEventListener('keydown', (e) => this.onKey(e), true);
     window.addEventListener('resize', () => this.position());
+    // Follow whichever message box you click into, and notice sends/edits as they happen.
+    document.addEventListener('focusin', (e) => { if ((e.target as Element | null)?.closest?.(COMPOSER_TEXTBOX)) this.refresh(); }, true);
+    document.addEventListener('input', () => this.refresh(), true);
+    document.addEventListener('keyup', (e) => { if (e.key === 'Enter' || e.key === 'Backspace' || e.key === 'Delete') this.refresh(); }, true);
     document.addEventListener('scroll', () => this.position(), true);
+  }
+
+  /**
+   * The message box being used: the one with focus (or focused last) if it is still on screen,
+   * otherwise the channel's main box. Covers DM boxes in profile popouts, threads and edits.
+   */
+  activeTextbox(): HTMLElement | null {
+    const focused = (document.activeElement as Element | null)?.closest?.(COMPOSER_TEXTBOX) as HTMLElement | null;
+    if (focused && isVisible(focused)) return focused;
+    if (this.textbox && this.textbox.isConnected && isVisible(this.textbox)) return this.textbox;
+    return findComposer();
+  }
+
+  /** After you send (box emptied) or edit the text, the rewrite can no longer be undone: back to "Reply in …". */
+  private checkUndo(): void {
+    const tb = this.textbox;
+    const u = this.undo;
+    if (!tb || !u || this.busy) return;
+    if (readDraft(tb).trim() !== u.inserted.trim()) { this.undo = null; this.hidePreview(); }
   }
 
   channelId(): string { return parseRoute(location.pathname)?.channelId ?? 'unknown'; }
@@ -57,8 +83,9 @@ export class Composer {
     if (this.raf) return;
     this.raf = requestAnimationFrame(() => {
       this.raf = 0;
-      const tb = findComposer();
-      if (tb !== this.textbox) { this.textbox = tb; this.undo = null; this.hidePreview(); }
+      const tb = this.activeTextbox();
+      if (tb !== this.textbox) { this.textbox = tb; this.hidePreview(); }
+      this.checkUndo();
       this.position();
     });
   }
@@ -66,7 +93,7 @@ export class Composer {
   private position(): void {
     const tb = this.textbox;
     if (!tb || !tb.isConnected || !this.settings().discord.enabled) { this.pill.style.display = 'none'; return; }
-    const box = (tb.closest(COMPOSER_CONTAINER) ?? tb).getBoundingClientRect();
+    const box = composerBox(tb).getBoundingClientRect();
     const lang = this.targetLang();
     (this.pill.querySelector('.tl') as HTMLElement).textContent = this.undo ? 'Undo' : lang ? `Reply in ${lang.toUpperCase()}` : 'Reply in…';
     this.pill.dataset.state = this.busy ? 'busy' : this.failed ? 'warn' : lang ? 'ready' : 'idle';
@@ -89,7 +116,7 @@ export class Composer {
   private onKey(e: KeyboardEvent): void {
     const hk = parseHotkey(this.settings().discord.replyHotkey);
     if (matchesHotkey(e, hk)) {
-      if (!findComposer()) return;
+      if (!this.activeTextbox()) return;
       e.preventDefault();
       e.stopImmediatePropagation();
       void this.run();
@@ -148,7 +175,7 @@ export class Composer {
   }
 
   async run(): Promise<void> {
-    const tb = findComposer();
+    const tb = this.activeTextbox();
     if (!tb || this.busy) return;
     this.textbox = tb;
     const draft = readDraft(tb);

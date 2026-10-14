@@ -88,3 +88,54 @@ test.describe.serial('Discord replying', () => {
     await page.close();
   });
 });
+
+test.describe.serial('Discord replying in any message box', () => {
+  test.beforeAll(async ({ bb }) => { await bb.installPacks(['fr-en', 'en-fr']); });
+
+  test('after you send, the pill goes back from "Undo" to "Reply in FR"', async ({ bb }) => {
+    const page = await bb.context.newPage();
+    await page.goto('https://discord.com/channels/111/222');
+    await expect(content(page, '900001')).toHaveText(/Hello everyone/i);
+    const pill = page.locator('#brainbox-overlay .pill');
+    await page.locator('[data-slate-editor="true"]').click();
+    await page.keyboard.type('See you tomorrow at the tournament.');
+    await page.keyboard.press('Control+Shift+Y');
+    await expect(pill).toContainText('Undo', { timeout: 30_000 });
+    await page.keyboard.press('End');
+    await page.keyboard.press('Enter');
+    await expect.poll(() => page.evaluate(() => window.__fixture.sent.at(-1))).toMatch(/demain/i);
+    await expect(pill).toContainText('Reply in FR');
+    await expect(page.locator('#brainbox-overlay .preview')).toBeHidden();
+    // Editing the rewritten draft by hand also ends the undo state.
+    await page.keyboard.type('Hello my friends, how are you?');
+    await page.keyboard.press('Control+Shift+Y');
+    await expect(pill).toContainText('Undo', { timeout: 30_000 });
+    await page.keyboard.type(' !!');
+    await expect(pill).toContainText('Reply in FR');
+    await page.close();
+  });
+
+  test('works in the DM box of a profile popout; the channel box is untouched', async ({ bb }) => {
+    const page = await bb.context.newPage();
+    await page.goto('https://discord.com/channels/111/222');
+    await expect(content(page, '900001')).toHaveText(/Hello everyone/i);
+    await page.evaluate(() => window.__fixture.openProfile());
+    const dm = page.locator('[role="dialog"] [data-slate-editor="true"]');
+    await dm.click();
+    await page.keyboard.type('Thank you very much for your help yesterday.');
+    // The pill moved to the popout's box.
+    const pillBox = await page.locator('#brainbox-overlay .pill').boundingBox();
+    const dmBox = await dm.boundingBox();
+    expect(Math.abs((pillBox!.y + pillBox!.height) - dmBox!.y)).toBeLessThan(60);
+    await page.keyboard.press('Control+Shift+Y');
+    await expect.poll(() => page.evaluate(() => window.__fixture.dmText()), { timeout: 30_000 }).toMatch(/merci/i);
+    expect(await page.evaluate(() => window.__fixture.editorText())).toBe('');
+    const french = await page.evaluate(() => window.__fixture.dmText());
+    await page.keyboard.press('End');
+    await page.keyboard.press('Enter');
+    await expect.poll(() => page.evaluate(() => window.__fixture.dmSent.at(-1))).toBe(french);
+    expect(await page.evaluate(() => window.__fixture.sent.length)).toBe(0);
+    await expect(page.locator('#brainbox-overlay .pill')).toContainText('Reply in FR');
+    await page.close();
+  });
+});

@@ -124,13 +124,44 @@ function Row({ m, byId }: { m: Msg; byId: Map<string, Msg> }): React.ReactElemen
 
 declare global {
   interface Window {
-    __fixture: { post(author: string, text: string): string; edit(id: string, text: string): void; sent: string[]; mounts: number; scrollToTop(): void; scrollToBottom(): void; editorText(): string; count: number };
+    __fixture: { post(author: string, text: string): string; openProfile(): void; dmSent: string[]; dmText(): string; edit(id: string, text: string): void; sent: string[]; mounts: number; scrollToTop(): void; scrollToBottom(): void; editorText(): string; count: number };
   }
 }
 const sent: string[] = [];
+const dmSent: string[] = [];
 let mounts = 0;
 
+// The small profile card Discord opens when you click a name, with its own "Message @user" box.
+function ProfilePopout({ onClose, editorRef }: { onClose: () => void; editorRef: (e: Editor) => void }): React.ReactElement {
+  const editor = useMemo(() => withHistory(withReact(createEditor())), []);
+  useEffect(() => editorRef(editor), [editor, editorRef]);
+  const initial: Descendant[] = useMemo(() => [{ type: 'line', children: [{ text: '' }] } as unknown as Descendant], []);
+  return (
+    <div className="userPopoutOuter_c69a7b" role="dialog" aria-label="Hugo" style={{ position: 'fixed', left: 320, top: 140, width: 340, background: '#232428', borderRadius: 8, padding: 16, boxShadow: '0 8px 24px rgba(0,0,0,.5)', zIndex: 100 }}>
+      <div style={{ height: 60, background: '#5865f2', borderRadius: 6, marginBottom: 12 }} />
+      <div className="username_c69a7b" style={{ fontWeight: 700, fontSize: 18 }}>Hugo</div>
+      <div style={{ fontSize: 13, color: '#b5bac1', marginBottom: 12 }}>hugo.fr · Joueur depuis 2019</div>
+      <div className="channelTextArea_f75fb0 channelTextAreaPopout_a7d72e" style={{ background: '#383a40', borderRadius: 8, padding: '8px 10px' }}>
+        <Slate editor={editor} initialValue={initial}>
+          <Editable aria-label="Message @Hugo" placeholder="Message @Hugo"
+            onKeyDown={(e) => {
+              if (e.key === 'Escape') onClose();
+              if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                const t = editor.children.map((n) => Node.string(n)).join('\n').trim();
+                if (t) { dmSent.push(t); Transforms.delete(editor, { at: { anchor: Editor.start(editor, []), focus: Editor.end(editor, []) } }); }
+              }
+            }}
+            renderElement={({ attributes, children }) => <div {...attributes}>{children}</div>} />
+        </Slate>
+      </div>
+    </div>
+  );
+}
+
 function App(): React.ReactElement {
+  const [profile, setProfile] = useState(false);
+  const dmEditor = useRef<Editor | null>(null);
   const [messages, setMessages] = useState<Msg[]>(initialMessages);
   const [range, setRange] = useState<[number, number]>([0, 0]);
   const scroller = useRef<HTMLDivElement>(null);
@@ -161,6 +192,9 @@ function App(): React.ReactElement {
         requestAnimationFrame(() => { scroller.current!.scrollTop = scroller.current!.scrollHeight; });
         return id;
       },
+      openProfile: () => setProfile(true),
+      dmSent,
+      dmText: () => (dmEditor.current ? dmEditor.current.children.map((n) => Node.string(n)).join('\n') : ''),
       edit: (id, text) => setMessages((ms) => ms.map((m) => (m.id === id ? { ...m, parts: [{ t: 'text', v: text }], edited: true } : m))),
       scrollToTop: () => { scroller.current!.scrollTop = 0; },
       scrollToBottom: () => { scroller.current!.scrollTop = scroller.current!.scrollHeight; },
@@ -181,6 +215,7 @@ function App(): React.ReactElement {
   const [start, end] = range;
   return (
     <div className="app_a3002d" id="app-mount">
+      {profile && <ProfilePopout onClose={() => setProfile(false)} editorRef={(e) => { dmEditor.current = e; }} />}
       <nav className="guilds_c48ade" aria-label="Servers sidebar"><div className="guild">FR</div></nav>
       <section className="chat_f75fb0" aria-label="Channel">
         <div className="title_f75fb0"><h1 className="titleWrapper_fc4f04"># général</h1></div>

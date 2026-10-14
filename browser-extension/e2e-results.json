@@ -12,24 +12,24 @@
     "maxFailures": 0,
     "metadata": {
       "ci": {
-        "commitHref": "https://github.com/hamzaibnzakir/live-translator/commit/9fb14400d1e3af21111d31915fc22a2735327cc8",
-        "commitHash": "9fb14400d1e3af21111d31915fc22a2735327cc8",
-        "buildHref": "https://github.com/hamzaibnzakir/live-translator/actions/runs/38545484242"
+        "commitHref": "https://github.com/hamzaibnzakir/live-translator/commit/8a197f31a8b044e6df8bfe6147d50c9857571370",
+        "commitHash": "8a197f31a8b044e6df8bfe6147d50c9857571370",
+        "buildHref": "https://github.com/hamzaibnzakir/live-translator/actions/runs/38546238887"
       },
       "gitCommit": {
-        "shortHash": "9fb1440",
-        "hash": "9fb14400d1e3af21111d31915fc22a2735327cc8",
-        "subject": "Brainbox Translate 0.2.2: grammar-word second opinion for language detection (French full of English jargon), no exotic guesses for short slang",
-        "body": "Brainbox Translate 0.2.2: grammar-word second opinion for language detection (French full of English jargon), no exotic guesses for short slang\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_017jf3M1hCcHiAxxQsgZJrDj\n",
+        "shortHash": "8a197f3",
+        "hash": "8a197f31a8b044e6df8bfe6147d50c9857571370",
+        "subject": "0.3.0: white + green redesign, light low-cost motion, renamed to Official Brainbox Discord Auto Translator, new icons",
+        "body": "0.3.0: white + green redesign, light low-cost motion, renamed to Official Brainbox Discord Auto Translator, new icons\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_017jf3M1hCcHiAxxQsgZJrDj\n",
         "author": {
           "name": "Claude",
           "email": "noreply@anthropic.com",
-          "time": 1791971518000
+          "time": 1791971895000
         },
         "committer": {
           "name": "Claude",
           "email": "noreply@anthropic.com",
-          "time": 1791971518000
+          "time": 1791971895000
         },
         "branch": "claude/brainbox-translate-extension-eh7mbh"
       },
@@ -67,24 +67,24 @@
         "retries": 0,
         "metadata": {
           "ci": {
-            "commitHref": "https://github.com/hamzaibnzakir/live-translator/commit/9fb14400d1e3af21111d31915fc22a2735327cc8",
-            "commitHash": "9fb14400d1e3af21111d31915fc22a2735327cc8",
-            "buildHref": "https://github.com/hamzaibnzakir/live-translator/actions/runs/38545484242"
+            "commitHref": "https://github.com/hamzaibnzakir/live-translator/commit/8a197f31a8b044e6df8bfe6147d50c9857571370",
+            "commitHash": "8a197f31a8b044e6df8bfe6147d50c9857571370",
+            "buildHref": "https://github.com/hamzaibnzakir/live-translator/actions/runs/38546238887"
           },
           "gitCommit": {
-            "shortHash": "9fb1440",
-            "hash": "9fb14400d1e3af21111d31915fc22a2735327cc8",
-            "subject": "Brainbox Translate 0.2.2: grammar-word second opinion for language detection (French full of English jargon), no exotic guesses for short slang",
-            "body": "Brainbox Translate 0.2.2: grammar-word second opinion for language detection (French full of English jargon), no exotic guesses for short slang\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_017jf3M1hCcHiAxxQsgZJrDj\n",
+            "shortHash": "8a197f3",
+            "hash": "8a197f31a8b044e6df8bfe6147d50c9857571370",
+            "subject": "0.3.0: white + green redesign, light low-cost motion, renamed to Official Brainbox Discord Auto Translator, new icons",
+            "body": "0.3.0: white + green redesign, light low-cost motion, renamed to Official Brainbox Discord Auto Translator, new icons\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_017jf3M1hCcHiAxxQsgZJrDj\n",
             "author": {
               "name": "Claude",
               "email": "noreply@anthropic.com",
-              "time": 1791971518000
+              "time": 1791971895000
             },
             "committer": {
               "name": "Claude",
               "email": "noreply@anthropic.com",
-              "time": 1791971518000
+              "time": 1791971895000
             },
             "branch": "claude/brainbox-translate-extension-eh7mbh"
           },
@@ -105,24 +105,24 @@
         "retries": 0,
         "metadata": {
           "ci": {
-            "commitHref": "https://github.com/hamzaibnzakir/live-translator/commit/9fb14400d1e3af21111d31915fc22a2735327cc8",
-            "commitHash": "9fb14400d1e3af21111d31915fc22a2735327cc8",
-            "buildHref": "https://github.com/hamzaibnzakir/live-translator/actions/runs/38545484242"
+            "commitHref": "https://github.com/hamzaibnzakir/live-translator/commit/8a197f31a8b044e6df8bfe6147d50c9857571370",
+            "commitHash": "8a197f31a8b044e6df8bfe6147d50c9857571370",
+            "buildHref": "https://github.com/hamzaibnzakir/live-translator/actions/runs/38546238887"
           },
           "gitCommit": {
-            "shortHash": "9fb1440",
-            "hash": "9fb14400d1e3af21111d31915fc22a2735327cc8",
-            "subject": "Brainbox Translate 0.2.2: grammar-word second opinion for language detection (French full of English jargon), no exotic guesses for short slang",
-            "body": "Brainbox Translate 0.2.2: grammar-word second opinion for language detection (French full of English jargon), no exotic guesses for short slang\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_017jf3M1hCcHiAxxQsgZJrDj\n",
+            "shortHash": "8a197f3",
+            "hash": "8a197f31a8b044e6df8bfe6147d50c9857571370",
+            "subject": "0.3.0: white + green redesign, light low-cost motion, renamed to Official Brainbox Discord Auto Translator, new icons",
+            "body": "0.3.0: white + green redesign, light low-cost motion, renamed to Official Brainbox Discord Auto Translator, new icons\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_017jf3M1hCcHiAxxQsgZJrDj\n",
             "author": {
               "name": "Claude",
               "email": "noreply@anthropic.com",
-              "time": 1791971518000
+              "time": 1791971895000
             },
             "committer": {
               "name": "Claude",
               "email": "noreply@anthropic.com",
-              "time": 1791971518000
+              "time": 1791971895000
             },
             "branch": "claude/brainbox-translate-extension-eh7mbh"
           },
@@ -168,16 +168,16 @@
                   "workerIndex": 0,
                   "parallelIndex": 0,
                   "status": "passed",
-                  "duration": 34115,
+                  "duration": 32767,
                   "errors": [],
                   "stdout": [
                     {
-                      "text": "{\n  \"messages\": 500,\n  \"packsLoaded\": [\n    \"fr-en\",\n    \"ja-en\",\n    \"es-en\"\n  ],\n  \"oneTimeModelLoadMs\": 1101,\n  \"timeToFirstTranslatedMessageMs\": 334,\n  \"firstTranslatedAfterFirstRowMountMs\": 189,\n  \"visibleMessages\": 7,\n  \"newMessageLatencyMs\": {\n    \"n\": 10,\n    \"p50\": 68,\n    \"p95\": 69,\n    \"max\": 69,\n    \"all\": [\n      59,\n      64,\n      64,\n      52,\n      68,\n      68,\n      51,\n      69,\n      68,\n      68\n    ]\n  },\n  \"warmVisibleMessageLatencyMs\": {\n    \"n\": 7,\n    \"p50\": 550,\n    \"p95\": 600,\n    \"max\": 600\n  },\n  \"coldVisibleMessageLatencyMs\": {\n    \"p50\": 661,\n    \"p95\": 728,\n    \"max\": 728\n  },\n  \"history\": {\n    \"messagesTranslated\": 435,\n    \"messagesPerSecond\": 25.9,\n    \"engineTexts\": 288,\n    \"seconds\": 16.8,\n    \"engineTextsPerSecond\": 17.1,\n    \"engineCalls\": 133,\n    \"cacheHits\": 0\n  },\n  \"longTasks\": {\n    \"count\": 0,\n    \"totalMs\": 0,\n    \"maxMs\": 0\n  },\n  \"idleMainThreadBusyMsPer3s\": 8,\n  \"memory\": {\n    \"pageJsHeapMB\": 7,\n    \"extensionProcessRssMB_before\": 1614,\n    \"extensionProcessRssMB_with3packs\": 1624,\n    \"wasmHeapReservedMB\": [\n      \"fr-en:523\",\n      \"ja-en:853\",\n      \"es-en:522\"\n    ],\n    \"allChromiumRssMB\": 2635\n  }\n}\n"
+                      "text": "{\n  \"messages\": 500,\n  \"packsLoaded\": [\n    \"fr-en\",\n    \"ja-en\",\n    \"es-en\"\n  ],\n  \"oneTimeModelLoadMs\": 625,\n  \"timeToFirstTranslatedMessageMs\": 197,\n  \"firstTranslatedAfterFirstRowMountMs\": 103,\n  \"visibleMessages\": 7,\n  \"newMessageLatencyMs\": {\n    \"n\": 10,\n    \"p50\": 54,\n    \"p95\": 68,\n    \"max\": 68,\n    \"all\": [\n      53,\n      53,\n      68,\n      53,\n      54,\n      54,\n      55,\n      54,\n      54,\n      53\n    ]\n  },\n  \"warmVisibleMessageLatencyMs\": {\n    \"n\": 7,\n    \"p50\": 387,\n    \"p95\": 437,\n    \"max\": 437\n  },\n  \"coldVisibleMessageLatencyMs\": {\n    \"p50\": 453,\n    \"p95\": 502,\n    \"max\": 502\n  },\n  \"history\": {\n    \"messagesTranslated\": 435,\n    \"messagesPerSecond\": 26.8,\n    \"engineTexts\": 288,\n    \"seconds\": 16.2,\n    \"engineTextsPerSecond\": 17.7,\n    \"engineCalls\": 149,\n    \"cacheHits\": 0\n  },\n  \"longTasks\": {\n    \"count\": 0,\n    \"totalMs\": 0,\n    \"maxMs\": 0\n  },\n  \"idleMainThreadBusyMsPer3s\": 7,\n  \"memory\": {\n    \"pageJsHeapMB\": 11,\n    \"extensionProcessRssMB_before\": 1622,\n    \"extensionProcessRssMB_with3packs\": 1632,\n    \"wasmHeapReservedMB\": [\n      \"fr-en:523\",\n      \"ja-en:853\",\n      \"es-en:522\"\n    ],\n    \"allChromiumRssMB\": 2649\n  }\n}\n"
                     }
                   ],
                   "stderr": [],
                   "retry": 0,
-                  "startTime": "2026-10-14T09:53:49.988Z",
+                  "startTime": "2026-10-14T10:00:00.007Z",
                   "annotations": [],
                   "attachments": []
                 }
@@ -195,8 +195,8 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-10-14T09:53:48.438Z",
-    "duration": 36084.979999999996,
+    "startTime": "2026-10-14T09:59:58.491Z",
+    "duration": 34511.776999999995,
     "expected": 1,
     "skipped": 0,
     "unexpected": 0,

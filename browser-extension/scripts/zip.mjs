@@ -6,7 +6,7 @@ import { join } from 'node:path';
 const root = new URL('..', import.meta.url).pathname;
 const { version } = JSON.parse(readFileSync(join(root, 'package.json'), 'utf8'));
 if (!existsSync(join(root, 'dist/manifest.json'))) throw new Error('Run npm run build first');
-const out = join(root, `brainbox-translate-${version}.zip`);
+const out = join(root, `brainbox-discord-auto-translator-${version}.zip`);
 rmSync(out, { force: true });
 execFileSync('zip', ['-r', '-q', '-X', out, '.', '-x', '*.map'], { cwd: join(root, 'dist'), stdio: 'inherit' });
 console.log(out);

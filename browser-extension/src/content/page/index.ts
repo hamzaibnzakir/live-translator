@@ -27,7 +27,7 @@ async function main(): Promise<void> {
     overlay ??= new Overlay();
     if (!banner) { banner = overlay.add(overlay.el('div', 'panel banner')); }
     banner.style.display = 'block';
-    banner.innerHTML = `<div class="hd"><span class="dot"></span>Brainbox Translate</div>
+    banner.innerHTML = `<div class="hd"><span class="dot"></span>Brainbox Auto Translator</div>
       <div>This page needs the ${escapeHtml(languageName(p.from))} → ${escapeHtml(languageName(p.to))} pack${p.sizeBytes ? ` (${formatBytes(p.sizeBytes)})` : ''}.</div>
       <div class="bar" style="display:none"><i></i></div>
       <div class="row"><button data-bb="dl">Download</button><button class="ghost" data-bb="x">Not now</button></div>`;

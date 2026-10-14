@@ -70,7 +70,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: brainbox-translate-extension
-          path: browser-extension/brainbox-translate-*.zip
+          path: browser-extension/brainbox-*.zip
 
       - name: Write test report
         if: always()
@@ -102,4 +102,4 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/ext-v')
         uses: softprops/action-gh-release@v2
         with:
-          files: browser-extension/brainbox-translate-*.zip
+          files: browser-extension/brainbox-*.zip

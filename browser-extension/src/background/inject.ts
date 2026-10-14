@@ -12,15 +12,15 @@ export function showSelectionCard(original: string, translation: string, label: 
   const top = Math.min(window.innerHeight - 160, (rect ? rect.bottom : 80) + 8);
   const left = Math.max(8, Math.min(window.innerWidth - 368, rect ? rect.left : 80));
   root.innerHTML = `<style>
-    .card{position:fixed;top:${top}px;left:${left}px;width:340px;max-height:260px;overflow:auto;background:#151821;color:#F3F4F8;
-      border:1px solid #262B38;border-radius:12px;padding:12px 14px;font:14px/1.45 system-ui,sans-serif;
-      box-shadow:0 8px 30px rgba(0,0,0,.45),0 0 0 1px rgba(139,92,246,.25),0 0 18px rgba(139,92,246,.25)}
-    .hd{display:flex;align-items:center;gap:6px;font-size:12px;color:#8A90A2;margin-bottom:6px}
-    .dot{width:8px;height:8px;border-radius:50%;background:#8B5CF6;box-shadow:0 0 8px #8B5CF6}
-    .t{white-space:pre-wrap;word-break:break-word}.err{color:#ff8080}
+    .card{position:fixed;top:${top}px;left:${left}px;width:340px;max-height:260px;overflow:auto;background:#FFFFFF;color:#13241A;
+      border:1px solid #DCE8E0;border-radius:12px;padding:12px 14px;font:14px/1.45 system-ui,sans-serif;
+      box-shadow:0 12px 32px rgba(0,0,0,.18),0 2px 6px rgba(0,0,0,.08)}
+    .hd{display:flex;align-items:center;gap:6px;font-size:12px;color:#5B6F62;margin-bottom:6px}
+    .dot{width:8px;height:8px;border-radius:50%;background:#1F9D55;}
+    .t{white-space:pre-wrap;word-break:break-word}.err{color:#C2392F}
     .row{display:flex;gap:8px;margin-top:10px;justify-content:flex-end}
-    button{background:#8B5CF6;color:white;border:0;border-radius:8px;padding:5px 12px;font:inherit;font-size:13px;cursor:pointer}
-    button.ghost{background:#1C202B;color:#c9cce0}</style>
+    button{background:#1F9D55;color:white;border:0;border-radius:8px;padding:5px 12px;font:inherit;font-size:13px;cursor:pointer}
+    button.ghost{background:#FFFFFF;color:#13241A;border:1px solid #C9DCCF}</style>
     <div class="card" role="dialog" aria-label="Brainbox translation"><div class="hd"><span class="dot"></span><span class="lbl"></span></div>
     <div class="t"></div><div class="row"><button class="ghost close">Close</button><button class="copy">Copy</button></div></div>`;
   (root.querySelector('.lbl') as HTMLElement).textContent = label;
@@ -44,8 +44,8 @@ export function showSelectionCard(original: string, translation: string, label: 
 export function showToast(message: string): void {
   const el = document.createElement('div');
   el.textContent = message;
-  el.style.cssText = 'position:fixed;z-index:2147483647;bottom:24px;left:50%;transform:translateX(-50%);background:#151821;color:#F3F4F8;'
-    + 'border:1px solid #262B38;border-radius:999px;padding:8px 16px;font:14px system-ui,sans-serif;box-shadow:0 0 18px rgba(139,92,246,.35)';
+  el.style.cssText = 'position:fixed;z-index:2147483647;bottom:24px;left:50%;transform:translateX(-50%);background:#13241A;color:#FFFFFF;'
+    + 'border:1px solid #13241A;border-radius:999px;padding:8px 16px;font:14px system-ui,sans-serif;box-shadow:0 6px 18px rgba(0,0,0,.18)';
   document.documentElement.appendChild(el);
   setTimeout(() => el.remove(), 2200);
 }

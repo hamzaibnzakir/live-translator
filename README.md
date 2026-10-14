@@ -6,7 +6,7 @@
 
 ---
 
-## Brainbox Translate — browser extension
+## Official Brainbox Discord Auto Translator (browser extension)
 
 Also in this repo: **[`browser-extension/`](browser-extension/README.md)** — a Chrome extension that translates Discord (discord.com) and any website **in place, on-device**, and rewrites your English replies into the channel's language before you press Enter. No OCR, no overlay, no API keys.
 

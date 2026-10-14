@@ -74,6 +74,7 @@ async function translateNow(andCopy = false): Promise<void> {
     const err = res.find((r) => r.status === 'error' && r.reason !== 'cancelled');
     const out = res.map((r, i) => (r.status === 'ok' ? r.translation ?? '' : lines[i] ?? '')).join('\n');
     $<HTMLTextAreaElement>('out').value = out;
+    const pane = $('out-pane'); pane.classList.remove('fresh'); void pane.offsetWidth; pane.classList.add('fresh');
     const used = res.find((r) => r.engine);
     const fell = res.find((r) => r.failedEngine);
     if (err) {
@@ -127,8 +128,8 @@ async function refreshChip(): Promise<void> {
   try {
     const s = await send<EngineStats>({ type: 'bb:stats' });
     const chromeFail = s.failures?.find((f) => f.engine === 'chrome');
-    if (settings.engine === 'bergamot') { chip.textContent = 'Offline engine'; chip.className = 'chip ok'; chip.title = 'Using Mozilla Bergamot, fully on this computer.'; }
-    else if (chromeFail) { chip.textContent = 'Chrome failed · offline'; chip.className = 'chip warn'; chip.title = `Chrome built-in translator: “${chromeFail.reason}”. Using the offline engine instead.`; }
+    if (settings.engine === 'bergamot') { chip.textContent = 'Offline'; chip.className = 'chip ok'; chip.title = 'Using Mozilla Bergamot, fully on this computer.'; }
+    else if (chromeFail) { chip.textContent = 'Offline (Chrome failed)'; chip.className = 'chip warn'; chip.title = `Chrome built-in translator: “${chromeFail.reason}”. Using the offline engine instead.`; }
     else { chip.textContent = 'On-device'; chip.className = 'chip ok'; chip.title = 'Auto: Chrome built-in when it works, otherwise the offline engine.'; }
   } catch { chip.textContent = 'Engine starting…'; chip.className = 'chip'; }
 }

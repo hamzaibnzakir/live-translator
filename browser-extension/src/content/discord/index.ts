@@ -106,7 +106,7 @@ async function main(): Promise<void> {
   window.__brainboxDiscord = { reader, composer, settings: get };
 
   // ---------- hover tooltip ----------
-  const tip = overlay.add(overlay.el('div', 'panel tip'));
+  const tip = overlay.add(overlay.el('div', 'panel tip in'));
   tip.style.display = 'none';
   let tipTarget: Element | null = null;
   let tipTimer = 0;

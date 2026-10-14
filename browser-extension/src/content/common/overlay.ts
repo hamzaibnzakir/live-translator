@@ -87,7 +87,7 @@ export class Notices {
     let open = true;
     const render = (): void => {
       const p = current.progress;
-      el.innerHTML = `<div class="hd">${this.logo}<span>Brainbox Translate</span><span class="sp"></span><button class="x" data-x aria-label="Dismiss">${this.closeIcon}</button></div>
+      el.innerHTML = `<div class="hd">${this.logo}<span>Brainbox Auto Translator</span><span class="sp"></span><button class="x" data-x aria-label="Dismiss">${this.closeIcon}</button></div>
         <div class="t"></div>${current.body ? '<div class="b"></div>' : ''}
         ${p === null || p === undefined ? '' : `<div class="bar ${p === 'busy' ? 'busy' : ''}"><i style="width:${p === 'busy' ? '' : `${Math.round(p * 100)}%`}"></i></div>`}
         ${current.actions?.length ? '<div class="row"></div>' : ''}`;

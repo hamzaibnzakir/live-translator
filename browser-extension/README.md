@@ -1,19 +1,19 @@
 <p align="center"><img src="static/icons/icon-128.png" width="88" alt="Brainbox"></p>
 
-<h1 align="center">Brainbox Translate</h1>
+<h1 align="center">Official Brainbox Discord Auto Translator</h1>
 
 <p align="center"><b>Read and reply on foreign-language Discord servers — and any website — as if everyone spoke English.</b><br>
 On-device translation, rewritten in place in the page. Offline once a language pack is downloaded. No API keys, no accounts, no per-message network requests.</p>
 
 ---
 
-Brainbox Translate is the browser sibling of the Windows app *Brainbox Live Translator* (screen OCR + overlay). This extension does something different: it rewrites the page's own text, the way Google Translate's "translate this page" does — no overlay, no OCR.
+The Official Brainbox Discord Auto Translator (Chrome extension) is the browser sibling of the Windows app *Brainbox Live Translator* (screen OCR + overlay). This extension does something different: it rewrites the page's own text, the way Google Translate's "translate this page" does — no overlay, no OCR.
 
 ## What it does
 
 | | |
 |---|---|
-| **Discord — read** | Every message in the channel turns into English inside Discord's own message elements. Mentions, emoji, links, code, spoilers, timestamps, usernames and markdown are untouched — only text nodes change. Hover a message for the original; **Alt+click** swaps it back. Replies' quoted lines, edits and embeds are handled; threads and forum *post pages* use the same message DOM (forum *list cards* are not translated yet). A tiny glow dot marks translated messages (can be turned off). |
+| **Discord — read** | Every message in the channel turns into English inside Discord's own message elements. Mentions, emoji, links, code, spoilers, timestamps, usernames and markdown are untouched — only text nodes change. Hover a message for the original; **Alt+click** swaps it back. Replies' quoted lines, edits and embeds are handled; threads and forum *post pages* use the same message DOM (forum *list cards* are not translated yet). A small green dot marks translated messages (can be turned off). |
 | **Discord — reply** | Type in English, press **Ctrl+Shift+Y** (or the 🧠 pill above the message box). Your draft is rewritten into the channel's main language, with a *"they will read … / meaning, back in English …"* preview. **Ctrl+Z** (or the pill) restores your English. **You always press Enter yourself.** |
 | **Quick translator** | Toolbar popup / side panel: paste anything → detected → English (or any language) → Copy. ⇄ swaps. **Ctrl+Enter** = translate & copy. Right-click a selection → *Translate selection to English* (card with Copy) or *Translate selection to…*. Optional clipboard mode (hotkey translates the clipboard in place). |
 | **Any website** | Toolbar → *This page* → *Translate this page* / *Show original* (or **Alt+Shift+T**). Code, inputs, editors and `translate="no"` are skipped; content that loads later is followed; *Show original* restores the page exactly. *Always / Never translate this site*. |
@@ -23,7 +23,7 @@ Brainbox Translate is the browser sibling of the Windows app *Brainbox Live Tran
 1. Get the extension: download `brainbox-translate-<version>.zip` from the GitHub release / Actions artifact and unzip it — **or** build it: `cd browser-extension && npm ci && npm run build` (output in `dist/`).
 2. Open **Chrome → Extensions** (`chrome://extensions`), turn on **Developer mode** (top right).
 3. Click **Load unpacked** and pick the unzipped folder (or `dist/`). You can also drag the zip onto the page.
-4. Pin Brainbox Translate in the toolbar (puzzle-piece icon → 📌).
+4. Pin the Brainbox Discord Auto Translator in the toolbar (puzzle-piece icon → 📌).
 
 > **Discord desktop app:** it's an Electron app and **cannot run browser extensions**. Use **discord.com in Chrome**. For an app-like window: open discord.com → ⋮ → *Cast, save and share* → *Install page as app*. The extension works inside that window.
 
@@ -90,9 +90,9 @@ CI (`.github/workflows/browser-extension.yml`) runs all of the above on every pu
 
 The fixture copies Discord's DOM, but real Discord changes often. What you should see:
 
-1. **Load** — `chrome://extensions` → Developer mode → Load unpacked → the Brainbox card appears with no errors. Toolbar icon → popup opens.
+1. **Load** — `chrome://extensions` → Developer mode → Load unpacked → the "Official Brainbox Discord Auto Translator" card appears with no errors. Toolbar icon → popup opens.
 2. **Packs** — popup → *Language packs* → search *French* → *Make fully offline*. Both columns show ✓ and a size (~26 MB each). If you're on Chrome 138+, the *Chrome built-in* column may offer *Download* too.
-3. **Read** — open a French server's text channel on discord.com. Within a moment, messages read in English with a tiny violet/cyan dot. `@mentions`, emoji, links and code look exactly as before. Hover a message → card with the French original, "French · offline (Bergamot)". Alt+click → it turns back to French; Alt+click again → English. Scroll up into older history → it translates as it comes into view; scroll back down → no flicker.
+3. **Read** — open a French server's text channel on discord.com. Within a moment, messages read in English with a small green dot. `@mentions`, emoji, links and code look exactly as before. Hover a message → card with the French original, "French · offline (Bergamot)". Alt+click → it turns back to French; Alt+click again → English. Scroll up into older history → it translates as it comes into view; scroll back down → no flicker.
 4. **Reply** — the 🧠 pill above the message box shows `→ FR`. Type "Thanks, I'll join you tonight", press **Ctrl+Shift+Y**. The box now holds French; a panel shows *They will read* + the English back-translation. Press **Ctrl+Z** → English is back; press the hotkey again → French. Press **Enter yourself** → **check that the sent message is the French text** (this is the one thing the fixture can't fully prove for real Discord's editor). If the box doesn't change, tell me — it means Discord's editor needs a different input path (`src/content/discord/editor.ts`).
 5. **Popup** — paste `Merci pour la partie !` → English appears → *Copy* → paste somewhere. Pick 🇫🇷 French as target, type English, **Ctrl+Enter** → French is copied.
 6. **Any page** — open a French news site → popup → *This page* → *Translate this page* → it reads in English; *Show original* → the page is exactly back. Select a sentence → right-click → *Translate selection to English* → card with Copy.

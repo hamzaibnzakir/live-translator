@@ -274,12 +274,12 @@ export class DiscordReader {
         if (blockText(segs) !== entry.source || segs.length !== translations.length) { this.processItem(li, Priority.visible); return; }
         const st = this.states.get(b.el);
         if (st?.showing === 'original') return;
-        this.write(b, segs, entry, channelId);
+        this.write(b, segs, entry, channelId, true);
       }
     });
   }
 
-  private write(b: Block, segs: Segment[], c: Cached, channelId: string): void {
+  private write(b: Block, segs: Segment[], c: Cached, channelId: string, fresh = false): void {
     segs.forEach((seg, i) => {
       const t = c.translations[i];
       if (t != null) writeSegment(seg, t, (n, v) => this.rewriter.write(n, v));
@@ -289,6 +289,7 @@ export class DiscordReader {
     b.el.setAttribute('data-bb-lang', c.from);
     if (c.engine) b.el.setAttribute('data-bb-engine', c.engine);
     b.el.removeAttribute('data-bb-state');
+    if (fresh) { b.el.setAttribute('data-bb-fresh', ''); setTimeout(() => b.el.removeAttribute('data-bb-fresh'), 400); }
     this.states.set(b.el, { key: b.key, channelId, source: c.source, showing: 'translated' });
   }
 

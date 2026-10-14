@@ -73,7 +73,7 @@ export type Request =
   | { type: 'bb:cache:clear' }
   | { type: 'bb:stats' }
   | { type: 'bb:stats:reset' }
-  | { type: 'bb:polish'; text: string; from: string; to: string; original?: string }
+  | { type: 'bb:polish'; text: string; from: string; to: string; original?: string; test?: { endpoint: string; model: string } }
   | { type: 'bb:clipboard:translate' }
   | { type: 'bb:page:toggle'; tabId?: number }
   | { type: 'bb:page:always'; origin: string; tabId?: number }

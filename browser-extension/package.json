@@ -1,6 +1,6 @@
 {
   "name": "brainbox-translate",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "private": true,
   "description": "Brainbox Translate — on-device, in-place page translation for Discord and any website.",
   "license": "Apache-2.0",

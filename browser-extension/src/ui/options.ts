@@ -152,7 +152,7 @@ function bindGeneral(): void {
     if (enabled) {
       const origin = new URL(endpoint).origin;
       const ok = await chrome.permissions.request({ origins: [`${origin}/*`] });
-      if (!ok) { $<HTMLInputElement>('polish-enabled').checked = false; enabled = false; }
+      if (!ok) { $<HTMLInputElement>('polish-enabled').checked = false; enabled = false; $('polish-result').textContent = `✗ Chrome access to ${origin} was not allowed, so AI polish stays off.`; }
     }
     await save((s) => ({ ...s, polish: { enabled, endpoint, model: $<HTMLInputElement>('polish-model').value.trim() } }));
   };
@@ -162,9 +162,13 @@ function bindGeneral(): void {
   $('polish-lmstudio').onclick = () => { $<HTMLInputElement>('polish-endpoint').value = 'http://localhost:1234/v1'; void savePolish($<HTMLInputElement>('polish-enabled').checked); };
   $('polish-ollama').onclick = () => { $<HTMLInputElement>('polish-endpoint').value = 'http://localhost:11434/v1'; void savePolish($<HTMLInputElement>('polish-enabled').checked); };
   $('polish-test').onclick = async () => {
+    const endpoint = $<HTMLInputElement>('polish-endpoint').value.trim() || DEFAULT_SETTINGS.polish.endpoint;
     $('polish-result').textContent = 'Testing…';
     try {
-      const r = await send<{ text: string; model: string }>({ type: 'bb:polish', text: 'Bonjour à tous, ça roule ?', from: 'fr', to: settings.targetLang });
+      // Ask for access to this local server right here, inside the click (Chrome requires a click).
+      const origin = new URL(endpoint).origin;
+      if (!(await chrome.permissions.request({ origins: [`${origin}/*`] }))) { $('polish-result').textContent = `✗ Chrome access to ${origin} was not allowed.`; return; }
+      const r = await send<{ text: string; model: string }>({ type: 'bb:polish', text: 'Bonjour à tous, ça roule ?', from: 'fr', to: settings.targetLang, test: { endpoint, model: $<HTMLInputElement>('polish-model').value.trim() } });
       $('polish-result').textContent = `✓ ${r.model}: ${r.text}`;
     } catch (e) { $('polish-result').textContent = `✗ ${(e as Error).message}`; }
   };

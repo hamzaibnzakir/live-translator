@@ -127,7 +127,7 @@ async function handle(msg: Request, sender: chrome.runtime.MessageSender): Promi
   if (OFFSCREEN_TYPES.has(msg.type)) return toOffscreen(msg);
   switch (msg.type) {
     case 'bb:ping': return 'pong';
-    case 'bb:polish': return polish(settings, msg.text, msg.from, msg.to, msg.original);
+    case 'bb:polish': return polish(settings, msg.text, msg.from, msg.to, msg.original, msg.test);
     case 'bb:page:toggle': {
       const id = msg.tabId ?? tabId;
       if (id === undefined) throw new Error('No tab');

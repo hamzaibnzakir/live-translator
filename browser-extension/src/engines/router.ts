@@ -7,6 +7,7 @@ import type { Settings } from '../shared/settings';
 import { skipReason } from '../shared/skipRules';
 import type { TranslationCache } from './cache';
 import { detectOffline } from './detect';
+import { refineDetection } from './stopwords';
 import type { Availability, Detection, TranslationEngine } from './types';
 
 interface Job { text: string; resolve: (v: string) => void; reject: (e: Error) => void }
@@ -170,7 +171,8 @@ export class EngineRouter {
     let from = item.from && item.from !== 'auto' ? item.from : '';
     let confidence = 1;
     if (!from) {
-      const d = await this.detect(item.detectText ? normalizeText(item.detectText) : norm);
+      const detectOn = item.detectText ? normalizeText(item.detectText) : norm;
+      const d = refineDetection(detectOn, await this.detect(detectOn), { target: to, hint: item.hint });
       confidence = d?.confidence ?? 0;
       from = d?.lang ?? 'und';
       if (confidence < s.minConfidence) {

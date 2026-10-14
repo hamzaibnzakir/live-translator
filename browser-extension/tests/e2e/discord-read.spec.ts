@@ -40,6 +40,9 @@ test.describe.serial('Discord reading', () => {
     console.log(`first visible message translated ${Date.now() - t0} ms after reload`);
     await expect(content(page, '900003')).toHaveText(/hello/i);          // こんにちは…
     await expect(content(page, '900003')).not.toHaveText(/[ぁ-んァ-ン]/);
+    // French full of English jargon (real message): must still be detected as French.
+    await expect(content(page, '900014')).toHaveAttribute('data-bb-lang', 'fr');
+    await expect(content(page, '900014')).not.toHaveText(/votre|est down ou pas/);
     await expect(content(page, '900002')).toContainText('@David');
     await expect(content(page, '900002')).toHaveText(/^Hi @David/);
     await expect(content(page, '900005')).toContainText('https://example.com/docs');

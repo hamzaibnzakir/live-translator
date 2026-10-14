@@ -61,6 +61,7 @@ const SPECIAL: Msg[] = [
   { id: '900010', author: 'Mateo', parts: [{ t: 'text', v: '¿Alguien quiere jugar esta noche?' }] },
   { id: '900011', author: 'Hugo', parts: [{ t: 'emoji', v: '😂' }, { t: 'emoji', v: '😂' }] },
   { id: '900012', author: 'Camille', parts: [{ t: 'link', v: 'https://example.com/video' }] },
+  { id: '900014', author: 'Rayan', parts: [{ t: 'text', v: 'les gars votre extension trendtrack est down ou pas ?' }] },
   { id: '900013', author: 'Camille', parts: [{ t: 'text', v: 'Je pense que c’est une ' }, { t: 'bold', v: 'très bonne' }, { t: 'text', v: ' idée.' }] },
 ];
 

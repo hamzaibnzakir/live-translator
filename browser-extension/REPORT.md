@@ -1,6 +1,6 @@
 # Brainbox Translate — test report
 
-Generated 2026-10-14T10:00:35.063Z for commit 8a197f31.
+Generated 2026-10-14T11:00:08.175Z for commit 3a6331eb.
 
 ## Unit tests (Vitest)
 
@@ -37,7 +37,7 @@ Generated 2026-10-14T10:00:35.063Z for commit 8a197f31.
     "Translator": "function",
     "availability": "downloadable"
   },
-  "testedAt": "2026-10-14T09:59:14.968Z"
+  "testedAt": "2026-10-14T10:58:42.214Z"
 }
 ```
 
@@ -51,46 +51,46 @@ Generated 2026-10-14T10:00:35.063Z for commit 8a197f31.
     "ja-en",
     "es-en"
   ],
-  "oneTimeModelLoadMs": 625,
-  "timeToFirstTranslatedMessageMs": 197,
-  "firstTranslatedAfterFirstRowMountMs": 103,
+  "oneTimeModelLoadMs": 910,
+  "timeToFirstTranslatedMessageMs": 271,
+  "firstTranslatedAfterFirstRowMountMs": 143,
   "visibleMessages": 7,
   "newMessageLatencyMs": {
     "n": 10,
-    "p50": 54,
-    "p95": 68,
-    "max": 68,
+    "p50": 63,
+    "p95": 65,
+    "max": 65,
     "all": [
-      53,
-      53,
-      68,
-      53,
-      54,
-      54,
-      55,
-      54,
-      54,
-      53
+      57,
+      65,
+      60,
+      46,
+      62,
+      63,
+      49,
+      63,
+      64,
+      65
     ]
   },
   "warmVisibleMessageLatencyMs": {
     "n": 7,
-    "p50": 387,
-    "p95": 437,
-    "max": 437
+    "p50": 475,
+    "p95": 525,
+    "max": 525
   },
   "coldVisibleMessageLatencyMs": {
-    "p50": 453,
-    "p95": 502,
-    "max": 502
+    "p50": 559,
+    "p95": 625,
+    "max": 625
   },
   "history": {
     "messagesTranslated": 435,
-    "messagesPerSecond": 26.8,
+    "messagesPerSecond": 25.8,
     "engineTexts": 288,
-    "seconds": 16.2,
-    "engineTextsPerSecond": 17.7,
-    "engineCalls": 149,
+    "seconds": 16.9,
+    "engineTextsPerSecond": 17.1,
+    "engineCalls": 148,
     "cacheHits": 0
   },
   "longTasks": {
@@ -98,17 +98,17 @@ Generated 2026-10-14T10:00:35.063Z for commit 8a197f31.
     "totalMs": 0,
     "maxMs": 0
   },
-  "idleMainThreadBusyMsPer3s": 7,
+  "idleMainThreadBusyMsPer3s": 9,
   "memory": {
-    "pageJsHeapMB": 11,
-    "extensionProcessRssMB_before": 1622,
-    "extensionProcessRssMB_with3packs": 1632,
+    "pageJsHeapMB": 10,
+    "extensionProcessRssMB_before": 1583,
+    "extensionProcessRssMB_with3packs": 1591,
     "wasmHeapReservedMB": [
       "fr-en:523",
       "ja-en:853",
       "es-en:522"
     ],
-    "allChromiumRssMB": 2649
+    "allChromiumRssMB": 2599
   }
 }
 ```

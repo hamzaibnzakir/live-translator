@@ -1,10 +1,10 @@
 # Brainbox Translate — test report
 
-Generated 2026-10-14T03:12:37.132Z for commit dc6e0d30.
+Generated 2026-10-14T09:54:26.934Z for commit 9fb14400.
 
 ## Unit tests (Vitest)
 
-**105 passed, 0 failed, 0 skipped** of 105.
+**127 passed, 0 failed, 0 skipped** of 127.
 
 
 ## Engine tests (real Bergamot WASM + real models)
@@ -37,7 +37,7 @@ Generated 2026-10-14T03:12:37.132Z for commit dc6e0d30.
     "Translator": "function",
     "availability": "downloadable"
   },
-  "testedAt": "2026-10-14T03:11:14.598Z"
+  "testedAt": "2026-10-14T09:53:01.073Z"
 }
 ```
 
@@ -51,46 +51,46 @@ Generated 2026-10-14T03:12:37.132Z for commit dc6e0d30.
     "ja-en",
     "es-en"
   ],
-  "oneTimeModelLoadMs": 989,
-  "timeToFirstTranslatedMessageMs": 296,
-  "firstTranslatedAfterFirstRowMountMs": 167,
-  "visibleMessages": 6,
+  "oneTimeModelLoadMs": 1101,
+  "timeToFirstTranslatedMessageMs": 334,
+  "firstTranslatedAfterFirstRowMountMs": 189,
+  "visibleMessages": 7,
   "newMessageLatencyMs": {
     "n": 10,
-    "p50": 56,
-    "p95": 67,
-    "max": 67,
+    "p50": 68,
+    "p95": 69,
+    "max": 69,
     "all": [
-      56,
-      62,
-      63,
-      51,
-      45,
-      50,
-      51,
+      59,
+      64,
+      64,
       52,
-      67,
-      66
+      68,
+      68,
+      51,
+      69,
+      68,
+      68
     ]
   },
   "warmVisibleMessageLatencyMs": {
-    "n": 6,
-    "p50": 445,
-    "p95": 478,
-    "max": 478
+    "n": 7,
+    "p50": 550,
+    "p95": 600,
+    "max": 600
   },
   "coldVisibleMessageLatencyMs": {
-    "p50": 523,
-    "p95": 556,
-    "max": 556
+    "p50": 661,
+    "p95": 728,
+    "max": 728
   },
   "history": {
     "messagesTranslated": 435,
-    "messagesPerSecond": 26.6,
-    "engineTexts": 287,
-    "seconds": 16.3,
-    "engineTextsPerSecond": 17.6,
-    "engineCalls": 148,
+    "messagesPerSecond": 25.9,
+    "engineTexts": 288,
+    "seconds": 16.8,
+    "engineTextsPerSecond": 17.1,
+    "engineCalls": 133,
     "cacheHits": 0
   },
   "longTasks": {
@@ -98,17 +98,17 @@ Generated 2026-10-14T03:12:37.132Z for commit dc6e0d30.
     "totalMs": 0,
     "maxMs": 0
   },
-  "idleMainThreadBusyMsPer3s": 7,
+  "idleMainThreadBusyMsPer3s": 8,
   "memory": {
-    "pageJsHeapMB": 8,
-    "extensionProcessRssMB_before": 1613,
-    "extensionProcessRssMB_with3packs": 1622,
+    "pageJsHeapMB": 7,
+    "extensionProcessRssMB_before": 1614,
+    "extensionProcessRssMB_with3packs": 1624,
     "wasmHeapReservedMB": [
       "fr-en:523",
       "ja-en:853",
       "es-en:522"
     ],
-    "allChromiumRssMB": 2619
+    "allChromiumRssMB": 2635
   }
 }
 ```

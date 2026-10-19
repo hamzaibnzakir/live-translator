@@ -110,14 +110,20 @@ async function main(): Promise<void> {
     reader.stop();
     composer.shutdown();
     tip.style.display = 'none';
-    // Give the text back; the new version (started in this tab by the update) re-translates it.
-    reader.restoreAll();
+    // Give the text back so the new version (started in this tab by the update) re-translates it.
+    // If the new copy already took over (it replaces our overlay), its text must not be touched.
+    if (overlay.host.isConnected) reader.restoreAll();
     setTimeout(() => {
       // Our overlay is still the live one → no new copy started here: ask for a refresh.
       if (overlay.host.isConnected) notices.show('updated', { title: 'Brainbox was updated', body: 'Refresh this tab (F5) to keep translating.', actions: [{ label: 'Refresh now', primary: true, onClick: () => location.reload() }] });
     }, 3000);
   }
-  const liveness = window.setInterval(() => { try { if (!chrome.runtime?.id) shutdown(); } catch { shutdown(); } }, 2000);
+  // Also notices channel switches (Discord changes the URL without always re-rendering the box).
+  let lastPath = location.pathname;
+  const liveness = window.setInterval(() => {
+    try { if (!chrome.runtime?.id) { shutdown(); return; } } catch { shutdown(); return; }
+    if (location.pathname !== lastPath) { lastPath = location.pathname; composer.refresh(); }
+  }, 1000);
 
   const reader = new DiscordReader(get, { onNeedsPack: showPackBanner, onAsk: showAsk, onVote: () => composer.refresh(), onEngineProblem, onDisconnected: shutdown });
   const composer = new Composer(overlay, reader, get, (r: TranslateResult) => r.pack && showPackBanner(r.pack));

@@ -65,7 +65,7 @@ describe('Bergamot worker crash recovery', () => {
       const n = ++created;
       let msgCb: ((e: { data: unknown }) => void) | null = null, errCb: ((e: unknown) => void) | null = null;
       return {
-        addEventListener: (t: string, cb: (e: { data: unknown }) => void) => { if (t === 'message') msgCb = cb; else errCb = cb; },
+        addEventListener: (t: string, cb: (e: { data: unknown }) => void) => { if (t === 'message') msgCb = cb; else errCb = cb as (e: unknown) => void; },
         postMessage: (m: unknown) => {
           const { id, name, args } = m as { id: number; name: string; args: unknown[] };
           // The first worker dies (out of memory) on its first translation.

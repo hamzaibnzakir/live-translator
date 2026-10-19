@@ -22,6 +22,8 @@ export interface SchedulerOptions {
   purpose: 'read' | 'page';
   onResult: (key: string, results: TranslateResult[], req: BlockRequest) => void;
   onNeedsPack?: (pack: PackRef, req: BlockRequest) => void;
+  /** The extension was updated/reloaded: this copy of the script can no longer talk to it. */
+  onDisconnected?: () => void;
   batchSize?: number;
   maxInflight?: number;
   transport?: (items: TranslateItem[], to: string, priority: number) => Promise<TranslateResult[]>;
@@ -39,6 +41,9 @@ export class Scheduler {
   /** (to|normalized text) → result; lets re-mounted or repeated text apply synchronously. */
   readonly textCache = new LRU<string, TranslateResult>(5000);
   requestsSent = 0;
+  /** Set once the extension context is gone; nothing is sent any more. */
+  dead = false;
+  private attempts = new Map<string, number>();
 
   constructor(private o: SchedulerOptions) {}
 
@@ -47,6 +52,7 @@ export class Scheduler {
   }
 
   request(req: BlockRequest, priority: number): void {
+    if (this.dead) return;
     debug('request', req.key, priority, this.inflight.has(req.key));
     this.waitingForPack.delete(req.key);
     if (this.inflight.has(req.key)) return;
@@ -125,15 +131,31 @@ export class Scheduler {
         rs.sort((a, b) => Number(a.id.slice(a.id.lastIndexOf('#') + 1)) - Number(b.id.slice(b.id.lastIndexOf('#') + 1)));
         const needs = rs.find((r) => r.status === 'needs-pack');
         if (needs?.pack) { this.waitingForPack.set(req.key, req); this.o.onNeedsPack?.(needs.pack, req); continue; }
-        rs.forEach((r, i) => { if (r.status === 'ok' || r.status === 'skipped') this.textCache.set(`${to}|${normalizeText(req.texts[i] ?? '')}`, r); });
+        // Only answers that depend on the text alone are cached ("too unsure" may change once the
+        // channel's language is known; "unsupported" may change when settings change).
+        rs.forEach((r, i) => { if (r.status === 'ok' || (r.status === 'skipped' && !['low-confidence', 'unsupported-pair'].includes(r.reason ?? ''))) this.textCache.set(`${to}|${normalizeText(req.texts[i] ?? '')}`, r); });
         this.o.onResult(req.key, rs, req);
       }
     } catch (e) {
       debug('batch failed', e);
       for (const req of reqs) this.inflight.delete(req.key);
+      if (isDisconnected(e)) { this.dead = true; this.queue.clear(); this.o.onDisconnected?.(); return; }
+      // Transient (service worker restarting, engine busy): try these again shortly.
+      for (const req of reqs) {
+        const n = (this.attempts.get(req.key) ?? 0) + 1;
+        this.attempts.set(req.key, n);
+        if (n <= 3) setTimeout(() => { if (!this.dead) this.request(req, priority); }, 3000 * n);
+      }
     } finally {
       this.active--;
       if (this.queue.size) this.schedule();
     }
   }
+}
+
+/** True when this content script belongs to an extension version that was reloaded or removed. */
+export function isDisconnected(e: unknown): boolean {
+  // In an extension page/content script `chrome.runtime.id` disappears once it is reloaded.
+  if (typeof chrome !== 'undefined' && chrome.runtime && !chrome.runtime.id) return true;
+  return /context invalidated|Extension context/i.test(String((e as Error)?.message ?? e));
 }

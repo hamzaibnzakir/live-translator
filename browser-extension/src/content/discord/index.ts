@@ -101,7 +101,25 @@ async function main(): Promise<void> {
     });
   }
 
-  const reader = new DiscordReader(get, { onNeedsPack: showPackBanner, onAsk: showAsk, onVote: () => composer.refresh(), onEngineProblem });
+  // ---------- extension updated / reloaded while this tab stays open ----------
+  let alive = true;
+  function shutdown(): void {
+    if (!alive) return;
+    alive = false;
+    clearInterval(liveness);
+    reader.stop();
+    composer.shutdown();
+    tip.style.display = 'none';
+    // Give the text back; the new version (started in this tab by the update) re-translates it.
+    reader.restoreAll();
+    setTimeout(() => {
+      // Our overlay is still the live one → no new copy started here: ask for a refresh.
+      if (overlay.host.isConnected) notices.show('updated', { title: 'Brainbox was updated', body: 'Refresh this tab (F5) to keep translating.', actions: [{ label: 'Refresh now', primary: true, onClick: () => location.reload() }] });
+    }, 3000);
+  }
+  const liveness = window.setInterval(() => { try { if (!chrome.runtime?.id) shutdown(); } catch { shutdown(); } }, 2000);
+
+  const reader = new DiscordReader(get, { onNeedsPack: showPackBanner, onAsk: showAsk, onVote: () => composer.refresh(), onEngineProblem, onDisconnected: shutdown });
   const composer = new Composer(overlay, reader, get, (r: TranslateResult) => r.pack && showPackBanner(r.pack));
   window.__brainboxDiscord = { reader, composer, settings: get };
 
@@ -140,7 +158,7 @@ async function main(): Promise<void> {
     });
   }
   document.addEventListener('mouseover', (e) => {
-    if (!settings.discord.hoverOriginal) return;
+    if (!alive || !settings.discord.hoverOriginal) return;
     const t = (e.target as Element | null)?.closest?.('[data-bb-translated="1"]');
     if (t === tipTarget) { clearTimeout(tipTimer); return; }
     clearTimeout(tipTimer);
@@ -152,7 +170,7 @@ async function main(): Promise<void> {
 
   // ---------- Alt+click restores one message (captured before Discord's own Alt+click) ----------
   const altHandler = (e: MouseEvent): void => {
-    if (!e.altKey || !settings.discord.altClickRestore) return;
+    if (!alive || !e.altKey || !settings.discord.altClickRestore) return;
     const t = (e.target as Element | null)?.closest?.('[data-bb-translated]');
     if (!t) return;
     e.preventDefault();

@@ -89,9 +89,15 @@ export function messageBlocks(item: Element): Block[] {
   return out;
 }
 
+/** A box you write messages in (channel, DM, thread, edit) — not Discord's search field. */
+export function isMessageBox(el: Element): boolean {
+  if (/search/i.test(el.getAttribute('aria-label') ?? '')) return false;
+  return !el.closest('[class*="search" i], [role="search"], [role="combobox"]');
+}
+
 /** The channel's main message box (the lowest visible one), when no box has focus. */
 export function findComposer(root: ParentNode = document): HTMLElement | null {
-  const all = [...root.querySelectorAll<HTMLElement>(COMPOSER_TEXTBOX)].filter(isVisible);
+  const all = [...root.querySelectorAll<HTMLElement>(COMPOSER_TEXTBOX)].filter((el) => isVisible(el) && isMessageBox(el));
   return all.sort((a, b) => b.getBoundingClientRect().bottom - a.getBoundingClientRect().bottom)[0] ?? null;
 }
 

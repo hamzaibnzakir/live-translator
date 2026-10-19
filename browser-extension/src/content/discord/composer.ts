@@ -8,7 +8,7 @@ import { translateProtected } from '../../shared/protect';
 import { pushRecent, saveSettings, type Settings } from '../../shared/settings';
 import { escapeHtml, formatBytes, type Overlay } from '../common/overlay';
 import { icon, LOGO_SVG } from '../common/theme';
-import { COMPOSER_TEXTBOX, composerBox, findComposer, isVisible, parseRoute, readDraft } from './discordSelectors';
+import { COMPOSER_TEXTBOX, composerBox, findComposer, isMessageBox, isVisible, parseRoute, readDraft } from './discordSelectors';
 import { replaceDraft } from './editor';
 import type { DiscordReader } from './reader';
 
@@ -19,7 +19,10 @@ export class Composer {
   private preview: HTMLElement;
   private menu: HTMLElement;
   private textbox: HTMLElement | null = null;
-  private override: string | null = null;
+  /** Reply language picked from the menu, per channel (French server stays French). */
+  private overrides = new Map<string, string>();
+  /** Set when this copy of the script was replaced by an update. */
+  dead = false;
   /** Undo state per message box (channel box, profile-popout DM box, thread box, edit box…). */
   private undos = new WeakMap<HTMLElement, UndoState>();
   private get undo(): UndoState | null { return this.textbox ? this.undos.get(this.textbox) ?? null : null; }
@@ -59,8 +62,8 @@ export class Composer {
    */
   activeTextbox(): HTMLElement | null {
     const focused = (document.activeElement as Element | null)?.closest?.(COMPOSER_TEXTBOX) as HTMLElement | null;
-    if (focused && isVisible(focused)) return focused;
-    if (this.textbox && this.textbox.isConnected && isVisible(this.textbox)) return this.textbox;
+    if (focused && isVisible(focused) && isMessageBox(focused)) return focused;
+    if (this.textbox && this.textbox.isConnected && isVisible(this.textbox) && isMessageBox(this.textbox)) return this.textbox;
     return findComposer();
   }
 
@@ -75,12 +78,12 @@ export class Composer {
   channelId(): string { return parseRoute(location.pathname)?.channelId ?? 'unknown'; }
 
   targetLang(): string | null {
-    return this.override ?? this.reader.tracker.main(this.channelId(), this.settings().targetLang);
+    return this.overrides.get(this.channelId()) ?? this.reader.tracker.main(this.channelId(), this.settings().targetLang);
   }
 
   /** Called on DOM changes (throttled to one frame) to find the message box and keep the pill attached. */
   refresh(): void {
-    if (this.raf) return;
+    if (this.raf || this.dead) return;
     this.raf = requestAnimationFrame(() => {
       this.raf = 0;
       const tb = this.activeTextbox();
@@ -114,6 +117,7 @@ export class Composer {
   }
 
   private onKey(e: KeyboardEvent): void {
+    if (this.dead) return;
     const hk = parseHotkey(this.settings().discord.replyHotkey);
     if (matchesHotkey(e, hk)) {
       if (!this.activeTextbox()) return;
@@ -153,9 +157,10 @@ export class Composer {
     box.innerHTML = q ? all.map(opt).join('') || '<div class="opt muted">No match</div>'
       : `<div class="sec">${main ? 'This channel &amp; recent' : 'Recent'}</div>${top.map(opt).join('')}<div class="sec">All languages</div>${all.filter((l) => !top.includes(l)).map(opt).join('')}`;
     box.querySelectorAll<HTMLElement>('.opt').forEach((o) => o.addEventListener('click', () => {
-      this.override = o.dataset.code!;
+      const code = o.dataset.code!;
+      this.overrides.set(this.channelId(), code);
       this.menu.style.display = 'none';
-      void saveSettings((st) => ({ ...st, recentLangs: pushRecent(st.recentLangs, this.override!) }));
+      void saveSettings((st) => ({ ...st, recentLangs: pushRecent(st.recentLangs, code) }));
       this.position();
       this.textbox?.focus();
     }));
@@ -239,4 +244,12 @@ export class Composer {
   }
 
   hidePreview(): void { this.preview.style.display = 'none'; }
+
+  /** Stops everything (the extension was updated and a new copy took over). */
+  shutdown(): void {
+    this.dead = true;
+    this.pill.style.display = 'none';
+    this.menu.style.display = 'none';
+    this.hidePreview();
+  }
 }

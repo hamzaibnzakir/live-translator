@@ -124,7 +124,15 @@ export class BergamotEngine implements TranslationEngine {
     const run = async (): Promise<string[]> => {
       const c = await lane.client;
       const models = lane.models.map((m) => { const [f, t] = m.split('-'); return { from: f, to: t }; });
-      const res = await c.call<{ target: { text: string } }[]>('translate', [{ models, texts: texts.map((text) => ({ text, html: false })) }]);
+      let res: { target: { text: string } }[];
+      try {
+        res = await c.call<{ target: { text: string } }[]>('translate', [{ models, texts: texts.map((text) => ({ text, html: false })) }]);
+      } catch (e) {
+        // A crashed worker (e.g. out of memory on a small PC) is never reused: the next request
+        // starts a fresh one instead of failing forever.
+        if (/crashed|terminated/i.test((e as Error).message) && this.lanes.get(lane.key) === lane) this.closeLane(lane.key);
+        throw e;
+      }
       void c.call<number>('wasmMemoryBytes').then((b) => this.wasmBytes.set(lane.key, b)).catch(() => undefined);
       return res.map((r) => r.target.text);
     };

@@ -18,11 +18,17 @@ async function ensureOffscreen(): Promise<void> {
   if (!creating) {
     creating = (async () => {
       const ready = new Promise<void>((r) => { readyResolve = r; });
-      await chrome.offscreen.createDocument({
-        url: 'offscreen.html',
-        reasons: [chrome.offscreen.Reason.WORKERS, chrome.offscreen.Reason.CLIPBOARD],
-        justification: 'Runs the on-device translation engines (WASM workers, Chrome Translator API) and clipboard mode.',
-      });
+      try {
+        await chrome.offscreen.createDocument({
+          url: 'offscreen.html',
+          reasons: [chrome.offscreen.Reason.WORKERS, chrome.offscreen.Reason.CLIPBOARD],
+          justification: 'Runs the on-device translation engines (WASM workers, Chrome Translator API) and clipboard mode.',
+        });
+      } catch (e) {
+        // Another call (e.g. after the worker restarted) created it first: that's fine.
+        if (!/single offscreen|already/i.test(String((e as Error).message))) throw e;
+        return;
+      }
       await Promise.race([ready, new Promise((r) => setTimeout(r, 2000))]);
     })().finally(() => { creating = null; });
   }
@@ -75,7 +81,13 @@ async function rebuildMenus(): Promise<void> {
   chrome.contextMenus.create({ id: 'bb-page', title: 'Translate this page / show original', contexts: ['page'] });
 }
 
-chrome.runtime.onInstalled.addListener(() => { void settingsReady.then(() => { void rebuildMenus(); void syncSiteScripts(); }); });
+chrome.runtime.onInstalled.addListener(() => {
+  void settingsReady.then(() => { void rebuildMenus(); void syncSiteScripts(); });
+  // After an update the old script in open Discord tabs is disconnected; start the new one there.
+  void chrome.tabs.query({ url: 'https://discord.com/*' }).then((tabs) => {
+    for (const t of tabs) if (t.id !== undefined) void chrome.scripting.executeScript({ target: { tabId: t.id }, files: ['content-discord.js'] }).catch(() => undefined);
+  });
+});
 chrome.runtime.onStartup.addListener(() => { void settingsReady.then(rebuildMenus); });
 
 async function onContextMenu(info: chrome.contextMenus.OnClickData, tab?: chrome.tabs.Tab): Promise<void> {

@@ -139,3 +139,22 @@ test.describe.serial('Discord replying in any message box', () => {
     await page.close();
   });
 });
+
+test('the reply language picked in one channel does not leak into another', async ({ bb }) => {
+  await bb.installPacks(['fr-en', 'en-fr', 'en-es']);
+  const page = await bb.context.newPage();
+  await page.goto('https://discord.com/channels/111/222');
+  await expect(content(page, '900001')).toHaveText(/Hello everyone/i);
+  await page.locator('#brainbox-overlay [data-bb="lang"]').click();
+  await page.locator('#brainbox-overlay .menu input').fill('spani');
+  await page.locator('#brainbox-overlay .menu .opt').first().click();
+  await expect(page.locator('#brainbox-overlay .pill')).toContainText('ES');
+  // Same tab, other channel (Discord is a single-page app).
+  await page.evaluate(() => { history.pushState({}, '', '/channels/111/333'); });
+  await page.locator('[data-slate-editor="true"]').click();
+  await expect(page.locator('#brainbox-overlay .pill')).not.toContainText('ES');
+  await page.evaluate(() => { history.pushState({}, '', '/channels/111/222'); });
+  await page.locator('[data-slate-editor="true"]').click();
+  await expect(page.locator('#brainbox-overlay .pill')).toContainText('ES');
+  await page.close();
+});

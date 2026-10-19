@@ -25,6 +25,7 @@ export interface ReaderHooks {
   onVote?(channelId: string): void;
   /** An engine failed; the router fell back to another one (or could not). */
   onEngineProblem?(engine: string, reason: string, recovered: boolean): void;
+  onDisconnected?(): void;
 }
 
 export class DiscordReader {
@@ -43,6 +44,7 @@ export class DiscordReader {
   readonly sessionAllowed = new Set<string>();
   readonly scheduler: Scheduler;
   appliedSync = 0;
+  private stopped = false;
 
   constructor(private settings: () => Settings, private hooks: ReaderHooks) {
     this.scheduler = new Scheduler({
@@ -53,6 +55,7 @@ export class DiscordReader {
       maxInflight: 6,
       onResult: (key, results, req) => this.onResult(key, results, req),
       onNeedsPack: (pack) => this.hooks.onNeedsPack(pack),
+      onDisconnected: () => this.hooks.onDisconnected?.(),
     });
   }
 
@@ -87,6 +90,8 @@ export class DiscordReader {
   }
 
   stop(): void {
+    this.stopped = true;
+    this.scheduler.dead = true;
     this.observer?.disconnect();
     this.observer = null;
     for (const o of this.observers.values()) { o.near.disconnect(); o.visible.disconnect(); }
@@ -168,6 +173,7 @@ export class DiscordReader {
 
   /** Re-applies cached translations synchronously (re-mount after scrolling, React re-render). */
   private applyCachedSync(li: Element): void {
+    if (this.stopped) return;
     const ids = parseMessageItemId(li.id);
     if (!ids || this.allowed(ids.channelId) !== 'yes') return;
     for (const b of messageBlocks(li)) {
@@ -189,6 +195,7 @@ export class DiscordReader {
   }
 
   processItem(li: Element, priority: number): void {
+    if (this.stopped) return;
     const ids = parseMessageItemId(li.id);
     if (!ids) return;
     const allowed = this.allowed(ids.channelId);
@@ -268,6 +275,7 @@ export class DiscordReader {
     this.cache.set(blockKey, entry);
     if (!li) return;
     this.writer.run(() => {
+      if (this.stopped) return;
       for (const b of messageBlocks(li)) {
         if (b.key !== blockKey) continue;
         const segs = this.segmentsOf(b.el);
